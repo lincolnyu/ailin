@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
+    <Compile Include="MyWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SubmitHandler.cs" />
     <Compile Include="PageInfo.cs" />
     <Compile Include="Question.cs" />

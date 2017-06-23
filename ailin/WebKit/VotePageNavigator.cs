@@ -10,19 +10,30 @@ namespace WebKit
         public const string DefaultMainPageUrlPattern = "http://www.ttpaihang.com/vote/rank.php?voteid=";
         public const string DeafultSubmitUrl = "http://www.ttpaihang.com/vote/rankpost.php";
         public const string ExpectedRadioName = "choice_id[]";
-        public const string ExpectedRadioNameHttp = "choice_id%5B%5D";
 
-        private WebClient _client = new WebClient();
+        private MyWebClient _client = new MyWebClient();
 
         private string _mainPageUrl;
 
         public VotePageNavigator(string mainPageUrl)
         {
             _mainPageUrl = mainPageUrl;
+            SetClient(_client);
         }
 
         public VotePageNavigator(int voteId = DefaultVoteId) : this(DefaultMainPageUrlPattern + voteId.ToString())
         {
+        }
+
+        private static void SetClient(WebClient client)
+        {
+            // TODO some stuff hardcoded
+            client.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
+            client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+            client.Headers.Add(HttpRequestHeader.Host, "www.ttpaihang.com");
+            //client.Headers.Add(HttpRequestHeader.Connection, "Keep-Alive"); // Can't do this
+            client.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
+            client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-AU,en;q=0.8,zh-Hans-CN;q=0.5,zh-Hans;q=0.3");
         }
 
         public string GetPageGB2312(string url)
@@ -160,26 +171,16 @@ namespace WebKit
             if (sel < 0 || sel >= pi.Question.Choices.Count) sel = 9;
             var c = pi.Question.Choices[sel];
             sh.KeyValues["answer"] = c.Value;
-            sh.KeyValues[ExpectedRadioNameHttp] = pi.Id;
+            sh.KeyValues[ExpectedRadioName] = pi.Id;
             sh.KeyValues["page"] = pi.PageId.ToString();
             return sh;
         }
 
         public string Submit(SubmitHandler sh, string url = DeafultSubmitUrl)
         {
-            // TODO some stuff hardcoded
-            using (var client = new WebClient())
-            {
-                client.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
-                client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-                client.Headers.Add(HttpRequestHeader.Host, "www.ttpaihang.com");
-                //client.Headers.Add(HttpRequestHeader.Connection, "Keep-Alive"); // Can't do this
-                client.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
-                client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-AU,en;q=0.8,zh-Hans-CN;q=0.5,zh-Hans;q=0.3");
-                client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
-                var bs = client.UploadValues(url, "POST", sh.KeyValues);
-                return bs.ConvertGB2312ToUTF();
-            }
+            _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
+            var bs = _client.UploadValues(url, "POST", sh.KeyValues);
+            return bs.ConvertGB2312ToUTF();
         }
 
         public string GetLinkToNextPage(string pageUrl, string pageContent)
