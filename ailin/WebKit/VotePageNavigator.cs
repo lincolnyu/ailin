@@ -7,6 +7,7 @@ namespace WebKit
     public class VotePageNavigator
     {
         public const int DefaultVoteId = 43;
+        public const int SecondVoteId = 1069;
         public const string DefaultMainPageUrlPattern = "http://www.ttpaihang.com/vote/rank.php?voteid=";
         public const string DeafultSubmitUrl = "http://www.ttpaihang.com/vote/rankpost.php";
         public const string ExpectedRadioName = "choice_id[]";
@@ -118,7 +119,7 @@ namespace WebKit
         private Question GetQuestion(string page)
         {
             // <strong>问题验证:</strong><font color='#ff0000'>哪个是战斗武器？</font> 选择答案：
-            string pattern = @"<strong>问题验证:</strong><font color='[^']+'>([^<]*)</font> 选择答案";
+            string pattern = @"<strong>问题验证:</strong>[ ]*<font[^>]+>([^<]*)</font>[ ]*选择答案";
             var match = Regex.Match(page, pattern);
 
             if (!match.Success) return null;
@@ -130,7 +131,8 @@ namespace WebKit
 
             // <Input name="answer" type="radio" Value="6b49819163"><label style="display:none">49efb</label>8
             var start = match.Index + match.Length;
-            var rex = new Regex("<label[^/]*/label>([^<]+)", RegexOptions.IgnoreCase);
+
+            var rex = new Regex("<label[^>]*>([^<]+)</label>([^<]+)", RegexOptions.IgnoreCase);
             for (;;)
             {
                 var inputInfo = page.GetNextInput(start);
@@ -149,10 +151,13 @@ namespace WebKit
                 match = rex.Match(page, afterInput);
                 if (match.Success)
                 {
+                    var label = match.Value;
+                    var labelStyle =  label.GetAttribute("style");
+                    var textSel = labelStyle == "display:none" ? 2 : 1;
                     var c = new Question.Choice
                     {
                         Value = value,
-                        Text = match.Groups[1].Value
+                        Text = match.Groups[textSel].Value
                     };
                     q.Choices.Add(c);
                 }
