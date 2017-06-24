@@ -132,9 +132,9 @@ namespace WebKit.Helpers
                 return new NodeInfo
                 {
                     Start = start,
-                    End = m.Groups[2].Index,
+                    End = m.Index + m.Length,
                     ContentStart = start,
-                    ContentEnd = m.Groups[2].Index,
+                    ContentEnd = m.Index,
                     OpeningTag = string.Empty,
                     ClosingTag = m.Groups[2].Value,
                     EndingType = NodeInfo.EndingTypes.ClosingTagOnly

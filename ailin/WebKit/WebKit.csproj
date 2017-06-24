@@ -43,6 +43,7 @@
     <Compile Include="Helpers\TextContentHelper.cs" />
     <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Helpers\HtmlNodeHelper.cs" />
+    <Compile Include="Helpers\VoteResponseHelper.cs" />
     <Compile Include="MyWebClient.cs">
       <SubType>Component</SubType>
     </Compile>

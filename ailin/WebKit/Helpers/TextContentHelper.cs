@@ -22,9 +22,10 @@ namespace WebKit.Helpers
 
             var open = str.Substring(n.Start, n.ContentStart - n.Start);
             var style = open.GetAttribute("style");
-            if (style == null || !style.Equals("display:none", StringComparison.OrdinalIgnoreCase))
+            if (style == null || !style.ToLower().Contains("display:none"))
             {
-                sb.Append(str.Substring(n.ContentStart, n.ContentLength));
+                var inner = str.Substring(n.ContentStart, n.ContentLength);
+                sb.Append(inner.GetTextContent());
             }
             if (n.End < str.Length)
             {

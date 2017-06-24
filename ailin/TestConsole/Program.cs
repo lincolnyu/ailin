@@ -15,7 +15,7 @@ namespace TestConsole
             const string submit = @"d:\temp\submit.txt";
             const string reply = @"d:\temp\reply.html";
 
-            var vpn = new VotePageNavigator(VotePageNavigator.SecondVoteId);
+            var vpn = new VotePageNavigator();
             var pi = vpn.SearchForZhuLin();
 
             using (var sw = new StreamWriter(qf))
@@ -51,9 +51,10 @@ namespace TestConsole
                 Process.Start(submit);
 
                 var res = vpn.Submit(s);
-                using (var sw = new StreamWriter(reply))
+                using (var fs = new FileStream(reply, FileMode.Create))
+                using (var bw = new BinaryWriter(fs))
                 {
-                    sw.Write(res);
+                    bw.Write(res);
                 }
                 Process.Start(reply);
             }

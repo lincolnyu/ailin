@@ -28,29 +28,37 @@
             </Style>
         </Grid.Resources>
         <TabControl>
-            <TabItem Loaded="Tab1OnLoaded">
+            <TabItem Name="Tab1">
                 <TabItem.Header>
                     <TextBlock>投票1（最红）</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
                     <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
                     <TextBlock FontSize="18">她的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
-                    <Button Name="Refresh1" Click="RefreshTab1">刷新</Button>
-                    <Button Name="VoteBtn1" Click="VoteTab1">马上投票给她</Button>
+                    <Button Name="Refresh1">刷新</Button>
+                    <Button Name="VoteBtn1">马上投票给她</Button>
                     <StackPanel Name="QuestionForm1" Visibility="Collapsed">
                         <TextBlock>选择问题后投票就立即下达</TextBlock>
                         <TextBlock Name="Question1"></TextBlock>
                         <StackPanel Name="Choices1">
                         </StackPanel>
-                        <StackPanel Name="Result1" Visibility="Collapsed">
+                        <StackPanel Name="Result1" Visibility="Collapsed" Orientation="Horizontal">
                             <TextBlock Name="ResultText1"></TextBlock>
+                            <TextBlock><Hyperlink Name="ResultPage1">详情</Hyperlink></TextBlock>
                         </StackPanel>
                     </StackPanel>
-                    <TextBlock>
+                    <StackPanel Name="VotePage1">
+                        <TextBlock>
                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage1">
                             她所在的投票页
                         </Hyperlink>
-                    </TextBlock>
+                        </TextBlock>
+                        <TextBlock>
+                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf1">
+                            她在该投票中的介绍
+                        </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
                     <TextBlock>
                         <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
                                RequestNavigate="HyperlinkRequestNavigate">
@@ -59,29 +67,37 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Loaded="Tab2OnLoaded">
+            <TabItem Name="Tab2">
                 <TabItem.Header>
                     <TextBlock>投票2（演技）</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
                     <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
                     <TextBlock FontSize="18">她的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
-                    <Button Name="Refresh2" Click="RefreshTab2">刷新</Button>
-                    <Button Name="VoteBtn2" Click="VoteTab2">马上投票给她</Button>
+                    <Button Name="Refresh2">刷新</Button>
+                    <Button Name="VoteBtn2">马上投票给她</Button>
                     <StackPanel Name="QuestionForm2" Visibility="Collapsed">
                         <TextBlock>选择问题后投票就立即下达</TextBlock>
                         <TextBlock Name="Question2"></TextBlock>
                         <StackPanel Name="Choices2">
                         </StackPanel>
-                        <StackPanel Name="Result2" Visibility="Collapsed">
+                        <StackPanel Name="Result2" Visibility="Collapsed" Orientation="Horizontal">
                             <TextBlock Name="ResultText2"></TextBlock>
+                            <TextBlock><Hyperlink Name="ResultPage2">详情</Hyperlink></TextBlock>
                         </StackPanel>
                     </StackPanel>
-                    <TextBlock>
+                    <StackPanel Name="VotePage2">
+                        <TextBlock>
                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage2">
                             她所在的投票页
                         </Hyperlink>
-                    </TextBlock>
+                        </TextBlock>
+                        <TextBlock>
+                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf2">
+                            她在该投票中的介绍
+                        </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
                     <TextBlock>
                         <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
                                RequestNavigate="HyperlinkRequestNavigate">

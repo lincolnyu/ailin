@@ -3,6 +3,7 @@
     public class PageInfo
     {
         public string PageUrl { get; set; }
+        public string ProfileUrl { get; set; }
         public int PageId { get; set; }
         public string PageContent { get; set; }
         public string Id { get; set; }

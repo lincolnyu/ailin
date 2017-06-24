@@ -17,10 +17,12 @@ namespace WebKit
         private MyWebClient _client = new MyWebClient();
 
         private string _mainPageUrl;
+        private string _baseUrl;
 
         public VotePageNavigator(string mainPageUrl)
         {
             _mainPageUrl = mainPageUrl;
+            _baseUrl = mainPageUrl.GetBaseUrl();
             SetClient(_client);
         }
 
@@ -59,11 +61,15 @@ namespace WebKit
             for (var url = _mainPageUrl; url != null; )
             {
                 var page = await GetPageGB2312(url);
-                var pattern = @"<a href=[^>]+>朱琳</a>";
+                var pattern = @"(<a href=[^>]+>)朱琳</a>";
                 var regex = new Regex(pattern);
                 var match = regex.Match(page);
                 if (match.Success)
                 {
+                    var a = match.Groups[1].Value;
+                    var proflink = a.GetAttribute("href");
+                    proflink = url.RelativeToAbsolute(proflink);
+
                     var start = match.Index + match.Length;
 
                     var input = page.GetNextInput(start).Item1;
@@ -83,6 +89,7 @@ namespace WebKit
                     return new PageInfo
                     {
                         PageUrl = url,
+                        ProfileUrl = proflink,
                         PageId = pageId,
                         PageContent = page,
                         Id = id?.ToString(),
@@ -192,18 +199,16 @@ namespace WebKit
             return sh;
         }
 
-        public string Submit(SubmitHandler sh, string url = DeafultSubmitUrl)
+        public byte[] Submit(SubmitHandler sh, string url = DeafultSubmitUrl)
         {
             _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
-            var bs = _client.UploadValues(url, "POST", sh.KeyValues);
-            return bs.ConvertGB2312ToUTF();
+            return _client.UploadValues(url, "POST", sh.KeyValues);
         }
 
-        public async Task<string> SubmitAsync(SubmitHandler sh, string url = DeafultSubmitUrl)
+        public async Task<byte[]> SubmitAsync(SubmitHandler sh, string url = DeafultSubmitUrl)
         {
             _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
-            var bs = await _client.UploadValuesTaskAsync(url, "POST", sh.KeyValues);
-            return bs.ConvertGB2312ToUTF();
+            return await _client.UploadValuesTaskAsync(url, "POST", sh.KeyValues);
         }
 
         public string GetLinkToNextPage(string pageUrl, string pageContent)
@@ -215,10 +220,7 @@ namespace WebKit
             {
                 var val = match.Groups[1].Value;
                 val = val.UrlInHtmlToUrl();
-                if (!val.IsAbsolute())
-                {
-                    val = _mainPageUrl.RelativeToAbsolute(val);
-                }
+                val = _mainPageUrl.RelativeToAbsolute(val);
                 val = val.Trim();
                 return val;
             }

@@ -1,0 +1,1 @@
+﻿<script>alert('1个选项被成功提交！');window.location='http://www.ttpaihang.com/vote/rank.php?voteid=43&page=3';</script>

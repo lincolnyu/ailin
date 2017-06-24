@@ -1,0 +1,79 @@
+﻿<html>
+<head>
+<title>信息提示窗口</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<style type="text/css">
+<!--
+.style1 {font-size: 14px}
+.style2 {font-size: 12px}
+A:link {
+	COLOR: #00496C; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #00496C; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+-->
+</style>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style=" margin:0 auto; text-align:center">
+
+<table width="1000" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="text-align:center">
+<table width="1000" height="500" border="0" cellspacing="0" cellpadding="0" >
+  <tr>
+    <td style="text-align:center">
+
+<table width="681" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="2"><table width="681" border="0" cellspacing="0" cellpadding="0" style="background-image:url(images/2cw.png); background-repeat:no-repeat; height:148px">
+      <tr>
+        <td style="vertical-align:top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="18%">&nbsp;</td>
+            <td width="75%" height="40" style="vertical-align:top;text-align:center; line-height:25px; font-size:12px; font-weight:bolder">友情提示</td>
+            <td width="7%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td style="text-align:center; line-height:35px; font-size:16px; font-family:'黑体'"> 您选择的选项可能已投过票,请勿重复投票！<br>若您当天尚未投过，请返回投票页面稍后再投！ 
+					    (
+					    RPT-3					    )			
+</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td  style="text-align:center; line-height:35px; font-size:12px; color:#00496C'"><a href="http://www.ttpaihang.com/vote/rank.php?voteid=43&page=3">返回投票页面(back to revote)</a> &nbsp;&nbsp;<a href="/comment/feedback.php?hiddentxt=RPT-3:43(2685)">我要反馈意见(error feedback)</a></p></td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+
+</td>
+  </tr>
+</table>
+
+</td>
+  </tr>
+</table>
+
+
+
+
+
+</body>
+</html>
