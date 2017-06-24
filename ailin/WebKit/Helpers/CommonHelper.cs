@@ -2,9 +2,9 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace WebKit
+namespace WebKit.Helpers
 {
-    public static class Helper
+    public static class CommonHelper
     {
         public static string RelativeToAbsolute(this string orig, string rel)
         {
@@ -56,7 +56,12 @@ namespace WebKit
             }
             return null;
         }
-        
+
+        public static string TrimQuestionString(this string s)
+        {
+            return s.Trim(' ', '\t', '\r', '\n');
+        }
+
         public static string GetAttribute(this string s, string attributeName, bool ignoreCase = true)
         {
             var ro = ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None;

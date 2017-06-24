@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using WebKit.Helpers;
 
 namespace WebKit
 {
@@ -37,19 +39,26 @@ namespace WebKit
             client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-AU,en;q=0.8,zh-Hans-CN;q=0.5,zh-Hans;q=0.3");
         }
 
-        public string GetPageGB2312(string url)
+        public async Task<string> GetPageGB2312(string url)
         {
-            var data = _client.DownloadData(url);
+            var data = await _client.DownloadDataTaskAsync(url);
             var page = data.ConvertGB2312ToUTF();
             return page;
         }
 
-        public PageInfo SearchForZhuLin()
+        public PageInfo SearchForZhuLin(bool getQuestions = true)
+        {
+            var task = SearchForZhuLinAsync(getQuestions);
+            task.Wait();
+            return task.Result;
+        }
+
+        public async Task<PageInfo> SearchForZhuLinAsync(bool getQuestions = true)
         {
             // should be like <a href="/vote/rankdetail-2685.html" target=_blank class=zthei >朱琳</a>
             for (var url = _mainPageUrl; url != null; )
             {
-                var page = GetPageGB2312(url);
+                var page = await GetPageGB2312(url);
                 var pattern = @"<a href=[^>]+>朱琳</a>";
                 var regex = new Regex(pattern);
                 var match = regex.Match(page);
@@ -67,7 +76,7 @@ namespace WebKit
 
                     GetRank(page, start, out int? votes, out int? popularity);
 
-                    var q = GetQuestion(page);
+                    var q = getQuestions? GetQuestion(page) : null;
 
                     var pageId = GetPageId(url);
 
@@ -129,52 +138,54 @@ namespace WebKit
                 Title = match.Groups[1].Value
             };
 
+            // could be like:
             // <Input name="answer" type="radio" Value="6b49819163"><label style="display:none">49efb</label>8
             var start = match.Index + match.Length;
 
-            var rex = new Regex("<label[^>]*>([^<]+)</label>([^<]+)", RegexOptions.IgnoreCase);
             for (;;)
             {
-                var inputInfo = page.GetNextInput(start);
-                if (inputInfo == null)
+                var block = page.GetNextNode(start, x=>x.ToLower() == "input", true);
+                if (block.OpeningTag.ToLower() == "input")
                 {
-                    break;
-                }
-                var input = inputInfo.Item1;
-                var name = input.GetAttribute("name");
-                if (!name.Equals("answer", StringComparison.OrdinalIgnoreCase))
-                {
-                    break;
-                }
-                var value = input.GetAttribute("value");
-                var afterInput = inputInfo.Item2 + input.Length;
-                match = rex.Match(page, afterInput);
-                if (match.Success)
-                {
-                    var label = match.Value;
-                    var labelStyle =  label.GetAttribute("style");
-                    var textSel = labelStyle == "display:none" ? 2 : 1;
+                    var t = page.Substring(block.Start, block.ContentStart - block.Start);
+                    var val = t.GetAttribute("value");
+                    var inner = page.Substring(block.ContentStart, block.ContentLength);
+                    var text = inner.GetTextContent();
                     var c = new Question.Choice
                     {
-                        Value = value,
-                        Text = match.Groups[textSel].Value
+                        Value = val,
+                        Text = text
                     };
                     q.Choices.Add(c);
                 }
-                start = match.Index + match.Length;
+                if (block.EndingType == HtmlNodeHelper.NodeInfo.EndingTypes.Mismatched)
+                {
+                    // means it reaches the parent node
+                    break;
+                }
+                start = block.End;
             }
+
             return q;
         }
 
         public static SubmitHandler CreateSubmit(PageInfo pi, int sel)
+        {
+            if (sel < 0 || sel >= pi.Question.Choices.Count)
+            {
+                sel = 0;
+            }
+            var c = pi.Question.Choices[sel];
+            return CreateSubmit(pi, c);
+        }
+
+        public static SubmitHandler CreateSubmit(PageInfo pi, Question.Choice c)
         {
             var sh = new SubmitHandler()
             {
                 RefPage = pi
             };
             sh.Process(pi.PageContent);
-            if (sel < 0 || sel >= pi.Question.Choices.Count) sel = 9;
-            var c = pi.Question.Choices[sel];
             sh.KeyValues["answer"] = c.Value;
             sh.KeyValues[ExpectedRadioName] = pi.Id;
             sh.KeyValues["page"] = pi.PageId.ToString();
@@ -185,6 +196,13 @@ namespace WebKit
         {
             _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
             var bs = _client.UploadValues(url, "POST", sh.KeyValues);
+            return bs.ConvertGB2312ToUTF();
+        }
+
+        public async Task<string> SubmitAsync(SubmitHandler sh, string url = DeafultSubmitUrl)
+        {
+            _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
+            var bs = await _client.UploadValuesTaskAsync(url, "POST", sh.KeyValues);
             return bs.ConvertGB2312ToUTF();
         }
 

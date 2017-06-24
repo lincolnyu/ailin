@@ -1,0 +1,22 @@
+﻿<table align="center" cellpadding="5" style="text-align:center; font-size:14px;margin:0px 10px 10px 10px; line-height:20px; border:1px #F60 dotted;">
+  <tr>
+    <td>
+	<strong>问题验证:</strong><font color='#ff0000'>哪个是贬义(否定)词？</font> 选择答案：
+<INPUT name="answer" type="radio" VALUE="c5c2dcd8bf">
+<label style="display:none">3076d</label><span  id="7fdfa">光荣</span>
+<INPUT name="answer" type="radio" VALUE="4814a9ce8b">
+<label style="display:none">d3c7c</label><span  id="f7e00">残忍</span>
+<INPUT name="answer" type="radio" VALUE="4d4597becb">
+<label style="display:none">eeecb</label><span  id="1fa7e">伟大</span>
+<INPUT name="answer" type="radio" VALUE="59ae20ab7d">
+<label style="display:none">76cb0</label><span  id="5e689">光明磊落</span>
+</td>
+  </tr>
+  <tr>
+    <td><SPAN   onClick="document.getElementById('anstips').innerHTML='残忍'; " style="cursor:hand;color:#000000;" onMouseOver="this.style.color='#00FF00';this.style.textDecoration='underline';" onMouseOut="this.style.color='#000000';this.style.textDecoration='none';"> 点击此处查看正确答案(Click here to take the correct answer)!</SPAN>[<span id="anstips" style="color:#FF0000; font-weight:bold"></span>]</td>
+  </tr>
+  somet garbage
+  <nested atta='atta' attb=attb >c1 <nested att1="abc" att2='def'>content in nested</nested> </nested>
+  some garbage
+  <broken>read me</tobreak>
+</table>

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using WebKit;
+using WebKit.Helpers;
 
 namespace TestConsole
 {
@@ -14,7 +15,7 @@ namespace TestConsole
             const string submit = @"d:\temp\submit.txt";
             const string reply = @"d:\temp\reply.html";
 
-            var vpn = new VotePageNavigator();
+            var vpn = new VotePageNavigator(VotePageNavigator.SecondVoteId);
             var pi = vpn.SearchForZhuLin();
 
             using (var sw = new StreamWriter(qf))
@@ -28,7 +29,7 @@ namespace TestConsole
                 var i = 0;
                 foreach (var a in pi.Question.Choices)
                 {
-                    sw.WriteLine("{0}: {1}", ++i, a.Text.Trim(' ', '\n', '\r', '\t'));
+                    sw.WriteLine("{0}: {1}", ++i, a.Text.TrimQuestionString());
                 }
             }
             Process.Start(qf);

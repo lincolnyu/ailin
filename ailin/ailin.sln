@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKit", "WebKit\WebKit.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{8D5668DA-109F-45F3-BF5D-BD8697BA60D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinWpf", "AiLinWpf\AiLinWpf.csproj", "{4FD7235A-9A3D-4EF0-B5E0-2B845FF71585}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinTests", "AiLinTests\AiLinTests.csproj", "{170273A2-36B8-479F-AF22-76215AA45557}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{8D5668DA-109F-45F3-BF5D-BD8697BA60D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D5668DA-109F-45F3-BF5D-BD8697BA60D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D5668DA-109F-45F3-BF5D-BD8697BA60D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD7235A-9A3D-4EF0-B5E0-2B845FF71585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD7235A-9A3D-4EF0-B5E0-2B845FF71585}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD7235A-9A3D-4EF0-B5E0-2B845FF71585}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD7235A-9A3D-4EF0-B5E0-2B845FF71585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170273A2-36B8-479F-AF22-76215AA45557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170273A2-36B8-479F-AF22-76215AA45557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170273A2-36B8-479F-AF22-76215AA45557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170273A2-36B8-479F-AF22-76215AA45557}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
