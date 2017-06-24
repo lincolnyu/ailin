@@ -8,6 +8,18 @@
         Title="爱琳投票助手 （版本1.0）" Height="514.875" Width="525">
     <Grid>
         <Grid.Resources>
+            <Style TargetType="RichTextBox">
+                <Style.Setters>
+                    <Setter Property="FontSize" Value="18">
+                    </Setter>
+                    <Setter Property="BorderThickness" Value="0">
+                    </Setter>
+                    <Setter Property="IsReadOnly" Value="True">
+                    </Setter>
+                    <Setter Property="IsDocumentEnabled" Value="True">
+                    </Setter>
+                </Style.Setters>
+            </Style>
             <Style TargetType="TextBlock">
                 <Style.Setters>
                     <Setter Property="FontSize" Value="18">
@@ -35,18 +47,6 @@
                 <StackPanel>
                     <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
                     <TextBlock FontSize="18">她的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
-                    <Button Name="Refresh1">刷新</Button>
-                    <Button Name="VoteBtn1">马上投票给她</Button>
-                    <StackPanel Name="QuestionForm1" Visibility="Collapsed">
-                        <TextBlock>选择问题后投票就立即下达</TextBlock>
-                        <TextBlock Name="Question1"></TextBlock>
-                        <StackPanel Name="Choices1">
-                        </StackPanel>
-                        <StackPanel Name="Result1" Visibility="Collapsed" Orientation="Horizontal">
-                            <TextBlock Name="ResultText1"></TextBlock>
-                            <TextBlock><Hyperlink Name="ResultPage1">详情</Hyperlink></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
                     <StackPanel Name="VotePage1">
                         <TextBlock>
                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage1">
@@ -65,6 +65,22 @@
                             该投票的主页
                         </Hyperlink>
                     </TextBlock>
+                    <Button Name="Refresh1">刷新</Button>
+                    <Button Name="VoteBtn1">马上投票给她</Button>
+                    <StackPanel Name="QuestionForm1" Visibility="Collapsed">
+                        <TextBlock>选择问题后投票就立即下达</TextBlock>
+                        <TextBlock Name="Question1"></TextBlock>
+                        <StackPanel Name="Choices1">
+                        </StackPanel>
+                        <RichTextBox Name="Result1" Visibility="Collapsed">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Name="ResultText1"></Run>
+                                    <Hyperlink Name="ResultPage1">详情</Hyperlink>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
             <TabItem Name="Tab2">
@@ -74,18 +90,6 @@
                 <StackPanel>
                     <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
                     <TextBlock FontSize="18">她的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
-                    <Button Name="Refresh2">刷新</Button>
-                    <Button Name="VoteBtn2">马上投票给她</Button>
-                    <StackPanel Name="QuestionForm2" Visibility="Collapsed">
-                        <TextBlock>选择问题后投票就立即下达</TextBlock>
-                        <TextBlock Name="Question2"></TextBlock>
-                        <StackPanel Name="Choices2">
-                        </StackPanel>
-                        <StackPanel Name="Result2" Visibility="Collapsed" Orientation="Horizontal">
-                            <TextBlock Name="ResultText2"></TextBlock>
-                            <TextBlock><Hyperlink Name="ResultPage2">详情</Hyperlink></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
                     <StackPanel Name="VotePage2">
                         <TextBlock>
                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage2">
@@ -104,6 +108,22 @@
                             该投票的主页
                         </Hyperlink>
                     </TextBlock>
+                    <Button Name="Refresh2">刷新</Button>
+                    <Button Name="VoteBtn2">马上投票给她</Button>
+                    <StackPanel Name="QuestionForm2" Visibility="Collapsed">
+                        <TextBlock>选择问题后投票就立即下达</TextBlock>
+                        <TextBlock Name="Question2"></TextBlock>
+                        <StackPanel Name="Choices2">
+                        </StackPanel>
+                        <RichTextBox Name="Result2" Visibility="Collapsed">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Name="ResultText2"></Run>
+                                    <Hyperlink Name="ResultPage2">详情</Hyperlink>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
             <TabItem>

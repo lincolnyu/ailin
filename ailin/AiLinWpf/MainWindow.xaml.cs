@@ -51,8 +51,8 @@ namespace AiLinWpf
             public TextBlock QuestionText;
             public StackPanel ChoicesPanel;
 
-            public StackPanel ResultPanel;
-            public TextBlock ResultText;
+            public RichTextBox ResultPanel;
+            public Run ResultText;
             public Hyperlink ResultLink;
 
             public void Setup(MainWindow window)
