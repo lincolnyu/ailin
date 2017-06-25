@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         mc:Ignorable="d"
-        Title="爱琳投票助手 （版本1.0.2）" Height="514.875" Width="525">
+        Title="爱琳投票助手 （版本1.0.3, testing squirrel）" Height="514.875" Width="525">
     <Grid>
         <Grid.Resources>
             <Style TargetType="RichTextBox">
