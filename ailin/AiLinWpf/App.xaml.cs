@@ -45,19 +45,18 @@ namespace AiLinWpf
             }
         }
 
-
         [STAThread]
         static void Main()
         {
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
-#if !DEBUG
-                CheckForUpdate().Wait();
-#endif
                 App app = new App();
                 _mainWindow = new MainWindow();
                 app.Run(_mainWindow);
                 _mutex.ReleaseMutex();
+#if !DEBUG
+                CheckForUpdate().Wait();
+#endif
             }
             else
             {
