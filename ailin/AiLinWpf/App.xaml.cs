@@ -16,7 +16,7 @@ namespace AiLinWpf
     /// </remarks>
     public partial class App : Application
     {
-        const string GitHubHost = "https://github.com/lincolnyu/ailin/releases/latest";
+        const string GitHubHost = "https://github.com/lincolnyu/ailin";
         private static Mutex _mutex = new Mutex(true, "{f0791ebc-4bff-484d-8199-e945b46bbed0}");
         private static MainWindow _mainWindow = null;
 
