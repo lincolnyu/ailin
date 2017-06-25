@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         mc:Ignorable="d"
-        Title="爱琳投票助手 （版本1.0）" Height="514.875" Width="525">
+        Title="爱琳投票助手 （版本1.0.0）" Height="514.875" Width="525">
     <Grid>
         <Grid.Resources>
             <Style TargetType="RichTextBox">
@@ -45,26 +45,36 @@
                     <TextBlock>投票1（最红）</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
-                    <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
-                    <TextBlock FontSize="18">她的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
-                    <StackPanel Name="VotePage1">
-                        <TextBlock>
-                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage1">
-                            她所在的投票页
-                        </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf1">
-                            她在该投票中的介绍
-                        </Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
-                               RequestNavigate="HyperlinkRequestNavigate">
-                            该投票的主页
-                        </Hyperlink>
-                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
+                            <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
+                            <StackPanel Name="VotePage1">
+                                <TextBlock>
+                                    <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage1">
+                                        她所在的投票页
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf1">
+                                        她在该投票中的介绍
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock>
+                                <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
+                                       RequestNavigate="HyperlinkRequestNavigate">
+                                    该投票的主页
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1">
+                        </Image>
+                    </Grid>
                     <Button Name="Refresh1">刷新</Button>
                     <Button Name="VoteBtn1">马上投票给她</Button>
                     <StackPanel Name="QuestionForm1" Visibility="Collapsed">
@@ -88,26 +98,34 @@
                     <TextBlock>投票2（演技）</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
-                    <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
-                    <TextBlock FontSize="18">她的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
-                    <StackPanel Name="VotePage2">
-                        <TextBlock>
-                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage2">
-                            她所在的投票页
-                        </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf2">
-                            她在该投票中的介绍
-                        </Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
-                               RequestNavigate="HyperlinkRequestNavigate">
-                            该投票的主页
-                        </Hyperlink>
-                    </TextBlock>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
+                            <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
+                            <StackPanel Name="VotePage2">
+                                <TextBlock>
+                                    <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage2">
+                                        她所在的投票页
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf2">
+                                        她在该投票中的介绍
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock>
+                                <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
+                                       RequestNavigate="HyperlinkRequestNavigate">
+                                    该投票的主页
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
                     <Button Name="Refresh2">刷新</Button>
                     <Button Name="VoteBtn2">马上投票给她</Button>
                     <StackPanel Name="QuestionForm2" Visibility="Collapsed">
@@ -128,7 +146,7 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock>友情链接</TextBlock>
+                    <TextBlock>关注链接</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
                     <TextBlock>

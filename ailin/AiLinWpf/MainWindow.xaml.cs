@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Navigation;
 using WebKit;
 using WebKit.Helpers;
+using Squirrel;
 
 namespace AiLinWpf
 {
@@ -228,6 +229,24 @@ namespace AiLinWpf
         {
             InitializeComponent();
             InitInfoDepdentUI();
+        }
+
+        static MainWindow()
+        {
+#if !DEBUG
+            SetupSquirrel();
+#endif
+        }
+
+        const string filehost = @"Z:\services\squirrel-releases\ailin\Releases";
+        const string webhost = "http://192.168.1.7/services/squirrel/ailin/releases";
+
+        private static async void SetupSquirrel()
+        {
+            using (var mgr = new UpdateManager(webhost))
+            {
+                await mgr.UpdateApp();
+            }
         }
 
         private void InitInfoDepdentUI()
