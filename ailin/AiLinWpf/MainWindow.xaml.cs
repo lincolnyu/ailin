@@ -190,7 +190,7 @@ namespace AiLinWpf
             private void RestoreRefreshSubmitted()
             {
                 RefreshButton.IsEnabled = true;
-                RefreshButton.Content = "关闭投票并更新";
+                RefreshButton.Content = "关闭投票并刷新";
                 VoteButton.IsEnabled = true;
                 ChoicesPanel.IsEnabled = false;
                 VoteButton.Visibility = Visibility.Collapsed;

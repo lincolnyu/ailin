@@ -29,9 +29,9 @@ namespace AiLinWpf
         {
             try
             {
-                using (var mgr = new UpdateManager(GitHubHost))
+                using (var mgr = UpdateManager.GitHubUpdateManager(GitHubHost))
                 {
-                    await mgr.UpdateApp();
+                    await mgr.Result.UpdateApp();
                 }
             }
             catch (Exception ex)
@@ -41,7 +41,7 @@ namespace AiLinWpf
                 {
                     message += ex.InnerException.Message;
                 }
-                MessageBox.Show(message);
+                MessageBox.Show(message, "无法安装更新");
             }
         }
 
@@ -51,12 +51,12 @@ namespace AiLinWpf
         {
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
-                App app = new App();
-                _mainWindow = new MainWindow();
-                app.Run(_mainWindow);
 #if !DEBUG
                 CheckForUpdate().Wait();
 #endif
+                App app = new App();
+                _mainWindow = new MainWindow();
+                app.Run(_mainWindow);
                 _mutex.ReleaseMutex();
             }
             else
