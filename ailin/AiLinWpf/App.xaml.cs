@@ -1,6 +1,7 @@
 ﻿using Squirrel;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace AiLinWpf
@@ -24,6 +25,26 @@ namespace AiLinWpf
             InitializeComponent();
         }
 
+        private static async Task CheckForUpdate()
+        {
+            try
+            {
+                using (var mgr = new UpdateManager(GitHubHost))
+                {
+                    await mgr.UpdateApp();
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message + Environment.NewLine;
+                if (ex.InnerException != null)
+                {
+                    message += ex.InnerException.Message;
+                }
+                MessageBox.Show(message);
+            }
+        }
+
 
         [STAThread]
         static void Main()
@@ -34,10 +55,7 @@ namespace AiLinWpf
                 _mainWindow = new MainWindow();
                 app.Run(_mainWindow);
 #if !DEBUG
-                using (var mgr = new UpdateManager(GitHubHost))
-                {
-                    mgr.UpdateApp().Wait();
-                }
+                CheckForUpdate().Wait();
 #endif
                 _mutex.ReleaseMutex();
             }
