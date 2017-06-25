@@ -238,12 +238,11 @@ namespace AiLinWpf
 #endif
         }
 
-        const string filehost = @"Z:\services\squirrel-releases\ailin\Releases";
-        const string webhost = "http://192.168.1.7/services/squirrel/ailin/releases";
+        const string GitHubHost = "https://github.com/lincolnyu/ailin/releases/latest";
 
         private static async void SetupSquirrel()
         {
-            using (var mgr = new UpdateManager(webhost))
+            using (var mgr = new UpdateManager(GitHubHost))
             {
                 await mgr.UpdateApp();
             }
