@@ -231,23 +231,6 @@ namespace AiLinWpf
             InitInfoDepdentUI();
         }
 
-        static MainWindow()
-        {
-#if !DEBUG
-            SetupSquirrel();
-#endif
-        }
-
-        const string GitHubHost = "https://github.com/lincolnyu/ailin/releases/latest";
-
-        private static async void SetupSquirrel()
-        {
-            using (var mgr = new UpdateManager(GitHubHost))
-            {
-                await mgr.UpdateApp();
-            }
-        }
-
         private void InitInfoDepdentUI()
         {
             _infoDepUIList.Add(new InfoDependentUI
