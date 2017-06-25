@@ -24,25 +24,21 @@ namespace AiLinWpf
             InitializeComponent();
         }
 
-        private static async void SetupSquirrel()
-        {
-            using (var mgr = new UpdateManager(GitHubHost))
-            {
-                await mgr.UpdateApp();
-            }
-        }
 
         [STAThread]
         static void Main()
         {
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
-#if !DEBUG
-                SetupSquirrel();
-#endif
                 App app = new App();
                 _mainWindow = new MainWindow();
                 app.Run(_mainWindow);
+#if !DEBUG
+                using (var mgr = new UpdateManager(GitHubHost))
+                {
+                    mgr.UpdateApp().Wait();
+                }
+#endif
                 _mutex.ReleaseMutex();
             }
             else
