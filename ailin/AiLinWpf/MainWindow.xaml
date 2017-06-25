@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         mc:Ignorable="d"
-        Title="爱琳投票助手 （版本1.0.2）" Height="514.875" Width="525">
+        Title="爱琳投票助手 （版本1.0.5）" Height="514.875" Width="525">
     <Grid>
         <Grid.Resources>
             <Style TargetType="RichTextBox">
@@ -45,10 +45,16 @@
                     <TextBlock>投票1（最红）</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" Opacity="0.5" 
+                                    AlignmentX="Right"
+                                    AlignmentY="Bottom"
+                                    Stretch="Uniform"></ImageBrush>
+                    </StackPanel.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="0*"></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*" MaxWidth="180"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
                             <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
@@ -73,7 +79,7 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
-                        <Image Grid.Column="1">
+                        <Image Grid.Column="1" Name="ProfileImage1">
                         </Image>
                     </Grid>
                     <Button Name="Refresh1">刷新</Button>
@@ -99,12 +105,18 @@
                     <TextBlock>投票2（演技）</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" Opacity="0.5" 
+                                    AlignmentX="Right"
+                                    AlignmentY="Bottom"
+                                    Stretch="Uniform"></ImageBrush>
+                    </StackPanel.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="0*"></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*" MaxWidth="180"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <StackPanel>
+                        <StackPanel Grid.Column="0">
                             <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
                             <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
                             <TextBlock FontSize="18">她目前的排名：<TextBlock Name="Rank2"></TextBlock></TextBlock>
@@ -127,6 +139,8 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
+                        <Image Grid.Column="1" Name="ProfileImage2">
+                        </Image>
                     </Grid>
                     <Button Name="Refresh2">刷新</Button>
                     <Button Name="VoteBtn2">马上投票给她</Button>
@@ -151,24 +165,42 @@
                     <TextBlock>关注链接</TextBlock>
                 </TabItem.Header>
                 <StackPanel>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="http://www.zhulin.net/" 
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" 
+                                    Opacity="0.5" AlignmentX="Right"
+                                    AlignmentY="Bottom"
+                                    Stretch="Uniform"></ImageBrush>
+                    </StackPanel.Background>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                            <Image Source="http://www.zhulin.net/images/lzmb.jpg" Width="120">
+                            </Image>
+                            <Hyperlink NavigateUri="http://www.zhulin.net/" 
+                                   RequestNavigate="HyperlinkRequestNavigate">
+                                琳中漫步-朱琳影迷会
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                            <Image Source="http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg" 
+                                   MaxWidth="120"/>
+                            <Hyperlink NavigateUri="http://tieba.baidu.com/f?kw=%E6%9C%B1%E7%90%B3" 
                                RequestNavigate="HyperlinkRequestNavigate">
-                            琳中漫步-朱琳影迷会
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="http://tieba.baidu.com/f?kw=%E6%9C%B1%E7%90%B3" 
-                               RequestNavigate="HyperlinkRequestNavigate">
-                            百度朱琳吧
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock>
-                        <Hyperlink NavigateUri="http://weibo.com/zhulinfanclub" 
-                               RequestNavigate="HyperlinkRequestNavigate">
-                            朱琳影迷会-新浪微博
-                        </Hyperlink>
-                    </TextBlock>
+                                百度朱琳吧
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                           <Image Source=" http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg" Width="120">
+                            </Image>
+                            <Hyperlink NavigateUri="http://weibo.com/zhulinfanclub" 
+                                   RequestNavigate="HyperlinkRequestNavigate">
+                                朱琳影迷会-新浪微博
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>

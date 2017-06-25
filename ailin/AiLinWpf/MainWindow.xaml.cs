@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using WebKit;
 using WebKit.Helpers;
 using Squirrel;
+using System.Windows.Media.Imaging;
 
 namespace AiLinWpf
 {
@@ -45,6 +46,7 @@ namespace AiLinWpf
             public StackPanel LinksPanel;
             public Hyperlink LinsPage;
             public Hyperlink LinsProfile;
+            public Image LinsImage;
 
             public Button RefreshButton;
             public Button VoteButton;
@@ -139,6 +141,14 @@ namespace AiLinWpf
                     RankText.Text = PageInfo.Rank?.ToString()?? "无法获取";
                     LinsPage.NavigateUri = PageInfo.PageUrl != null? new Uri(PageInfo.PageUrl) : null;
                     LinsProfile.NavigateUri = PageInfo.ProfileUrl != null ? new Uri(PageInfo.ProfileUrl) : null;
+                    if (PageInfo.Thumbnail != null)
+                    {
+                        var img = new BitmapImage();
+                        img.BeginInit();
+                        img.UriSource = new Uri(PageInfo.Thumbnail);
+                        img.EndInit();
+                        LinsImage.Source = img;
+                    }
 
                     QuestionText.Text = PageInfo.Question.Title?.TrimQuestionString()?? "无法获取问题";
                     if (PageInfo.Question.Title != null)
@@ -252,6 +262,7 @@ namespace AiLinWpf
                 LinksPanel = VotePage1,
                 LinsPage = LinsPage1,
                 LinsProfile = LinsProf1,
+                LinsImage = ProfileImage1,
 
                 RefreshButton = Refresh1,
                 VoteButton = VoteBtn1,
@@ -279,6 +290,7 @@ namespace AiLinWpf
                 LinksPanel = VotePage2,
                 LinsPage = LinsPage2,
                 LinsProfile = LinsProf2,
+                LinsImage = ProfileImage2,
 
                 RefreshButton = Refresh2,
                 VoteButton = VoteBtn2,
