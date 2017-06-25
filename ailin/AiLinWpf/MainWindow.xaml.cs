@@ -40,6 +40,7 @@ namespace AiLinWpf
 
             public TextBlock NumVotesText;
             public TextBlock PopularityText;
+            public TextBlock RankText;
 
             public StackPanel LinksPanel;
             public Hyperlink LinsPage;
@@ -133,22 +134,26 @@ namespace AiLinWpf
                 PageInfo = await Navigator.SearchForZhuLinAsync(true);
                 if (PageInfo != null)
                 {
-                    NumVotesText.Text = PageInfo.Votes.ToString();
-                    PopularityText.Text = PageInfo.Popularity.ToString();
-                    LinsPage.NavigateUri = new Uri(PageInfo.PageUrl);
-                    LinsProfile.NavigateUri = new Uri(PageInfo.ProfileUrl);
+                    NumVotesText.Text = PageInfo.Votes?.ToString()?? "无法获取";
+                    PopularityText.Text = PageInfo.Popularity?.ToString()?? "无法获取";
+                    RankText.Text = PageInfo.Rank?.ToString()?? "无法获取";
+                    LinsPage.NavigateUri = PageInfo.PageUrl != null? new Uri(PageInfo.PageUrl) : null;
+                    LinsProfile.NavigateUri = PageInfo.ProfileUrl != null ? new Uri(PageInfo.ProfileUrl) : null;
 
-                    QuestionText.Text = PageInfo.Question.Title.TrimQuestionString();
-                    ChoicesPanel.Children.Clear();
-                    foreach (var c in PageInfo.Question.Choices)
+                    QuestionText.Text = PageInfo.Question.Title?.TrimQuestionString()?? "无法获取问题";
+                    if (PageInfo.Question.Title != null)
                     {
-                        var rb = new RadioButton
+                        ChoicesPanel.Children.Clear();
+                        foreach (var c in PageInfo.Question.Choices)
                         {
-                            Tag = c,
-                            Content = c.Text.TrimQuestionString()
-                        };
-                        rb.Click += RbClick;
-                        ChoicesPanel.Children.Add(rb);
+                            var rb = new RadioButton
+                            {
+                                Tag = c,
+                                Content = c.Text.TrimQuestionString()
+                            };
+                            rb.Click += RbClick;
+                            ChoicesPanel.Children.Add(rb);
+                        }
                     }
                 }
                 else
@@ -242,6 +247,7 @@ namespace AiLinWpf
 
                 NumVotesText = NumVotes1,
                 PopularityText = Popularity1,
+                RankText = Rank1,
 
                 LinksPanel = VotePage1,
                 LinsPage = LinsPage1,
@@ -268,6 +274,7 @@ namespace AiLinWpf
 
                 NumVotesText = NumVotes2,
                 PopularityText = Popularity2,
+                RankText = Rank2,
 
                 LinksPanel = VotePage2,
                 LinsPage = LinsPage2,

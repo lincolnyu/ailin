@@ -9,6 +9,8 @@
         public string Id { get; set; }
         public int? Votes { get; set; }
         public int? Popularity { get; set; }
+        public int? Rank { get; set; }
+        public string Thumbnail { get; set; }
 
         public Question Question { get; set; }
     }

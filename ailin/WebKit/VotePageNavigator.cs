@@ -80,9 +80,15 @@ namespace WebKit
                         id = input.GetAttributeInt("value");
                     }
 
-                    GetRank(page, start, out int? votes, out int? popularity);
+                    GetVotesAndPopularity(page, start, out int? votes, out int? popularity);
+                    GetRankAndThumbnail(page, match.Index, out int? rank, out string thumbnail);
 
                     var q = getQuestions? GetQuestion(page) : null;
+
+                    if (thumbnail != null)
+                    {
+                        thumbnail = url.RelativeToAbsolute(thumbnail);
+                    }
 
                     var pageId = GetPageId(url);
 
@@ -95,6 +101,8 @@ namespace WebKit
                         Id = id?.ToString(),
                         Votes = votes,
                         Popularity = popularity,
+                        Rank = rank,
+                        Thumbnail = thumbnail,
                         Question = q
                     };
                 }
@@ -113,7 +121,7 @@ namespace WebKit
             return 1;
         }
 
-        private void GetRank(string page, int start, out int? votes, out int? popularity)
+        private void GetVotesAndPopularity(string page, int start, out int? votes, out int? popularity)
         {
             votes = null;
             popularity = null;
@@ -129,6 +137,33 @@ namespace WebKit
             if (m.Success && int.TryParse(m.Groups[1].Value, out int p))
             {
                 popularity = p;
+            }
+        }
+
+        private void GetRankAndThumbnail(string page, int start, out int? rank, out string thumbnail)
+        {
+            // go backwards
+
+            thumbnail = null;
+            rank = null;
+
+            var imgstart = page.LastIndexOf("<img", start);
+            if (imgstart >= 0)
+            {
+                var imgend = page.IndexOf(">", imgstart) + 1;
+                if (imgend > imgstart)
+                {
+                    var imgtag = page.Substring(imgstart, imgend - imgstart);
+                    thumbnail = imgtag.GetAttribute("src");
+
+                    var s = page.Substring(imgend, start - imgend);
+                    var rex = new Regex("TOP.([0-9]+)", RegexOptions.IgnoreCase);
+                    var m = rex.Match(s);
+                    if (m.Success && int.TryParse(m.Groups[1].Value, out int r))
+                    {
+                        rank = r;
+                    }
+                }
             }
         }
 

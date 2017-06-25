@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         mc:Ignorable="d"
-        Title="爱琳投票助手 （版本1.0.0）" Height="514.875" Width="525">
+        Title="爱琳投票助手 （版本1.0.2）" Height="514.875" Width="525">
     <Grid>
         <Grid.Resources>
             <Style TargetType="RichTextBox">
@@ -53,6 +53,7 @@
                         <StackPanel>
                             <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
                             <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
+                            <TextBlock FontSize="18">她目前的排名：<TextBlock Name="Rank1"></TextBlock></TextBlock>
                             <StackPanel Name="VotePage1">
                                 <TextBlock>
                                     <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage1">
@@ -106,6 +107,7 @@
                         <StackPanel>
                             <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
                             <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
+                            <TextBlock FontSize="18">她目前的排名：<TextBlock Name="Rank2"></TextBlock></TextBlock>
                             <StackPanel Name="VotePage2">
                                 <TextBlock>
                                     <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage2">
