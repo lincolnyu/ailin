@@ -1,16 +1,19 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace WebKit.Helpers
 {
     public static class VoteResponseHelper
     {
-        public static string GetVoteResponseMessage(this string page, bool cleanup = false)
+        public static Tuple<string, bool> GetVoteResponseMessage(this string page, bool cleanup = false)
         {
             var rexa = new Regex(@"alert\('([^']+)'\)");
             var ma = rexa.Match(page, 0);
             if (ma.Success)
             {
-                return ma.Groups[1].Value;
+                //it looks like '1个选项被成功提交'
+                var res = ma.Groups[1].Value.Contains("成功提交");
+                return new Tuple<string, bool>(ma.Groups[1].Value, true);
             }
             var rex = new Regex("<td[^>]*>");
             var start = 0;
@@ -28,7 +31,7 @@ namespace WebKit.Helpers
                         {
                             s = Cleanup(s);
                         }
-                        return s;
+                        return new Tuple<string, bool>(s, false);
                     }
                     start = m.Index + m.Length;
                 }
@@ -37,7 +40,7 @@ namespace WebKit.Helpers
                     break;
                 }
             }
-            return null;
+            return new Tuple<string, bool>(null, false);
         }
 
         private static string Cleanup(string s)

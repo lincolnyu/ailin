@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         mc:Ignorable="d"
-        Title="爱琳投票助手 （版本1.0.5）" Height="514.875" Width="525">
+        Title="爱琳投票助手" Height="514.875" Width="525">
     <Grid>
         <Grid.Resources>
             <Style TargetType="RichTextBox">
@@ -53,13 +53,15 @@
                     </StackPanel.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8*"></ColumnDefinition>
-                            <ColumnDefinition Width="2*" MaxWidth="180"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*" MinWidth="100" MaxWidth="180"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
-                            <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
-                            <TextBlock FontSize="18">她目前的排名：<TextBlock Name="Rank1"></TextBlock></TextBlock>
+                            <TextBlock >朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
+                            <TextBlock >她目前的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
+                            <TextBlock >她目前的排名：<TextBlock Name="Rank1"></TextBlock></TextBlock>
+                            <TextBlock FontSize="15">上次投票时间：<TextBlock FontSize="15" Name="LastVoteTime1"></TextBlock></TextBlock>
+                            <TextBlock FontSize="15">上次投票前，<TextBlock FontSize="15" Name="LastVoteResult1"></TextBlock></TextBlock>
                             <StackPanel Name="VotePage1">
                                 <TextBlock>
                                     <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage1">
@@ -68,9 +70,25 @@
                                 </TextBlock>
                                 <TextBlock>
                                     <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf1">
-                                        她在该投票中的介绍
+                                        她在该投票中的简介
                                     </Hyperlink>
                                 </TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPageMobile1">
+                                            投票页移动版
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <Button Name="Invite1" Margin="10,0,0,0">
+                                        <Button.ToolTip>
+                                            创建邀请信息到剪贴板，然后复制到邮件或即时消息分享给朋友
+                                        </Button.ToolTip>
+                                        创建邀请
+                                    </Button>
+                                    <Button Name="InviteEmail1" Margin="5,0,0,0">
+                                        Email邀请
+                                    </Button>
+                                </StackPanel>
                             </StackPanel>
                             <TextBlock>
                                 <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
@@ -79,8 +97,11 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
-                        <Image Grid.Column="1" Name="ProfileImage1">
-                        </Image>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                            <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">
+                                <Image Name="ProfileImage1"/>
+                            </Hyperlink>
+                        </TextBlock>
                     </Grid>
                     <Button Name="Refresh1">刷新</Button>
                     <Button Name="VoteBtn1">马上投票给她</Button>
@@ -93,7 +114,9 @@
                             <FlowDocument>
                                 <Paragraph>
                                     <Run Name="ResultText1"></Run>
-                                    <Hyperlink Name="ResultPage1">详情</Hyperlink>
+                                    <TextBlock>
+                                        <Hyperlink Name="ResultPage1">详情</Hyperlink>
+                                    </TextBlock>
                                 </Paragraph>
                             </FlowDocument>
                         </RichTextBox>
@@ -113,13 +136,15 @@
                     </StackPanel.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8*"></ColumnDefinition>
-                            <ColumnDefinition Width="2*" MaxWidth="180"></ColumnDefinition>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*" MinWidth="100" MaxWidth="180"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <TextBlock FontSize="18">朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
-                            <TextBlock FontSize="18">她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
-                            <TextBlock FontSize="18">她目前的排名：<TextBlock Name="Rank2"></TextBlock></TextBlock>
+                            <TextBlock>朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
+                            <TextBlock>她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
+                            <TextBlock>她目前的排名：<TextBlock Name="Rank2"></TextBlock></TextBlock>
+                            <TextBlock FontSize="15">上次投票时间：<TextBlock FontSize="15" Name="LastVoteTime2"></TextBlock></TextBlock>
+                            <TextBlock FontSize="15">上次投票前，<TextBlock FontSize="15" Name="LastVoteResult2"></TextBlock></TextBlock>
                             <StackPanel Name="VotePage2">
                                 <TextBlock>
                                     <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPage2">
@@ -128,9 +153,25 @@
                                 </TextBlock>
                                 <TextBlock>
                                     <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsProf2">
-                                        她在该投票中的介绍
+                                        她在该投票中的简介
                                     </Hyperlink>
                                 </TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock>
+                                        <Hyperlink RequestNavigate="HyperlinkRequestNavigate" Name="LinsPageMobile2">
+                                            投票页移动版
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <Button Name="Invite2" Margin="10,0,0,0">
+                                        <Button.ToolTip>
+                                            创建邀请信息到剪贴板，然后复制到邮件或即时消息分享给朋友
+                                        </Button.ToolTip>
+                                        创建邀请
+                                    </Button>
+                                    <Button Name="InviteEmail2" Margin="5,0,0,0">
+                                        Email邀请
+                                    </Button>
+                                </StackPanel>
                             </StackPanel>
                             <TextBlock>
                                 <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
@@ -139,8 +180,11 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
-                        <Image Grid.Column="1" Name="ProfileImage2">
-                        </Image>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                            <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">
+                                <Image Name="ProfileImage2"/>
+                            </Hyperlink>
+                        </TextBlock>
                     </Grid>
                     <Button Name="Refresh2">刷新</Button>
                     <Button Name="VoteBtn2">马上投票给她</Button>
@@ -153,7 +197,9 @@
                             <FlowDocument>
                                 <Paragraph>
                                     <Run Name="ResultText2"></Run>
-                                    <Hyperlink Name="ResultPage2">详情</Hyperlink>
+                                    <TextBlock>
+                                        <Hyperlink Name="ResultPage2">详情</Hyperlink>
+                                    </TextBlock>
                                 </Paragraph>
                             </FlowDocument>
                         </RichTextBox>
@@ -164,44 +210,65 @@
                 <TabItem.Header>
                     <TextBlock>关注链接</TextBlock>
                 </TabItem.Header>
-                <StackPanel>
-                    <StackPanel.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="53*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="443*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.ColumnSpan="3">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" 
                                     Opacity="0.5" AlignmentX="Right"
                                     AlignmentY="Bottom"
                                     Stretch="Uniform"></ImageBrush>
-                    </StackPanel.Background>
-                    <StackPanel Orientation="Horizontal">
+                        </StackPanel.Background>
                         <TextBlock>
-                            <Image Source="http://www.zhulin.net/images/lzmb.jpg" Width="120">
-                            </Image>
                             <Hyperlink NavigateUri="http://www.zhulin.net/" 
-                                   RequestNavigate="HyperlinkRequestNavigate">
-                                琳中漫步-朱琳影迷会
+                                       RequestNavigate="HyperlinkRequestNavigate"
+                                       TextDecorations="None">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="http://www.zhulin.net/images/lzmb.jpg" Width="120"/>
+                                    <TextBlock VerticalAlignment="Bottom">
+                                        琳中漫步-朱琳影迷会
+                                    </TextBlock>
+                                </StackPanel>
                             </Hyperlink>
                         </TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
                         <TextBlock>
-                            <Image Source="http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg" 
-                                   MaxWidth="120"/>
                             <Hyperlink NavigateUri="http://tieba.baidu.com/f?kw=%E6%9C%B1%E7%90%B3" 
-                               RequestNavigate="HyperlinkRequestNavigate">
-                                百度朱琳吧
+                                       RequestNavigate="HyperlinkRequestNavigate"
+                                       TextDecorations="None">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg" 
+                                           Width="120"/>
+                                    <TextBlock VerticalAlignment="Bottom">
+                                        百度朱琳吧
+                                    </TextBlock>
+                                </StackPanel>
                             </Hyperlink>
                         </TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
                         <TextBlock>
-                           <Image Source=" http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg" Width="120">
-                            </Image>
                             <Hyperlink NavigateUri="http://weibo.com/zhulinfanclub" 
-                                   RequestNavigate="HyperlinkRequestNavigate">
-                                朱琳影迷会-新浪微博
+                                       RequestNavigate="HyperlinkRequestNavigate"
+                                       TextDecorations="None">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source=" http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg" 
+                                           Width="120"/>                                    
+                                    <TextBlock VerticalAlignment="Bottom">
+                                        朱琳影迷会-新浪微博
+                                    </TextBlock>
+                                </StackPanel>
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
-                </StackPanel>
+                    <TextBlock Grid.Row="1" FontSize="15" Grid.ColumnSpan="3"><Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手求助与反馈" 
+                                                       RequestNavigate="HyperlinkRequestNavigate">联系作者</Hyperlink></TextBlock>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebKit.Helpers;
@@ -9,46 +10,88 @@ namespace WebKit
     {
         public const int DefaultVoteId = 43;
         public const int SecondVoteId = 1069;
-        public const string DefaultMainPageUrlPattern = "http://www.ttpaihang.com/vote/rank.php?voteid=";
-        public const string DeafultSubmitUrl = "http://www.ttpaihang.com/vote/rankpost.php";
+        public const string MainPageUrlPattern = "http://www.ttpaihang.com/vote/rank.php?voteid=";
+        public const string SubmitUrl = "http://www.ttpaihang.com/vote/rankpost.php";
+        public const string MobilePageUrlPattern = "http://m.ttpaihang.com/vote/rank.php?voteid=";
         public const string ExpectedRadioName = "choice_id[]";
+        private const string MobileUserAgent = "Mozilla/5.0 (Linux; Android 7.1.1; Nexus 6P Build/NMF26F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.85 Mobile Safari/537.36";
 
         private MyWebClient _client = new MyWebClient();
 
         private string _mainPageUrl;
         private string _baseUrl;
 
-        public VotePageNavigator(string mainPageUrl)
+        private bool _isMobile;
+
+        public VotePageNavigator(string mainPageUrl, bool isMobile = false)
         {
             _mainPageUrl = mainPageUrl;
             _baseUrl = mainPageUrl.GetBaseUrl();
+            _isMobile = isMobile;
             SetClient(_client);
         }
 
-        public VotePageNavigator(int voteId = DefaultVoteId) : this(DefaultMainPageUrlPattern + voteId.ToString())
+        public VotePageNavigator(int voteId = DefaultVoteId, string mainPageUrlPattern = MainPageUrlPattern, 
+            bool isMobile = false) 
+            : this(mainPageUrlPattern + voteId.ToString(), isMobile)
         {
         }
 
-        private static void SetClient(WebClient client)
+        private void SetClient(WebClient client)
         {
-            // TODO some stuff hardcoded
             client.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
             client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-            client.Headers.Add(HttpRequestHeader.Host, "www.ttpaihang.com");
-            //client.Headers.Add(HttpRequestHeader.Connection, "Keep-Alive"); // Can't do this
+
+            var host = _baseUrl.BaseUrlToDomain();
+            client.Headers.Add(HttpRequestHeader.Host, host);
+
+            SetUserAgentIfMobile();
+
             client.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-AU,en;q=0.8,zh-Hans-CN;q=0.5,zh-Hans;q=0.3");
+            //client.Headers.Add(HttpRequestHeader.Connection, "Keep-Alive"); // Can't do this, will throw error
         }
 
         public async Task<string> GetPageGB2312(string url)
         {
+            SetUserAgentIfMobile();
             var data = await _client.DownloadDataTaskAsync(url);
             var page = data.ConvertGB2312ToUTF();
             return page;
         }
 
+        private void SetUserAgentIfMobile()
+        {
+            if (_isMobile)
+            {
+                _client.Headers.Add(HttpRequestHeader.UserAgent, MobileUserAgent);
+            }
+        }
+
+        public string SearchForZhuLinMobileUrl()
+        {
+            var task = SearchForZhuLinMobileUrlAsync();
+            task.Wait();
+            return task.Result;
+        }
+
+        public async Task<string> SearchForZhuLinMobileUrlAsync()
+        {
+            for (var url = _mainPageUrl; url != null;)
+            {
+                var page = await GetPageGB2312(url);
+                if (page.Contains("朱琳")) // TODO what about another Zhu Lin?
+                {
+                    return url;
+                }
+                url = GetLinkToNextPage(url, page);
+            }
+            return null;
+        }
+
         public PageInfo SearchForZhuLin(bool getQuestions = true)
         {
+            Debug.Assert(!_isMobile);
             var task = SearchForZhuLinAsync(getQuestions);
             task.Wait();
             return task.Result;
@@ -56,11 +99,12 @@ namespace WebKit
 
         public async Task<PageInfo> SearchForZhuLinAsync(bool getQuestions = true)
         {
+            Debug.Assert(!_isMobile);
             // should be like <a href="/vote/rankdetail-2685.html" target=_blank class=zthei >朱琳</a>
             for (var url = _mainPageUrl; url != null; )
             {
                 var page = await GetPageGB2312(url);
-                var pattern = @"(<a href=[^>]+>)朱琳</a>";
+                var pattern = @"(<a href=[^>]+>)朱琳</a>"; // TODO what about another Zhu Lin?
                 var regex = new Regex(pattern);
                 var match = regex.Match(page);
                 if (match.Success)
@@ -233,13 +277,13 @@ namespace WebKit
             return sh;
         }
 
-        public byte[] Submit(SubmitHandler sh, string url = DeafultSubmitUrl)
+        public byte[] Submit(SubmitHandler sh, string url = SubmitUrl)
         {
             _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
             return _client.UploadValues(url, "POST", sh.KeyValues);
         }
 
-        public async Task<byte[]> SubmitAsync(SubmitHandler sh, string url = DeafultSubmitUrl)
+        public async Task<byte[]> SubmitAsync(SubmitHandler sh, string url = SubmitUrl)
         {
             _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
             return await _client.UploadValuesTaskAsync(url, "POST", sh.KeyValues);

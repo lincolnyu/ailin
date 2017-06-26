@@ -9,13 +9,13 @@ namespace TestConsole
 {
     class Program
     {
-        static void Main(string[] args)
+        static void TestDesktop(int voteid = VotePageNavigator.DefaultVoteId)
         {
             const string qf = @"d:\temp\question.txt";
             const string submit = @"d:\temp\submit.txt";
             const string reply = @"d:\temp\reply.html";
 
-            var vpn = new VotePageNavigator();
+            var vpn = new VotePageNavigator(voteid);
             var pi = vpn.SearchForZhuLin();
 
             using (var sw = new StreamWriter(qf))
@@ -43,7 +43,7 @@ namespace TestConsole
                 {
                     sw.WriteLine("Below the line is the request: ");
                     sw.WriteLine("------------------------------");
-                    foreach (var k in s.KeyValues.AllKeys.OrderBy(x=>x))
+                    foreach (var k in s.KeyValues.AllKeys.OrderBy(x => x))
                     {
                         sw.WriteLine($"{k}: {s.KeyValues.Get(k)}");
                     }
@@ -58,6 +58,18 @@ namespace TestConsole
                 }
                 Process.Start(reply);
             }
+        }
+
+        static void TestMobile(int voteid = VotePageNavigator.DefaultVoteId)
+        {
+            var vpn = new VotePageNavigator(voteid, VotePageNavigator.MobilePageUrlPattern, true);
+            var url = vpn.SearchForZhuLinMobileUrl();
+            Console.WriteLine($"mobile-url: {url}");
+        }
+
+        static void Main(string[] args)
+        {
+            TestMobile();
         }
     }
 }

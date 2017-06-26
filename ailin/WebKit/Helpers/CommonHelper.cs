@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -91,6 +90,19 @@ namespace WebKit.Helpers
         {
             var slashPosition = abs.GetRootSlashPosition();
             return abs.Substring(0, slashPosition);
+        }
+
+        public static string BaseUrlToDomain(this string baseUrl)
+        {
+            if (baseUrl.StartsWith("http://"))
+            {
+                return baseUrl.Remove(0, "http://".Length).Trim('/');
+            }
+            else if (baseUrl.StartsWith("https://"))
+            {
+                return baseUrl.Remove(0, "https://".Length).Trim('/');
+            }
+            return baseUrl.Trim('/');
         }
 
         private static int GetRootSlashPosition(this string abs)
