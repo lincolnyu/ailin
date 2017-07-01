@@ -1,5 +1,4 @@
-﻿using AiLinWpf.Views;
-using Squirrel;
+﻿using Squirrel;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,8 +33,11 @@ namespace AiLinWpf
                 using (var mgr = UpdateManager.GitHubUpdateManager(GitHubHost))
                 {
                     var res = await mgr.Result.UpdateApp();
-                    var ver = res.Version.Version;
-                    MessageBox.Show($"成功安装更新版本{ver.Major}.{ver.Minor}.{ver.Build}", title);
+                    var ver = res?.Version?.Version;
+                    if (ver != null)
+                    {
+                        MessageBox.Show($"成功安装更新版本{ver.Major}.{ver.Minor}.{ver.Build}", title);
+                    }
                 }
             }
             catch (Exception ex)

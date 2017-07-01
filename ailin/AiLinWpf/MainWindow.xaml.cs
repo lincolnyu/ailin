@@ -338,10 +338,8 @@ namespace AiLinWpf
 
             private void LoadLast()
             {
-                if (Records.Load())
-                {
-                    ShowLast();
-                }
+                Records.Load();
+                ShowLast();
             }
 
             private void ShowLast()
