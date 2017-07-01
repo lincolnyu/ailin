@@ -348,6 +348,8 @@ namespace AiLinWpf
             {
                 if (Records.Last == null)
                 {
+                    LastVoteTime.Text = "--";
+                    LastVoteResult.Text = "--";
                     return;
                 }
                 LastVoteTime.Text = Records.Last.Time.ToString();
@@ -372,12 +374,8 @@ namespace AiLinWpf
                     LinsProfile.NavigateUri = PageInfo.ProfileUrl != null ? new Uri(PageInfo.ProfileUrl) : null;
                     if (PageInfo.Thumbnail != null)
                     {
-                        var img = new BitmapImage();
-                        img.BeginInit();
-                        img.UriSource = new Uri(PageInfo.Thumbnail);
-                        img.EndInit();
-                        LinsImage.Source = img;
-                        
+                        LinsImage.Source = TryLoadImage(PageInfo.Thumbnail);
+
                         var imageLink = (Hyperlink)((InlineUIContainer)LinsImage.Parent).Parent;
                         imageLink.NavigateUri = LinsProfile.NavigateUri;
                     }
@@ -524,6 +522,41 @@ namespace AiLinWpf
             InitializeComponent();
             InitInfoDepdentUI();
             SetTitle();
+            LoadPages();
+        }
+
+        public static BitmapImage TryLoadImage(string uri, string fallbackUri = "pack://application:,,,/Images/fallback.gif", int attempts = 3)
+        {
+            BitmapImage img = null;
+            for (var i = 0; i < attempts; i++)
+            {
+                try
+                {
+                    img = new BitmapImage();
+                    img.BeginInit();
+                    img.UriSource = new Uri(uri);
+                    img.EndInit();
+                    break;
+                }
+                catch (Exception)
+                {
+                    img = null;
+                }
+            }
+            if (img == null)
+            {
+                img = new BitmapImage();
+                img.BeginInit();
+                img.UriSource = new Uri(fallbackUri);
+                img.EndInit();
+            }
+            return img;
+        }
+
+        private void LoadPages()
+        {
+            const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
+            TiebaLogo.Source = TryLoadImage(tiebaImage, "pack://application:,,,/Images/tieba-fallback.png", 1);
         }
 
         private void SetTitle()

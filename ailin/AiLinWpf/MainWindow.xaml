@@ -232,7 +232,8 @@
                                        RequestNavigate="HyperlinkRequestNavigate"
                                        TextDecorations="None">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="http://www.zhulin.net/images/lzmb.jpg" Width="120"/>
+                                    <Image Source="http://www.zhulin.net/images/lzmb.jpg" Width="120" 
+                                           MaxHeight="120" Stretch="None"/>
                                     <TextBlock VerticalAlignment="Bottom">
                                         琳中漫步-朱琳影迷会
                                     </TextBlock>
@@ -244,8 +245,7 @@
                                        RequestNavigate="HyperlinkRequestNavigate"
                                        TextDecorations="None">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg" 
-                                           Width="120"/>
+                                    <Image Name="TiebaLogo" Width="120" MaxHeight="120"/>
                                     <TextBlock VerticalAlignment="Bottom">
                                         百度朱琳吧
                                     </TextBlock>
@@ -258,7 +258,7 @@
                                        TextDecorations="None">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source=" http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg" 
-                                           Width="120"/>                                    
+                                           Width="120" MaxHeight="120"/>                                    
                                     <TextBlock VerticalAlignment="Bottom">
                                         朱琳影迷会-新浪微博
                                     </TextBlock>

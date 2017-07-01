@@ -145,5 +145,11 @@
   <ItemGroup>
     <Resource Include="Images\background.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fallback.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tieba-fallback.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
