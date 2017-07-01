@@ -1,4 +1,5 @@
-﻿using Squirrel;
+﻿using AiLinWpf.Views;
+using Squirrel;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,11 +28,14 @@ namespace AiLinWpf
 
         private static async Task CheckForUpdate()
         {
+            var title = _mainWindow.Title;
             try
             {
                 using (var mgr = UpdateManager.GitHubUpdateManager(GitHubHost))
                 {
-                    await mgr.Result.UpdateApp();
+                    var res = await mgr.Result.UpdateApp();
+                    var ver = res.Version.Version;
+                    MessageBox.Show($"成功安装更新版本{ver.Major}.{ver.Minor}.{ver.Build}", title);
                 }
             }
             catch (Exception ex)
@@ -41,7 +45,7 @@ namespace AiLinWpf
                 {
                     message += ex.InnerException.Message;
                 }
-                MessageBox.Show(message, "无法安装更新");
+                MessageBox.Show("无法安装更新：\n" + message, title);
             }
         }
 
@@ -53,10 +57,10 @@ namespace AiLinWpf
                 App app = new App();
                 _mainWindow = new MainWindow();
                 app.Run(_mainWindow);
-                _mutex.ReleaseMutex();
 #if !DEBUG
                 CheckForUpdate().Wait();
 #endif
+                _mutex.ReleaseMutex();
             }
             else
             {
