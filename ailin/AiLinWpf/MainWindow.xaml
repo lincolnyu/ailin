@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         mc:Ignorable="d"
-        Title="爱琳投票助手" Height="514.875" Width="525">
+        Title="爱琳投票助手" Height="558.375" Width="567">
     <Grid>
         <Grid.Resources>
             <Style TargetType="RichTextBox">
@@ -24,6 +24,12 @@
                 <Style.Setters>
                     <Setter Property="FontSize" Value="18">
                     </Setter>
+                </Style.Setters>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="VideoTitle">
+                <Style.Setters>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
                 </Style.Setters>
             </Style>
             <Style TargetType="RadioButton">
@@ -269,6 +275,241 @@
                     <TextBlock Grid.Row="1" FontSize="15" Grid.ColumnSpan="3"><Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手求助与反馈" 
                                                        RequestNavigate="HyperlinkRequestNavigate">联系作者</Hyperlink></TextBlock>
                 </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>影剧资源</TextBlock>
+                </TabItem.Header>
+                <ListBox Name="VideoList">
+                    <ListBox.Items>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">叛国者（1980年电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XOTA5NDI3NTY4.html">优酷</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">小院（1981年微电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://video.tudou.com/v/XMjEwNDUzNDc2MA==.html">土豆</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.bilibili.com/video/av4042145/">bilibili</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">梨园传奇（1982年电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjczMDI3MTc4NA==.html">优酷</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="https://www.youtube.com/watch?v=zL18G-U4bBo">Youtube</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">远离人群的地方（1983年电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.1905.com/vod/play/873539.shtml">1905电影网</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">骆驼草（1983年电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE4MzM1MjY0.html">1905电影网</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">肖尔布拉克（1984年电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTg4OTU1ODM4MA==.html">优酷</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">二十年后再相会（1984年电影）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.fun.tv/vplay/g-37790/">风行网</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="https://www.youtube.com/watch?v=GXF0P4-a2L4">Youtube</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">凯旋在子夜（1987年电视剧）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>优酷：</TextBlock>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI4MTI4.html">1</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI4MzE2.html">2</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI4Njg0.html">3</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI4Nzcy.html">4</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI5MDgw.html">5</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI5MTky.html">6</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI5Mzk2.html">7</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI5NTU2.html">8</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI5Njk2.html">9</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDI5ODMy.html">10</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTE1NDMwMDUy.html">11</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">戏剧人生（1992年电视剧）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>优酷：</TextBlock>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MTc2NTc2.html">1</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MTkwMzgw.html">2</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjAzNTY4.html">3</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjE5OTUy.html">4</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjI2ODYw.html">5</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1NDkxOTg0.html">6</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjM5NTc2.html">7</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjQ1MDY0.html">8</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1NTQ1NDk2.html">9</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjUzNzQ0.html">10</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjU2MTEy.html">11</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjYxNzA0.html">12</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjY2NTc2.html">13</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MjgwNDY0.html">14</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1Mjg4OTgw.html">15</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MzA0OTQw.html">16</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MzE3MjYw.html">17</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MzI5MjUy.html">18</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTA1MzU3MDM2.html">19</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">火浴（1993年电视剧）</TextBlock>
+                                <WrapPanel>
+                                    <TextBlock>优酷：</TextBlock>
+                                    <TextBlock>
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDYyMzcxMg==.html">1</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY0NTU5Ng==.html">2</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY1MDcyMA==.html">3</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY1NTk5Mg==.html">4</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY2MDk5Mg==.html">5</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY2NjI3Mg==.html">6</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY3MTE0MA==.html">7</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY3OTM5Ng==.html">8</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY4NDg2NA==.html">9</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDY4OTcwNA==.html">10</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Margin="3,0,0,0">
+                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM5NDYzMDcxNg==.html">11</Hyperlink>
+                                    </TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox.Items>
+                </ListBox>
             </TabItem>
         </TabControl>
     </Grid>
