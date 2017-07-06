@@ -1,6 +1,10 @@
-﻿using Squirrel;
+﻿//#define NO_SINGLE_INSTANCE
+
+using Squirrel;
 using System;
+#if !NO_SINGLE_INSTANDCE
 using System.Threading;
+#endif
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -17,7 +21,9 @@ namespace AiLinWpf
     public partial class App : Application
     {
         const string GitHubHost = "https://github.com/lincolnyu/ailin";
+#if !NO_SINGLE_INSTANCE
         private static Mutex _mutex = new Mutex(true, "{f0791ebc-4bff-484d-8199-e945b46bbed0}");
+#endif
         private static MainWindow _mainWindow = null;
 
         App()
@@ -54,20 +60,25 @@ namespace AiLinWpf
         [STAThread]
         static void Main()
         {
+#if !NO_SINGLE_INSTANCE
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
+#endif
                 App app = new App();
                 _mainWindow = new MainWindow();
                 app.Run(_mainWindow);
 #if !DEBUG
                 CheckForUpdate().Wait();
 #endif
+
+#if !NO_SINGLE_INSTANCE
                 _mutex.ReleaseMutex();
             }
             else
             {
                 _mainWindow.WindowState = WindowState.Normal;
             }
+#endif
         }
 
     }
