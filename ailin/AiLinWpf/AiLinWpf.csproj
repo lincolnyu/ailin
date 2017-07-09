@@ -95,10 +95,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Actions\Resource.cs" />
+    <Compile Include="Actions\ResourceList.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\InfoDepedentUI.cs" />
+    <Compile Include="Data\Record.cs" />
+    <Compile Include="Data\RecordRepository.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -151,5 +157,6 @@
   <ItemGroup>
     <Resource Include="Images\tieba-fallback.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
