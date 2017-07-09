@@ -301,8 +301,57 @@
                         <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">按类型排序</Button>
                         <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">按时间排序</Button>
                         <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">按名称排序</Button>
+                        <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" IsChecked="True" 
+                                  Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked">播放乐曲</CheckBox>
                     </StackPanel>
-                    <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged">
+                    <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged" HorizontalContentAlignment="Stretch">
+                        <ListBox.Resources>
+                            <Style x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <!-- <Setter Property="Background" TargetName="Bd" Value="#1F26A0DA"/> -->
+                                                    <Setter Property="Background" TargetName="Bd" Value="Pink"/>
+                                                    <!-- <Setter Property="BorderBrush" TargetName="Bd" Value="#A826A0DA"/> -->
+                                                    <Setter Property="BorderBrush" TargetName="Bd" Value="Pink"/>
+                                                </MultiTrigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                                        <Condition Property="IsSelected" Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <!--  <Setter Property="Background" TargetName="Bd" Value="#3DDADADA"/> -->
+                                                    <Setter Property="Background" TargetName="Bd" Value="Violet"/>
+                                                    <!--   <Setter Property="BorderBrush" TargetName="Bd" Value="#FFDADADA"/> -->
+                                                    <Setter Property="BorderBrush" TargetName="Bd" Value="Violet"/>
+                                                </MultiTrigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                                        <Condition Property="IsSelected" Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <!-- <Setter Property="Background" TargetName="Bd" Value="#3D26A0DA"/> -->
+                                                    <Setter Property="Background" TargetName="Bd" Value="Violet"/>
+                                                    <!-- <Setter Property="BorderBrush" TargetName="Bd" Value="#FF26A0DA"/> -->
+                                                    <Setter Property="BorderBrush" TargetName="Bd" Value="Violet"/>
+                                                </MultiTrigger>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.Resources>
                         <ListBox.Items>
                             <ListBoxItem>
                                 <StackPanel>
@@ -394,7 +443,7 @@
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
-                            <ListBoxItem>
+                            <ListBoxItem Name="EShNHLXH">
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">二十年后再相会（1984年电影）</TextBlock>
                                     <WrapPanel>
@@ -425,7 +474,7 @@
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
-                            <ListBoxItem>
+                            <ListBoxItem Name="KXZZY">
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">凯旋在子夜（1987年电视剧）</TextBlock>
                                     <WrapPanel>
