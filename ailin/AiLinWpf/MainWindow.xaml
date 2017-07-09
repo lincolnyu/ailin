@@ -430,7 +430,7 @@
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
-                            <ListBoxItem>
+                            <ListBoxItem Name="XEBLK">
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">肖尔布拉克（1984年电影）</TextBlock>
                                     <WrapPanel>
