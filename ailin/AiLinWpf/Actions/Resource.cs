@@ -28,7 +28,7 @@ namespace AiLinWpf.Actions
             switch (Type)
             {
                 case Types.Movie:
-                    UI.Background = new SolidColorBrush(Colors.Silver);
+                    UI.Background = new SolidColorBrush(Colors.PaleGoldenrod);
                     break;
                 case Types.Series:
                     UI.Background = new SolidColorBrush(Colors.LightSkyBlue);

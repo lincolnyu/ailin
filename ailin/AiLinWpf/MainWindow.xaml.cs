@@ -10,7 +10,6 @@ using AiLinWpf.Data;
 using AiLinWpf.Actions;
 using static AiLinWpf.Helpers.ImageHelper;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace AiLinWpf
 {
@@ -262,7 +261,8 @@ namespace AiLinWpf
                 switch (lbi.Name)
                 {
                     case "EShNHLXH":
-                        await TryPlayAudioInternet("http://nj02all01.baidupcs.com/file/974efb01e066aa38734b4a1c000282c1?bkt=p3-1400974efb01e066aa38734b4a1c000282c13d0b893a0000001e22a8&fid=537220065-250528-953697596526191&time=1499589091&sign=FDTAXGERLBHS-DCb740ccc5511e5e8fedcff06b081203-q9VYZxjJ%2Fa5YzLSibjnl6d7Vmyk%3D&to=69&size=1974952&sta_dx=1974952&sta_cs=4&sta_ft=mp3&sta_ct=0&sta_mt=0&fm2=MH,Yangquan,Netizen-anywhere,,victoria,any&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=1400974efb01e066aa38734b4a1c000282c13d0b893a0000001e22a8&sl=76480590&expires=8h&rt=sh&r=610235207&mlogid=4399413282025914715&vuk=282335&vbdid=443606385&fin=fblxzhf.mp3&fn=fblxzhf.mp3&rtype=1&iv=0&dp-logid=4399413282025914715&dp-callid=0.1.1&hps=1&csl=80&csign=ZMLyV6T0L9zkkwFfMOo%2F4sxc4LA%3D&so=0&ut=6&uter=4&serv=0&by=themis");
+                        // http://pan.baidu.com/s/1qXZN8V6
+                        // TODO move to an accessible place
                         break;
                     case "HFQX":
                         await TryPlayAudioInternet("http://om5.alicdn.com/587/2587/13990/172730_15984329_l.mp3?auth_key=43e9654917bd89fd67a31409b1d6c98f-1500174000-0-null");
@@ -270,8 +270,13 @@ namespace AiLinWpf
                     case "KXZZY":
                         await TryPlayAudioInternet("http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3");
                         break;
+                    case "YLZhZhND":
+                        await TryPlayAudioInternet("http://om5.alicdn.com/1/258/41258/243252/2811487_297631_l.mp3?auth_key=8481e4f9dbf66fe1f5f8c0c517e19043-1500260400-0-null");
+                        break;
                     case "XEBLK":
-                        await TryPlayAudioInternet("http://nbcache03.baidupcs.com/file/e1d178204d30eabfeae0facdbe0d1975?bkt=p3-1400e1d178204d30eabfeae0facdbe0d197581b5cae70000001cb8cb&xcode=d731a894e20cea8b7a7a34e82a3ce2cdf1d963f61828ba150b2977702d3e6764&fid=537220065-250528-1014980471055521&time=1499604527&sign=FDTAXGERLBHS-DCb740ccc5511e5e8fedcff06b081203-ZfTLTMtKzsUXjqSCfPup9H1mMi8%3D&to=p7&size=1882315&sta_dx=1882315&sta_cs=8&sta_ft=mp3&sta_ct=0&sta_mt=0&fm2=MH,Yangquan,Netizen-anywhere,,victoria,any&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=1400e1d178204d30eabfeae0facdbe0d197581b5cae70000001cb8cb&sl=76480590&expires=8h&rt=sh&r=664813939&mlogid=4403556923920253669&vuk=282335&vbdid=443606385&fin=xeblk.mp3&fn=xeblk.mp3&rtype=1&iv=0&dp-logid=4403556923920253669&dp-callid=0.1.1&hps=1&csl=80&csign=ZMLyV6T0L9zkkwFfMOo%2F4sxc4LA%3D&so=0&ut=6&uter=4&serv=0&by=themis");
+                        // http://pan.baidu.com/s/1qYlYRHM
+                        // TODO move to an accessible place
+                        await TryPlayAudioInternet("http://d.pcs.baidu.com/file/e1d178204d30eabfeae0facdbe0d1975?fid=537220065-250528-1014980471055521&time=1499691456&rt=sh&sign=FDTAERVY-DCb740ccc5511e5e8fedcff06b081203-5Tg%2FCTTj3cwtcuxQEMAznAPQfqA%3D&expires=8h&chkv=1&chkbd=0&chkpc=et&dp-logid=4426891561741149185&dp-callid=0&r=703819881&ext=.mp3");
                         break;
                     case "XYJ":
                         await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");
