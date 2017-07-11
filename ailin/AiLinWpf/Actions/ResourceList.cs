@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace AiLinWpf.Actions
 {
@@ -119,7 +120,15 @@ namespace AiLinWpf.Actions
                     var top = sp.Children[0];
                     if (top is TextBlock tb)
                     {
-                        title = tb.Text;
+                        if (tb.Inlines.FirstInline is Hyperlink hl)
+                        {
+                            var run = hl.Inlines.FirstOrDefault() as Run;
+                            title = run == null ? string.Empty : run.Text;
+                        }
+                        else
+                        {
+                            title = tb.Text;
+                        }
                     }
                 }
                 else
@@ -140,11 +149,11 @@ namespace AiLinWpf.Actions
 
         private void TryDeduceFromType(string title, Resource r)
         {
-            if (title.Contains("电影"))
+            if (title.Contains("电影）"))
             {
                 r.Type = Resource.Types.Movie;
             }
-            else if (title.Contains("电视剧"))
+            else if (title.Contains("电视剧）"))
             {
                 r.Type = Resource.Types.Series;
             }
@@ -153,27 +162,47 @@ namespace AiLinWpf.Actions
                 r.Type = Resource.Types.Uncategorized;
             }
 
-            ExtractYear(title, "（([0-9]+)年", r);
+            ExtractDate(title, "（([0-9]+)年", null, r);
         }
 
         private void TryParseTag(object tag, Resource r)
         {
             if (tag is string s)
             {
-                ExtractYear(s, "([0-9]+)年", r);
+                var split = s.Split(';');
+                var sdate = split[0];
+                ExtractDate(sdate, "([0-9]+)年", "([0-9]+)月", r);
             }
         }
 
-        private void ExtractYear(string s, string pattern, Resource r)
+        private void ExtractDate(string s, string patternYear, string patternMonth, Resource r)
         {
-            var rex = new Regex(pattern);
-            var m = rex.Match(s);
-            if (m.Success)
+            var rexYear = new Regex(patternYear);
+            var mYear = rexYear.Match(s);
+            if (mYear.Success)
             {
-                var ystr = m.Groups[1].Value;
-                if (int.TryParse(ystr, out int yr))
+                var ystr = mYear.Groups[1].Value;
+                if (int.TryParse(ystr, out int year))
                 {
-                    r.Date = new DateTime(yr, 1, 1);
+                    var dateSet = false;
+                    if (patternMonth != null)
+                    {
+                        var rexMonth = new Regex(patternMonth);
+                        var mMonth = rexMonth.Match(s);
+                        if (mMonth.Success)
+                        {
+                            var mstr = mMonth.Groups[1].Value;
+                            if (int.TryParse(mstr, out int month) && month > 1 && month <= 12)
+                            {
+                                r.Date = new DateTime(year, month, 1);
+                                dateSet = true;
+                            }
+                        }
+                    }
+                    if (!dateSet)
+                    {
+                        r.Date = new DateTime(year, 1, 1);
+                    }
                 }
             }
         }

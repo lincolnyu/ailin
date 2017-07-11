@@ -32,6 +32,12 @@
                     <Setter Property="FontWeight" Value="SemiBold"/>
                 </Style.Setters>
             </Style>
+            <Style TargetType="Hyperlink" x:Key="UndecoratedLink">
+                <Style.Setters>
+                    <Setter Property="TextDecorations" Value="None"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style.Setters>
+            </Style>
             <Style TargetType="RadioButton">
                 <Style.Setters>
                     <Setter Property="FontSize" Value="18">
@@ -294,7 +300,7 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock>影剧资源</TextBlock>
+                    <TextBlock>影剧欣赏</TextBlock>
                 </TabItem.Header>
                 <DockPanel LastChildFill="True">
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Name="OrderButtons">
@@ -414,7 +420,7 @@
                                         <TextBlock Margin="3,0,0,0">
                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XODMwMTg2MTY=.html">3</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">
+                                        <TextBlock Margin="10,0,0,0">
                                             56网：
                                         </TextBlock>
                                         <TextBlock Margin="3,0,0,0">
@@ -462,7 +468,7 @@
                                         <TextBlock Margin="3,0,0,0">
                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XODMzOTQxMTI=.html">4</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">
+                                        <TextBlock Margin="10,0,0,0">
                                             56网：
                                         </TextBlock>
                                         <TextBlock Margin="3,0,0,0">
@@ -478,7 +484,7 @@
                                         <TextBlock>
                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.le.com/ptv/vplay/26553300.html?ch=sohu_v">乐视</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">
+                                        <TextBlock Margin="10,0,0,0">
                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTg4OTU1ODM4MA==.html">优酷</Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
@@ -491,7 +497,7 @@
                                         <TextBlock>
                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.fun.tv/vplay/g-37790/">风行网</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">
+                                        <TextBlock Margin="10,0,0,0">
                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="https://www.youtube.com/watch?v=GXF0P4-a2L4">Youtube</Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
@@ -505,10 +511,10 @@
                                         <TextBlock>
                                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTEyMTY2Njg4.html">标准版</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">
+                                        <TextBlock Margin="8,0,0,0">
                                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTU4NzczODg0NA==.html">世杰版</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">乐视：</TextBlock>
+                                        <TextBlock Margin="10,0,0,0">乐视：</TextBlock>
                                         <TextBlock Margin="3,0,0,0">
                                         <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.le.com/ptv/vplay/20873763.html">完整版</Hyperlink>
                                         </TextBlock>
@@ -1001,7 +1007,7 @@
                                         <TextBlock>
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="https://v.qq.com/x/cover/6q1uczedvs1ezs8.html?new=1">播放</Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0">优酷：</TextBlock>
+                                        <TextBlock Margin="10,0,0,0">优酷：</TextBlock>
                                         <TextBlock>
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3ODE3ODQyMA==.html">1</Hyperlink>
                                         </TextBlock>
@@ -1096,26 +1102,68 @@
                                         </TextBlock>
                                         <TextBlock>
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDc3NTU0NA==.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDc3MTk5Ng==.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDcyOTg4MA==.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDY5MDcwMA==.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDcyNDc3Ng==.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDY2Njc4OA==.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDY2NTc2MA==.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDYwOTIyNA==.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDU4NDc2OA==.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgzMTc4OA==.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjc0OTMxMTc2MA==.html">11</Hyperlink> <!-- from other source -->
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgyMDkyMA==.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgxODgyOA==.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgxODY4NA==.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgwODg5Mg==.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDc5NjQ1Ng==.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgwODc5Mg==.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDc5NjM1Mg==.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDc3NjMwMA==.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDg0NDg4NA==.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDg0NDMyOA==.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDgzNzQyMA==.html">22</Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
@@ -1125,7 +1173,74 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">和平卫士（1999年电视剧）</TextBlock>
                                     <WrapPanel>
-                                        <!-- http://www.soku.com/search_video/q_和平卫士 -->
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_和平卫士">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMyNTIyMTI4.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMjcxNTI4.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMjcxODA4.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI2NTIw.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI2NjA4.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI2NzEy.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI2ODAw.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI2ODcy.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI2OTgw.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI3MDg4.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI3MjEy.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMjc5ODIw.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI3MzA0.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI3NDIw.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzI3NTM2.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMjg0MDUy.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzYwMzky.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzU4NzY0.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzYwNTQ4.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMjMzMzYxMzAw.html">20</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1134,7 +1249,12 @@
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">光荣之旅（1999年电视剧）</TextBlock>
                                     <WrapPanel>
                                         <TextBlock>
-                                            优酷：
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_光荣之旅">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
                                         </TextBlock>
                                         <TextBlock>
                                             <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4MzAyNjQwNA==.html">1</Hyperlink>
@@ -1197,6 +1317,74 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">永不放弃（2000年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_永不放弃">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5MjAw.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5MTEy.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5NDI0.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5NDI4.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5NTgw.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5NjA4.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5ODI0.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTI5Nzc2.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMwMDcy.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMwMTI4.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMwNDMy.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMwMzY0.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMwNzA4.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMzNTA4.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMzNjUy.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMzNzY0.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTM0MDQw.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTMzOTI4.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTM0MTQ0.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTA5NTM0MjY0.html">20</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1204,6 +1392,14 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">朝天门（2000年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            土豆：
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://video.tudou.com/v/XMjEzMjM2OTQ4MA==.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">完整资源暂无。如有线索烦请<Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手影视资源建议" 
+                                                       RequestNavigate="HyperlinkRequestNavigate">告知作者</Hyperlink>。</TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1211,6 +1407,83 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">情长路更长（2001年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_%E6%83%85%E9%95%BF%E8%B7%AF%E6%9B%B4%E9%95%BF">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEyNzQ2NDQ=.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEyODk4MDA=.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEyOTg4OTI=.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEzMDg4ODg=.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEzMDg4MDQ=.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEzMTc1Njg=.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEzNDQ1MzI=.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE0MjQwMjQ=.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE0MjIzNTY=.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE0MjIzNjA=.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1MDIzNTY=.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1MDQwMjQ=.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1MDQ5NjQ=.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1MjA3ODQ=.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1MzI2MjQ=.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1NDAxNTY=.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE1NTU2MTI=.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE2NjQ5ODA=.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE2NzY3NzI=.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE2ODQwNTI=.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE2OTkyMDA=.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE3MDQzNjg=.html">22</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjE3MDg3ODQ=.html">23</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1218,6 +1491,67 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">红与黑2000（2001年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>优酷：</TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk2NDU1Ng==.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk1NjQ1Ng==.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk1NTQ2OA==.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk1MDE4OA==.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk0ODIwMA==.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4MzkzNzgyOA==.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4MzkzNTg5Ng==.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4MzkyMjA3Mg==.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4MzkxODQ3Mg==.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzg5OTQwMA==.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzg5ODY2MA==.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzg5NjU0MA==.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzg3MTk2OA==.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk3MTIwMA==.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk2NTQyMA==.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk4NDM2NA==.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk3NzQ0MA==.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDAxNjMwNA==.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk5Mzk3Ng==.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4Mzk4NTAwMA==.html">20</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1225,6 +1559,48 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">兄弟（2002年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>优酷：</TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzY5NjcwMA==.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzY5ODEwNA==.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMDA5Mg==.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMDQzMg==.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMDczMg==.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMTEzNg==.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            ...
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMTM2MA==.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMTY4NA==.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            ...
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMTk5Ng==.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMjMyOA==.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM3NzcwMjYyMA==.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">剧集不完整。如有线索烦请<Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手影视资源建议" 
+                                                       RequestNavigate="HyperlinkRequestNavigate">告知作者</Hyperlink>。</TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1232,6 +1608,74 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">谁可相依（2003年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_%E8%B0%81%E5%8F%AF%E7%9B%B8%E4%BE%9D">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIxNzg4MA==.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMDY1Ng==.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMTI5Mg==.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMTkyMA==.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMjcwMA==.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMzQ2NA==.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMzk3Ng==.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyNDU0OA==.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyNTE4NA==.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIxODQ0NA==.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIxOTAwMA==.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIxOTU0NA==.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4MzIyMDE2NA==.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4Mzk5NDcwNA==.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4Mzk5NTEwOA==.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4Mzk5NTM4OA==.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTgxODQzMDkyMA==.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4Mzk5NjEzMg==.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4Mzk5NjYyOA==.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTc4Mzk5NzA4OA==.html">20</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1239,27 +1683,280 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">桐籽花开（2003年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_桐籽花开">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMjQyOTI=.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMjY4MzY=.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMjk1NDQ=.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMzIwMTY=.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMzQ4NjQ=.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMzc1NjA=.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyMzk5NzY=.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNDI3OTI=.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNDUzMzY=.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNDc3NDQ=.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNDk5NzY=.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNTI2NzY=.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNTU5NjQ=.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNTg5MzY=.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNjE4MjA=.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNjQ3NzY=.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNjc1MTI=.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNzA3Njg=.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNzM3MTY=.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNzY4MDQ=.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyNzk2MDg=.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyODI2NzY=.html">22</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyODUzODg=.html">23</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyODg3MzY=.html">24</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNTkyOTE2MTI=.html">25</Hyperlink>
+                                        </TextBlock>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </ListBoxItem>
+                            <ListBoxItem Tag="200302">
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                        <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://baike.baidu.com/item/%E6%88%91%E5%BF%83%E6%B0%B8%E8%BF%9C#3">
+                                            我心永远（又名《高光阴影》）（2003年电视剧）
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/s2010/wxyy/">
+                                            土豆
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341428.shtml">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341435.shtml">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341438.shtml">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341465.shtml">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341471.shtml">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341477.shtml">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341498.shtml">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341487.shtml">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341506.shtml">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341541.shtml">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341544.shtml">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341575.shtml">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341590.shtml">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341596.shtml">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341601.shtml">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341625.shtml">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341634.shtml">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341636.shtml">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341667.shtml">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://tv.sohu.com/20090219/n262341677.shtml">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_我心永远">
+                                            优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.360kan.com/tv/R4JvaqHbSG0lMn.html">
+                                            360影视
+                                            </Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">我心永远（2003年电视剧）</TextBlock>
+                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                        <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" RequestNavigate="HyperlinkRequestNavigate" 
+                                                   NavigateUri="http://baike.baidu.com/item/%E8%8A%B1%E5%BC%80%E4%B9%9F%E6%9C%89%E5%A3%B0">
+                                            花开也有声（2003年电视剧）    
+                                        </Hyperlink>
+                                    </TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>资源暂无。如有线索烦请<Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手影视资源建议" 
+                                                       RequestNavigate="HyperlinkRequestNavigate">告知作者</Hyperlink>。</TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">花开也有声（2003年电视剧）</TextBlock>
+                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                        <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://baike.baidu.com/item/命运配方">
+                                            命运配方（2003年电视剧）
+                                        </Hyperlink>
+                                    </TextBlock>
                                     <WrapPanel>
-                                    </WrapPanel>
-                                </StackPanel>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">命运配方（2003年电视剧）</TextBlock>
-                                    <WrapPanel>
+                                        <TextBlock>
+                                            优酷：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDI2OTQwOA==.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDI0NzE2MA==.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDIyNTg3Mg==.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDE5MzY4NA==.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDE3NjYxNg==.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDEzNTE3Ng==.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDEzNDY4MA==.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDExNzgzMg==.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDA4ODg0NA==.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDA1NTk3Ng==.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDAxNzU3Mg==.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTY3MjkyNzQw.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDU3ODIxNg==.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDUxMTkwOA==.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            ...
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDUwNDY2MA==.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDUzMjU4OA==.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDQ2Mzk5Ng==.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDQ0MDc2NA==.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDQzMjU4MA==.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDM5NjgwOA==.html">22</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDM3NDE3Ng==.html">23</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDM0ODYwMA==.html">24</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTM4NDI5MzMwMA==.html">25</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">剧集不完整。如有线索烦请<Hyperlink NavigateUri="mailto:linc.yu@outlook.com" 
+                                                       RequestNavigate="HyperlinkRequestNavigate">告知作者</Hyperlink>。</TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1267,6 +1964,21 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">让我们记住（2003年电影）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            优酷：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEwNTUwODQ=.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEwNjc3MDQ=.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEwODA2ODA=.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XNjEwODE3MjA=.html">4</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1274,6 +1986,13 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">风雨中国心（2003年电影）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.cctv.com/program/zgdybd/20031224/100622.shtml">
+                                            背景介绍
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="8,0,0,0">资源暂无。如有线索烦请<Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手影视资源建议" 
+                                                       RequestNavigate="HyperlinkRequestNavigate">告知作者</Hyperlink>。</TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1281,6 +2000,80 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">第一次亲密接触（2004年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://list.youku.com/show/id_zcbfcd008962411de83b1.html">
+                                                优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDQ5MDMy.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDQ5NzUy.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUwMDQw.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUwNDI0.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUwODUy.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUxMjA0.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUxNDY4.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUxODA4.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUyMTUy.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDQ5NDE2.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUyNDQ4.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUyNzU2.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUzMDA4.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUzMjg0.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUzNTc2.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDUzOTI4.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDU0Mjky.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDU0NTU2.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDU0ODU2.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDU1MTUy.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDU1NDQ0.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTAwNDU1NzIw.html">22</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1288,13 +2081,146 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">龙票（2004年电视剧）</TextBlock>
                                     <WrapPanel>
-                                    </WrapPanel>
-                                </StackPanel>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">高光阴影（2004年电视剧）</TextBlock>
-                                    <WrapPanel>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://www.soku.com/search_video/q_龙票">
+                                                优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            ：
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjEy.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjQ0.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjE2.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjIw.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjQw.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjQ4.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjUy.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjU2.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjY0.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjYw.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjA4.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Njcy.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjY4.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Njc2.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Njgw.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Njg0.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjI0.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Njg4.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjI4.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NjMy.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzQ0.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzQ4.html">22</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzUy.html">23</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzYw.html">24</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzY0.html">25</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzY4.html">26</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Nzcy.html">27</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Nzgw.html">28</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Nzg0.html">29</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Nzg4.html">30</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Nzky.html">31</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4Nzk2.html">32</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODE2.html">33</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODAw.html">34</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODI0.html">35</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4NzQw.html">36</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODI4.html">37</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODA0.html">38</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODMy.html">39</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODA4.html">40</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODc2.html">41</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODY0.html">42</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODY4.html">43</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.youku.com/v_show/id_XMTI4Njk4ODcy.html">44</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1358,6 +2284,100 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">撕开你的伤口（2005年电视剧）</TextBlock>
                                     <WrapPanel>
+                                        <TextBlock>PPTV：</TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/ibZubGTIsJGLFQ6s.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/ibpyiaIFsVicTueHIQ.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/ib52hHzQmLmzPTbU.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/EPOzMUokLGrNS7M.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/icJaYFia0icF1W4Np4.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/EicS6OFMNBUOmJIw.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/Fe6wLmX33x2AicmY.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/FOibvLWb40A5x71c.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/FvG1M0giaKmjLSbE.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/Gv3BP1QGDkyvLZU.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/FicC2NE8hKWfKSLA.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/LcbIRv1vZ6UIhu4.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/GPu7OVIMBEKlI4s.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/IMPDQfp0XJr9eibM.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/IcLEQvlzW5n8euI.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/J8DGRP9xWZf6eOA.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/Gfq8OlELA0GkIoo.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/GiczCQPt1XZvibfOQ.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/HPe3NU4gKGbJR68.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/IsXJRicxuZqQHhe0.html">20</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/I8TKSANdNXPWVLw.html">21</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/KcrMSgFbM3HUUro.html">22</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/Hfa4Nk0f9zWYFn4.html">23</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/Hvm9O1AKAkCjIYk.html">24</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/KMvLSQJcNHLVU7s.html">25</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/JL9icicZbIwP5h30c.html">26</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/Jb6AicpXHzw1w7lY.html">27</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/HiciaibPFcJATibiaIIg.html">28</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/JsHFQichyWpj7eeE.html">29</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/K8zSUOuFjcsurBQ.html">30</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink RequestNavigate="HyperlinkRequestNavigate" NavigateUri="http://v.pptv.com/show/LMfHRf5wWJb5d98.html">31</Hyperlink>
+                                        </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
@@ -1379,14 +2399,6 @@
                                 <StackPanel>
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">中国家庭421（2005年电视剧）</TextBlock>
                                     <WrapPanel>
-                                    </WrapPanel>
-                                </StackPanel>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">撕开你的伤口（2006年电视剧）</TextBlock>
-                                    <WrapPanel>
-                                        <TextBlock><Hyperlink NavigateUri="http://www.360kan.com/tv/QrFwaaPWSmHmMX.html">360影视</Hyperlink></TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
