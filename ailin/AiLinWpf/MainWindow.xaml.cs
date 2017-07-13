@@ -263,6 +263,7 @@ namespace AiLinWpf
                     case "EShNHLXH":
                         // http://pan.baidu.com/s/1qXZN8V6
                         // TODO move to an accessible place
+                        StopPlayingAudio();
                         break;
                     case "HFQX":
                         await TryPlayAudioInternet("http://om5.alicdn.com/587/2587/13990/172730_15984329_l.mp3?auth_key=43e9654917bd89fd67a31409b1d6c98f-1500174000-0-null");
@@ -276,7 +277,7 @@ namespace AiLinWpf
                     case "XEBLK":
                         // http://pan.baidu.com/s/1qYlYRHM
                         // TODO move to an accessible place
-                        await TryPlayAudioInternet("http://d.pcs.baidu.com/file/e1d178204d30eabfeae0facdbe0d1975?fid=537220065-250528-1014980471055521&time=1499691456&rt=sh&sign=FDTAERVY-DCb740ccc5511e5e8fedcff06b081203-5Tg%2FCTTj3cwtcuxQEMAznAPQfqA%3D&expires=8h&chkv=1&chkbd=0&chkpc=et&dp-logid=4426891561741149185&dp-callid=0&r=703819881&ext=.mp3");
+                        StopPlayingAudio();
                         break;
                     case "XYJ":
                         await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");
@@ -299,6 +300,7 @@ namespace AiLinWpf
 
         private void PlayAudioResource(string audioName)
         {
+            AudioPlayer.Stop();
             var uri = new Uri(@"Audio/" + audioName + ".wma", UriKind.Relative);
             AudioPlayer.Source = uri;
             AudioPlayer.Play();
@@ -318,9 +320,9 @@ namespace AiLinWpf
         {
             try
             {
+                AudioPlayer.Stop();
                 var uri = new Uri(url);
                 AudioPlayer.Source = uri;
-                AudioPlayer.Stop();
                 AudioPlayer.Play();
 
                 await WaitUntilMediaStatusChangedToOtherThanStop();
