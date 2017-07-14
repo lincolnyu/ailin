@@ -261,9 +261,8 @@ namespace AiLinWpf
                 switch (lbi.Name)
                 {
                     case "EShNHLXH":
-                        // http://pan.baidu.com/s/1qXZN8V6
-                        // TODO move to an accessible place
-                        StopPlayingAudio();
+                        // version on baidu pan  http://pan.baidu.com/s/1qXZN8V6
+                        await TryPlayAudioInternet("http://vgmyqa-dm2306.files.1drv.com/y4mFGrhvofPXWEMEEmOLz7s-U2_Z3V308knhn7TvYGfyxheMS9lBlPjKffBBYzfBJNLh4Duf2mUNPL9nvFcF0PZ58V5whUn_QRSS9lXzyC58ipM4t6kdjg6T5o1nOHi0a7ujjRZUrx8VyQGtJkQB6S39HuSgLVmDVAY3h7VVvl_9SsbszaYgpejy3jRGDg1S1G1/audio.mp3?application=Boombox&appver=2.0&scid=XBoxMusic_Streaming&rid=8BgKL2TTIUimjGdWIZNRfQ.4");
                         break;
                     case "HFQX":
                         await TryPlayAudioInternet("http://om5.alicdn.com/587/2587/13990/172730_15984329_l.mp3?auth_key=43e9654917bd89fd67a31409b1d6c98f-1500174000-0-null");
@@ -275,9 +274,8 @@ namespace AiLinWpf
                         await TryPlayAudioInternet("http://om5.alicdn.com/1/258/41258/243252/2811487_297631_l.mp3?auth_key=8481e4f9dbf66fe1f5f8c0c517e19043-1500260400-0-null");
                         break;
                     case "XEBLK":
-                        // http://pan.baidu.com/s/1qYlYRHM
-                        // TODO move to an accessible place
-                        StopPlayingAudio();
+                        // version on baidu pan http://pan.baidu.com/s/1qYlYRHM
+                        await TryPlayAudioInternet("http://u46kbq-dm2306.files.1drv.com/y4ma_byVeSd2JkriEqCXyM4Vv4o34tkkJxc0sjijFvTnF18eJ-jquzCFe_D1FYpQjbehu1erg-XuLF_Urhf2ET5bILL25Y-gnOH-58cLjTaVSo3C4Dq-UBS1wzJYhZhCOtWv3Xxhp4tqi9c6R761qpcn-P9uFbDxQg8CSu5jlO2EJqZ1mafsnFEwgbV1qHv951X/audio.mp3?application=Boombox&appver=2.0&scid=XBoxMusic_Streaming&rid=i7N6bDngsUK%2bZMZ8FHZepA.4");
                         break;
                     case "XYJ":
                         await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");

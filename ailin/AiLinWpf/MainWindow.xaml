@@ -322,7 +322,7 @@
                         <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" IsChecked="True" 
                                   Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked">
                             <CheckBox.ToolTip>
-                                播放选中剧集的配乐（如果可用）
+                                播放部分选中剧集的配乐（注：不一定使用原剧原唱）
                             </CheckBox.ToolTip>
                             播放乐曲
                         </CheckBox>
@@ -531,6 +531,10 @@
                                         <TextBlock Margin="8,0,0,0">
                                         <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTU4NzczODg0NA==.html">世杰版</Hyperlink>
                                         </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">腾讯：</TextBlock>
+                                        <TextBlock>
+                                        <Hyperlink NavigateUri="https://v.qq.com/x/cover/aav44xv50k8sfjb/v01837h5xtn.html?ptag=2345.tv">标准版（较高清）</Hyperlink>
+                                        </TextBlock>
                                         <TextBlock Margin="10,0,0,0">乐视：</TextBlock>
                                         <TextBlock Margin="3,0,0,0">
                                         <Hyperlink NavigateUri="http://www.le.com/ptv/vplay/20873763.html">完整版</Hyperlink>
@@ -575,6 +579,18 @@
                                         </TextBlock>
                                         <TextBlock Margin="3,0,0,0">
                             <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTE1NDMwMDUy.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
+                                            腾讯:
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/0rupde2v5mqir49/c00155kqqxa.html">播放</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
+                                            爱奇艺:
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="http://www.iqiyi.com/a_19rrhb7wu1.html?vfm=2008_aldbd">播放</Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
