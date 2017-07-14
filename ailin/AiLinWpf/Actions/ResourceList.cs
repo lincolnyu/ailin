@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AiLinWpf.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -24,8 +25,8 @@ namespace AiLinWpf.Actions
 
         public static Comparison<Resource> CompareTypeAscending => (x, y) => x.Type.CompareTo(y.Type);
         public static Comparison<Resource> CompareTypeDescending => (x, y) => y.Type.CompareTo(x.Type);
-        public static Comparison<Resource> CompareTitleAscending => (x, y) => x.Title.CompareTo(y.Title);
-        public static Comparison<Resource> CompareTitleDescending => (x, y) => y.Title.CompareTo(x.Title);
+        public static Comparison<Resource> CompareTitleAscending => (x, y) => ChineseHelper.Compare(x.Title, y.Title);
+        public static Comparison<Resource> CompareTitleDescending => (x, y) => ChineseHelper.Compare(y.Title, x.Title);
         public static Comparison<Resource> CompareDateAscending => (x, y) => x.Date.CompareTo(y.Date);
         public static Comparison<Resource> CompareDateDescending => (x, y) => y.Date.CompareTo(x.Date);
 

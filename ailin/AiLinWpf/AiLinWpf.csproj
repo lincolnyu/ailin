@@ -104,6 +104,7 @@
     <Compile Include="Data\InfoDepedentUI.cs" />
     <Compile Include="Data\Record.cs" />
     <Compile Include="Data\RecordRepository.cs" />
+    <Compile Include="Helpers\ChineseHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
