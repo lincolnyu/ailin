@@ -16,7 +16,7 @@ namespace TestConsole
             const string reply = @"d:\temp\reply.html";
 
             var vpn = new VotePageNavigator(voteid);
-            var pi = vpn.SearchForZhuLin();
+            var pi = vpn.SearchForZhuLin().Item1;
 
             using (var sw = new StreamWriter(qf))
             {

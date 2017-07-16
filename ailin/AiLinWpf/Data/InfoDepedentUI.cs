@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AiLinWpf.Styles;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Windows.Documents;
 using WebKit;
 using WebKit.Helpers;
 using static AiLinWpf.Helpers.ImageHelper;
+using static WebKit.VotePageNavigator;
 
 namespace AiLinWpf.Data
 {
@@ -21,10 +23,13 @@ namespace AiLinWpf.Data
             LoadedWithQuestion,
             SubmittingQuestion,
             ReplyReceived,
-            RefreshingAfterReply
+            RefreshingAfterReply,
+            Error
         }
 
         public States State { get; set; }
+
+        public ErrorCodes Error { get; private set; }
 
         public int VoteId;
         public VotePageNavigator Navigator;
@@ -80,13 +85,17 @@ namespace AiLinWpf.Data
 
         #region Event handlers
 
-        private void TabOnLoaded(object sender, RoutedEventArgs e)
+        private async void TabOnLoaded(object sender, RoutedEventArgs e)
         {
-            RefreshVote();
+            await RefreshVoteAsync();
         }
 
-        private void RefreshTab(object sender, RoutedEventArgs e)
+        private async void RefreshTab(object sender, RoutedEventArgs e)
         {
+            if (State == States.Error)
+            {
+                Application.Current.Shutdown();
+            }
             if (State == States.ReplyReceived)
             {
                 ResultPanel.Visibility = Visibility.Collapsed;
@@ -98,7 +107,7 @@ namespace AiLinWpf.Data
             {
                 State = States.Refreshing;
             }
-            RefreshVote();
+            await RefreshVoteAsync();
         }
 
         private void VoteButtonClick(object sender, RoutedEventArgs e)
@@ -223,12 +232,12 @@ namespace AiLinWpf.Data
             }
         }
 
-        private async void RefreshVote() => await RefreshVoteAsync();
-
         private async Task RefreshVoteAsync()
         {
             DisableRefresh();
-            PageInfo = await Navigator.SearchForZhuLinAsync(true);
+            var res = await Navigator.SearchForZhuLinAsync(true);
+            PageInfo = res.Item1;
+            Error = res.Item2;
             if (PageInfo != null)
             {
                 NumVotesText.Text = PageInfo.Votes?.ToString() ?? "无法获取";
@@ -263,11 +272,14 @@ namespace AiLinWpf.Data
             }
             else
             {
-                // TODO report error
+                State = States.Error;
+                ReportError();
+                return;
             }
 
             var mobileNavigator = new VotePageNavigator(VoteId, VotePageNavigator.MobilePageUrlPattern, true);
-            var mp = await mobileNavigator.SearchForZhuLinMobileUrlAsync();
+            var resMob = await mobileNavigator.SearchForZhuLinMobileUrlAsync();
+            var mp = resMob.Item1;
             if (mp != null)
             {
                 LinsPageMobile.NavigateUri = new Uri(mp);
@@ -301,7 +313,7 @@ namespace AiLinWpf.Data
             State = States.Loaded;
         }
 
-        public void DisableRefresh()
+        private void DisableRefresh()
         {
             RefreshButton.Content = "正在刷新……";
             VoteButton.IsEnabled = false;
@@ -315,7 +327,7 @@ namespace AiLinWpf.Data
             CollapseVote();
         }
 
-        public void RestoreRefresh()
+        private void RestoreRefresh()
         {
             RefreshButton.IsEnabled = true;
             VoteButton.IsEnabled = true;
@@ -329,6 +341,24 @@ namespace AiLinWpf.Data
             }
             CollapseVote();
             RefreshButton.Content = "刷新";
+        }
+
+        private void ReportError()
+        {
+            RefreshButton.IsEnabled = true;
+            RefreshButton.Foreground = Coloring.RedBrush;
+            switch (Error)
+            {
+                case ErrorCodes.ParsingError:
+                    RefreshButton.Content = "网络错误，点此关闭后重新打开程序以重试";
+                    break;
+                case ErrorCodes.WebRequestError:
+                    RefreshButton.Content = "解析失败，点此关闭后重新打开程序以重试";
+                    break;
+                default:
+                    Debug.Assert(false, "未识别错误");
+                    break;
+            }
         }
 
         public void DisableRefreshSubmitting()

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,6 +9,13 @@ namespace WebKit
 {
     public class VotePageNavigator
     {
+        public enum ErrorCodes
+        {
+            Success,
+            WebRequestError,
+            ParsingError
+        }
+
         public const int DefaultVoteId = 43;
         public const int SecondVoteId = 1069;
         public const string MainPageUrlPattern = "http://www.ttpaihang.com/vote/rank.php?voteid=";
@@ -55,9 +63,16 @@ namespace WebKit
         public async Task<string> GetPageGB2312(string url)
         {
             SetUserAgentIfMobile();
-            var data = await _client.DownloadDataTaskAsync(url);
-            var page = data.ConvertGB2312ToUTF();
-            return page;
+            try
+            {
+                var data = await _client.DownloadDataTaskAsync(url);
+                var page = data.ConvertGB2312ToUTF();
+                return page;
+            }
+            catch (WebException)
+            {
+                return null;
+            }
         }
 
         private void SetUserAgentIfMobile()
@@ -68,28 +83,32 @@ namespace WebKit
             }
         }
 
-        public string SearchForZhuLinMobileUrl()
+        public Tuple<string, ErrorCodes> SearchForZhuLinMobileUrl()
         {
             var task = SearchForZhuLinMobileUrlAsync();
             task.Wait();
             return task.Result;
         }
 
-        public async Task<string> SearchForZhuLinMobileUrlAsync()
+        public async Task<Tuple<string, ErrorCodes>> SearchForZhuLinMobileUrlAsync()
         {
             for (var url = _mainPageUrl; url != null;)
             {
                 var page = await GetPageGB2312(url);
+                if (page == null)
+                {
+                    return new Tuple<string, ErrorCodes>(null, ErrorCodes.WebRequestError);
+                }
                 if (page.Contains("朱琳")) // TODO what about another Zhu Lin?
                 {
-                    return url;
+                    return new Tuple<string, ErrorCodes>(url, ErrorCodes.Success);
                 }
                 url = GetLinkToNextPage(url, page);
             }
-            return null;
+            return new Tuple<string, ErrorCodes>(null, ErrorCodes.ParsingError);
         }
 
-        public PageInfo SearchForZhuLin(bool getQuestions = true)
+        public Tuple<PageInfo, ErrorCodes> SearchForZhuLin(bool getQuestions = true)
         {
             Debug.Assert(!_isMobile);
             var task = SearchForZhuLinAsync(getQuestions);
@@ -97,13 +116,17 @@ namespace WebKit
             return task.Result;
         }
 
-        public async Task<PageInfo> SearchForZhuLinAsync(bool getQuestions = true)
+        public async Task<Tuple<PageInfo, ErrorCodes>> SearchForZhuLinAsync(bool getQuestions = true)
         {
             Debug.Assert(!_isMobile);
             // should be like <a href="/vote/rankdetail-2685.html" target=_blank class=zthei >朱琳</a>
             for (var url = _mainPageUrl; url != null; )
             {
                 var page = await GetPageGB2312(url);
+                if (page == null)
+                {
+                    return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.WebRequestError);
+                }
                 var pattern = @"(<a href=[^>]+>)朱琳</a>"; // TODO what about another Zhu Lin?
                 var regex = new Regex(pattern);
                 var match = regex.Match(page);
@@ -135,7 +158,7 @@ namespace WebKit
 
                     var pageId = GetPageId(url);
 
-                    return new PageInfo
+                    var pi = new PageInfo
                     {
                         PageUrl = url,
                         ProfileUrl = proflink,
@@ -148,10 +171,11 @@ namespace WebKit
                         Thumbnail = thumbnail,
                         Question = q
                     };
+                    return new Tuple<PageInfo, ErrorCodes>(pi, ErrorCodes.Success);
                 }
                 url = GetLinkToNextPage(url, page);
             }
-            return null;
+            return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.ParsingError);
         }
 
         private int GetPageId(string url)

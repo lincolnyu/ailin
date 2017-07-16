@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AiLinWpf.Styles;
+using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -28,10 +29,10 @@ namespace AiLinWpf.Actions
             switch (Type)
             {
                 case Types.Movie:
-                    UI.Background = new SolidColorBrush(Colors.PaleGoldenrod);
+                    UI.Background = Coloring.PaleGoldenrodBrush;
                     break;
                 case Types.Television:
-                    UI.Background = new SolidColorBrush(Colors.LightSkyBlue);
+                    UI.Background = Coloring.LightSkyBlueBrush;
                     break;
             }
         }
