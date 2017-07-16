@@ -1,6 +1,4 @@
-﻿#define NO_SINGLE_INSTANCE
-
-using Squirrel;
+﻿using Squirrel;
 using System;
 #if !NO_SINGLE_INSTANDCE
 using System.Threading;
@@ -36,9 +34,9 @@ namespace AiLinWpf
             var title = _mainWindow.Title;
             try
             {
-                using (var mgr = UpdateManager.GitHubUpdateManager(GitHubHost))
+                using (var mgr = await UpdateManager.GitHubUpdateManager(GitHubHost))
                 {
-                    var res = await mgr.Result.UpdateApp();
+                    var res = await mgr.UpdateApp();
                     var ver = res?.Version?.Version;
                     if (ver != null)
                     {
@@ -60,26 +58,34 @@ namespace AiLinWpf
         [STAThread]
         static void Main()
         {
-#if !NO_SINGLE_INSTANCE
-            if (_mutex.WaitOne(TimeSpan.Zero, true))
+            try
             {
+#if !NO_SINGLE_INSTANCE
+                if (_mutex.WaitOne(TimeSpan.Zero, true))
+                {
 #endif
-                App app = new App();
-                _mainWindow = new MainWindow();
-                app.Run(_mainWindow);
+                    App app = new App();
+                    _mainWindow = new MainWindow();
+                    app.Run(_mainWindow);
 #if !DEBUG
-                CheckForUpdate().Wait();
+                    CheckForUpdate().Wait();
 #endif
 
 #if !NO_SINGLE_INSTANCE
+                }
+                else
+                {
+                    _mainWindow.WindowState = WindowState.Normal;
+                }
+#endif
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
                 _mutex.ReleaseMutex();
             }
-            else
-            {
-                _mainWindow.WindowState = WindowState.Normal;
-            }
-#endif
         }
-
     }
 }
