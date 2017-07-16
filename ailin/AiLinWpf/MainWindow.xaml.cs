@@ -85,7 +85,7 @@ namespace AiLinWpf
             await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
                 LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
 
-            await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", tiebaFallback, 1, 5000);
+            await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 1, 5000);
 
             await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 1, 5000);
 
