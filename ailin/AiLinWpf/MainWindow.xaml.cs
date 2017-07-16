@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
 using System;
+using System.Windows.Media;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using System.Threading.Tasks;
 using AiLinWpf.Data;
 using AiLinWpf.Actions;
@@ -66,14 +68,29 @@ namespace AiLinWpf
             InitializeComponent();
             InitInfoDepdentUI();
             SetTitle();
-            LoadPages();
             _resourceList = new ResourceList(this);
         }
 
-        private void LoadPages()
+        private async void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
+            await LoadImages();
+        }
+
+        private async Task LoadImages()
+        {
+            const string tiebaFallback = "pack://application:,,,/Images/tieba-fallback.png";
+            const string generalFallback = "pack://application:,,,/Images/fallback.gif";
+
+            var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 1);
+            await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+                LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
+
+            await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", tiebaFallback, 1, 5000);
+
+            await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 1, 5000);
+
             const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
-            TiebaLogo.Source = TryLoadImage(tiebaImage, "pack://application:,,,/Images/tieba-fallback.png", 1);
+            await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 1, 5000);
         }
 
         private void SetTitle()
@@ -261,8 +278,7 @@ namespace AiLinWpf
                 switch (lbi.Name)
                 {
                     case "EShNHLXH":
-                        // version on baidu pan  http://pan.baidu.com/s/1qXZN8V6
-                        await TryPlayAudioInternet("http://vgmyqa-dm2306.files.1drv.com/y4mFGrhvofPXWEMEEmOLz7s-U2_Z3V308knhn7TvYGfyxheMS9lBlPjKffBBYzfBJNLh4Duf2mUNPL9nvFcF0PZ58V5whUn_QRSS9lXzyC58ipM4t6kdjg6T5o1nOHi0a7ujjRZUrx8VyQGtJkQB6S39HuSgLVmDVAY3h7VVvl_9SsbszaYgpejy3jRGDg1S1G1/audio.mp3?application=Boombox&appver=2.0&scid=XBoxMusic_Streaming&rid=8BgKL2TTIUimjGdWIZNRfQ.4");
+                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/fblxzhf.mp3");
                         break;
                     case "HFQX":
                         await TryPlayAudioInternet("http://om5.alicdn.com/587/2587/13990/172730_15984329_l.mp3?auth_key=43e9654917bd89fd67a31409b1d6c98f-1500174000-0-null");
@@ -270,12 +286,17 @@ namespace AiLinWpf
                     case "KXZZY":
                         await TryPlayAudioInternet("http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3");
                         break;
+                    case "WZTTDN":
+                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wzttdn.mp3");
+                        break;
                     case "YLZhZhND":
                         await TryPlayAudioInternet("http://om5.alicdn.com/1/258/41258/243252/2811487_297631_l.mp3?auth_key=8481e4f9dbf66fe1f5f8c0c517e19043-1500260400-0-null");
                         break;
                     case "XEBLK":
-                        // version on baidu pan http://pan.baidu.com/s/1qYlYRHM
-                        await TryPlayAudioInternet("http://u46kbq-dm2306.files.1drv.com/y4ma_byVeSd2JkriEqCXyM4Vv4o34tkkJxc0sjijFvTnF18eJ-jquzCFe_D1FYpQjbehu1erg-XuLF_Urhf2ET5bILL25Y-gnOH-58cLjTaVSo3C4Dq-UBS1wzJYhZhCOtWv3Xxhp4tqi9c6R761qpcn-P9uFbDxQg8CSu5jlO2EJqZ1mafsnFEwgbV1qHv951X/audio.mp3?application=Boombox&appver=2.0&scid=XBoxMusic_Streaming&rid=i7N6bDngsUK%2bZMZ8FHZepA.4");
+                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xeblk.mp3");
+                        break;
+                    case "XJRSh":
+                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xjrsh.mp3");
                         break;
                     case "XYJ":
                         await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");
@@ -369,6 +390,11 @@ namespace AiLinWpf
         private async void PlaySongsOnChecked(object sender, RoutedEventArgs e)
         {
             await PlaySelected();
+        }
+
+        private void FriendlyLinksOnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            FriendlyLinks.IsSelected = true;
         }
     }
 }

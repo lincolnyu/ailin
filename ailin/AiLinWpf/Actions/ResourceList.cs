@@ -156,7 +156,7 @@ namespace AiLinWpf.Actions
             }
             else if (title.Contains("电视剧）"))
             {
-                r.Type = Resource.Types.Series;
+                r.Type = Resource.Types.Television;
             }
             else
             {

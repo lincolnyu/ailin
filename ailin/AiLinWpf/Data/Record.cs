@@ -75,5 +75,4 @@ namespace AiLinWpf.Data
             return new Record { Time = t, Votes = votes, Rank = rank, Popularity = pop };
         }
     }
-
 }

@@ -55,5 +55,4 @@ namespace AiLinWpf.Data
             }
         }
     }
-
 }

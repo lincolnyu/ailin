@@ -238,7 +238,7 @@ namespace AiLinWpf.Data
                 LinsProfile.NavigateUri = PageInfo.ProfileUrl != null ? new Uri(PageInfo.ProfileUrl) : null;
                 if (PageInfo.Thumbnail != null)
                 {
-                    LinsImage.Source = TryLoadImage(PageInfo.Thumbnail);
+                    await LinsImage.TryLoadWebImage(PageInfo.Thumbnail);
 
                     var imageLink = (Hyperlink)((InlineUIContainer)LinsImage.Parent).Parent;
                     imageLink.NavigateUri = LinsProfile.NavigateUri;

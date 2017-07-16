@@ -9,12 +9,12 @@ namespace AiLinWpf.Actions
         public enum Types
         {
             Uncategorized,
-            Movie,
-            Series,
-            RadioDrama,
-            Recite,
-            Interview,
-            Show
+            Movie,      // 电影
+            Television, // 电视剧
+            RadioDrama, // 广播剧
+            Recite,     // 朗诵
+            Interview,  // 访谈
+            Show        // 综艺
         }
 
         public DateTime Date { get; set; }
@@ -30,7 +30,7 @@ namespace AiLinWpf.Actions
                 case Types.Movie:
                     UI.Background = new SolidColorBrush(Colors.PaleGoldenrod);
                     break;
-                case Types.Series:
+                case Types.Television:
                     UI.Background = new SolidColorBrush(Colors.LightSkyBlue);
                     break;
             }
