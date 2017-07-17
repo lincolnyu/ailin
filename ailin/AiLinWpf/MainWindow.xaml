@@ -601,7 +601,7 @@
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">台北女人（1992年电影）</TextBlock>
                                     <WrapPanel>
                                         <TextBlock Margin="3,0,0,0"><Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTM3ODE4MDg3Ng==.html?from=y1.7-1.2">优酷</Hyperlink></TextBlock>
-                                        <TextBlock Margin="3,0,0,0"><Hyperlink NavigateUri="http://www.1905.com/vod/play/86081.shtml">1905电影网</Hyperlink></TextBlock>
+                                        <TextBlock Margin="10,0,0,0"><Hyperlink NavigateUri="http://www.1905.com/vod/play/86081.shtml">1905电影网</Hyperlink></TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>

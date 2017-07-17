@@ -281,7 +281,7 @@ namespace AiLinWpf
                         await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/fblxzhf.mp3");
                         break;
                     case "HFQX":
-                        await TryPlayAudioInternet("http://om5.alicdn.com/587/2587/13990/172730_15984329_l.mp3?auth_key=43e9654917bd89fd67a31409b1d6c98f-1500174000-0-null");
+                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wlsh.mp3");
                         break;
                     case "KXZZY":
                         await TryPlayAudioInternet("http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3");
@@ -290,7 +290,7 @@ namespace AiLinWpf
                         await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wzttdn.mp3");
                         break;
                     case "YLZhZhND":
-                        await TryPlayAudioInternet("http://om5.alicdn.com/1/258/41258/243252/2811487_297631_l.mp3?auth_key=8481e4f9dbf66fe1f5f8c0c517e19043-1500260400-0-null");
+                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/a-morning-in-cornwell.mp3");
                         break;
                     case "XEBLK":
                         await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xeblk.mp3");
