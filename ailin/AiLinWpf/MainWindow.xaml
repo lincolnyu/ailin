@@ -4899,16 +4899,11 @@
                     <TextBlock>友情链接</TextBlock>
                 </TabItem.Header>
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="53*"/>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="443*"/>
-                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="20"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.ColumnSpan="3">
+                    <StackPanel>
                         <StackPanel.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" 
                                     Opacity="0.5" AlignmentX="Right"
@@ -4967,8 +4962,20 @@
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
-                    <TextBlock Grid.Row="1" FontSize="15" Grid.ColumnSpan="3"><Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手求助与反馈" 
-                                                       RequestNavigate="HyperlinkRequestNavigate">联系作者</Hyperlink></TextBlock>
+                    <DockPanel Grid.Row="1" >
+                        <TextBlock DockPanel.Dock="Left" FontSize="15">
+                            <Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手求助与反馈" 
+                                       RequestNavigate="HyperlinkRequestNavigate">
+                                联系作者
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock DockPanel.Dock="Right" FontSize="15" HorizontalAlignment="Right">
+                            <Hyperlink NavigateUri="https://github.com/lincolnyu/ailin/releases/latest" 
+                                       RequestNavigate="HyperlinkRequestNavigate">
+                                下载最新版本
+                            </Hyperlink>
+                        </TextBlock>
+                    </DockPanel>
                 </Grid>
             </TabItem>
         </TabControl>

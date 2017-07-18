@@ -71,26 +71,44 @@ namespace AiLinWpf
             _resourceList = new ResourceList(this);
         }
 
-        private async void WindowOnLoaded(object sender, RoutedEventArgs e)
+        private void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
-            await LoadImages();
+            LoadImages();
         }
 
-        private async Task LoadImages()
+        private delegate void DownloadTask();
+
+        private void LoadImages()
         {
             const string tiebaFallback = "pack://application:,,,/Images/tieba-fallback.png";
             const string generalFallback = "pack://application:,,,/Images/fallback.gif";
 
-            var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 1);
-            await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
-                LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
+            DownloadTask[] tasks = {
+                async () =>
+                {
+                    var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 1);
+                    await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+                        LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
+                },
+                async ()=>
+                {
+                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 1, 5000);
+                },
+                async ()=>
+                {
+                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 1, 5000);
+                },
+                async ()=>
+                {
+                    const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
+                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 1, 5000);
+                }
+            };
 
-            await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 1, 5000);
-
-            await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 1, 5000);
-
-            const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
-            await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 1, 5000);
+            foreach (var task in tasks)
+            {
+                task();
+            }
         }
 
         private void SetTitle()

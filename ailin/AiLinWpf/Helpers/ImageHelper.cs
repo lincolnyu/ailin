@@ -49,8 +49,14 @@ namespace AiLinWpf.Helpers
                 {
                     webRequest.ContentType = "image/jpeg";
                 }
-                WebResponse webResponse = webRequest.GetResponse();
 
+                var infiniteTimeout = downloadTimeoutCount >= int.MaxValue / downloadPolling;
+                var totalTimeout = infiniteTimeout ? System.Threading.Timeout.Infinite 
+                    : downloadPolling * downloadTimeoutCount;
+                
+                webRequest.Timeout = totalTimeout;
+                var initTime = DateTime.UtcNow;
+                var webResponse = webRequest.GetResponse();
                 var img = new BitmapImage()
                 {
                     CreateOptions = BitmapCreateOptions.None,
@@ -71,7 +77,15 @@ namespace AiLinWpf.Helpers
 
                 for (var i = 0; i < downloadTimeoutCount && !downloadCompleted && !downloadFailed; i++)
                 {
-                    await Task.Delay(downloadPolling);
+                    var delayTime = downloadPolling;
+                    if (!infiniteTimeout)
+                    {
+                        var elapsed = DateTime.UtcNow - initTime;
+                        var left = (int)(totalTimeout - elapsed.TotalMilliseconds);
+                        if (left <= 0) break;
+                        if (left < delayTime) delayTime = left;
+                    }
+                    await Task.Delay(delayTime);
                 }
                 return downloadCompleted? img : null;
             }
