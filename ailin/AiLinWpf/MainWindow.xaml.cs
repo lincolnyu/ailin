@@ -561,7 +561,7 @@ namespace AiLinWpf
         {
             var assembly = Assembly.GetExecutingAssembly();
             var ver = assembly.GetName().Version;
-            Title = $"爱琳投票助手（版本{ver.Major}.{ver.Minor}.{ver.Build}）";
+            Title = $"爱琳投票助手（版本{ver.Major}.{ver.Minor}.{ver.Build}）（1.0.5之增补修复版）";
         }
 
         private void InitInfoDepdentUI()
