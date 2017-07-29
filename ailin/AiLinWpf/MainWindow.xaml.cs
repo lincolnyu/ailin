@@ -71,6 +71,8 @@ namespace AiLinWpf
         private string _searchTarget;
         private List<Tuple<FrameworkElement, FrameworkElement>> _highlightedPairs
             = new List<Tuple<FrameworkElement, FrameworkElement>>();
+        private List<ListBoxItem> _highlightedItems = new List<ListBoxItem>();
+        private int? _currentFocused;
 
         public MainWindow()
         {
@@ -479,29 +481,67 @@ namespace AiLinWpf
         {
             if (e.Key == Key.Enter)
             {
-                SearchAndHighlight();
+                if (_currentFocused == null)
+                {
+                    SearchAndHighlight();
+                }
+                else
+                {
+                    var shift = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+                    if (shift)
+                    {
+                        _currentFocused--;
+                        if (_currentFocused.Value < 0)
+                        {
+                            _currentFocused = _highlightedItems.Count-1;
+                        }
+                    }
+                    else
+                    {
+                        _currentFocused++;
+                        if (_currentFocused.Value >= _highlightedItems.Count)
+                        {
+                            _currentFocused = 0;
+                        }
+                    }
+                    var lbi = _highlightedItems[_currentFocused.Value];
+                    VideoList.ScrollIntoView(lbi);
+                    lbi.IsSelected = true;
+                }
             }
         }
 
         private void SearchAndHighlight()
         {
+            DeHighlight();
+            if (string.IsNullOrWhiteSpace(_searchTarget))
+            {
+                return;
+            }
             var first = true;
+            var search = _searchTarget.Trim();
             foreach (var lbi in VideoList.Items.Cast<ListBoxItem>())
             {
                 if (lbi.Content is Panel p)
                 {
                     var tbs = p.GetAllTexts().ToList();
-                    var pairs = tbs.Highlight(_searchTarget);
+                    var pairs = tbs.Highlight(search);
                     var nonEmpty = false;
                     foreach (var pair in pairs)
                     {
                         nonEmpty = true;
                         _highlightedPairs.Add(pair);
                     }
-                    if (nonEmpty && first)
+                    if (nonEmpty)
                     {
-                        VideoList.ScrollIntoView(lbi);
-                        first = true;
+                        _highlightedItems.Add(lbi);
+                        _currentFocused = 0;
+                        if (first)
+                        {
+                            VideoList.ScrollIntoView(lbi);
+                            lbi.IsSelected = true;
+                            first = false;
+                        }
                     }
                 }
             }
@@ -510,6 +550,9 @@ namespace AiLinWpf
         private void DeHighlight()
         {
             _highlightedPairs.DeHighlight();
+            _highlightedPairs.Clear();
+            _highlightedItems.Clear();
+            _currentFocused = null;
         }
 
         private void UpdateSearchTarget(string target)

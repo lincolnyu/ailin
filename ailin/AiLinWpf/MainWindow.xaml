@@ -71,6 +71,8 @@
                     </Setter>
                 </Style.Setters>
             </Style>
+            <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
+            <Image x:Key="ClearIcon" Source="pack://application:,,,/Images/clear.png"/>
         </Grid.Resources>
         <MediaElement Name="AudioPlayer" LoadedBehavior="Manual" UnloadedBehavior="Stop"
                                   MediaOpened="AudioPlayerOnMediaOpened" MediaEnded="AudioPlayerOnMediaEnded"
@@ -273,23 +275,34 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
-                        <Grid Margin="8,0,8,0">
+                        <Grid Margin="10,0,10,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5*" MaxWidth="200" MinWidth="100"></ColumnDefinition>
                                 <ColumnDefinition Width="5*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
+                            <Grid Grid.Column="0" Height="30">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox Grid.Column="0" VerticalContentAlignment="Center" Name="SearchBox"
+                                <TextBox Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Name="SearchBox"
                                          GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
                                          TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyDown">
                                 </TextBox>
-                                <Button Grid.Column="1" Click="BtnClearOnClick">X</Button>
-                                <Button Grid.Column="2" Click="BtnSearchOnClick">O</Button>
+                                <Button Grid.Column="1" Click="BtnClearOnClick" Margin="7"
+                                        Background="Transparent">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                    Width="16" Height="16" Child="{StaticResource ResourceKey=ClearIcon}">
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Grid.Column="2" Click="BtnSearchOnClick" Width="30" Height="30" 
+                                        Content="{StaticResource ResourceKey=SearchIcon}">
+                                </Button>
                             </Grid>
                         </Grid>
                     </DockPanel>

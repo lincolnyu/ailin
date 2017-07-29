@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 
 namespace AiLinWpf.Helpers
 {
@@ -50,7 +51,9 @@ namespace AiLinWpf.Helpers
             {
                 if (tfe is TextBlock tb)
                 {
-                    if (tb.Text.Contains(text))
+                    var s = tb.Text;
+                    var index = s.IndexOf(text);
+                    if (index >= 0)
                     {
                         var ntb = new TextBlock
                         {
@@ -58,10 +61,23 @@ namespace AiLinWpf.Helpers
                             FontWeight = tb.FontWeight,
                             FontStyle = tb.FontStyle,
                             Foreground = tb.Foreground,
-                            Background = Coloring.YellowBrush
+                            Background = tb.Background
                         };
-                        ntb.Text = tb.Text;
+                        var lastIndex = 0;
+                        do
+                        {
+                            ntb.Inlines.Add(s.Substring(lastIndex, index - lastIndex));
+                            var run = new Run(s.Substring(index, text.Length))
+                            {
+                                Background = Coloring.YellowBrush
+                            };
+                            ntb.Inlines.Add(run);
+                            lastIndex = index + text.Length;
+                            index = tb.Text.IndexOf(text, lastIndex);
+                        } while (index >= 0);
+                        ntb.Inlines.Add(s.Substring(lastIndex));
                         Replace(tb, ntb);
+                        System.Diagnostics.Trace.WriteLine($"New text is {ntb.Text}");
                         yield return new Tuple<FrameworkElement, FrameworkElement>(tb, ntb);
                     }
                 }
