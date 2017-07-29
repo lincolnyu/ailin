@@ -216,7 +216,7 @@ namespace AiLinWpf
             {
                 _byDateAscending = !(_byDateAscending ?? false);
                 var c = _byDateAscending.Value ? ResourceList.CompareDateAscending : ResourceList.CompareDateDescending;
-                BtnOrderByTime.Content = _byDateAscending.Value ? "按时间升序" : "按时间降序";
+                BtnOrderByTime.Content = _byDateAscending.Value ? "时间升序" : "时间降序";
                 _resourceList.Push(c);
                 UpdateButtonOrder();
             }
@@ -228,7 +228,7 @@ namespace AiLinWpf
             {
                 _byTypeAscending = !(_byTypeAscending ?? false);
                 var c = _byTypeAscending.Value ? ResourceList.CompareTypeAscending : ResourceList.CompareTypeDescending;
-                BtnOrderByType.Content = _byTypeAscending.Value ? "按类型升序" : "按类型降序";
+                BtnOrderByType.Content = _byTypeAscending.Value ? "类型升序" : "类型降序";
                 _resourceList.Push(c);
                 UpdateButtonOrder();
             }
@@ -240,7 +240,7 @@ namespace AiLinWpf
             {
                 _byNameAscending = !(_byNameAscending ?? false);
                 var c = _byNameAscending.Value ? ResourceList.CompareTitleAscending : ResourceList.CompareTitleDescending;
-                BtnOrderByName.Content = _byNameAscending.Value ? "按名称升序" : "按名称降序";
+                BtnOrderByName.Content = _byNameAscending.Value ? "名称升序" : "名称降序";
                 _resourceList.Push(c);
                 UpdateButtonOrder();
             }

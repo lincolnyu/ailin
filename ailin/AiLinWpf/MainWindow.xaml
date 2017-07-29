@@ -251,9 +251,9 @@
                 <DockPanel LastChildFill="True">
                     <DockPanel DockPanel.Dock="Top">
                         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Name="OrderButtons">
-                            <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">按类型排序</Button>
-                            <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">按时间排序</Button>
-                            <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">按名称排序</Button>
+                            <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">类型排序</Button>
+                            <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">时间排序</Button>
+                            <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">名称排序</Button>
                             <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" IsChecked="True" 
                                   Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked">
                                 <CheckBox.ToolTip>
@@ -685,7 +685,7 @@
                                     <WrapPanel>
                                         <TextBlock>优酷：</TextBlock>
                                         <TextBlock><Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMzYzMTU2MzI=.html">片源1</Hyperlink></TextBlock>
-                                        <TextBlock Margin="3,0,0,0"><Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTM2MjUzMjU2.html">片源2</Hyperlink></TextBlock>
+                                        <TextBlock Margin="8,0,0,0"><Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTM2MjUzMjU2.html">片源2</Hyperlink></TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
