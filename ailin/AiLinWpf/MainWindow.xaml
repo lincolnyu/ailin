@@ -357,17 +357,34 @@
                         <ListBox.Items>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">叛国者（1980年电影）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" 
+                                                       NavigateUri="https://baike.baidu.com/item/叛国者/3952443#2">
+                                                叛国者（1980年电影）
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">饰演：助手沈虹；导演：张其昌；西安电影制片厂</TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
+                                            <Hyperlink NavigateUri="http://www.1905.com/vod/play/413067.shtml">1905电影网</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
                             <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XOTA5NDI3NTY4.html">优酷</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
+                                        <Hyperlink NavigateUri="http://my.tv.sohu.com/us/284234282/86852819.shtml">搜狐视频</Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">小院（1981年微电影）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">小院（1981年微电影）</TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">饰演：桑桑</TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                             <Hyperlink NavigateUri="http://video.tudou.com/v/XMjEwNDUzNDc2MA==.html">土豆</Hyperlink>
@@ -380,7 +397,10 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">相思豆（1981年电视剧）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">相思豆（1981年电视剧）</TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">饰演：方姐</TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock Style="{StaticResource ResourceKey=UnavailableNotice}" >资源暂无。如有线索烦请<Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手影视资源建议" 
                                                        RequestNavigate="HyperlinkRequestNavigate">告知作者</Hyperlink>。</TextBlock>
@@ -389,7 +409,15 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">梨园传奇（1982年电影）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" 
+                                                       NavigateUri="https://baike.baidu.com/item/%E6%A2%A8%E5%9B%AD%E4%BC%A0%E5%A5%87/4037802?fr=aladdin">
+                                                梨园传奇（1982年电影）
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">饰演：坤旦花想容</TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                             <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMjczMDI3MTc4NA==.html">优酷</Hyperlink>
@@ -402,7 +430,17 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">弯弯的石径（1982年电视剧）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" 
+                                                       NavigateUri="https://baike.baidu.com/item/%E5%BC%AF%E5%BC%AF%E7%9A%84%E7%9F%B3%E5%BE%84/308538">
+                                                弯弯的石径（1982年电视剧）
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">
+                                            饰演：秦小婉；导演：米家山
+                                        </TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                                             优酷：
@@ -427,7 +465,17 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">远离人群的地方（1983年电影）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}"
+                                                NavigateUri="https://baike.baidu.com/item/%E8%BF%9C%E7%A6%BB%E4%BA%BA%E7%BE%A4%E7%9A%84%E5%9C%B0%E6%96%B9">
+                                                远离人群的地方（1983年电影）
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">
+                                            饰演：科学院记者覃泓
+                                        </TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                             <Hyperlink NavigateUri="http://www.1905.com/vod/play/873539.shtml">1905电影网</Hyperlink>
@@ -437,17 +485,39 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">骆驼草（1983年电影）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                           <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}"
+                                                NavigateUri="https://baike.baidu.com/item/%E9%AA%86%E9%A9%BC%E8%8D%89/4089129?fr=aladdin"> 
+                                               骆驼草（1983年电影）
+                                           </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">
+                                            饰演：柳英；导演：景慕逵 赵继烈；八一电影制片厂
+                                        </TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
-                            <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTE4MzM1MjY0.html">1905电影网</Hyperlink>
+                                            <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTE4MzM1MjY0.html">
+                                                1905电影网
+                                            </Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">金房子（1983年电视剧）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}"  
+                                                       NavigateUri="https://baike.baidu.com/item/%E9%AA%86%E9%A9%BC%E8%8D%89/4089129?fr=aladdin">
+                                                金房子（1983年电视剧）
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">
+                                            饰演：喜爱文艺的女青年文静；导演：徐庆东
+                                        </TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                                             优酷：
