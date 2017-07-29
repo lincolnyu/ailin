@@ -108,6 +108,20 @@ namespace AiLinWpf.Actions
             }
         }
 
+        private static TextBlock GetFirstTextBlock(Panel panel)
+        {
+            var c = panel.Children[0];
+            if (c is TextBlock tb)
+            {
+                return tb;
+            }
+            else if (c is Panel p)
+            {
+                return GetFirstTextBlock(p);
+            }
+            return null;
+        }
+
         public void ResyncFromUI()
         {
             Resources.Clear();
@@ -116,20 +130,21 @@ namespace AiLinWpf.Actions
                 var tag = lbi.Tag;
                 var c = lbi.Content;
                 string title = null;
-                if (c is StackPanel sp)
+                if (c is Panel panel)
                 {
-                    var top = sp.Children[0];
-                    if (top is TextBlock tb)
+                    var tb = GetFirstTextBlock(panel);
+                    if (tb == null)
                     {
-                        if (tb.Inlines.FirstInline is Hyperlink hl)
-                        {
-                            var run = hl.Inlines.FirstOrDefault() as Run;
-                            title = run == null ? string.Empty : run.Text;
-                        }
-                        else
-                        {
-                            title = tb.Text;
-                        }
+                        throw new NotSupportedException();
+                    }
+                    if (tb.Inlines.FirstInline is Hyperlink hl)
+                    {
+                        var run = hl.Inlines.FirstOrDefault() as Run;
+                        title = run == null ? string.Empty : run.Text;
+                    }
+                    else
+                    {
+                        title = tb.Text;
                     }
                 }
                 else

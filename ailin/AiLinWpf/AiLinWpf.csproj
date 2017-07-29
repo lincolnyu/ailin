@@ -102,6 +102,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Styles\Coloring.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>

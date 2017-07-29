@@ -12,6 +12,10 @@ using AiLinWpf.Data;
 using AiLinWpf.Actions;
 using WebKit;
 using static AiLinWpf.Helpers.ImageHelper;
+using System.Linq;
+using AiLinWpf.Helpers;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace AiLinWpf
 {
@@ -63,6 +67,11 @@ namespace AiLinWpf
 
         private bool _sorting;
 
+        private bool _suppressSearchBoxTextChangedHandling = false;
+        private string _searchTarget;
+        private List<Tuple<FrameworkElement, FrameworkElement>> _highlightedPairs
+            = new List<Tuple<FrameworkElement, FrameworkElement>>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -73,6 +82,7 @@ namespace AiLinWpf
 
         private void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
+            ShowPlaceholderText();
             LoadImages();
         }
 
@@ -413,6 +423,99 @@ namespace AiLinWpf
         private void FriendlyLinksOnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             FriendlyLinks.IsSelected = true;
+        }
+
+        private void SearchBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            var saved = _suppressSearchBoxTextChangedHandling;
+            _suppressSearchBoxTextChangedHandling = true;
+
+            if (string.IsNullOrWhiteSpace(_searchTarget))
+            {
+                SearchBox.Text = "";
+            }
+
+            _suppressSearchBoxTextChangedHandling = saved;
+        }
+
+        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            ShowPlaceholderText();
+        }
+
+        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_suppressSearchBoxTextChangedHandling)
+            {
+                UpdateSearchTarget(SearchBox.Text);
+            }
+        }
+
+        private void ShowPlaceholderText()
+        {
+            var saved = _suppressSearchBoxTextChangedHandling;
+            _suppressSearchBoxTextChangedHandling = true;
+
+            if (String.IsNullOrWhiteSpace(_searchTarget))
+            {
+                SearchBox.Text = "Search...";
+            }
+
+            _suppressSearchBoxTextChangedHandling = saved;
+        }
+
+        private void BtnClearOnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateSearchTarget("");
+            ShowPlaceholderText();
+        }
+
+        private void BtnSearchOnClick(object sender, RoutedEventArgs e)
+        {
+            SearchAndHighlight();
+        }
+
+        private void SearchBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchAndHighlight();
+            }
+        }
+
+        private void SearchAndHighlight()
+        {
+            var first = true;
+            foreach (var lbi in VideoList.Items.Cast<ListBoxItem>())
+            {
+                if (lbi.Content is Panel p)
+                {
+                    var tbs = p.GetAllTexts().ToList();
+                    var pairs = tbs.Highlight(_searchTarget);
+                    var nonEmpty = false;
+                    foreach (var pair in pairs)
+                    {
+                        nonEmpty = true;
+                        _highlightedPairs.Add(pair);
+                    }
+                    if (nonEmpty && first)
+                    {
+                        VideoList.ScrollIntoView(lbi);
+                        first = true;
+                    }
+                }
+            }
+        }
+
+        private void DeHighlight()
+        {
+            _highlightedPairs.DeHighlight();
+        }
+
+        private void UpdateSearchTarget(string target)
+        {
+            _searchTarget = target;
+            DeHighlight();
         }
     }
 }

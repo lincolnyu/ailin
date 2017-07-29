@@ -33,6 +33,12 @@
                     <Setter Property="FontWeight" Value="SemiBold"/>
                 </Style.Setters>
             </Style>
+            <Style TargetType="TextBlock" x:Key="Description">
+                <Style.Setters>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="VerticalAlignment" Value="Bottom"/>
+                </Style.Setters>
+            </Style>
             <Style TargetType="Hyperlink">
                 <Style.Setters>
                     <EventSetter Event="RequestNavigate" Handler="HyperlinkRequestNavigate"/>
@@ -267,6 +273,25 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
+                        <Grid Margin="8,0,8,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" MaxWidth="200" MinWidth="100"></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" VerticalContentAlignment="Center" Name="SearchBox"
+                                         GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
+                                         TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyDown">
+                                </TextBox>
+                                <Button Grid.Column="1" Click="BtnClearOnClick">X</Button>
+                                <Button Grid.Column="2" Click="BtnSearchOnClick">O</Button>
+                            </Grid>
+                        </Grid>
                     </DockPanel>
                     <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged" HorizontalContentAlignment="Stretch">
                         <ListBox.Resources>
@@ -4411,7 +4436,10 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">重案六组4（2010年电视剧）</TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">重案六组4（2010年电视剧）</TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">饰演：陈雪</TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                                             <Hyperlink NavigateUri="http://www.soku.com/search_video/q_重案六组%20第四部">
@@ -4760,10 +4788,13 @@
                             </ListBoxItem>
                             <ListBoxItem>
                                 <StackPanel>
-                                    <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">
                                         <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}" 
                                                    NavigateUri="http://baike.baidu.com/item/遍地阳光">遍地阳光（2013年电视剧）</Hyperlink>
                                         </TextBlock>
+                                        <TextBlock Style="{StaticResource ResourceKey=Description}">饰演：电力集团总工程师林雅芝</TextBlock>
+                                    </StackPanel>
                                     <WrapPanel>
                                         <TextBlock>
                                             优酷：
