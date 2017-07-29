@@ -1,6 +1,8 @@
 ﻿using AiLinWpf.Styles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -44,6 +46,16 @@ namespace AiLinWpf.Helpers
             }
         }
 
+        public static string GetText(this InlineCollection ic)
+        {
+            var sb = new StringBuilder();
+            foreach (var run in ic.OfType<Run>())
+            {
+                sb.Append(run.Text);
+            }
+            return sb.ToString();
+        }
+
         public static IEnumerable<Tuple<FrameworkElement, FrameworkElement>> 
             Highlight(this ICollection<FrameworkElement> tfes, string text)
         {
@@ -51,7 +63,17 @@ namespace AiLinWpf.Helpers
             {
                 if (tfe is TextBlock tb)
                 {
-                    var s = tb.Text;
+                    string s;
+                    var hl = tb.Inlines.FirstInline as Hyperlink;
+                    if (hl != null)
+                    {
+                        s = hl.Inlines.GetText();
+                    }
+                    else
+                    {
+                        s = tb.Text;
+                    }
+
                     var index = s.IndexOf(text);
                     if (index >= 0)
                     {
@@ -63,19 +85,35 @@ namespace AiLinWpf.Helpers
                             Foreground = tb.Foreground,
                             Background = tb.Background
                         };
+                        InlineCollection inlines;
+                        if (hl != null)
+                        {
+                            var nhl = new Hyperlink()
+                            {
+                                NavigateUri = hl.NavigateUri,
+                                Style = hl.Style
+                            };
+                            ntb.Inlines.Add(nhl);
+                            inlines = nhl.Inlines;
+                        }
+                        else
+                        {
+                            inlines = ntb.Inlines;
+                        }
                         var lastIndex = 0;
                         do
                         {
-                            ntb.Inlines.Add(s.Substring(lastIndex, index - lastIndex));
+                            inlines.Add(s.Substring(lastIndex, index - lastIndex));
                             var run = new Run(s.Substring(index, text.Length))
                             {
                                 Background = Coloring.YellowBrush
                             };
-                            ntb.Inlines.Add(run);
+                            inlines.Add(run);
                             lastIndex = index + text.Length;
-                            index = tb.Text.IndexOf(text, lastIndex);
+                            index = s.IndexOf(text, lastIndex);
                         } while (index >= 0);
-                        ntb.Inlines.Add(s.Substring(lastIndex));
+
+                        inlines.Add(s.Substring(lastIndex));
                         Replace(tb, ntb);
                         System.Diagnostics.Trace.WriteLine($"New text is {ntb.Text}");
                         yield return new Tuple<FrameworkElement, FrameworkElement>(tb, ntb);

@@ -36,43 +36,6 @@ namespace AiLinWpf.Actions
             x == CompareTitleAscending && y == CompareTitleDescending || x == CompareTitleDescending && y == CompareTitleAscending ||
             x == CompareDateAscending && y == CompareDateDescending || x == CompareDateDescending && y == CompareDateAscending;
 
-
-        private int CompareForSortByTypeAscending(Resource x, Resource y)
-        {
-            var c = x.Type.CompareTo(y.Type);
-            if (c != 0) return c;
-            c = x.Date.CompareTo(y.Date);
-            if (c != 0) return c;
-            return string.Compare(x.Title, y.Title, StringComparison.CurrentCulture);
-        }
-
-        private int CompareForSortByTypeDescending(Resource x, Resource y)
-        {
-            var c = -x.Type.CompareTo(y.Type);
-            if (c != 0) return c;
-            c = x.Date.CompareTo(y.Date);
-            if (c != 0) return c;
-            return string.Compare(x.Title, y.Title, StringComparison.CurrentCulture);
-        }
-
-        private int CompareForSortByTitleAscending(Resource x, Resource y)
-        {
-            var c = string.Compare(x.Title, y.Title, StringComparison.CurrentCulture);
-            if (c != 0) return c;
-            c = x.Type.CompareTo(y.Type);
-            if (c != 0) return c;
-            return x.Date.CompareTo(y.Date);
-        }
-
-        private int CompareForSortByTitleDescending(Resource x, Resource y)
-        {
-            var c = -string.Compare(x.Title, y.Title, StringComparison.CurrentCulture);
-            if (c != 0) return c;
-            c = x.Type.CompareTo(y.Type);
-            if (c != 0) return c;
-            return x.Date.CompareTo(y.Date);
-        }
-
         public void Push(Comparison<Resource> c)
         {
             for (var i = 0; i < Comparisons.Count; i++)
@@ -139,8 +102,7 @@ namespace AiLinWpf.Actions
                     }
                     if (tb.Inlines.FirstInline is Hyperlink hl)
                     {
-                        var run = hl.Inlines.FirstOrDefault() as Run;
-                        title = run == null ? string.Empty : run.Text;
+                        title = hl.Inlines.GetText();
                     }
                     else
                     {
