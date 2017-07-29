@@ -23,11 +23,19 @@ namespace AiLinWpf.Data
             LoadedWithQuestion,
             SubmittingQuestion,
             ReplyReceived,
-            RefreshingAfterReply,
             Error
         }
 
-        public States State { get; set; }
+        public enum RefreshReasons
+        {
+            UserRequested,
+            AfterReply,
+            PossiblyExpired
+        }
+
+        public States State { get; private set; }
+
+        public RefreshReasons RefreshReason { get; private set; }
 
         public ErrorCodes Error { get; private set; }
 
@@ -68,6 +76,9 @@ namespace AiLinWpf.Data
 
         public RecordRepository Records;
 
+        private DateTime? _lastRefresh;
+        private TimeSpan _expiry = TimeSpan.FromSeconds(60);
+
         public void Setup(MainWindow window)
         {
             Records = new RecordRepository(VoteId);
@@ -79,7 +90,6 @@ namespace AiLinWpf.Data
             InviteEmail.Click += InviteEmailButtonClick;
             ResultLink.RequestNavigate += window.HyperlinkRequestNavigate;
             State = States.Refreshing;
-
             LoadLast();
         }
 
@@ -101,12 +111,13 @@ namespace AiLinWpf.Data
                 ResultPanel.Visibility = Visibility.Collapsed;
                 VoteButton.Visibility = Visibility.Visible;
                 ChoicesPanel.IsEnabled = true;
-                State = States.RefreshingAfterReply;
+                RefreshReason = RefreshReasons.AfterReply;
             }
             else
             {
-                State = States.Refreshing;
+                RefreshReason = RefreshReasons.UserRequested;
             }
+            State = States.Refreshing;
             await RefreshVoteAsync();
         }
 
@@ -311,11 +322,21 @@ namespace AiLinWpf.Data
 
             RestoreRefresh();
             State = States.Loaded;
+            _lastRefresh = DateTime.UtcNow;
         }
 
         private void DisableRefresh()
         {
-            RefreshButton.Content = "正在刷新……";
+            switch (RefreshReason)
+            {
+                case RefreshReasons.UserRequested:
+                case RefreshReasons.AfterReply:
+                    RefreshButton.Content = "正在刷新……";
+                    break;
+                case RefreshReasons.PossiblyExpired:
+                    RefreshButton.Content = "网页可能已经过期，正在刷新……";
+                    break;
+            }
             VoteButton.IsEnabled = false;
             RefreshButton.IsEnabled = false;
             LinsProfile.IsEnabled = false;
@@ -378,7 +399,7 @@ namespace AiLinWpf.Data
             ResultPanel.Visibility = Visibility.Visible;
         }
 
-        public void ToggleVote()
+        public async void ToggleVote()
         {
             if (VoteExpanded())
             {
@@ -386,7 +407,19 @@ namespace AiLinWpf.Data
             }
             else
             {
+                await RefreshIfNeeded();
                 ExpandVote();
+            }
+        }
+
+        private async Task RefreshIfNeeded()
+        {
+            if (_lastRefresh == null ||
+                DateTime.UtcNow - _lastRefresh >= _expiry)
+            {
+                State = States.Refreshing;
+                RefreshReason = RefreshReasons.PossiblyExpired;
+                await RefreshVoteAsync();
             }
         }
 
