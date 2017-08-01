@@ -2533,13 +2533,76 @@
                                     <TextBlock Style="{StaticResource ResourceKey=VideoTitle}">民族英雄马本斋（2004年电视剧）</TextBlock>
                                     <WrapPanel>
                                         <TextBlock>
-                                            <Hyperlink NavigateUri="http://www.soku.com/search_video/q_民族英雄马本斋">
-                                                优酷
+                                            <Hyperlink NavigateUri="https://v.qq.com/detail/t/t0zah8bhlsidlba.html">
+                                                腾讯
                                             </Hyperlink>
                                         </TextBlock>
                                         <TextBlock>
                                             ：
                                         </TextBlock>
+                                        <TextBlock>
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/h002255iu15.html">1</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/h002255iu15.html">2</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/k0022t65muh.html">3</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/q00226maeay.html">4</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/r00224njqwl.html">5</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/z0022bpdjm6.html">6</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/k002230qylf.html">7</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/j00226etew6.html">8</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/s00227dxpht.html">9</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/e0022jcz6nk.html">10</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/z00227z7gnn.html">11</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/e00224j3bir.html">12</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/r0022f7x83u.html">13</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/p0022roxzd3.html">14</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/n0022edzja2.html">15</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/n0022932s7t.html">16</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/g0022dy3cwy.html">17</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/u0022ltucrm.html">18</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="3,0,0,0">
+                                            <Hyperlink NavigateUri="https://v.qq.com/x/cover/t0zah8bhlsidlba/h0022nb2x3r.html">19</Hyperlink>
+                                        </TextBlock>
+                                        <TextBlock Margin="10,0,0,0">
+                                            <Hyperlink NavigateUri="http://www.soku.com/search_video/q_民族英雄马本斋">
+                                                优酷
+                                            </Hyperlink>
+                                        </TextBlock>
+                                        <!--
                                         <TextBlock>
                                             <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XNTA2NDgzOTI4.html">1</Hyperlink>
                                         </TextBlock>
@@ -2597,6 +2660,7 @@
                                         <TextBlock Margin="3,0,0,0">
                                             <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XNTMwNjMyNDA0.html">19</Hyperlink>
                                         </TextBlock>
+                                        -->
                                     </WrapPanel>
                                 </StackPanel>
                             </ListBoxItem>

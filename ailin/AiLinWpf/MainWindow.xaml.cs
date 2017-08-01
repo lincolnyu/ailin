@@ -11,11 +11,10 @@ using System.Threading.Tasks;
 using AiLinWpf.Data;
 using AiLinWpf.Actions;
 using WebKit;
-using static AiLinWpf.Helpers.ImageHelper;
 using System.Linq;
 using AiLinWpf.Helpers;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using static AiLinWpf.Helpers.ImageHelper;
 
 namespace AiLinWpf
 {
