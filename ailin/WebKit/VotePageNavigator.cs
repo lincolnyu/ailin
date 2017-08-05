@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Redback.Helpers;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -50,7 +51,7 @@ namespace WebKit
             client.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
             client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 
-            var host = _baseUrl.BaseUrlToDomain();
+            var host = _baseUrl.BaseUrlToHost();
             client.Headers.Add(HttpRequestHeader.Host, host);
 
             SetUserAgentIfMobile();
@@ -134,7 +135,7 @@ namespace WebKit
                 {
                     var a = match.Groups[1].Value;
                     var proflink = a.GetAttribute("href");
-                    proflink = url.RelativeToAbsolute(proflink);
+                    proflink = url.GetAbsoluteUrl(proflink);
 
                     var start = match.Index + match.Length;
 
@@ -153,7 +154,7 @@ namespace WebKit
 
                     if (thumbnail != null)
                     {
-                        thumbnail = url.RelativeToAbsolute(thumbnail);
+                        thumbnail = url.GetAbsoluteUrl(thumbnail);
                     }
 
                     var pageId = GetPageId(url);
@@ -322,7 +323,7 @@ namespace WebKit
             {
                 var val = match.Groups[1].Value;
                 val = val.UrlInHtmlToUrl();
-                val = _mainPageUrl.RelativeToAbsolute(val);
+                val = _mainPageUrl.GetAbsoluteUrl(val);
                 val = val.Trim();
                 return val;
             }

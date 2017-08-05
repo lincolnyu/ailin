@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Redback.Helpers;
+using System.Text;
 
 namespace WebKit.Helpers
 {

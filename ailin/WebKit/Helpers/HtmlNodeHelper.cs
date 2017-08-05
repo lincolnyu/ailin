@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace WebKit.Helpers
+namespace Redback.Helpers
 {
     public static class HtmlNodeHelper
     {
