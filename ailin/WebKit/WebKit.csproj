@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\HtmlNodeHelper.cs" />
     <Compile Include="Helpers\TextContentHelper.cs" />
     <Compile Include="Helpers\CommonHelper.cs" />
-    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Helpers\VoteResponseHelper.cs" />
     <Compile Include="MyWebClient.cs">
       <SubType>Component</SubType>
@@ -54,6 +52,12 @@
     <Compile Include="Question.cs" />
     <Compile Include="VotePageNavigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj">
+      <Project>{01b732cb-bf3f-4f3a-b61c-9eff5d8e0322}</Project>
+      <Name>RedbackCoreLite</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
