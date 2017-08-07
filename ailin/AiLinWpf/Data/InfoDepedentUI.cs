@@ -20,10 +20,10 @@ namespace AiLinWpf.Data
         {
             Refreshing,
             Loaded,
-            LoadedWithQuestion,
             SubmittingQuestion,
             ReplyReceived,
-            Error
+            Error,
+            Cancelled
         }
 
         public enum RefreshReasons
@@ -97,14 +97,15 @@ namespace AiLinWpf.Data
 
         private async void TabOnLoaded(object sender, RoutedEventArgs e)
         {
-            await RefreshVoteAsync();
+            await RefreshVoteAsync(true);
         }
 
         private async void RefreshTab(object sender, RoutedEventArgs e)
         {
-            if (State == States.Error)
+            if (State == States.Refreshing)
             {
-                Application.Current.Shutdown();
+                Navigator.CancelRefresh();
+                return;
             }
             if (State == States.ReplyReceived)
             {
@@ -156,7 +157,7 @@ namespace AiLinWpf.Data
             }
         }
 
-        #endregion
+#endregion
 
         private async void RbClick(object sender, RoutedEventArgs e)
             => await RbClickAsync(sender, e);
@@ -168,7 +169,7 @@ namespace AiLinWpf.Data
             State = States.SubmittingQuestion;
             var rb = (RadioButton)sender;
             var c = (Question.Choice)rb.Tag;
-            var s = VotePageNavigator.CreateSubmit(PageInfo, c);
+            var s = CreateSubmit(PageInfo, c);
             byte[] result;
             var resultLinkContainer = (TextBlock)ResultLink.Parent;
             try
@@ -243,14 +244,16 @@ namespace AiLinWpf.Data
             }
         }
 
-        private async Task RefreshVoteAsync()
+        private async Task RefreshVoteAsync(bool mandatory = false)
         {
             DisableRefresh();
             var res = await Navigator.SearchForZhuLinAsync(true);
-            PageInfo = res.Item1;
-            Error = res.Item2;
-            if (PageInfo != null)
+            var page = res.Item1;
+            var error = res.Item2;
+            if (page != null && error == ErrorCodes.Success)
             {
+                PageInfo = page;
+                Error = error;
                 NumVotesText.Text = PageInfo.Votes?.ToString() ?? "无法获取";
                 PopularityText.Text = PageInfo.Popularity?.ToString() ?? "无法获取";
                 RankText.Text = PageInfo.Rank?.ToString() ?? "无法获取";
@@ -281,14 +284,22 @@ namespace AiLinWpf.Data
                     }
                 }
             }
+            else if (!mandatory && PageInfo != null && error == ErrorCodes.Cancelled)
+            {
+                RestoreRefresh();
+                State = States.Loaded;
+                Error = ErrorCodes.Success;
+                return;
+            }
             else
             {
-                State = States.Error;
-                ReportError();
+                PageInfo = page;
+                Error = error;
+                ProcessError();
                 return;
             }
 
-            var mobileNavigator = new VotePageNavigator(VoteId, VotePageNavigator.MobilePageUrlPattern, true);
+            var mobileNavigator = new VotePageNavigator(VoteId, MobilePageUrlPattern, true);
             var resMob = await mobileNavigator.SearchForZhuLinMobileUrlAsync();
             var mp = resMob.Item1;
             if (mp != null)
@@ -327,18 +338,19 @@ namespace AiLinWpf.Data
 
         private void DisableRefresh()
         {
+            RefreshButton.Foreground = Coloring.Black;
             switch (RefreshReason)
             {
                 case RefreshReasons.UserRequested:
                 case RefreshReasons.AfterReply:
-                    RefreshButton.Content = "正在刷新……";
+                    RefreshButton.Content = "正在刷新（按此键取消刷新）……";
                     break;
                 case RefreshReasons.PossiblyExpired:
                     RefreshButton.Content = "网页可能已经过期，正在刷新……";
                     break;
             }
             VoteButton.IsEnabled = false;
-            RefreshButton.IsEnabled = false;
+            RefreshButton.IsEnabled = true;
             LinsProfile.IsEnabled = false;
             LinsPage.IsEnabled = false;
             LinsPageMobile.IsEnabled = false;
@@ -348,10 +360,10 @@ namespace AiLinWpf.Data
             CollapseVote();
         }
 
-        private void RestoreRefresh()
+        private void RestoreRefresh(bool enableVoteButton = true)
         {
             RefreshButton.IsEnabled = true;
-            VoteButton.IsEnabled = true;
+            VoteButton.IsEnabled = enableVoteButton;
             LinsProfile.IsEnabled = true;
             LinsPage.IsEnabled = true;
             LinsPageMobile.IsEnabled = true;
@@ -364,17 +376,30 @@ namespace AiLinWpf.Data
             RefreshButton.Content = "刷新";
         }
 
-        private void ReportError()
+        private void ProcessError()
         {
             RefreshButton.IsEnabled = true;
+            if (Error ==  ErrorCodes.Cancelled)
+            {
+                _lastRefresh = null;
+                State = States.Cancelled;
+                RestoreRefresh();
+                return;
+            }
+            State = States.Error;
             RefreshButton.Foreground = Coloring.RedBrush;
             switch (Error)
             {
                 case ErrorCodes.ParsingError:
-                    RefreshButton.Content = "网络错误，点此关闭后重新打开程序以重试";
+                    RefreshButton.Content = "解析失败，点此重试";
                     break;
                 case ErrorCodes.WebRequestError:
-                    RefreshButton.Content = "解析失败，点此关闭后重新打开程序以重试";
+                    RefreshButton.Content = "网络错误，点此重试";
+                    break;
+                case ErrorCodes.TimeOutError:
+                    RefreshButton.Content = "超时错误，点此重试";
+                    break;
+                case ErrorCodes.Cancelled:
                     break;
                 default:
                     Debug.Assert(false, "未识别错误");
@@ -408,18 +433,24 @@ namespace AiLinWpf.Data
             else
             {
                 await RefreshIfNeeded();
-                ExpandVote();
+                if (State == States.Loaded)
+                {
+                    ExpandVote();
+                }
+                else
+                {
+                    CollapseVote();
+                }
             }
         }
 
         private async Task RefreshIfNeeded()
         {
-            if (_lastRefresh == null ||
-                DateTime.UtcNow - _lastRefresh >= _expiry)
+            if (_lastRefresh == null || DateTime.UtcNow - _lastRefresh >= _expiry)
             {
                 State = States.Refreshing;
                 RefreshReason = RefreshReasons.PossiblyExpired;
-                await RefreshVoteAsync();
+                await RefreshVoteAsync(true);
             }
         }
 

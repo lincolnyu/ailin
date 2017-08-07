@@ -8,6 +8,8 @@
         Title="爱琳投票助手" Height="558.375" Width="567"
         Loaded="WindowOnLoaded">
     <Grid>
+        
+        
         <Grid.Resources>
             <Style TargetType="RichTextBox">
                 <Style.Setters>
