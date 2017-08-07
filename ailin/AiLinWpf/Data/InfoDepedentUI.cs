@@ -1,4 +1,6 @@
-﻿using AiLinWpf.Styles;
+﻿//#define TEST_INVITE
+
+using AiLinWpf.Styles;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -33,6 +35,24 @@ namespace AiLinWpf.Data
             PossiblyExpired
         }
 
+        private DateTime? _lastRefresh;
+        private readonly TimeSpan _expiry
+            = TimeSpan.FromSeconds(60);
+
+        private string _inviteMessage;
+        private DateTime _lastInviteMessageRefresh;
+        private readonly TimeSpan _inviteMessageExpiry
+#if TEST_INVITE
+            = TimeSpan.FromSeconds(1);
+        private Canceller _inviteCanceller = new Canceller();
+        private bool _notFirst;
+#else
+            = TimeSpan.FromMinutes(15);
+#endif
+
+        private AsyncLock MobileNavLock = new AsyncLock();
+        public VotePageNavigator MobileNavigator { get; private set; }
+
         public States State { get; private set; }
 
         public RefreshReasons RefreshReason { get; private set; }
@@ -40,7 +60,7 @@ namespace AiLinWpf.Data
         public ErrorCodes Error { get; private set; }
 
         public int VoteId;
-        public VotePageNavigator Navigator;
+        public VotePageNavigator Navigator { get; private set; }
         public PageInfo PageInfo;
 
         public TabItem Tab;
@@ -70,17 +90,15 @@ namespace AiLinWpf.Data
         public Run ResultText;
         public Hyperlink ResultLink;
 
-        public string InviteMessage;
-
         public MainWindow MainWindow;
 
         public RecordRepository Records;
 
-        private DateTime? _lastRefresh;
-        private TimeSpan _expiry = TimeSpan.FromSeconds(60);
-
         public void Setup(MainWindow window)
         {
+            Navigator = new VotePageNavigator(VoteId);
+            MobileNavigator = new VotePageNavigator(VoteId, MobilePageUrlPattern, true);
+
             Records = new RecordRepository(VoteId);
             MainWindow = window;
             Tab.Loaded += TabOnLoaded;
@@ -93,11 +111,19 @@ namespace AiLinWpf.Data
             LoadLast();
         }
 
-        #region Event handlers
+#region Event handlers
 
         private async void TabOnLoaded(object sender, RoutedEventArgs e)
         {
             await RefreshVoteAsync(true);
+        }
+        
+        private void CancelInvite()
+        {
+            MobileNavigator.CancelRefresh();
+#if TEST_INVITE
+            _inviteCanceller.Cancel();
+#endif
         }
 
         private async void RefreshTab(object sender, RoutedEventArgs e)
@@ -105,6 +131,7 @@ namespace AiLinWpf.Data
             if (State == States.Refreshing)
             {
                 Navigator.CancelRefresh();
+                CancelInvite();
                 return;
             }
             if (State == States.ReplyReceived)
@@ -127,37 +154,82 @@ namespace AiLinWpf.Data
             ToggleVote();
         }
 
-        private void InviteButtonClick(object sender, RoutedEventArgs e)
+        private async void InviteButtonClick(object sender, RoutedEventArgs e)
         {
-            if (InviteMessage != null)
+            const string cancelStr = "取消";
+            if ((string)Invite.Content != cancelStr)
             {
-                Clipboard.SetText(InviteMessage);
-                MessageBox.Show(InviteMessage, "以下内容已经复制到剪贴板");
+                var oldContent = Invite.Content;
+                var oldWidth = Invite.ActualWidth;
+                Invite.Content = cancelStr;
+                Invite.Width = oldWidth;
+                var invite = await GetInviteMessageAsync();
+                Invite.Content = oldContent;
+                if (invite != null)
+                {
+                    Clipboard.SetText(invite);
+                    MessageBox.Show(invite, "以下内容已经复制到剪贴板");
+                }
+                else
+                {
+                    MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                }
             }
             else
             {
-                MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                CancelInvite();
             }
         }
 
-        private void InviteEmailButtonClick(object sender, RoutedEventArgs e)
+        private async void InviteEmailButtonClick(object sender, RoutedEventArgs e)
         {
-            if (InviteMessage != null)
+            const string cancelStr = "取消";
+            if ((string)InviteEmail.Content != cancelStr)
             {
-                var body = InviteMessage.Replace("\n", "%0A");
-                body = body.Replace("\r", "");
-                body = body.Replace("?", "%3F");
-                body = body.Replace("&", "%26");
-                var mailto = $"mailto:?subject=亲，帮我个忙&body={body}";
-                Process.Start(new ProcessStartInfo(mailto));
+                var oldContent = InviteEmail.Content;
+                var oldWidth = InviteEmail.ActualWidth;
+                InviteEmail.Content = cancelStr;
+                InviteEmail.Width = oldWidth;
+                var invite = await GetInviteMessageAsync();
+                InviteEmail.Content = oldContent;
+                if (invite != null)
+                {
+                    var body = invite.Replace("\n", "%0A");
+                    body = body.Replace("\r", "");
+                    body = body.Replace("?", "%3F");
+                    body = body.Replace("&", "%26");
+                    var mailto = $"mailto:?subject=亲，帮我个忙&body={body}";
+                    Process.Start(new ProcessStartInfo(mailto));
+                }
+                else
+                {
+                    MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                }
             }
             else
             {
-                MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                CancelInvite();
             }
         }
 
 #endregion
+
+        public async Task<string> GetInviteMessageAsync()
+        {
+            using (await MobileNavLock.Wait())
+            {
+                if (_inviteMessage == null || DateTime.UtcNow - _lastInviteMessageRefresh >= _inviteMessageExpiry)
+                {
+                    _inviteMessage = await RetrieveInvite_unsafe();
+
+                    if (_inviteMessage != null)
+                    {
+                        _lastInviteMessageRefresh = DateTime.UtcNow;
+                    }
+                }
+                return _inviteMessage;
+            }
+        }
 
         private async void RbClick(object sender, RoutedEventArgs e)
             => await RbClickAsync(sender, e);
@@ -299,37 +371,7 @@ namespace AiLinWpf.Data
                 return;
             }
 
-            var mobileNavigator = new VotePageNavigator(VoteId, MobilePageUrlPattern, true);
-            var resMob = await mobileNavigator.SearchForZhuLinMobileUrlAsync();
-            var mp = resMob.Item1;
-            if (mp != null)
-            {
-                LinsPageMobile.NavigateUri = new Uri(mp);
-            }
-
-            if (mp != null || PageInfo.PageUrl != null)
-            {
-                var sb = new StringBuilder();
-                sb.Append("亲，请为我的偶像朱琳老师投上您宝贵的一票");
-                if (PageInfo.Rank != null)
-                {
-                    sb.Append($"，她现在在{PageInfo.Rank}位");
-                }
-                sb.AppendLine("。多谢了先！");
-                if (mp != null)
-                {
-                    sb.AppendLine($"手机网址： {mp}");
-                }
-                if (PageInfo.PageUrl != null)
-                {
-                    sb.AppendLine($"普通网址： {PageInfo.PageUrl}");
-                }
-                InviteMessage = sb.ToString();
-            }
-            else
-            {
-                InviteMessage = null;
-            }
+            await GetInviteMessageAsync();
 
             RestoreRefresh();
             State = States.Loaded;
@@ -356,7 +398,6 @@ namespace AiLinWpf.Data
             LinsPageMobile.IsEnabled = false;
             Invite.IsEnabled = false;
             InviteEmail.IsEnabled = false;
-            InviteMessage = "";
             CollapseVote();
         }
 
@@ -367,11 +408,8 @@ namespace AiLinWpf.Data
             LinsProfile.IsEnabled = true;
             LinsPage.IsEnabled = true;
             LinsPageMobile.IsEnabled = true;
-            if (InviteMessage != null)
-            {
-                Invite.IsEnabled = true;
-                InviteEmail.IsEnabled = true;
-            }
+            Invite.IsEnabled = true;
+            InviteEmail.IsEnabled = true;
             CollapseVote();
             RefreshButton.Content = "刷新";
         }
@@ -452,6 +490,54 @@ namespace AiLinWpf.Data
                 RefreshReason = RefreshReasons.PossiblyExpired;
                 await RefreshVoteAsync(true);
             }
+        }
+
+        private async Task<string> RetrieveInvite_unsafe()
+        {
+            var resMob = await MobileNavigator.SearchForZhuLinMobileUrlAsync();
+            var mp = resMob.Item1;
+            if (mp != null)
+            {
+                LinsPageMobile.NavigateUri = new Uri(mp);
+            }
+
+#if TEST_INVITE
+            try
+            {
+                if (_notFirst)
+                {
+                    await Task.Delay(10000, _inviteCanceller.Token);
+                }
+                else
+                {
+                    _notFirst = true;
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                return null;
+            }
+#endif
+            if (mp != null || PageInfo.PageUrl != null)
+            {
+                var sb = new StringBuilder();
+                sb.Append("亲，请为我的偶像朱琳老师投上您宝贵的一票");
+                if (PageInfo.Rank != null)
+                {
+                    sb.Append($"，她现在在{PageInfo.Rank}位");
+                }
+                sb.AppendLine("。多谢了先！");
+                if (mp != null)
+                {
+                    sb.AppendLine($"手机网址： {mp}");
+                }
+                if (PageInfo.PageUrl != null)
+                {
+                    sb.AppendLine($"普通网址： {PageInfo.PageUrl}");
+                }
+                return  sb.ToString();
+            }
+            return null;
         }
 
         private bool VoteExpanded()

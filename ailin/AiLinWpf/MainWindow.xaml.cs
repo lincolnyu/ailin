@@ -134,7 +134,6 @@ namespace AiLinWpf
             _infoDepUIList.Add(new InfoDependentUI
             {
                 VoteId = Vote1,
-                Navigator = new VotePageNavigator(Vote1),
 
                 Tab = Tab1,
 
@@ -167,7 +166,6 @@ namespace AiLinWpf
             _infoDepUIList.Add(new InfoDependentUI
             {
                 VoteId = Vote2,
-                Navigator = new VotePageNavigator(Vote2),
 
                 Tab = Tab2,
 

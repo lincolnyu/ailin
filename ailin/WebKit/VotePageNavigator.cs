@@ -41,7 +41,7 @@ namespace WebKit
         private bool _cancelled;
         private bool _downloading;
 #if SIMULATE_TIMEOUT
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private Canceller _timeoutCanceller = new Canceller();
 #endif
 
         public VotePageNavigator(string mainPageUrl, bool isMobile = false)
@@ -128,8 +128,7 @@ namespace WebKit
                 }
             }
 #if SIMULATE_TIMEOUT
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _timeoutCanceller.Cancel();
 #endif
         }
 
@@ -176,7 +175,7 @@ namespace WebKit
 #if SIMULATE_TIMEOUT
             try
             {
-                await Task.Delay(3000, _cancellationTokenSource.Token);
+                await Task.Delay(3000, _timeoutCanceller.Token);
                 return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.TimeOutError);
             }
             catch (TaskCanceledException)
