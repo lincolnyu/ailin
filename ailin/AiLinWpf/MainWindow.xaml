@@ -280,11 +280,12 @@
                         <Grid Margin="10,0,10,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5*" MaxWidth="200" MinWidth="100"></ColumnDefinition>
-                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" Height="30">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
+                                    <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
@@ -306,6 +307,7 @@
                                         Content="{StaticResource ResourceKey=SearchIcon}">
                                 </Button>
                             </Grid>
+                            <TextBlock Name="MatchCount" Grid.Column="1" Style="{StaticResource Description}"></TextBlock>
                         </Grid>
                     </DockPanel>
                     <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged" HorizontalContentAlignment="Stretch">

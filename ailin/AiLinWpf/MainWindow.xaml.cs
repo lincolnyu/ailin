@@ -10,7 +10,6 @@ using System.Windows.Threading;
 using System.Threading.Tasks;
 using AiLinWpf.Data;
 using AiLinWpf.Actions;
-using WebKit;
 using System.Linq;
 using AiLinWpf.Helpers;
 using System.Windows.Input;
@@ -457,7 +456,7 @@ namespace AiLinWpf
 
             if (String.IsNullOrWhiteSpace(_searchTarget))
             {
-                SearchBox.Text = "Search...";
+                SearchBox.Text = "搜索...";
             }
 
             _suppressSearchBoxTextChangedHandling = saved;
@@ -517,6 +516,7 @@ namespace AiLinWpf
             }
             var first = true;
             var search = _searchTarget.Trim();
+            var count = 0;
             foreach (var lbi in VideoList.Items.Cast<ListBoxItem>())
             {
                 if (lbi.Content is Panel p)
@@ -539,8 +539,17 @@ namespace AiLinWpf
                             lbi.IsSelected = true;
                             first = false;
                         }
+                        count++;
                     }
                 }
+            }
+            if (count > 0)
+            {
+                MatchCount.Text = $"找到{count}条记录";
+            }
+            else
+            {
+                MatchCount.Text = $"没有找到匹配项";
             }
         }
 
@@ -550,6 +559,7 @@ namespace AiLinWpf
             _highlightedPairs.Clear();
             _highlightedItems.Clear();
             _currentFocused = null;
+            MatchCount.Text = "";
         }
 
         private void UpdateSearchTarget(string target)
