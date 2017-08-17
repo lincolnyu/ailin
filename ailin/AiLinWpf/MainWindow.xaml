@@ -8,8 +8,6 @@
         Title="爱琳投票助手" Height="558.375" Width="567"
         Loaded="WindowOnLoaded">
     <Grid>
-        
-        
         <Grid.Resources>
             <Style TargetType="RichTextBox">
                 <Style.Setters>
@@ -503,7 +501,7 @@
                                     <WrapPanel>
                                         <TextBlock>
                                             <Hyperlink NavigateUri="http://v.youku.com/v_show/id_XMTE4MzM1MjY0.html">
-                                                1905电影网
+                                                优酷
                                             </Hyperlink>
                                         </TextBlock>
                                     </WrapPanel>
@@ -5085,39 +5083,40 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="20"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel>
-                        <StackPanel.Background>
-                            <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" 
+                    <Grid.Background>
+                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" 
                                     Opacity="0.5" AlignmentX="Right"
                                     AlignmentY="Bottom"
                                     Stretch="Uniform"></ImageBrush>
-                        </StackPanel.Background>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="http://www.zhulin.net/" 
-                                       RequestNavigate="HyperlinkRequestNavigate"
-                                       TextDecorations="None">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Name="LZhMBLogo" Width="120" 
-                                           MaxHeight="120" Stretch="None"/>
-                                    <TextBlock VerticalAlignment="Bottom">
-                                        琳中漫步-朱琳影迷会
-                                    </TextBlock>
-                                </StackPanel>
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="http://tieba.baidu.com/f?kw=%E6%9C%B1%E7%90%B3" 
-                                       RequestNavigate="HyperlinkRequestNavigate"
-                                       TextDecorations="None">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Name="TiebaLogo" Width="120" MaxHeight="120"/>
-                                    <TextBlock VerticalAlignment="Bottom">
-                                        百度朱琳吧
-                                    </TextBlock>
-                                </StackPanel>
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
+                    </Grid.Background>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock>
+                                <Hyperlink NavigateUri="http://www.zhulin.net/" 
+                                           RequestNavigate="HyperlinkRequestNavigate"
+                                           TextDecorations="None">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="LZhMBLogo" Width="120" 
+                                               MaxHeight="120" Stretch="None"/>
+                                        <TextBlock VerticalAlignment="Bottom">
+                                            琳中漫步-朱琳影迷会
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock>
+                                <Hyperlink NavigateUri="http://tieba.baidu.com/f?kw=%E6%9C%B1%E7%90%B3" 
+                                           RequestNavigate="HyperlinkRequestNavigate"
+                                           TextDecorations="None">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="TiebaLogo" Width="120" MaxHeight="120"/>
+                                        <TextBlock VerticalAlignment="Bottom">
+                                            百度朱琳吧
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock>
                             <Hyperlink NavigateUri="http://weibo.com/zhulinfanclub" 
                                        RequestNavigate="HyperlinkRequestNavigate"
                                        TextDecorations="None">
@@ -5129,21 +5128,35 @@
                                     </TextBlock>
                                 </StackPanel>
                             </Hyperlink>
-                        </TextBlock>
-                        <TextBlock>
-                            <Hyperlink NavigateUri=" http://i.youku.com/i/UNTk4MzU2NDQ" 
-                                       RequestNavigate="HyperlinkRequestNavigate"
-                                       TextDecorations="None">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Name="LoveChinaLogo"
-                                           Width="120" MaxHeight="120"/>                                    
-                                    <TextBlock VerticalAlignment="Bottom">
-                                        lovechina66（优酷账号）视频汇总
-                                    </TextBlock>
-                                </StackPanel>
-                            </Hyperlink>
-                        </TextBlock>
-                    </StackPanel>
+                            </TextBlock>
+                                <TextBlock>
+                                <Hyperlink NavigateUri=" http://i.youku.com/i/UNTk4MzU2NDQ" 
+                                           RequestNavigate="HyperlinkRequestNavigate"
+                                           TextDecorations="None">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="LoveChinaLogo"
+                                               Width="120" MaxHeight="120"/>                                    
+                                        <TextBlock VerticalAlignment="Bottom">
+                                            lovechina66（优酷账号）视频汇总
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock>
+                                <Hyperlink NavigateUri=" http://www.zhulin.net/html/bbs/printpage.asp?boardid=5&amp;id=485" 
+                                           RequestNavigate="HyperlinkRequestNavigate"
+                                           TextDecorations="None">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="CollectionLogo"
+                                               Width="120" MaxHeight="120"/>                                    
+                                        <TextBlock VerticalAlignment="Bottom">
+                                            琳中漫步-超长荟萃
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
                     <DockPanel Grid.Row="1" >
                         <TextBlock DockPanel.Dock="Left" FontSize="15">
                             <Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手求助与反馈" 

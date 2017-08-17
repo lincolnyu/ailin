@@ -112,6 +112,10 @@ namespace AiLinWpf
                 {
                     const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
                     await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 1, 5000);
+                },
+                async ()=>
+                {
+                    await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback, 1, 5000);
                 }
             };
 
