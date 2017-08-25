@@ -571,5 +571,13 @@ namespace AiLinWpf
             _searchTarget = target;
             DeHighlight();
         }
+
+        private void MainKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                SearchBox.Focus();
+            }
+        }
     }
 }
