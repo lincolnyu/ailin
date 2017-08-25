@@ -5150,7 +5150,7 @@
                                         <Image Name="CollectionLogo"
                                                Width="120" MaxHeight="120"/>                                    
                                         <TextBlock VerticalAlignment="Bottom">
-                                            琳中漫步-超长荟萃
+                                            琳中漫步-杂志里的朱朱-超长荟萃-绝对精品
                                         </TextBlock>
                                     </StackPanel>
                                 </Hyperlink>
