@@ -51,6 +51,10 @@
       <Project>{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}</Project>
       <Name>RedbackCoreLite</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AiLinLib\AiLinLib.csproj">
+      <Project>{99d20b9e-18c5-42b8-a82b-f1dcdfdbdf76}</Project>
+      <Name>AiLinLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebKit\WebKit.csproj">
       <Project>{b2eb9446-88b7-4506-bbb4-d0eb9375a320}</Project>
       <Name>WebKit</Name>

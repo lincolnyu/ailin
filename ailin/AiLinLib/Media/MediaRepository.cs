@@ -3,7 +3,7 @@ using JsonParser;
 using JsonParser.JsonStructures;
 using System;
 
-namespace AiLinWpf.Sources
+namespace AiLinLib.Media
 {
     public class MediaRepository
     {
@@ -112,7 +112,7 @@ namespace AiLinWpf.Sources
                     mr.MediaList.Add(mi);
                 }
             }
-            mr.MediaList.Sort();
+            mr.MediaList.Sort(MediaIdComparer.Instance);
             return mr;
         }
 

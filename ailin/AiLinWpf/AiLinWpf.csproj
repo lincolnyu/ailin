@@ -104,9 +104,7 @@
   <ItemGroup>
     <Compile Include="Actions\MediaInfoFiller.cs" />
     <Compile Include="Actions\MediaUiSyncer.cs" />
-    <Compile Include="Sources\MediaInfo.cs" />
     <Compile Include="Sources\MediaRepoManager.cs" />
-    <Compile Include="Sources\MediaRepository.cs" />
     <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Styles\Coloring.cs" />
     <Page Include="App.xaml">
@@ -163,9 +161,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\jsonparser\JsonParser\JsonParser\JsonParser_dn45.csproj">
-      <Project>{bc9c47db-a6c2-424e-99b1-ec9cc93e4701}</Project>
-      <Name>JsonParser_dn45</Name>
+    <ProjectReference Include="..\AiLinLib\AiLinLib.csproj">
+      <Project>{99d20b9e-18c5-42b8-a82b-f1dcdfdbdf76}</Project>
+      <Name>AiLinLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebKit\WebKit.csproj">
       <Project>{b2eb9446-88b7-4506-bbb4-d0eb9375a320}</Project>

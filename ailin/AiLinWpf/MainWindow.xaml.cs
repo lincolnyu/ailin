@@ -88,7 +88,7 @@ namespace AiLinWpf
         {
             ShowPlaceholderText();
             await LoadImages();
-            await RefreshAndMergeMediaList();
+            //await RefreshAndMergeMediaList();
         }
 
         private delegate Task DownloadTask();

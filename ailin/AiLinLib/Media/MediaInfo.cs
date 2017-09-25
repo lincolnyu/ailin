@@ -1,4 +1,4 @@
-﻿namespace AiLinWpf.Sources
+﻿namespace AiLinLib.Media
 {
     public class MediaInfo
     {

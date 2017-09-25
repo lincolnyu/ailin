@@ -1,4 +1,5 @@
-﻿using AiLinWpf.Sources;
+﻿using AiLinLib.Media;
+using AiLinWpf.Sources;
 using AiLinWpf.Styles;
 using System;
 using System.Windows.Controls;
