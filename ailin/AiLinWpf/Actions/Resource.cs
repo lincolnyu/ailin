@@ -1,11 +1,11 @@
-﻿using AiLinWpf.Styles;
+﻿using AiLinWpf.Sources;
+using AiLinWpf.Styles;
 using System;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace AiLinWpf.Actions
 {
-    public class Resource
+    public class Resource : MediaInfo
     {
         public enum Types
         {
@@ -20,7 +20,6 @@ namespace AiLinWpf.Actions
 
         public DateTime Date { get; set; }
         public Types Type { get; set; }
-        public string Title { get; set; }
 
         public ListBoxItem UI { get; set; }
 

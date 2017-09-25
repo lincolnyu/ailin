@@ -12,7 +12,7 @@ namespace AiLinWpf.Data
         public RecordRepository(int id)
         {
             VoteId = id;
-            FileName = $"records_{id}txt";
+            FileName = $"records_{id}.txt";
         }
 
         public void Save()

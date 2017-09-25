@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace AiLinWpf.Actions
 {
@@ -71,118 +69,26 @@ namespace AiLinWpf.Actions
             }
         }
 
-        private static TextBlock GetFirstTextBlock(Panel panel)
-        {
-            var c = panel.Children[0];
-            if (c is TextBlock tb)
-            {
-                return tb;
-            }
-            else if (c is Panel p)
-            {
-                return GetFirstTextBlock(p);
-            }
-            return null;
-        }
-
         public void ResyncFromUI()
         {
             Resources.Clear();
             foreach (var lbi in VideoList.Items.Cast<ListBoxItem>())
             {
-                var tag = lbi.Tag;
-                var c = lbi.Content;
-                string title = null;
-                if (c is Panel panel)
-                {
-                    var tb = GetFirstTextBlock(panel);
-                    if (tb == null)
-                    {
-                        throw new NotSupportedException();
-                    }
-                    if (tb.Inlines.FirstInline is Hyperlink hl)
-                    {
-                        title = hl.Inlines.GetText();
-                    }
-                    else
-                    {
-                        title = tb.Text;
-                    }
-                }
-                else
-                {
-                    throw new NotSupportedException();
-                }
-                var r = new Resource
-                {
-                    Title = title,
-                    UI = lbi
-                };
-                TryDeduceFromType(title, r);
-                TryParseTag(tag, r);
-                r.ColorAsPerType();
+                var sync = new MediaUiSyncer(lbi, null);
+                sync.Pull();
+                var r = sync.Resource;
                 Resources.Add(r);
             }
         }
 
-        private void TryDeduceFromType(string title, Resource r)
+        public void InjectToUI()
         {
-            if (title.Contains("电影）"))
+            foreach (var r in Resources)
             {
-                r.Type = Resource.Types.Movie;
+                var lbi = r.UI;
+                var mus = new MediaUiSyncer(lbi, r);
+                mus.Push();
             }
-            else if (title.Contains("电视剧）"))
-            {
-                r.Type = Resource.Types.Television;
-            }
-            else
-            {
-                r.Type = Resource.Types.Uncategorized;
-            }
-
-            ExtractDate(title, "（([0-9]+)年", null, r);
-        }
-
-        private void TryParseTag(object tag, Resource r)
-        {
-            if (tag is string s)
-            {
-                var split = s.Split(';');
-                var sdate = split[0];
-                ExtractDate(sdate, "([0-9]+)年", "([0-9]+)月", r);
-            }
-        }
-
-        private void ExtractDate(string s, string patternYear, string patternMonth, Resource r)
-        {
-            var rexYear = new Regex(patternYear);
-            var mYear = rexYear.Match(s);
-            if (mYear.Success)
-            {
-                var ystr = mYear.Groups[1].Value;
-                if (int.TryParse(ystr, out int year))
-                {
-                    var dateSet = false;
-                    if (patternMonth != null)
-                    {
-                        var rexMonth = new Regex(patternMonth);
-                        var mMonth = rexMonth.Match(s);
-                        if (mMonth.Success)
-                        {
-                            var mstr = mMonth.Groups[1].Value;
-                            if (int.TryParse(mstr, out int month) && month > 1 && month <= 12)
-                            {
-                                r.Date = new DateTime(year, month, 1);
-                                dateSet = true;
-                            }
-                        }
-                    }
-                    if (!dateSet)
-                    {
-                        r.Date = new DateTime(year, 1, 1);
-                    }
-                }
-            }
-        }
+        }        
     }
 }

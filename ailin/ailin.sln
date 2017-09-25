@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKit", "WebKit\WebKit.csproj", "{B2EB9446-88B7-4506-BBB4-D0EB9375A320}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinTests", "AiLinTests\AiLinTests.csproj", "{170273A2-36B8-479F-AF22-76215AA45557}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedbackCoreLite", "..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj", "{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonParser_dn45", "..\..\jsonparser\JsonParser\JsonParser\JsonParser_dn45.csproj", "{BC9C47DB-A6C2-424E-99B1-EC9CC93E4701}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,8 +41,15 @@ Global
 		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9C47DB-A6C2-424E-99B1-EC9CC93E4701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9C47DB-A6C2-424E-99B1-EC9CC93E4701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9C47DB-A6C2-424E-99B1-EC9CC93E4701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9C47DB-A6C2-424E-99B1-EC9CC93E4701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED292338-703A-4057-B3B1-8F77BA32021A}
 	EndGlobalSection
 EndGlobal

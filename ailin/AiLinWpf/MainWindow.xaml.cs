@@ -14,6 +14,7 @@ using System.Linq;
 using AiLinWpf.Helpers;
 using System.Windows.Input;
 using static AiLinWpf.Helpers.ImageHelper;
+using AiLinWpf.Sources;
 
 namespace AiLinWpf
 {
@@ -72,6 +73,9 @@ namespace AiLinWpf
         private List<ListBoxItem> _highlightedItems = new List<ListBoxItem>();
         private int? _currentFocused;
 
+        public const string MediaListUrl = "http://localhost:80/exetel/apps/ailin/media.json";
+        public const string MediaListFileName = "media.json";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -80,20 +84,31 @@ namespace AiLinWpf
             _resourceList = new ResourceList(this);
         }
 
-        private void WindowOnLoaded(object sender, RoutedEventArgs e)
+        private async void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
             ShowPlaceholderText();
-            LoadImages();
+            await LoadImages();
+            await RefreshAndMergeMediaList();
         }
 
-        private delegate void DownloadTask();
+        private delegate Task DownloadTask();
 
-        private void LoadImages()
+        private async Task RefreshAndMergeMediaList()
+        {
+            var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
+            await mediaRepoManager.Initialize();
+            await mediaRepoManager.Refresh();
+            var merger = new MediaInfoFiller(_resourceList, mediaRepoManager.Current);
+            merger.Fill();
+            _resourceList.InjectToUI();
+        }
+
+        private async Task LoadImages()
         {
             const string tiebaFallback = "pack://application:,,,/Images/tieba-fallback.png";
             const string generalFallback = "pack://application:,,,/Images/fallback.gif";
 
-            DownloadTask[] tasks = {
+            DownloadTask[] downloads = {
                 async () =>
                 {
                     var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 1);
@@ -119,10 +134,8 @@ namespace AiLinWpf
                 }
             };
 
-            foreach (var task in tasks)
-            {
-                task();
-            }
+            var tasks = downloads.Select(dl => dl()).ToArray();
+            await Task.WhenAll(tasks);  
         }
 
         private void SetTitle()
