@@ -1,5 +1,5 @@
 {
-"version" : "1.0",
+  "version" : "1.0",
   "mediaList": [
     {
       "id": "EShNHZXH",
@@ -47,7 +47,7 @@
       "sources": [
         {
           "name": "优酷",
-          "sources": [
+          "playlist": [
             { "片源1": "http://v.youku.com/v_show/id_XMzYzMTU2MzI=.html" },
             { "片源2": "http://v.youku.com/v_show/id_XMTM2MjUzMjU2.html" }
           ]

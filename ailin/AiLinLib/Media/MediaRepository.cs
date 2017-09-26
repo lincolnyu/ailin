@@ -68,51 +68,13 @@ namespace AiLinLib.Media
             {
                 if (item is JsonPairs mediaInfo)
                 {
-                    if (!mediaInfo.TryGetValue("id", out string id))
+                    var mi = MediaInfo.TryParse(mediaInfo);
+                    if (mi != null)
                     {
-                        continue;
+                        mr.MediaList.Add(mi);
                     }
-                    var mi = new MediaInfo { Id = id };
-                    if (mediaInfo.TryGetValue("title", out string title))
-                    {
-                        mi.Title = title;
-                    }
-                    if (mediaInfo.TryGetValue("category", out string category))
-                    {
-                        mi.Category = category;
-                    }
-                    if (mediaInfo.TryGetValue("role", out string role))
-                    {
-                        mi.Role = role;
-                    }
-                    if (mediaInfo.TryGetValue("director", out string director))
-                    {
-                        mi.Director = director;
-                    }
-                    if (mediaInfo.TryGetValue("producer", out string producer))
-                    {
-                        mi.Producer = producer;
-                    }
-                    if (mediaInfo.TryGetValue("playwright", out string playwright))
-                    {
-                        mi.Playwright = playwright;
-                    }
-                    if (mediaInfo.TryGetValue("adaptedFrom", out string adaptedFrom))
-                    {
-                        mi.AdaptedFrom = adaptedFrom;
-                    }
-                    if (mediaInfo.TryGetValue("remarks", out string remarks))
-                    {
-                        mi.Remarks = remarks;
-                    }
-                    if (mediaInfo.TryGetValue("link", out string link))
-                    {
-                        mi.ExternalLink = link;
-                    }
-                    mr.MediaList.Add(mi);
                 }
             }
-            mr.MediaList.Sort(MediaIdComparer.Instance);
             return mr;
         }
 
