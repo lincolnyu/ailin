@@ -7,11 +7,31 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace AiLinWpf.Helpers
 {
     public static class UiHelper
     {
+        public static Panel GetFirstPanelFromDatabound(this DependencyObject element)
+        {
+            var childCount = VisualTreeHelper.GetChildrenCount(element);
+            for (var i = 0; i < childCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(element, i);
+                if (child is Panel p)
+                {
+                    return p;
+                }
+                var p2 = child.GetFirstPanelFromDatabound();
+                if (p2 != null)
+                {
+                    return p2;
+                }
+            }
+            return null;
+        }
+
         public static IEnumerable<FrameworkElement> GetAllTexts(this Panel panel)
         {
             foreach (var c in panel.Children)
@@ -83,7 +103,9 @@ namespace AiLinWpf.Helpers
                             FontWeight = tb.FontWeight,
                             FontStyle = tb.FontStyle,
                             Foreground = tb.Foreground,
-                            Background = tb.Background
+                            Background = tb.Background,
+                            VerticalAlignment = tb.VerticalAlignment,
+                            Margin = tb.Margin
                         };
                         InlineCollection inlines;
                         if (hl != null)

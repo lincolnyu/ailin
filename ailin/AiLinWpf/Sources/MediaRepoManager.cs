@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AiLinWpf.Sources
@@ -48,7 +49,10 @@ namespace AiLinWpf.Sources
         {
             try
             {
-                var client = new WebClient();
+                var client = new WebClient
+                {
+                    Encoding = Encoding.UTF8
+                };
                 var json = await client.DownloadStringTaskAsync(SourceUrl);
                 return MediaRepository.TryParse(json);
             }
@@ -65,7 +69,7 @@ namespace AiLinWpf.Sources
                 using (var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null))
                 {
                     var fs = isoStore.OpenFile(TempFileName, FileMode.Open);
-                    using (var sr = new StreamReader(fs))
+                    using (var sr = new StreamReader(fs, Encoding.UTF8))
                     {
                         var json = await sr.ReadToEndAsync();
                         var mr = MediaRepository.TryParse(json);
@@ -84,7 +88,7 @@ namespace AiLinWpf.Sources
             using (var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null))
             {
                 var fs = isoStore.CreateFile(TempFileName);
-                using (var sw = new StreamWriter(fs))
+                using (var sw = new StreamWriter(fs, Encoding.UTF8))
                 {
                     await sw.WriteAsync(Current.OriginalJson);
                 }

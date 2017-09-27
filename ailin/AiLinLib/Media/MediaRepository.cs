@@ -23,15 +23,11 @@ namespace AiLinLib.Media
 
         public List<MediaInfo> MediaList { get; } = new List<MediaInfo>();
 
+        public Dictionary<string, MediaInfo> IdToInfo { get; } = new Dictionary<string, MediaInfo>();
+
         public MediaInfo this[string id]
         {
-            get
-            {
-                var query = new MediaInfo { Id = id };
-                var index = MediaList.BinarySearch(query, MediaIdComparer.Instance);
-                if (index < 0) return null;
-                return MediaList[index];
-            }
+            get => IdToInfo.TryGetValue(id, out var res) ? res : null;
         }
 
         public static MediaRepository TryParse(string json)
@@ -72,6 +68,7 @@ namespace AiLinLib.Media
                     if (mi != null)
                     {
                         mr.MediaList.Add(mi);
+                        mr.IdToInfo[mi.Id] = mi;
                     }
                 }
             }

@@ -102,8 +102,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\MediaInfoFiller.cs" />
-    <Compile Include="Actions\MediaUiSyncer.cs" />
     <Compile Include="Sources\MediaRepoManager.cs" />
     <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Styles\Coloring.cs" />
@@ -115,8 +113,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Actions\Resource.cs" />
-    <Compile Include="Actions\ResourceList.cs" />
+    <Compile Include="ViewModels\MediaInfoViewModel.cs" />
+    <Compile Include="ViewModels\MediaListViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -161,6 +159,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\qsharp\QSharp\QSharp.Scheme.Classical.Sequential\QSharp.Scheme.Classical.Sequential%28dns11%29.csproj">
+      <Project>{c503a736-6ccd-4fc6-b920-96cc7b9c9d9c}</Project>
+      <Name>QSharp.Scheme.Classical.Sequential%28dns11%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AiLinLib\AiLinLib.csproj">
       <Project>{99d20b9e-18c5-42b8-a82b-f1dcdfdbdf76}</Project>
       <Name>AiLinLib</Name>

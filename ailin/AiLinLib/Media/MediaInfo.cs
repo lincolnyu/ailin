@@ -9,6 +9,12 @@ namespace AiLinLib.Media
     {
         public string Id { get; set; }
         public string Title { get; set; }
+
+        /// <summary>
+        ///  YYYYMMDD
+        /// </summary>
+        public string DateStr { get; set; }
+
         public string Category { get; set; }
         public string Role { get; set; }
         public string Director { get; set; }
@@ -35,9 +41,13 @@ namespace AiLinLib.Media
             {
                 mi.Title = title;
             }
-            if (mediaInfo.TryGetValue("category", out string category))
+            if (mediaInfo.TryGetValue("type", out string category))
             {
                 mi.Category = category;
+            }
+            if (mediaInfo.TryGetValue("date", out string date))
+            {
+                mi.DateStr = date;
             }
             if (mediaInfo.TryGetValue("role", out string role))
             {

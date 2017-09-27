@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinTests", "AiLinTests\Ai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedbackCoreLite", "..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj", "{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinLib", "AiLinLib\AiLinLib.csproj", "{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AiLinLib", "AiLinLib\AiLinLib.csproj", "{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonParser_dns11", "..\..\jsonparser\JsonParser\JsonParser\JsonParser_dns11.csproj", "{714C9E77-900F-4078-ABA1-96C6BEEAAB62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QSharp.Scheme.Classical.Sequential(dns11)", "..\..\qsharp\QSharp\QSharp.Scheme.Classical.Sequential\QSharp.Scheme.Classical.Sequential(dns11).csproj", "{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

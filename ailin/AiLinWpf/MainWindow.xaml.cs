@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 using AiLinWpf.Data;
-using AiLinWpf.Actions;
+using AiLinWpf.ViewModels;
 using System.Linq;
 using AiLinWpf.Helpers;
 using System.Windows.Input;
@@ -56,7 +56,7 @@ namespace AiLinWpf
         private const int Vote2 = 1069;
 
         private List<InfoDependentUI> _infoDepUIList = new List<InfoDependentUI>();
-        private ResourceList _resourceList;
+        private MediaListViewModel _mediaList;
 
         private bool? _byNameAscending;
         private bool? _byDateAscending;
@@ -81,14 +81,13 @@ namespace AiLinWpf
             InitializeComponent();
             InitInfoDepdentUI();
             SetTitle();
-            _resourceList = new ResourceList(this);
         }
 
         private async void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
             ShowPlaceholderText();
             await LoadImages();
-            //await RefreshAndMergeMediaList();
+            await RefreshAndMergeMediaList();
         }
 
         private delegate Task DownloadTask();
@@ -98,9 +97,8 @@ namespace AiLinWpf
             var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
             await mediaRepoManager.Initialize();
             await mediaRepoManager.Refresh();
-            var merger = new MediaInfoFiller(_resourceList, mediaRepoManager.Current);
-            merger.Fill();
-            _resourceList.InjectToUI();
+            _mediaList = new MediaListViewModel(mediaRepoManager.Current);
+            VideoList.ItemsSource = _mediaList.MediaViewModels;
         }
 
         private async Task LoadImages()
@@ -228,9 +226,9 @@ namespace AiLinWpf
             using (new SortingSaver(this))
             {
                 _byDateAscending = !(_byDateAscending ?? false);
-                var c = _byDateAscending.Value ? ResourceList.CompareDateAscending : ResourceList.CompareDateDescending;
+                var c = _byDateAscending.Value ? MediaListViewModel.CompareDateAscending : MediaListViewModel.CompareDateDescending;
                 BtnOrderByTime.Content = _byDateAscending.Value ? "时间升序" : "时间降序";
-                _resourceList.Push(c);
+                _mediaList.Push(c);
                 UpdateButtonOrder();
             }
         }
@@ -240,9 +238,9 @@ namespace AiLinWpf
             using (new SortingSaver(this))
             {
                 _byTypeAscending = !(_byTypeAscending ?? false);
-                var c = _byTypeAscending.Value ? ResourceList.CompareTypeAscending : ResourceList.CompareTypeDescending;
+                var c = _byTypeAscending.Value ? MediaListViewModel.CompareTypeAscending : MediaListViewModel.CompareTypeDescending;
                 BtnOrderByType.Content = _byTypeAscending.Value ? "类型升序" : "类型降序";
-                _resourceList.Push(c);
+                _mediaList.Push(c);
                 UpdateButtonOrder();
             }
         }
@@ -252,9 +250,9 @@ namespace AiLinWpf
             using (new SortingSaver(this))
             {
                 _byNameAscending = !(_byNameAscending ?? false);
-                var c = _byNameAscending.Value ? ResourceList.CompareTitleAscending : ResourceList.CompareTitleDescending;
+                var c = _byNameAscending.Value ? MediaListViewModel.CompareTitleAscending : MediaListViewModel.CompareTitleDescending;
                 BtnOrderByName.Content = _byNameAscending.Value ? "名称升序" : "名称降序";
-                _resourceList.Push(c);
+                _mediaList.Push(c);
                 UpdateButtonOrder();
             }
         }
@@ -262,9 +260,9 @@ namespace AiLinWpf
         private void UpdateButtonOrder()
         {
             var index = 0;
-            foreach (var c in _resourceList.Comparisons)
+            foreach (var c in _mediaList.Comparisons)
             {
-                if (c == ResourceList.CompareDateAscending || c == ResourceList.CompareDateDescending)
+                if (c == MediaListViewModel.CompareDateAscending || c == MediaListViewModel.CompareDateDescending)
                 {
                     var i = OrderButtons.Children.IndexOf(BtnOrderByTime);
                     if(index != i)
@@ -273,7 +271,7 @@ namespace AiLinWpf
                         OrderButtons.Children.Insert(index, BtnOrderByTime);
                     }
                 }
-                else if (c == ResourceList.CompareTypeAscending || c == ResourceList.CompareTypeDescending)
+                else if (c == MediaListViewModel.CompareTypeAscending || c == MediaListViewModel.CompareTypeDescending)
                 {
                     var i = OrderButtons.Children.IndexOf(BtnOrderByType);
                     if (index != i)
@@ -315,12 +313,12 @@ namespace AiLinWpf
                 return;
             }
             var item = VideoList.SelectedItem;
-            var lbi = (ListBoxItem)item;
-            if (lbi != null)
+            var mivm = (MediaInfoViewModel)item;
+            if (mivm != null)
             {
-                switch (lbi.Name)
+                switch (mivm.Id)
                 {
-                    case "EShNHLXH":
+                    case "EShNHZXH":
                         await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/fblxzhf.mp3");
                         break;
                     case "HFQX":
@@ -534,9 +532,11 @@ namespace AiLinWpf
             var first = true;
             var search = _searchTarget.Trim();
             var count = 0;
-            foreach (var lbi in VideoList.Items.Cast<ListBoxItem>())
+            foreach (var item in VideoList.Items)
             {
-                if (lbi.Content is Panel p)
+                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                var p = lbi.GetFirstPanelFromDatabound();
+                if (p != null)
                 {
                     var tbs = p.GetAllTexts().ToList();
                     var pairs = tbs.Highlight(search);
