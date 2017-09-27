@@ -66,7 +66,8 @@ namespace AiLinWpf.ViewModels
 
         public Types Type { get; private set; }
 
-        public Brush Color { get; private set; }
+        public Brush Background { get; private set; }
+        public bool BackgroundUpdatedToUI { get; set; }
 
         private void YieldSubtitle()
         {
@@ -122,19 +123,19 @@ namespace AiLinWpf.ViewModels
 
         private void SetType()
         {
-            Color = Coloring.Transparent;
+            Background = Coloring.Transparent;
             switch (Model.Category)
             {
                 case "movie":
                     Type = Types.Movie;
                     TypeStr = "电影";
-                    Color = Coloring.PaleGoldenrodBrush;
+                    Background = Coloring.PaleGoldenrodBrush;
                     break;
                 case "tv":
                 case "television":
                     Type = Types.Television;
                     TypeStr = "电视剧";
-                    Color = Coloring.LightSkyBlueBrush;
+                    Background = Coloring.LightSkyBlueBrush;
                     break;
                 case "radio drama":
                     Type = Types.RadioDrama;

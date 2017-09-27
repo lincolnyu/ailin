@@ -15,6 +15,9 @@ using AiLinWpf.Helpers;
 using System.Windows.Input;
 using static AiLinWpf.Helpers.ImageHelper;
 using AiLinWpf.Sources;
+using System.Collections.Specialized;
+using System.Collections;
+using System.Windows.Controls.Primitives;
 
 namespace AiLinWpf
 {
@@ -99,6 +102,30 @@ namespace AiLinWpf
             await mediaRepoManager.Refresh();
             _mediaList = new MediaListViewModel(mediaRepoManager.Current);
             VideoList.ItemsSource = _mediaList.MediaViewModels;
+            VideoList.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
+            VideoList.ItemContainerGenerator.ItemsChanged += ItemContainerGeneratorOnItemsChanged;
+        }
+
+        private void ItemContainerGeneratorOnStatusChanged(object sender, EventArgs e)
+        {
+            ColorVideoListItems(VideoList.Items);
+        }
+
+        private void ItemContainerGeneratorOnItemsChanged(object sender, ItemsChangedEventArgs e)
+        {
+        }
+        
+        private void ColorVideoListItems(IList items)
+        {
+            foreach (var item in items.Cast<MediaInfoViewModel>().Where(i=>!i.BackgroundUpdatedToUI))
+            {
+                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                if (lbi != null)
+                {
+                    lbi.Background = item.Background;
+                    item.BackgroundUpdatedToUI = true;
+                }
+            }
         }
 
         private async Task LoadImages()
