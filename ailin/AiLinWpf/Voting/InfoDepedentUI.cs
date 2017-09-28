@@ -14,7 +14,7 @@ using WebKit.Helpers;
 using static AiLinWpf.Helpers.ImageHelper;
 using static WebKit.VotePageNavigator;
 
-namespace AiLinWpf.Data
+namespace AiLinWpf.Voting
 {
     public class InfoDependentUI
     {

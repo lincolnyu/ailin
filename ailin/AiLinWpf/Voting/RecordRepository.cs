@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.IsolatedStorage;
 
-namespace AiLinWpf.Data
+namespace AiLinWpf.Voting
 {
     public class RecordRepository
     {

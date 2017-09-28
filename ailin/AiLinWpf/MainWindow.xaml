@@ -4,84 +4,134 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
+        xmlns:vmpl="clr-namespace:AiLinWpf.ViewModels.Playlist"
+        xmlns:converters="clr-namespace:AiLinWpf.Converters"
         mc:Ignorable="d"
         Title="爱琳投票助手" Height="558.375" Width="567"
         Loaded="WindowOnLoaded">
+    <Window.Resources>
+        <converters:ToStringConverter x:Key="ToStringConverter" />
+        <Style TargetType="RichTextBox">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="18">
+                </Setter>
+                <Setter Property="BorderThickness" Value="0">
+                </Setter>
+                <Setter Property="IsReadOnly" Value="True">
+                </Setter>
+                <Setter Property="IsDocumentEnabled" Value="True">
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="18">
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MediaTitle">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MediaSubtitle">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontStyle" Value="Italic"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="MediaSource">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="Margin" Value="2,0,2,0"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Description">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="Hyperlink">
+            <Style.Setters>
+                <!--
+                    References: (2 does not seem to work) 
+                    1. https://wpf.2000things.com/2011/08/29/374-using-a-tooltip-to-display-the-full-contents-of-a-textbox/
+                    2. https://wpf.2000things.com/2011/08/30/375-binding-something-in-a-tooltip-to-a-property-on-the-parent-control/
+                -->
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri, Converter={StaticResource ToStringConverter}}"/>
+                <EventSetter Event="RequestNavigate" Handler="HyperlinkRequestNavigate"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="Hyperlink" x:Key="NormalHyperlink">
+            <Style.Setters>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri, Converter={StaticResource ToStringConverter}}"/>
+                <EventSetter Event="RequestNavigate" Handler="HyperlinkRequestNavigate"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="Hyperlink" x:Key="SpecialHyperlink">
+        </Style>
+        <Style TargetType="Hyperlink" x:Key="UndecoratedLink">
+            <Style.Setters>
+                <Setter Property="TextDecorations" Value="None"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <EventSetter Event="RequestNavigate" Handler="HyperlinkRequestNavigate"/>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri, Converter={StaticResource ToStringConverter}}"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="UnavailableNotice">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="18">
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="Button">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="18">
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
+        <Image x:Key="ClearIcon" Source="pack://application:,,,/Images/clear.png"/>
+        <DataTemplate DataType="{x:Type vmpl:MediaProviderLabelViewModel}">
+            <TextBlock Margin="{Binding Margin}" 
+                           Style="{StaticResource MediaSource}"
+                           Text="{Binding Title}">
+            </TextBlock>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmpl:MediaProviderWithUrlViewModel}">
+            <TextBlock Margin="{Binding Margin}" 
+                           Style="{StaticResource MediaSource}">
+                    <Hyperlink NavigateUri="{Binding Url}"
+                               Style="{StaticResource NormalHyperlink}">
+                        <Run Text="{Binding Title}"></Run>
+                    </Hyperlink>
+            </TextBlock>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmpl:TrackViewModel}" >
+            <TextBlock Style="{StaticResource MediaSource}">
+                    <Hyperlink Tag="something" IsEnabled="{Binding HasUrl}" 
+                               NavigateUri="{Binding Url}"
+                               Style="{StaticResource NormalHyperlink}">
+                        <Run Text="{Binding Title}" ></Run>
+                    </Hyperlink>
+            </TextBlock>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmpl:EllipsisViewModel}">
+            <TextBlock Style="{StaticResource MediaSource}">...</TextBlock>
+        </DataTemplate>
+    </Window.Resources>
     <Grid KeyDown="MainKeyDown">
-        <Grid.Resources>
-            <Style TargetType="RichTextBox">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="18">
-                    </Setter>
-                    <Setter Property="BorderThickness" Value="0">
-                    </Setter>
-                    <Setter Property="IsReadOnly" Value="True">
-                    </Setter>
-                    <Setter Property="IsDocumentEnabled" Value="True">
-                    </Setter>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="TextBlock">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="18">
-                    </Setter>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="TextBlock" x:Key="MediaTitle">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="18"/>
-                    <Setter Property="FontWeight" Value="SemiBold"/>
-                    <Setter Property="VerticalAlignment" Value="Bottom"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="TextBlock" x:Key="MediaSubtitle">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="16"/>
-                    <Setter Property="FontStyle" Value="Italic"/>
-                    <Setter Property="VerticalAlignment" Value="Bottom"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="TextBlock" x:Key="Description">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="12"/>
-                    <Setter Property="VerticalAlignment" Value="Bottom"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="Hyperlink">
-                <Style.Setters>
-                    <EventSetter Event="RequestNavigate" Handler="HyperlinkRequestNavigate"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="Hyperlink" x:Key="SpecialHyperlink">
-            </Style>
-            <Style TargetType="Hyperlink" x:Key="UndecoratedLink">
-                <Style.Setters>
-                    <Setter Property="TextDecorations" Value="None"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                    <EventSetter Event="RequestNavigate" Handler="HyperlinkRequestNavigate"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="TextBlock" x:Key="UnavailableNotice">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="14"/>
-                    <Setter Property="VerticalAlignment" Value="Bottom"/>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="RadioButton">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="18">
-                    </Setter>
-                </Style.Setters>
-            </Style>
-            <Style TargetType="Button">
-                <Style.Setters>
-                    <Setter Property="FontSize" Value="18">
-                    </Setter>
-                </Style.Setters>
-            </Style>
-            <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
-            <Image x:Key="ClearIcon" Source="pack://application:,,,/Images/clear.png"/>
-        </Grid.Resources>
         <MediaElement Name="AudioPlayer" LoadedBehavior="Manual" UnloadedBehavior="Stop"
                                   MediaOpened="AudioPlayerOnMediaOpened" MediaEnded="AudioPlayerOnMediaEnded"
                                   MediaFailed="AudioPlayerOnMediaFailed"></MediaElement>
@@ -370,7 +420,7 @@
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding Title}" Style="{StaticResource ResourceKey=MediaTitle}">
                                             <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}"
@@ -382,6 +432,13 @@
                                         </TextBlock>
                                         <TextBlock Margin="3,0,0,0" Text="{Binding BriefDescription}" Style="{StaticResource Description}"></TextBlock>
                                     </StackPanel>
+                                    <ItemsControl ItemsSource="{Binding MediaSourceItems}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

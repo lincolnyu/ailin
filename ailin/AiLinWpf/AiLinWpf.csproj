@@ -102,9 +102,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Sources\MediaRepoManager.cs" />
     <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Styles\Coloring.cs" />
+    <Compile Include="Styles\Layouts.cs" />
+    <Compile Include="ViewModels\Playlist\EllipsisViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\MediaProviderLabelViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\MediaProviderWithUrlViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\TrackViewModel.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,9 +125,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\InfoDepedentUI.cs" />
-    <Compile Include="Data\Record.cs" />
-    <Compile Include="Data\RecordRepository.cs" />
+    <Compile Include="Voting\InfoDepedentUI.cs" />
+    <Compile Include="Voting\Record.cs" />
+    <Compile Include="Voting\RecordRepository.cs" />
     <Compile Include="Helpers\ChineseHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">

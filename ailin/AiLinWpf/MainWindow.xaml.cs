@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Threading.Tasks;
-using AiLinWpf.Data;
+using AiLinWpf.Voting;
 using AiLinWpf.ViewModels;
 using System.Linq;
 using AiLinWpf.Helpers;

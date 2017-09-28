@@ -4,6 +4,9 @@ using System;
 using System.Windows.Media;
 using System.Globalization;
 using System.Text;
+using System.Collections.ObjectModel;
+using AiLinWpf.ViewModels.Playlist;
+using System.Windows;
 
 namespace AiLinWpf.ViewModels
 {
@@ -27,6 +30,7 @@ namespace AiLinWpf.ViewModels
             SetDate();
             YieldSubtitle();
             YieldBriefDescription();
+            YieldPlaylists();
         }
 
         public MediaInfo Model { get; }
@@ -59,6 +63,8 @@ namespace AiLinWpf.ViewModels
         public string Subtitle { get; private set; }
 
         public string BriefDescription { get; private set; }
+
+        public ObservableCollection<object> MediaSourceItems { get; } = new ObservableCollection<object>();
 
         #endregion
 
@@ -175,6 +181,42 @@ namespace AiLinWpf.ViewModels
             }
             catch (ArgumentException)
             {
+            }
+        }
+
+        private void YieldPlaylists()
+        {
+            MediaSourceItems.Clear();
+            foreach (var source in Model.Sources)
+            {
+                var title = source.Playlist.Count > 0 ? source.Name + ":" : source.Name;
+                var url = source.Target;
+                MediaProviderLabelViewModel mp;
+                if (!string.IsNullOrWhiteSpace(url))
+                {
+                    mp = new MediaProviderWithUrlViewModel { Title = title, Url = url, Margin = Layouts.StandardIsolatedTextItemMargin };
+                }
+                else
+                {
+                    mp = new MediaProviderLabelViewModel { Title = title, Margin = Layouts.StandardIsolatedTextItemMargin };
+                }
+                MediaSourceItems.Add(mp);
+                int? lastI = null;
+                foreach (var t in source.Playlist)
+                {
+                    var tt = t.Item1;
+                    if (int.TryParse(tt, out var itt))
+                    {
+                        var inconsecutive = lastI.HasValue && lastI + 1 != itt;
+                        if (inconsecutive)
+                        {
+                            MediaSourceItems.Add(EllipsisViewModel.Instance);
+                        }
+                        lastI = itt;
+                    }
+                    var tvm = new TrackViewModel { Title = tt, Url = t.Item2 };
+                    MediaSourceItems.Add(tvm);
+                }
             }
         }
     }
