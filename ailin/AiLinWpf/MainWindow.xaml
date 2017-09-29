@@ -131,7 +131,7 @@
             <TextBlock Style="{StaticResource MediaSource}">...</TextBlock>
         </DataTemplate>
     </Window.Resources>
-    <Grid KeyDown="MainKeyDown">
+    <Grid>
         <MediaElement Name="AudioPlayer" LoadedBehavior="Manual" UnloadedBehavior="Stop"
                                   MediaOpened="AudioPlayerOnMediaOpened" MediaEnded="AudioPlayerOnMediaEnded"
                                   MediaFailed="AudioPlayerOnMediaFailed"></MediaElement>
@@ -302,7 +302,7 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem>
+            <TabItem KeyDown="MediaItemOnKeyDown">
                 <TabItem.Header>
                     <TextBlock>影剧欣赏</TextBlock>
                 </TabItem.Header>
@@ -370,7 +370,8 @@
                             </TextBlock>
                         </StackPanel>
                     </Grid>
-                    <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged" HorizontalContentAlignment="Stretch">
+                    <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged" 
+                             HorizontalContentAlignment="Stretch">
                         <ListBox.Resources>
                             <Style x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
                                 <Setter Property="Template">

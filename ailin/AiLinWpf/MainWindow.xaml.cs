@@ -18,6 +18,7 @@ using AiLinWpf.Sources;
 using System.Collections.Specialized;
 using System.Collections;
 using System.Windows.Controls.Primitives;
+using System.Threading;
 
 namespace AiLinWpf
 {
@@ -26,6 +27,8 @@ namespace AiLinWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Types
+
         public enum MediaStatuses
         {
             Stopped,
@@ -33,6 +36,8 @@ namespace AiLinWpf
             Ended,
             Failed
         }
+
+        private delegate Task DownloadTask();
 
         private class SortingSaver : IDisposable
         {
@@ -54,6 +59,10 @@ namespace AiLinWpf
                 _mainWindow._sorting = _wasSorting;
             }
         }
+
+        #endregion
+
+        #region Fields
 
         private const int Vote1 = 43;
         private const int Vote2 = 1069;
@@ -79,6 +88,10 @@ namespace AiLinWpf
         public const string MediaListUrl = "http://localhost:80/exetel/apps/ailin/media.json";
         public const string MediaListFileName = "media.json";
 
+        #endregion
+
+        #region Constructors
+
         public MainWindow()
         {
             InitializeComponent();
@@ -86,33 +99,240 @@ namespace AiLinWpf
             SetTitle();
         }
 
+        #endregion
+
+        #region Event handlers
+
         private async void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
             ShowPlaceholderText();
+            await InitLoadAndRefreshMediaList();
             await LoadImages();
-            await RefreshAndMergeMediaList();
         }
 
-        private delegate Task DownloadTask();
+        public void HyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+        }
 
-        private async Task RefreshAndMergeMediaList()
+        private void BtnOrderByTimeOnClick(object sender, RoutedEventArgs e)
+        {
+            using (new SortingSaver(this))
+            {
+                _byDateAscending = !(_byDateAscending ?? false);
+                var c = _byDateAscending.Value ? MediaListViewModel.CompareDateAscending : MediaListViewModel.CompareDateDescending;
+                BtnOrderByTime.Content = _byDateAscending.Value ? "时间升序" : "时间降序";
+                _mediaList.Push(c);
+                UpdateButtonOrder();
+            }
+        }
+
+        private void BtnOrderByTypeOnClick(object sender, RoutedEventArgs e)
+        {
+            using (new SortingSaver(this))
+            {
+                _byTypeAscending = !(_byTypeAscending ?? false);
+                var c = _byTypeAscending.Value ? MediaListViewModel.CompareTypeAscending : MediaListViewModel.CompareTypeDescending;
+                BtnOrderByType.Content = _byTypeAscending.Value ? "类型升序" : "类型降序";
+                _mediaList.Push(c);
+                UpdateButtonOrder();
+            }
+        }
+
+        private void BtnOrderByNameOnClick(object sender, RoutedEventArgs e)
+        {
+            using (new SortingSaver(this))
+            {
+                _byNameAscending = !(_byNameAscending ?? false);
+                var c = _byNameAscending.Value ? MediaListViewModel.CompareTitleAscending : MediaListViewModel.CompareTitleDescending;
+                BtnOrderByName.Content = _byNameAscending.Value ? "名称升序" : "名称降序";
+                _mediaList.Push(c);
+                UpdateButtonOrder();
+            }
+        }
+
+        private void AudioPlayerOnMediaOpened(object sender, RoutedEventArgs e)
+        {
+            SetPlayStatus(MediaStatuses.Opened);
+        }
+
+        private void AudioPlayerOnMediaEnded(object sender, RoutedEventArgs e)
+        {
+            SetPlayStatus(MediaStatuses.Ended);
+        }
+
+        private void AudioPlayerOnMediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            SetPlayStatus(MediaStatuses.Failed);
+        }
+
+        private void SetPlayStatus(MediaStatuses status)
+        {
+            _mediaStatus = status;
+        }
+
+        private void PlaySongsOnUnchecked(object sender, RoutedEventArgs e)
+        {
+            AudioPlayer.Stop();
+        }
+
+        private async void PlaySongsOnChecked(object sender, RoutedEventArgs e)
+        {
+            await PlaySelected();
+        }
+
+        private void FriendlyLinksOnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            FriendlyLinks.IsSelected = true;
+        }
+
+        private void SearchBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            var saved = _suppressSearchBoxTextChangedHandling;
+            _suppressSearchBoxTextChangedHandling = true;
+
+            if (string.IsNullOrWhiteSpace(_searchTarget))
+            {
+                SearchBox.Text = "";
+            }
+
+            _suppressSearchBoxTextChangedHandling = saved;
+        }
+
+        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            ShowPlaceholderText();
+        }
+
+        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_suppressSearchBoxTextChangedHandling)
+            {
+                UpdateSearchTarget(SearchBox.Text);
+            }
+        }
+
+        private void ShowPlaceholderText()
+        {
+            var saved = _suppressSearchBoxTextChangedHandling;
+            _suppressSearchBoxTextChangedHandling = true;
+
+            if (String.IsNullOrWhiteSpace(_searchTarget))
+            {
+                SearchBox.Text = "搜索...";
+            }
+
+            _suppressSearchBoxTextChangedHandling = saved;
+        }
+
+        private void BtnClearOnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateSearchTarget("");
+            ShowPlaceholderText();
+        }
+
+        private void BtnSearchOnClick(object sender, RoutedEventArgs e)
+        {
+            SearchAndHighlight();
+        }
+
+        private void SearchBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (_currentFocused == null)
+                {
+                    SearchAndHighlight();
+                }
+                else
+                {
+                    var shift = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+                    if (shift)
+                    {
+                        _currentFocused--;
+                        if (_currentFocused.Value < 0)
+                        {
+                            _currentFocused = _highlightedItems.Count - 1;
+                        }
+                    }
+                    else
+                    {
+                        _currentFocused++;
+                        if (_currentFocused.Value >= _highlightedItems.Count)
+                        {
+                            _currentFocused = 0;
+                        }
+                    }
+                    var lbi = _highlightedItems[_currentFocused.Value];
+                    VideoList.ScrollIntoView(lbi);
+                    lbi.IsSelected = true;
+                }
+            }
+        }
+
+        private async void MediaItemOnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                SearchBox.Focus();
+            }
+            else if (e.Key == Key.F5)
+            {
+                var force = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+                await RedownloadMediaList(force);
+            }
+        }
+
+        #endregion
+
+        private async Task RedownloadMediaList(bool force)
+        {
+            var caption = force ? "是否确认重新下载媒体列表？" : "是否确认刷新媒体列表？";
+            var res = MessageBox.Show(caption, Title, MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.Yes)
+            {
+                await LoadAndRefreshMediaList(force, true);
+            }
+        }
+
+        private async Task InitLoadAndRefreshMediaList()
+        {
+            VideoList.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
+            await LoadAndRefreshMediaList(false);
+        }
+
+        private async Task LoadAndRefreshMediaList(bool force, bool showRefreshResult = false)
         {
             var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
             await mediaRepoManager.Initialize();
-            await mediaRepoManager.Refresh();
+            if (force)
+            {
+                mediaRepoManager.Reset();
+            }
+            var res = await mediaRepoManager.Refresh();
+            if (showRefreshResult)
+            {
+                switch (res)
+                {
+                    case MediaRepoManager.RefreshResults.Refreshed:
+                        MessageBox.Show("成功下载并更新列表。", Title);
+                        break;
+                    case MediaRepoManager.RefreshResults.FailedToDownload:
+                        MessageBox.Show("下载列表失败。", Title);
+                        break;
+                    case MediaRepoManager.RefreshResults.AlreadyLatest:
+                        MessageBox.Show("已经是最新列表，无需更新。", Title);
+                        break;
+                }
+            }
             _mediaList = new MediaListViewModel(mediaRepoManager.Current);
             VideoList.ItemsSource = _mediaList.MediaViewModels;
-            VideoList.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
-            VideoList.ItemContainerGenerator.ItemsChanged += ItemContainerGeneratorOnItemsChanged;
         }
 
         private void ItemContainerGeneratorOnStatusChanged(object sender, EventArgs e)
         {
             ColorVideoListItems(VideoList.Items);
-        }
-
-        private void ItemContainerGeneratorOnItemsChanged(object sender, ItemsChangedEventArgs e)
-        {
         }
         
         private void ColorVideoListItems(IList items)
@@ -136,31 +356,32 @@ namespace AiLinWpf
             DownloadTask[] downloads = {
                 async () =>
                 {
-                    var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 1);
+                    var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 5000, 1);
                     await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
                         LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
                 },
                 async ()=>
                 {
-                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 5000);
+                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 5000);
+                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 5000, 1);
                 },
                 async ()=>
                 {
                     const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
-                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 5000);
+                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback,5000);
+                    await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback, 5000, 1);
                 }
             };
-
+            
             var tasks = downloads.Select(dl => dl()).ToArray();
-            await Task.WhenAll(tasks);  
+            await Task.WhenAll(tasks);
+            Trace.WriteLine("All image downloading processes have been completed.");
         }
 
         private void SetTitle()
@@ -239,48 +460,6 @@ namespace AiLinWpf
             foreach (var idui in _infoDepUIList)
             {
                 idui.Setup(this);
-            }
-        }
-
-        public void HyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
-        }
-
-        private void BtnOrderByTimeOnClick(object sender, RoutedEventArgs e)
-        {
-            using (new SortingSaver(this))
-            {
-                _byDateAscending = !(_byDateAscending ?? false);
-                var c = _byDateAscending.Value ? MediaListViewModel.CompareDateAscending : MediaListViewModel.CompareDateDescending;
-                BtnOrderByTime.Content = _byDateAscending.Value ? "时间升序" : "时间降序";
-                _mediaList.Push(c);
-                UpdateButtonOrder();
-            }
-        }
-
-        private void BtnOrderByTypeOnClick(object sender, RoutedEventArgs e)
-        {
-            using (new SortingSaver(this))
-            {
-                _byTypeAscending = !(_byTypeAscending ?? false);
-                var c = _byTypeAscending.Value ? MediaListViewModel.CompareTypeAscending : MediaListViewModel.CompareTypeDescending;
-                BtnOrderByType.Content = _byTypeAscending.Value ? "类型升序" : "类型降序";
-                _mediaList.Push(c);
-                UpdateButtonOrder();
-            }
-        }
-
-        private void BtnOrderByNameOnClick(object sender, RoutedEventArgs e)
-        {
-            using (new SortingSaver(this))
-            {
-                _byNameAscending = !(_byNameAscending ?? false);
-                var c = _byNameAscending.Value ? MediaListViewModel.CompareTitleAscending : MediaListViewModel.CompareTitleDescending;
-                BtnOrderByName.Content = _byNameAscending.Value ? "名称升序" : "名称降序";
-                _mediaList.Push(c);
-                UpdateButtonOrder();
             }
         }
 
@@ -430,125 +609,6 @@ namespace AiLinWpf
             }
         }
 
-        private void AudioPlayerOnMediaOpened(object sender, RoutedEventArgs e)
-        {
-            SetPlayStatus(MediaStatuses.Opened);
-        }
-
-        private void AudioPlayerOnMediaEnded(object sender, RoutedEventArgs e)
-        {
-            SetPlayStatus(MediaStatuses.Ended);
-        }
-
-        private void AudioPlayerOnMediaFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-            SetPlayStatus(MediaStatuses.Failed);
-        }
-
-        private void SetPlayStatus(MediaStatuses status)
-        {
-            _mediaStatus = status;
-        }
-        
-        private void PlaySongsOnUnchecked(object sender, RoutedEventArgs e)
-        {
-            AudioPlayer.Stop();
-        }
-
-        private async void PlaySongsOnChecked(object sender, RoutedEventArgs e)
-        {
-            await PlaySelected();
-        }
-
-        private void FriendlyLinksOnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            FriendlyLinks.IsSelected = true;
-        }
-
-        private void SearchBoxGotFocus(object sender, RoutedEventArgs e)
-        {
-            var saved = _suppressSearchBoxTextChangedHandling;
-            _suppressSearchBoxTextChangedHandling = true;
-
-            if (string.IsNullOrWhiteSpace(_searchTarget))
-            {
-                SearchBox.Text = "";
-            }
-
-            _suppressSearchBoxTextChangedHandling = saved;
-        }
-
-        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
-        {
-            ShowPlaceholderText();
-        }
-
-        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!_suppressSearchBoxTextChangedHandling)
-            {
-                UpdateSearchTarget(SearchBox.Text);
-            }
-        }
-
-        private void ShowPlaceholderText()
-        {
-            var saved = _suppressSearchBoxTextChangedHandling;
-            _suppressSearchBoxTextChangedHandling = true;
-
-            if (String.IsNullOrWhiteSpace(_searchTarget))
-            {
-                SearchBox.Text = "搜索...";
-            }
-
-            _suppressSearchBoxTextChangedHandling = saved;
-        }
-
-        private void BtnClearOnClick(object sender, RoutedEventArgs e)
-        {
-            UpdateSearchTarget("");
-            ShowPlaceholderText();
-        }
-
-        private void BtnSearchOnClick(object sender, RoutedEventArgs e)
-        {
-            SearchAndHighlight();
-        }
-
-        private void SearchBoxKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (_currentFocused == null)
-                {
-                    SearchAndHighlight();
-                }
-                else
-                {
-                    var shift = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
-                    if (shift)
-                    {
-                        _currentFocused--;
-                        if (_currentFocused.Value < 0)
-                        {
-                            _currentFocused = _highlightedItems.Count-1;
-                        }
-                    }
-                    else
-                    {
-                        _currentFocused++;
-                        if (_currentFocused.Value >= _highlightedItems.Count)
-                        {
-                            _currentFocused = 0;
-                        }
-                    }
-                    var lbi = _highlightedItems[_currentFocused.Value];
-                    VideoList.ScrollIntoView(lbi);
-                    lbi.IsSelected = true;
-                }
-            }
-        }
-
         private void SearchAndHighlight()
         {
             DeHighlight();
@@ -610,14 +670,6 @@ namespace AiLinWpf
         {
             _searchTarget = target;
             DeHighlight();
-        }
-
-        private void MainKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.F && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-            {
-                SearchBox.Focus();
-            }
         }
     }
 }

@@ -10,6 +10,13 @@ namespace AiLinWpf.Sources
 {
     public class MediaRepoManager
     {
+        public enum RefreshResults
+        {
+            AlreadyLatest,
+            Refreshed,
+            FailedToDownload
+        }
+
         public MediaRepoManager(string sourceUrl, string tempFileName)
         {
             SourceUrl = sourceUrl;
@@ -25,7 +32,16 @@ namespace AiLinWpf.Sources
             Current = await Load();
         }
 
-        public async Task Refresh()
+        public void Reset()
+        {
+            Current = null;
+            using (var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null))
+            {
+                isoStore.DeleteFile(TempFileName);
+            }
+        }
+
+        public async Task<RefreshResults> Refresh()
         {
             var repo = await Download();
             if (repo != null)
@@ -42,7 +58,9 @@ namespace AiLinWpf.Sources
                     // TODO should try mutliple times?
                     await Save();
                 }
+                return toUpdate ? RefreshResults.Refreshed : RefreshResults.AlreadyLatest;
             }
+            return RefreshResults.FailedToDownload;
         }
 
         private async Task<MediaRepository> Download()
