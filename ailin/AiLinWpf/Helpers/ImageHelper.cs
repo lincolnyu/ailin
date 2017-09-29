@@ -10,23 +10,30 @@ namespace AiLinWpf.Helpers
     public static class ImageHelper
     {
         public static async Task<BitmapImage> TryLoadWebImageMultAttempts(string webUri,
-            int attempts = 3, int downloadTimeoutMs = 3000)
+            int downloadTotalTimeoutMs = 3000)
         {
-            const int downloadPolling = 200;
-            int downloadTimeoutCount = downloadTimeoutMs / downloadPolling;
             BitmapImage result = null;
-            for (var i = 0; i < attempts && result == null; i++)
+            var start = DateTime.UtcNow;
+            for (; ; )
             {
-                result = await TryLoadWebImage(webUri, downloadPolling, downloadTimeoutCount);
+                var elapsed = (DateTime.UtcNow - start).TotalMilliseconds;
+                if (downloadTotalTimeoutMs > elapsed)
+                {
+                    var timeout = (int)Math.Floor(downloadTotalTimeoutMs - elapsed);
+                    result = await TryLoadWebImage(webUri, timeout);
+                }
+                else
+                {
+                    break;
+                }
             }
             return result;
         }
 
         public static async Task<string> TryLoadWebImage(this Image image, string webUri,
-            string fallbackUri = "pack://application:,,,/Images/fallback.gif",
-            int attempts = 3, int downloadTimeoutMs = 5000)
+            string fallbackUri = "pack://application:,,,/Images/fallback.gif", int downloadTimeoutMs = 10000)
         {
-            var img = await TryLoadWebImageMultAttempts(webUri, attempts, downloadTimeoutMs);
+            var img = await TryLoadWebImageMultAttempts(webUri, downloadTimeoutMs);
             var imageUri = webUri;
             if (img == null)
             {
@@ -39,8 +46,8 @@ namespace AiLinWpf.Helpers
             return imageUri;
         }
 
-        private static async Task<BitmapImage> TryLoadWebImage(string uri, int downloadPolling, 
-            int downloadTimeoutCount = int.MaxValue, string contentType = "image/jpeg")
+        private static async Task<BitmapImage> TryLoadWebImage(string uri, int downloadTimeoutMs, 
+            string contentType = "image/jpeg")
         {
             try
             {
@@ -50,22 +57,16 @@ namespace AiLinWpf.Helpers
                     webRequest.ContentType = "image/jpeg";
                 }
 
-                var infiniteTimeout = downloadTimeoutCount >= int.MaxValue / downloadPolling;
-                var totalTimeout = infiniteTimeout ? System.Threading.Timeout.Infinite 
-                    : downloadPolling * downloadTimeoutCount;
-                
-                webRequest.Timeout = totalTimeout;
-                var initTime = DateTime.UtcNow;
+                webRequest.Timeout = downloadTimeoutMs;
                 var webResponse = webRequest.GetResponse();
                 var img = new BitmapImage()
                 {
                     CreateOptions = BitmapCreateOptions.None,
                     CacheOption = BitmapCacheOption.OnLoad
                 };
-                var downloadFailed = false;
-                var downloadCompleted = false;
-                img.DownloadFailed += (s, e) => downloadFailed = true;
-                img.DownloadCompleted += (s, e) => downloadCompleted = true;
+                var tcs = new TaskCompletionSource<BitmapImage>();
+                img.DownloadFailed += (s, e) => tcs.SetResult(null);
+                img.DownloadCompleted += (s, e) => tcs.SetResult(img);
                 img.BeginInit();
                 img.StreamSource = webResponse.GetResponseStream();
                 img.EndInit();
@@ -75,19 +76,7 @@ namespace AiLinWpf.Helpers
                     return img;
                 }
 
-                for (var i = 0; i < downloadTimeoutCount && !downloadCompleted && !downloadFailed; i++)
-                {
-                    var delayTime = downloadPolling;
-                    if (!infiniteTimeout)
-                    {
-                        var elapsed = DateTime.UtcNow - initTime;
-                        var left = (int)(totalTimeout - elapsed.TotalMilliseconds);
-                        if (left <= 0) break;
-                        if (left < delayTime) delayTime = left;
-                    }
-                    await Task.Delay(delayTime);
-                }
-                return downloadCompleted? img : null;
+                return await tcs.Task;
             }
             catch (Exception)
             {

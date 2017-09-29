@@ -142,20 +142,20 @@ namespace AiLinWpf
                 },
                 async ()=>
                 {
-                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 1, 5000);
+                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 5000);
                 },
                 async ()=>
                 {
-                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 1, 5000);
+                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 5000);
                 },
                 async ()=>
                 {
                     const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
-                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 1, 5000);
+                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 5000);
                 },
                 async ()=>
                 {
-                    await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback, 1, 5000);
+                    await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback,5000);
                 }
             };
 
