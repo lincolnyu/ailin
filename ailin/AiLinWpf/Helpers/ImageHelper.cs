@@ -1,10 +1,12 @@
-﻿using System;
+﻿#define ADVANCED_IMAGE_DOWNLOADING
+using System;
 using System.Windows.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+#if ADVANCED_IMAGE_DOWNLOADING
 using System.Net;
-using System.Threading;
+#endif
 
 namespace AiLinWpf.Helpers
 {
@@ -57,7 +59,7 @@ namespace AiLinWpf.Helpers
             try
             {
                 System.Diagnostics.Trace.WriteLine($"Image {uri} download started");
-
+#if ADVANCED_IMAGE_DOWNLOADING
                 var tcs = new TaskCompletionSource<bool>();
                 var webRequest = WebRequest.CreateDefault(new Uri(uri));
                 if (contentType != null)
@@ -80,6 +82,13 @@ namespace AiLinWpf.Helpers
                 var res = await tcs.Task;
                 System.Diagnostics.Trace.WriteLine($"Image {uri} download succeeded: {res}");
                 return res ? img : null;
+#else                
+                var img = new BitmapImage();
+                img.BeginInit();
+                img.UriSource = new Uri(uri);
+                img.EndInit();
+                return img;
+#endif
             }
             catch (Exception)
             {
