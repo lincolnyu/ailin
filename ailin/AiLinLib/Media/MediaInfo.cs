@@ -28,6 +28,8 @@ namespace AiLinLib.Media
         /// </summary>        
         public string ExternalLink { get; set; }
 
+        public string SourceCompleteness { get; set; }
+
         public List<Tuple<string, string>> Songs { get; } = new List<Tuple<string, string>>();
 
         public List<MediaSource> Sources { get; } = new List<MediaSource>();
@@ -121,6 +123,10 @@ namespace AiLinLib.Media
                         mi.Sources.Add(source);
                     }
                 }
+            }
+            if (mediaInfo.TryGetValue("sourceCompleteness", out string completeness))
+            {
+                mi.SourceCompleteness = completeness;
             }
             return mi;
         }

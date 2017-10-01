@@ -11,6 +11,7 @@
         Loaded="WindowOnLoaded">
     <Window.Resources>
         <converters:ToStringConverter x:Key="ToStringConverter" />
+        <converters:HasNontrivialConverter x:Key="HasNontrivialConverter" />
         <Style TargetType="RichTextBox">
             <Style.Setters>
                 <Setter Property="FontSize" Value="18">
@@ -345,20 +346,20 @@
                                     <Button.Template>
                                         <ControlTemplate>
                                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                    Width="16" Height="16" Child="{StaticResource ResourceKey=ClearIcon}">
+                                                    Width="16" Height="16" Child="{StaticResource ClearIcon}">
                                             </Border>
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
                                 <Button Grid.Column="2" Click="BtnSearchOnClick" Width="30" Height="30" 
-                                        Content="{StaticResource ResourceKey=SearchIcon}">
+                                        Content="{StaticResource SearchIcon}">
                                 </Button>
                             </Grid>
                             <TextBlock Name="MatchCount" Grid.Column="1" Style="{StaticResource Description}"></TextBlock>
                         </Grid>
                         <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
                             <TextBlock Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center">
-                                鸣谢<Hyperlink Style="{StaticResource ResourceKey=SpecialHyperlink}"
+                                鸣谢<Hyperlink Style="{StaticResource SpecialHyperlink}"
                                              NavigateUri="Dummy"
                                              RequestNavigate="FriendlyLinksOnRequestNavigate">
                                     友情链接
@@ -423,13 +424,14 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Title}" Style="{StaticResource ResourceKey=MediaTitle}">
-                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}"
-                                                            IsEnabled="{Binding HasExternalLink}"
+                                        <TextBlock Style="{StaticResource MediaTitle}">
+                                            <Hyperlink Style="{StaticResource UndecoratedLink}"
+                                                           IsEnabled="{Binding ExternalLink, Converter={StaticResource HasNontrivialConverter}}"
                                                            NavigateUri="{Binding ExternalLink}">
+                                                <Run Text="{Binding Title, Mode=OneWay}"/>
                                             </Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0" Text="{Binding Subtitle}" Style="{StaticResource ResourceKey=MediaSubtitle}">
+                                        <TextBlock Margin="3,0,0,0" Text="{Binding Subtitle}" Style="{StaticResource MediaSubtitle}">
                                         </TextBlock>
                                         <TextBlock Margin="3,0,0,0" Text="{Binding BriefDescription}" Style="{StaticResource Description}"></TextBlock>
                                     </StackPanel>

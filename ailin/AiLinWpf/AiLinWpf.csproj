@@ -102,6 +102,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\HasNontrivialConverter.cs" />
     <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Sources\MediaRepoManager.cs" />
     <Compile Include="Helpers\UiHelper.cs" />

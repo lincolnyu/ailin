@@ -31,6 +31,7 @@ namespace AiLinWpf.ViewModels
             YieldSubtitle();
             YieldBriefDescription();
             YieldPlaylists();
+            YieldSourceCompletenessComments();
         }
 
         public MediaInfo Model { get; }
@@ -53,9 +54,6 @@ namespace AiLinWpf.ViewModels
 
         #region Deduced properties
 
-        // TODO can use a converter
-        public bool HasExternalLink => Model.ExternalLink != null;
-
         public string Year => DateStr.Substring(0, 4);
 
         public string TypeStr { get; private set; }
@@ -65,6 +63,8 @@ namespace AiLinWpf.ViewModels
         public string BriefDescription { get; private set; }
 
         public ObservableCollection<object> MediaSourceItems { get; } = new ObservableCollection<object>();
+
+        public string SourceCompletenessComments { get; private set; }
 
         #endregion
 
@@ -217,6 +217,22 @@ namespace AiLinWpf.ViewModels
                     var tvm = new TrackViewModel { Title = tt, Url = t.Item2 };
                     MediaSourceItems.Add(tvm);
                 }
+            }
+        }
+
+        private void YieldSourceCompletenessComments()
+        {
+            if (Model.SourceCompleteness == "false")
+            {
+                SourceCompletenessComments = "";
+            }
+            else if (!string.IsNullOrWhiteSpace(Model.SourceCompleteness))
+            {
+                SourceCompletenessComments = Model.SourceCompleteness;
+            }
+            else
+            {
+                SourceCompletenessComments = "";
             }
         }
     }
