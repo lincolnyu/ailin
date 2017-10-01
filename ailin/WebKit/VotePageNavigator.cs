@@ -1,10 +1,13 @@
 ﻿//#define SIMULATE_TIMEOUT
+//#define SIMULATE_DOWNLOADING_NULL
 
+using AiLinWpfLib.Helpers;
 using Redback.Helpers;
 using System;
 using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using WebKit.Helpers;
 #if SIMULATE_TIMEOUT
@@ -79,9 +82,15 @@ namespace WebKit
             try
             {
                 _downloading = true;
+#if SIMULATE_DOWNLOADING_NULL
+                await Task.Delay(3000);
+                _downloading = false;
+                var page = "";
+#else
                 var data = await _client.DownloadDataTaskAsync(url);
                 _downloading = false;
-                var page = data.ConvertGB2312ToUTF();
+                var page = await Task.Run(() => data.ConvertGB2312ToUTF());
+#endif
                 return page;
             }
             catch (WebException)

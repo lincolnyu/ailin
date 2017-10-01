@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonParser_dns11", "..\..\j
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QSharp.Scheme.Classical.Sequential(dns11)", "..\..\qsharp\QSharp\QSharp.Scheme.Classical.Sequential\QSharp.Scheme.Classical.Sequential(dns11).csproj", "{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{9266A996-3902-4114-A16E-11263A180A3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinWpfLib", "AiLinWpfLib\AiLinWpfLib.csproj", "{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

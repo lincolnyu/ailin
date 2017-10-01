@@ -13,12 +13,9 @@ using AiLinWpf.ViewModels;
 using System.Linq;
 using AiLinWpf.Helpers;
 using System.Windows.Input;
-using static AiLinWpf.Helpers.ImageHelper;
+using static AiLinWpf.Helpers.ImageLoadingHelper;
 using AiLinWpf.Sources;
-using System.Collections.Specialized;
 using System.Collections;
-using System.Windows.Controls.Primitives;
-using System.Threading;
 
 namespace AiLinWpf
 {
@@ -95,8 +92,8 @@ namespace AiLinWpf
         public MainWindow()
         {
             InitializeComponent();
-            InitInfoDepdentUI();
             SetTitle();
+            InitInfoDepdentUI();
         }
 
         #endregion
@@ -350,7 +347,7 @@ namespace AiLinWpf
 
         private async Task LoadImages()
         {
-            const string tiebaFallback = "pack://application:,,,/Images/tieba-fallback.png";
+            const string tiebaFallback = "pack://application:,,,/Images/fallback-tieba.png";
             const string generalFallback = "pack://application:,,,/Images/fallback.gif";
 
             DownloadTask[] downloads = {
@@ -378,9 +375,16 @@ namespace AiLinWpf
                     await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback, 5000, 1);
                 }
             };
-            
+
+#if LOAD_IMAGE_IN_PARALLEL
             var tasks = downloads.Select(dl => dl()).ToArray();
             await Task.WhenAll(tasks);
+#else
+            foreach (var dl in downloads)
+            {
+                await dl();
+            }
+#endif
             Trace.WriteLine("All image downloading processes have been completed.");
         }
 

@@ -8,4 +8,10 @@
     <ProjectReference Include="..\..\..\jsonparser\JsonParser\JsonParser\JsonParser_dns11.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\PresentationCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
