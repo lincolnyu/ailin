@@ -1,4 +1,5 @@
-﻿//#define TEST_INVITE
+﻿//#define TEST_DISABLE_INITIAL_LOAD
+//#define TEST_INVITE
 
 using AiLinWpf.Styles;
 using System;
@@ -11,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using WebKit;
 using WebKit.Helpers;
-using static AiLinWpf.Helpers.ImageHelper;
+using static AiLinWpf.Helpers.ImageLoadingHelper;
 using static WebKit.VotePageNavigator;
 
 namespace AiLinWpf.Voting
@@ -20,6 +21,7 @@ namespace AiLinWpf.Voting
     {
         public enum States
         {
+            Init,
             Refreshing,
             Loaded,
             SubmittingQuestion,
@@ -107,7 +109,7 @@ namespace AiLinWpf.Voting
             Invite.Click += InviteButtonClick;
             InviteEmail.Click += InviteEmailButtonClick;
             ResultLink.RequestNavigate += window.HyperlinkRequestNavigate;
-            State = States.Refreshing;
+            State = States.Init;
             LoadLast();
         }
 
@@ -115,9 +117,13 @@ namespace AiLinWpf.Voting
 
         private async void TabOnLoaded(object sender, RoutedEventArgs e)
         {
+            EnableLinsPages(false);
+#if !TEST_DISABLE_INITIAL_LOAD
+            State = States.Refreshing;
             await RefreshVoteAsync(true);
+#endif
         }
-        
+
         private void CancelInvite()
         {
             MobileNavigator.CancelRefresh();
@@ -393,9 +399,7 @@ namespace AiLinWpf.Voting
             }
             VoteButton.IsEnabled = false;
             RefreshButton.IsEnabled = true;
-            LinsProfile.IsEnabled = false;
-            LinsPage.IsEnabled = false;
-            LinsPageMobile.IsEnabled = false;
+            EnableLinsPages(false);
             Invite.IsEnabled = false;
             InviteEmail.IsEnabled = false;
             CollapseVote();
@@ -405,13 +409,18 @@ namespace AiLinWpf.Voting
         {
             RefreshButton.IsEnabled = true;
             VoteButton.IsEnabled = enableVoteButton;
-            LinsProfile.IsEnabled = true;
-            LinsPage.IsEnabled = true;
-            LinsPageMobile.IsEnabled = true;
+            EnableLinsPages(true);
             Invite.IsEnabled = true;
             InviteEmail.IsEnabled = true;
             CollapseVote();
             RefreshButton.Content = "刷新";
+        }
+
+        private void EnableLinsPages(bool enabled)
+        {
+            LinsProfile.IsEnabled = enabled;
+            LinsPage.IsEnabled = enabled;
+            LinsPageMobile.IsEnabled = enabled;
         }
 
         private void ProcessError()
@@ -522,7 +531,7 @@ namespace AiLinWpf.Voting
             {
                 var sb = new StringBuilder();
                 sb.Append("亲，请为我的偶像朱琳老师投上您宝贵的一票");
-                if (PageInfo.Rank != null)
+                if (PageInfo?.Rank != null)
                 {
                     sb.Append($"，她现在在{PageInfo.Rank}位");
                 }
@@ -531,7 +540,7 @@ namespace AiLinWpf.Voting
                 {
                     sb.AppendLine($"手机网址： {mp}");
                 }
-                if (PageInfo.PageUrl != null)
+                if (PageInfo?.PageUrl != null)
                 {
                     sb.AppendLine($"普通网址： {PageInfo.PageUrl}");
                 }
