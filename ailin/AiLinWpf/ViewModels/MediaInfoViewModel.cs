@@ -1,12 +1,12 @@
-﻿using AiLinLib.Media;
-using AiLinWpf.Styles;
-using System;
+﻿using System;
 using System.Windows.Media;
 using System.Globalization;
 using System.Text;
 using System.Collections.ObjectModel;
+using AiLinLib.Media;
+using AiLinWpf.Styles;
 using AiLinWpf.ViewModels.Playlist;
-using System.Windows;
+using AiLinWpf.ViewModels.SourcesMissing;
 
 namespace AiLinWpf.ViewModels
 {
@@ -31,7 +31,6 @@ namespace AiLinWpf.ViewModels
             YieldSubtitle();
             YieldBriefDescription();
             YieldPlaylists();
-            YieldSourceCompletenessComments();
         }
 
         public MediaInfo Model { get; }
@@ -63,8 +62,6 @@ namespace AiLinWpf.ViewModels
         public string BriefDescription { get; private set; }
 
         public ObservableCollection<object> MediaSourceItems { get; } = new ObservableCollection<object>();
-
-        public string SourceCompletenessComments { get; private set; }
 
         #endregion
 
@@ -189,21 +186,32 @@ namespace AiLinWpf.ViewModels
             MediaSourceItems.Clear();
             foreach (var source in Model.Sources)
             {
+                var i = -1;
+                Func<bool> isLast = () => i == source.Playlist.Count-1;
                 var title = source.Playlist.Count > 0 ? source.Name + ":" : source.Name;
                 var url = source.Target;
                 MediaProviderLabelViewModel mp;
                 if (!string.IsNullOrWhiteSpace(url))
                 {
-                    mp = new MediaProviderWithUrlViewModel { Title = title, Url = url, Margin = Layouts.StandardIsolatedTextItemMargin };
+                    mp = new MediaProviderWithUrlViewModel
+                    {
+                        Title = title, Url = url,
+                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness)
+                    };
                 }
                 else
                 {
-                    mp = new MediaProviderLabelViewModel { Title = title, Margin = Layouts.StandardIsolatedTextItemMargin };
+                    mp = new MediaProviderLabelViewModel
+                    {
+                        Title = title,
+                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness)
+                    };
                 }
                 MediaSourceItems.Add(mp);
                 int? lastI = null;
-                foreach (var t in source.Playlist)
+                for (i++ ; i < source.Playlist.Count; i++)
                 {
+                    var t = source.Playlist[i];
                     var tt = t.Item1;
                     if (int.TryParse(tt, out var itt))
                     {
@@ -215,24 +223,25 @@ namespace AiLinWpf.ViewModels
                         lastI = itt;
                     }
                     var tvm = new TrackViewModel { Title = tt, Url = t.Item2 };
+                    tvm.Margin = Layouts.GenerateLeftJustified(isLast()? 
+                        Layouts.StandardSeparationMarginThickness : Layouts.StandardTrackItemMarginThickness);
                     MediaSourceItems.Add(tvm);
                 }
             }
-        }
 
-        private void YieldSourceCompletenessComments()
-        {
-            if (Model.SourceCompleteness == "false")
+            GeneralMissingViewModel missing = null;
+            if (Model.SourcesMissing == "true")
             {
-                SourceCompletenessComments = "";
+                missing = GeneralMissingViewModel.GenerateCommon();
             }
-            else if (!string.IsNullOrWhiteSpace(Model.SourceCompleteness))
+            else if (!string.IsNullOrWhiteSpace(Model.SourcesMissing))
             {
-                SourceCompletenessComments = Model.SourceCompleteness;
+                missing = GeneralMissingViewModel.Parse(Model.SourcesMissing);
             }
-            else
+            if (missing != null)
             {
-                SourceCompletenessComments = "";
+                missing.Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness);
+                MediaSourceItems.Add(missing);
             }
         }
     }

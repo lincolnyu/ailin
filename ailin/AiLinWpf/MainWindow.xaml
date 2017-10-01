@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         xmlns:vmpl="clr-namespace:AiLinWpf.ViewModels.Playlist"
+        xmlns:vmsm="clr-namespace:AiLinWpf.ViewModels.SourcesMissing"
         xmlns:converters="clr-namespace:AiLinWpf.Converters"
         mc:Ignorable="d"
         Title="爱琳投票助手" Height="558.375" Width="567"
@@ -12,6 +13,7 @@
     <Window.Resources>
         <converters:ToStringConverter x:Key="ToStringConverter" />
         <converters:HasNontrivialConverter x:Key="HasNontrivialConverter" />
+        <converters:HasNontrivialToVisibilityConverter x:Key="HasNontrivialToVisibilityConverter" />
         <Style TargetType="RichTextBox">
             <Style.Setters>
                 <Setter Property="FontSize" Value="18">
@@ -105,8 +107,7 @@
         <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
         <Image x:Key="ClearIcon" Source="pack://application:,,,/Images/clear.png"/>
         <DataTemplate DataType="{x:Type vmpl:MediaProviderLabelViewModel}">
-            <TextBlock Margin="{Binding Margin}" 
-                           Style="{StaticResource MediaSource}"
+            <TextBlock Margin="{Binding Margin}" Style="{StaticResource MediaSource}"
                            Text="{Binding Title}">
             </TextBlock>
         </DataTemplate>
@@ -120,8 +121,8 @@
             </TextBlock>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmpl:TrackViewModel}" >
-            <TextBlock Style="{StaticResource MediaSource}">
-                    <Hyperlink Tag="something" IsEnabled="{Binding HasUrl}" 
+            <TextBlock Style="{StaticResource MediaSource}" Margin="{Binding Margin}">
+                    <Hyperlink IsEnabled="{Binding Url, Converter={StaticResource HasNontrivialConverter}}" 
                                NavigateUri="{Binding Url}"
                                Style="{StaticResource NormalHyperlink}">
                         <Run Text="{Binding Title}" ></Run>
@@ -130,6 +131,17 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmpl:EllipsisViewModel}">
             <TextBlock Style="{StaticResource MediaSource}">...</TextBlock>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmsm:GeneralMissingViewModel}">
+            <StackPanel Orientation="Horizontal" Margin="{Binding Margin}">
+                <TextBlock Style="{StaticResource Description}" Text="{Binding PreContactText}"></TextBlock>
+                <TextBlock Style="{StaticResource Description}">
+                    <Hyperlink NavigateUri="{Binding Contact}" Style="{StaticResource NormalHyperlink}">
+                        <Run Text="{Binding ContactText, Mode=OneWay}"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock Style="{StaticResource Description}" Text="{Binding PostContactText}"></TextBlock>
+            </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -423,7 +435,8 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
+                                    <WrapPanel HorizontalAlignment="Left" Orientation="Horizontal" 
+                                               Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}">
                                         <TextBlock Style="{StaticResource MediaTitle}">
                                             <Hyperlink Style="{StaticResource UndecoratedLink}"
                                                            IsEnabled="{Binding ExternalLink, Converter={StaticResource HasNontrivialConverter}}"
@@ -433,9 +446,12 @@
                                         </TextBlock>
                                         <TextBlock Margin="3,0,0,0" Text="{Binding Subtitle}" Style="{StaticResource MediaSubtitle}">
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0" Text="{Binding BriefDescription}" Style="{StaticResource Description}"></TextBlock>
-                                    </StackPanel>
-                                    <ItemsControl ItemsSource="{Binding MediaSourceItems}">
+                                        <TextBlock Margin="8,0,0,0" Text="{Binding BriefDescription}" 
+                                               Visibility="{Binding BriefDescription, Converter={StaticResource HasNontrivialToVisibilityConverter}}" 
+                                               Style="{StaticResource Description}"></TextBlock>
+                                    </WrapPanel>
+                                    <ItemsControl ItemsSource="{Binding MediaSourceItems}" Margin="5,0,0,0"
+                                                  Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel/>
