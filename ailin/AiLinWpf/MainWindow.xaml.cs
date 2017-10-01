@@ -526,35 +526,15 @@ namespace AiLinWpf
             var mivm = (MediaInfoViewModel)item;
             if (mivm != null)
             {
-                switch (mivm.Id)
+                var bgm = mivm.Model.Songs.Count == 1 ? mivm.Model.Songs.First() : 
+                    mivm.Model.Songs.FirstOrDefault(x => x.Item1 == "bgm");
+                if (bgm != null && !string.IsNullOrWhiteSpace(bgm.Item2))
                 {
-                    case "EShNHZXH":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/fblxzhf.mp3");
-                        break;
-                    case "HFQX":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wlsh.mp3");
-                        break;
-                    case "KXZZY":
-                        await TryPlayAudioInternet("http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3");
-                        break;
-                    case "WZTTDN":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wzttdn.mp3");
-                        break;
-                    case "YLZhZhND":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/a-morning-in-cornwell.mp3");
-                        break;
-                    case "XEBLK":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xeblk.mp3");
-                        break;
-                    case "XJRSh":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xjrsh.mp3");
-                        break;
-                    case "XYJ":
-                        await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");
-                        break;
-                    default:
-                        StopPlayingAudio();
-                        break;
+                    await TryPlayAudioInternet(bgm.Item2);
+                }
+                else
+                {
+                    StopPlayingAudio();
                 }
             }
             else

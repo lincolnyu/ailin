@@ -28,6 +28,8 @@ namespace AiLinLib.Media
         /// </summary>        
         public string ExternalLink { get; set; }
 
+        public List<Tuple<string, string>> Songs { get; } = new List<Tuple<string, string>>();
+
         public List<MediaSource> Sources { get; } = new List<MediaSource>();
 
         public static MediaInfo TryParse(JsonPairs mediaInfo)
@@ -77,6 +79,18 @@ namespace AiLinLib.Media
             {
                 mi.ExternalLink = link;
             }
+            if (mediaInfo.TryGetNode("songs", out JsonArray songs))
+            {
+                foreach (var p in songs.Items.OfType<JsonPairs>().Where(x=>x.KeyValues.Count==1))
+                {
+                    var pair = p.KeyValues.First();
+                    if (JsonPairs.TryGetValue(pair, out string t))
+                    {
+                        var song = new Tuple<string, string>(pair.Key, t);
+                        mi.Songs.Add(song);
+                    }
+                }
+            }
             if (mediaInfo.TryGetNode("sources", out JsonArray sources))
             {
                 // Ignoreing invalid ones
@@ -97,7 +111,7 @@ namespace AiLinLib.Media
                             foreach (var p in playlist.Items.OfType<JsonPairs>().Where(x=>x.KeyValues.Count==1))
                             {
                                 var pair = p.KeyValues.First();
-                                if (p.TryGetValue(pair.Key, out string t))
+                                if (JsonPairs.TryGetValue(pair, out string t))
                                 {
                                     var track = new Tuple<string, string>(pair.Key, t);
                                     source.Playlist.Add(track);
