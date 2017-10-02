@@ -12,17 +12,6 @@ namespace AiLinWpf.ViewModels
 {
     public class MediaInfoViewModel
     {
-        public enum Types
-        {
-            Uncategorized,
-            Movie,      // 电影
-            Television, // 电视剧
-            RadioDrama, // 广播剧
-            Recite,     // 朗诵
-            Interview,  // 访谈
-            Show        // 综艺
-        }
-
         public MediaInfoViewModel(MediaInfo model)
         {
             Model = model;
@@ -55,6 +44,7 @@ namespace AiLinWpf.ViewModels
 
         public string Year => DateStr.Substring(0, 4);
 
+        public int TypeId { get; private set; }
         public string TypeStr { get; private set; }
 
         public string Subtitle { get; private set; }
@@ -66,8 +56,6 @@ namespace AiLinWpf.ViewModels
         #endregion
 
         public DateTime Date { get; private set; }
-
-        public Types Type { get; private set; }
 
         public Brush Background { get; private set; }
         public bool BackgroundUpdatedToUI { get; set; }
@@ -130,31 +118,36 @@ namespace AiLinWpf.ViewModels
             switch (Model.Category)
             {
                 case "movie":
-                    Type = Types.Movie;
                     TypeStr = "电影";
                     Background = Coloring.PaleGoldenrodBrush;
+                    TypeId = 1;
+                    break;
+                case "short":
+                    TypeStr = "微电影";
+                    Background = Coloring.PaleGoldenrodBrush;
+                    TypeId = 1;
                     break;
                 case "tv":
                 case "television":
-                    Type = Types.Television;
                     TypeStr = "电视剧";
                     Background = Coloring.LightSkyBlueBrush;
+                    TypeId = 2;
                     break;
                 case "radio drama":
-                    Type = Types.RadioDrama;
                     TypeStr = "广播剧";
+                    TypeId = 3;
                     break;
                 case "recite":
-                    Type = Types.Recite;
                     TypeStr = "朗诵";
+                    TypeId = 4;
                     break;
                 case "interview":
-                    Type = Types.Interview;
                     TypeStr = "访谈";
+                    TypeId = 5;
                     break;
                 case "show":
-                    Type = Types.Show;
                     TypeStr = "综艺";
+                    TypeId = 6;
                     break;
             }
         }

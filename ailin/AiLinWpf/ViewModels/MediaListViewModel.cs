@@ -21,8 +21,8 @@ namespace AiLinWpf.ViewModels
 
         public List<Comparison<MediaInfoViewModel>> Comparisons = new List<Comparison<MediaInfoViewModel>>();
 
-        public static Comparison<MediaInfoViewModel> CompareTypeAscending => (x, y) => x.Type.CompareTo(y.Type);
-        public static Comparison<MediaInfoViewModel> CompareTypeDescending => (x, y) => y.Type.CompareTo(x.Type);
+        public static Comparison<MediaInfoViewModel> CompareTypeAscending => (x, y) => x.TypeId.CompareTo(y.TypeId);
+        public static Comparison<MediaInfoViewModel> CompareTypeDescending => (x, y) => y.TypeId.CompareTo(x.TypeId);
         public static Comparison<MediaInfoViewModel> CompareTitleAscending => (x, y) => ChineseHelper.Compare(x.Title, y.Title);
         public static Comparison<MediaInfoViewModel> CompareTitleDescending => (x, y) => ChineseHelper.Compare(y.Title, x.Title);
         public static Comparison<MediaInfoViewModel> CompareDateAscending => (x, y) => x.Date.CompareTo(y.Date);
