@@ -27,9 +27,20 @@ namespace AiLinWpf.Sources
         public string TempFileName { get; }
         public MediaRepository Current { get; private set; }
 
-        public async Task Initialize()
+        public async Task Initialize(bool resetToDefault = false)
         {
-            Current = await Load();
+            if (resetToDefault)
+            {
+                Reset();
+            }
+            else
+            {
+                Current = await Load();
+            }
+            if (Current == null)
+            {
+                await ResetToDefault();
+            }
         }
 
         public void Reset()
@@ -38,6 +49,15 @@ namespace AiLinWpf.Sources
             using (var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null))
             {
                 isoStore.DeleteFile(TempFileName);
+            }
+        }
+
+        public async Task ResetToDefault()
+        {
+            Current = await LoadDefault();
+            if (Current != null)
+            {
+                await Save();
             }
         }
 
@@ -93,6 +113,24 @@ namespace AiLinWpf.Sources
                         var mr = MediaRepository.TryParse(json);
                         return mr;
                     }
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private async Task<MediaRepository> LoadDefault()
+        {
+            try
+            {
+                using (var fs = new FileStream(@"Jsons\media.json", FileMode.Open))
+                using (var sr = new StreamReader(fs))
+                {
+                    var json = await sr.ReadToEndAsync();
+                    var mr = MediaRepository.TryParse(json);
+                    return mr;
                 }
             }
             catch (Exception)

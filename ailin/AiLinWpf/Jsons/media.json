@@ -1,0 +1,82 @@
+{
+  "version" : "0.0",
+  "mediaList": [
+    {
+      "id": "PGZh",
+      "title": "叛国者",
+      "type": "movie",
+      "date": "1980",
+      "sources": [
+        {
+          "name": "优酷",
+          "playlist": [
+            { "片源1": "http://v.youku.com/v_show/id_XOTA5NDI3NTY4.html" },
+            { "片源2": "http://v.youku.com/v_show/id_XMjc2NzU3OTY3Mg==.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XY",
+      "title": "小院",
+      "type": "movie",
+      "date": "1981",
+      "sources": [
+        {
+          "name": "土豆",
+          "target": "http://video.tudou.com/v/XMjEwNDUzNDc2MA==.html"
+        },
+        {
+          "name": "bilibili",
+          "target": "http://www.bilibili.com/video/av4042145/"
+        }
+      ],
+      "sourcesMissing": "true"
+    },
+    {
+      "id": "EShNHZXH",
+      "title": "二十年后再相会",
+      "type": "movie",
+      "date": "1984",
+      "role": "船舶监造师诸晖",
+      "director": "石晓华",
+      "producer": "上海电影制片厂",
+      "link": "https://baike.baidu.com/item/%E4%BA%8C%E5%8D%81%E5%B9%B4%E5%90%8E%E5%86%8D%E7%9B%B8%E4%BC%9A/15927?fr=aladdin",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/fblxzhf.mp3" }
+      ],
+      "sources": [
+        {
+          "name": "乐视",
+          "target": "http://www.le.com/ptv/vplay/26553300.html?ch=sohu_v"
+        },
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XMTg4OTU1ODM4MA==.html"
+        }
+      ]
+    },
+    {
+      "id": "XEBLK",
+      "title": "肖尔布拉克",
+      "type": "movie",
+      "date": "1984",
+      "role": "知青叶娟",
+      "director": "包起成",
+      "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/xeblk.mp3" }
+      ],
+      "sources": [
+        {
+          "name": "风行网",
+          "target": "http://www.fun.tv/vplay/g-37790/"
+        },
+        {
+          "name": "Youtube",
+          "target": "https://www.youtube.com/watch?v=GXF0P4-a2L4"
+        }
+      ]
+    }
+  ]
+}

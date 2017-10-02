@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿//#define SIMULATE_FAILED_LOAD
+using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -32,6 +33,13 @@ namespace AiLinWpf
             Opened,
             Ended,
             Failed
+        }
+
+        private enum RefreshOptions
+        {
+            NoRefresh,
+            RefreshWithNoMessage,
+            RefreshWithMessage
         }
 
         private delegate Task DownloadTask();
@@ -289,17 +297,21 @@ namespace AiLinWpf
             var res = MessageBox.Show(caption, Title, MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                await LoadAndRefreshMediaList(force, true);
+                await LoadAndRefreshMediaList(force, RefreshOptions.RefreshWithMessage);
             }
         }
 
         private async Task InitLoadAndRefreshMediaList()
         {
             VideoList.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
-            await LoadAndRefreshMediaList(false);
+#if SIMULATE_FAILED_LOAD
+            await LoadAndRefreshMediaList(false, RefreshOptions.NoRefresh);
+#else
+            await LoadAndRefreshMediaList(false, RefreshOptions.RefreshWithNoMessage);
+#endif
         }
 
-        private async Task LoadAndRefreshMediaList(bool force, bool showRefreshResult = false)
+        private async Task LoadAndRefreshMediaList(bool force, RefreshOptions refreshOption)
         {
             var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
             await mediaRepoManager.Initialize();
@@ -307,20 +319,24 @@ namespace AiLinWpf
             {
                 mediaRepoManager.Reset();
             }
-            var res = await mediaRepoManager.Refresh();
-            if (showRefreshResult)
+            if (refreshOption != RefreshOptions.NoRefresh)
             {
-                switch (res)
+                var res = await mediaRepoManager.Refresh();
+                if (refreshOption == RefreshOptions.RefreshWithMessage)
                 {
-                    case MediaRepoManager.RefreshResults.Refreshed:
-                        MessageBox.Show("成功下载并更新列表。", Title);
-                        break;
-                    case MediaRepoManager.RefreshResults.FailedToDownload:
-                        MessageBox.Show("下载列表失败。", Title);
-                        break;
-                    case MediaRepoManager.RefreshResults.AlreadyLatest:
-                        MessageBox.Show("已经是最新列表，无需更新。", Title);
-                        break;
+                    switch (res)
+                    {
+                        case MediaRepoManager.RefreshResults.Refreshed:
+                            MessageBox.Show("成功下载并更新列表。", Title);
+                            break;
+                        case MediaRepoManager.RefreshResults.FailedToDownload:
+                            MessageBox.Show("下载列表失败。", Title);
+                            await mediaRepoManager.ResetToDefault();
+                            break;
+                        case MediaRepoManager.RefreshResults.AlreadyLatest:
+                            MessageBox.Show("已经是最新列表，无需更新。", Title);
+                            break;
+                    }
                 }
             }
             _mediaList = new MediaListViewModel(mediaRepoManager.Current);
