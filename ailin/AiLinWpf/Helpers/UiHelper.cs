@@ -137,7 +137,6 @@ namespace AiLinWpf.Helpers
 
                         inlines.Add(s.Substring(lastIndex));
                         Replace(tb, ntb);
-                        System.Diagnostics.Trace.WriteLine($"New text is {ntb.Text}");
                         yield return new Tuple<FrameworkElement, FrameworkElement>(tb, ntb);
                     }
                 }

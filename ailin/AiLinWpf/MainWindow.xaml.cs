@@ -17,6 +17,7 @@ using System.Windows.Input;
 using static AiLinWpf.Helpers.ImageLoadingHelper;
 using AiLinWpf.Sources;
 using System.Collections;
+using System.Windows.Controls.Primitives;
 
 namespace AiLinWpf
 {
@@ -205,9 +206,16 @@ namespace AiLinWpf
             _suppressSearchBoxTextChangedHandling = saved;
         }
 
+        private bool HasSearchResults()
+            => _highlightedItems.Count > 0;
+
         private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
         {
             ShowPlaceholderText();
+            if (!HasSearchResults())
+            {
+                EndSearch();
+            }
         }
 
         private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
@@ -237,18 +245,21 @@ namespace AiLinWpf
             ShowPlaceholderText();
         }
 
-        private void BtnSearchOnClick(object sender, RoutedEventArgs e)
+        private async void BtnSearchOnClick(object sender, RoutedEventArgs e)
         {
-            SearchAndHighlight();
+            PrepareForSearch();
+            await SearchAndHighlight();
+            ScrollToFirstHighlightedIfAny();
         }
 
-        private void SearchBoxKeyDown(object sender, KeyEventArgs e)
+        private async void SearchBoxKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
+                PrepareForSearch();
                 if (_currentFocused == null)
                 {
-                    SearchAndHighlight();
+                    await SearchAndHighlight();
                 }
                 else
                 {
@@ -269,10 +280,19 @@ namespace AiLinWpf
                             _currentFocused = 0;
                         }
                     }
-                    var lbi = _highlightedItems[_currentFocused.Value];
-                    VideoList.ScrollIntoView(lbi);
-                    lbi.IsSelected = true;
                 }
+                ScrollToFirstHighlightedIfAny();
+            }
+        }
+
+        private void ScrollToFirstHighlightedIfAny()
+        {
+            if(_currentFocused.HasValue && _currentFocused.Value >= 0 && _currentFocused.Value < _highlightedItems.Count)
+            {
+                var lbi = _highlightedItems[_currentFocused.Value];
+                var obj = lbi.DataContext;
+                VideoList.ScrollIntoView(obj);
+                lbi.IsSelected = true;
             }
         }
 
@@ -291,6 +311,16 @@ namespace AiLinWpf
 
         #endregion
 
+        private void PrepareForSearch()
+        {
+            VideoList.SetValue(VirtualizingPanel.IsVirtualizingProperty, false);
+        }
+
+        private void EndSearch()
+        {
+            VideoList.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
+        }
+
         private async Task RedownloadMediaList(bool force)
         {
             var caption = force ? "是否确认重新下载媒体列表？" : "是否确认刷新媒体列表？";
@@ -303,7 +333,6 @@ namespace AiLinWpf
 
         private async Task InitLoadAndRefreshMediaList()
         {
-            VideoList.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
 #if SIMULATE_FAILED_LOAD
             await LoadAndRefreshMediaList(false, RefreshOptions.NoRefresh);
 #else
@@ -341,24 +370,6 @@ namespace AiLinWpf
             }
             _mediaList = new MediaListViewModel(mediaRepoManager.Current);
             VideoList.ItemsSource = _mediaList.MediaViewModels;
-        }
-
-        private void ItemContainerGeneratorOnStatusChanged(object sender, EventArgs e)
-        {
-            ColorVideoListItems(VideoList.Items);
-        }
-        
-        private void ColorVideoListItems(IList items)
-        {
-            foreach (var item in items.Cast<MediaInfoViewModel>().Where(i=>!i.BackgroundUpdatedToUI))
-            {
-                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
-                if (lbi != null)
-                {
-                    lbi.Background = item.Background;
-                    item.BackgroundUpdatedToUI = true;
-                }
-            }
         }
 
         private async Task LoadImages()
@@ -609,7 +620,31 @@ namespace AiLinWpf
             }
         }
 
-        private void SearchAndHighlight()
+        private async Task<ListBoxItem> GetListBoxItem(object item)
+        {
+            while (true)
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                EventHandler handler = null;
+                VideoList.ItemContainerGenerator.StatusChanged += handler = (sender, e) =>
+                {
+                    VideoList.ItemContainerGenerator.StatusChanged -= handler;
+                    tcs.SetResult(true);
+                };
+                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                if (lbi != null)
+                {
+                    VideoList.ItemContainerGenerator.StatusChanged -= handler;
+                    return lbi;
+                }
+                else
+                {
+                    await tcs.Task;
+                }
+            }
+        }
+
+        private async Task SearchAndHighlight()
         {
             DeHighlight();
             if (string.IsNullOrWhiteSpace(_searchTarget))
@@ -621,7 +656,8 @@ namespace AiLinWpf
             var count = 0;
             foreach (var item in VideoList.Items)
             {
-                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                ListBoxItem lbi = null;
+                lbi = await GetListBoxItem(item);
                 var p = lbi.GetFirstPanelFromDatabound();
                 if (p != null)
                 {

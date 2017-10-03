@@ -127,7 +127,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\SourcesMissing\GeneralMissingViewModel.cs" />
+    <Compile Include="ViewModels\SourcesRemarks\CommonSourceRemarksViewModel.cs" />
+    <Compile Include="ViewModels\SourcesRemarks\XamlSourceRemarksViewModel.cs" />
     <Compile Include="Voting\InfoDepedentUI.cs" />
     <Compile Include="Voting\Record.cs" />
     <Compile Include="Voting\RecordRepository.cs" />

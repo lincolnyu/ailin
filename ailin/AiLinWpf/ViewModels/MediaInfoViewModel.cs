@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using AiLinLib.Media;
 using AiLinWpf.Styles;
 using AiLinWpf.ViewModels.Playlist;
-using AiLinWpf.ViewModels.SourcesMissing;
+using AiLinWpf.ViewModels.SourcesRemarks;
 
 namespace AiLinWpf.ViewModels
 {
@@ -42,7 +42,7 @@ namespace AiLinWpf.ViewModels
 
         #region Deduced properties
 
-        public string Year => DateStr.Substring(0, 4);
+        public string Year => DateStr?.Substring(0, 4)??"";
 
         public int TypeId { get; private set; }
         public string TypeStr { get; private set; }
@@ -117,6 +117,7 @@ namespace AiLinWpf.ViewModels
             Background = Coloring.Transparent;
             switch (Model.Category)
             {
+                case "film":
                 case "movie":
                     TypeStr = "电影";
                     Background = Coloring.PaleGoldenrodBrush;
@@ -169,6 +170,9 @@ namespace AiLinWpf.ViewModels
                     Date = DateTime.ParseExact(Model.DateStr, "yyyy", CultureInfo.InvariantCulture);
                 }
             }
+            catch (NullReferenceException)
+            {
+            }
             catch (ArgumentException)
             {
             }
@@ -181,7 +185,8 @@ namespace AiLinWpf.ViewModels
             {
                 var i = -1;
                 Func<bool> isLast = () => i == source.Playlist.Count-1;
-                var title = source.Playlist.Count > 0 ? source.Name + ":" : source.Name;
+                var hasColon = source.Playlist.Count > 0;
+                var title = source.Name.TrimEnd('：');
                 var url = source.Target;
                 MediaProviderLabelViewModel mp;
                 if (!string.IsNullOrWhiteSpace(url))
@@ -189,7 +194,8 @@ namespace AiLinWpf.ViewModels
                     mp = new MediaProviderWithUrlViewModel
                     {
                         Title = title, Url = url,
-                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness)
+                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness),
+                        HasColon = hasColon
                     };
                 }
                 else
@@ -197,7 +203,8 @@ namespace AiLinWpf.ViewModels
                     mp = new MediaProviderLabelViewModel
                     {
                         Title = title,
-                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness)
+                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness),
+                        HasColon = hasColon
                     };
                 }
                 MediaSourceItems.Add(mp);
@@ -222,19 +229,22 @@ namespace AiLinWpf.ViewModels
                 }
             }
 
-            GeneralMissingViewModel missing = null;
-            if (Model.SourcesMissing == "true")
+            if (Model.SourcesRemarks?.Contains("<") == true)
             {
-                missing = GeneralMissingViewModel.GenerateCommon();
+                var xsrvm = XamlSourceRemarksViewModel.TryParseBlock(Model.SourcesRemarks);
+                if (xsrvm != null)
+                {
+                    MediaSourceItems.Add(xsrvm);
+                }
             }
-            else if (!string.IsNullOrWhiteSpace(Model.SourcesMissing))
+            else
             {
-                missing = GeneralMissingViewModel.Parse(Model.SourcesMissing);
-            }
-            if (missing != null)
-            {
-                missing.Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness);
-                MediaSourceItems.Add(missing);
+                var gsrvm = CommonSourceRemarksViewModel.TryParse(Model.SourcesRemarks);
+                if (gsrvm != null)
+                {
+                    gsrvm.Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness);
+                    MediaSourceItems.Add(gsrvm);
+                }
             }
         }
     }
