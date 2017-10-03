@@ -234,6 +234,7 @@ namespace AiLinWpf.ViewModels
                 var xsrvm = XamlSourceRemarksViewModel.TryParseBlock(Model.SourcesRemarks);
                 if (xsrvm != null)
                 {
+                    xsrvm.Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness);
                     MediaSourceItems.Add(xsrvm);
                 }
             }

@@ -13,6 +13,25 @@ namespace AiLinWpf.Helpers
 {
     public static class UiHelper
     {
+        public static IEnumerable<DependencyObject> FindAll(this DependencyObject element, ICollection<Type> types)
+        {
+            var cc = VisualTreeHelper.GetChildrenCount(element);
+            for (var i = 0; i < cc; i++)
+            {
+                var child = VisualTreeHelper.GetChild(element, i);
+                var isOfType = types.Any(t => t.IsInstanceOfType(child));
+                if (types.Contains(child.GetType()))
+                {
+                    yield return child;
+                }
+                var es = child.FindAll(types);
+                foreach (var e in es)
+                {
+                    yield return e;
+                }
+            }
+        }
+
         public static Panel GetFirstPanelFromDatabound(this DependencyObject element)
         {
             var childCount = VisualTreeHelper.GetChildrenCount(element);

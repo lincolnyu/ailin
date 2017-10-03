@@ -55,7 +55,7 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="Description">
             <Style.Setters>
-                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="VerticalAlignment" Value="Bottom"/>
             </Style.Setters>
         </Style>
@@ -146,7 +146,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmsr:XamlSourceRemarksViewModel}">
-            <ContentPresenter Content="{Binding Element}"/>
+            <ContentPresenter Content="{Binding Element}" Margin="{Binding Margin}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
