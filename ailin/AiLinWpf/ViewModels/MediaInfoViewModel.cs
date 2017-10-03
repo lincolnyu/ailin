@@ -208,19 +208,23 @@ namespace AiLinWpf.ViewModels
                     };
                 }
                 MediaSourceItems.Add(mp);
+                var checkConsecutiveness = CheckConsecutiveness();
                 int? lastI = null;
                 for (i++ ; i < source.Playlist.Count; i++)
                 {
                     var t = source.Playlist[i];
                     var tt = t.Item1;
-                    if (int.TryParse(tt, out var itt))
+                    if (checkConsecutiveness)
                     {
-                        var inconsecutive = lastI.HasValue && lastI + 1 != itt;
-                        if (inconsecutive)
+                        if (int.TryParse(tt, out var itt))
                         {
-                            MediaSourceItems.Add(EllipsisViewModel.Instance);
+                            var inconsecutive = lastI.HasValue && lastI + 1 != itt;
+                            if (inconsecutive)
+                            {
+                                MediaSourceItems.Add(EllipsisViewModel.Instance);
+                            }
+                            lastI = itt;
                         }
-                        lastI = itt;
                     }
                     var tvm = new TrackViewModel { Title = tt, Url = t.Item2 };
                     tvm.Margin = Layouts.GenerateLeftJustified(isLast()? 
@@ -248,5 +252,8 @@ namespace AiLinWpf.ViewModels
                 }
             }
         }
+
+        private bool CheckConsecutiveness()
+            => Model.SourcesRemarks?.Contains("剧集不全")?? false;
     }
 }
