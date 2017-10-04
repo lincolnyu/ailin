@@ -4,6 +4,13 @@ namespace AiLinWpf.Styles
 {
     public static class Layouts
     {
-        public static readonly Thickness StandardIsolatedTextItemMargin = new Thickness(8, 0, 8, 0);
+        public const int StandardTrackItemMarginThickness = 3;
+        public const int StandardSeparationMarginThickness = 10;
+
+        public static Thickness GenerateLeftJustified(int after)
+            => GenerateHorizontalMargin(0, after);
+
+        public static Thickness GenerateHorizontalMargin(int before, int after)
+            => new Thickness(before, 0, after, 0);
     }
 }

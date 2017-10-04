@@ -102,6 +102,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\HasNontrivialConverter.cs" />
+    <Compile Include="Converters\HasNontrivialToVisibilityConverter.cs" />
     <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Sources\MediaRepoManager.cs" />
     <Compile Include="Helpers\UiHelper.cs" />
@@ -125,6 +127,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\SourcesRemarks\CommonSourceRemarksViewModel.cs" />
+    <Compile Include="ViewModels\SourcesRemarks\XamlSourceRemarksViewModel.cs" />
     <Compile Include="Voting\InfoDepedentUI.cs" />
     <Compile Include="Voting\Record.cs" />
     <Compile Include="Voting\RecordRepository.cs" />
@@ -153,6 +157,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Compile Include="Helpers\InterpretationHelper.cs" />
+    <Content Include="Jsons\media.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -212,5 +220,6 @@
     <Resource Include="Images\init-weibo.jpg" />
     <Resource Include="Images\init-zhulin.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

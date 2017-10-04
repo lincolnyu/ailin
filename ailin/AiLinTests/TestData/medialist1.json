@@ -9,6 +9,9 @@
       "role": "船舶监造师诸晖",
       "director": "石晓华",
       "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/fblxzhf.mp3" }
+      ],
       "sources": [
         {
           "name": "乐视",
@@ -28,6 +31,9 @@
       "role": "知青叶娟",
       "director": "包起成",
       "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/xeblk.mp3" }
+      ],
       "sources": [
         {
           "name": "风行网",
@@ -79,7 +85,7 @@
     {
       "id": "MYPF",
       "title": "命运配方",
-      "type": "television",
+      "type": "tv",
       "date": "2003",
       "sources": [
         {

@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AiLinWpf"
         xmlns:vmpl="clr-namespace:AiLinWpf.ViewModels.Playlist"
+        xmlns:vmsr="clr-namespace:AiLinWpf.ViewModels.SourcesRemarks"
         xmlns:converters="clr-namespace:AiLinWpf.Converters"
         mc:Ignorable="d"
         Title="爱琳投票助手" Height="558.375" Width="567"
         Loaded="WindowOnLoaded">
     <Window.Resources>
         <converters:ToStringConverter x:Key="ToStringConverter" />
+        <converters:HasNontrivialConverter x:Key="HasNontrivialConverter" />
+        <converters:HasNontrivialToVisibilityConverter x:Key="HasNontrivialToVisibilityConverter" />
         <Style TargetType="RichTextBox">
             <Style.Setters>
                 <Setter Property="FontSize" Value="18">
@@ -52,7 +55,7 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="Description">
             <Style.Setters>
-                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontSize" Value="14"/>
                 <Setter Property="VerticalAlignment" Value="Bottom"/>
             </Style.Setters>
         </Style>
@@ -104,23 +107,24 @@
         <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
         <Image x:Key="ClearIcon" Source="pack://application:,,,/Images/clear.png"/>
         <DataTemplate DataType="{x:Type vmpl:MediaProviderLabelViewModel}">
-            <TextBlock Margin="{Binding Margin}" 
-                           Style="{StaticResource MediaSource}"
+            <TextBlock Margin="{Binding Margin}" Style="{StaticResource MediaSource}"
                            Text="{Binding Title}">
+                <Run Text="{Binding Colon, Mode=OneWay}"></Run>
             </TextBlock>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmpl:MediaProviderWithUrlViewModel}">
             <TextBlock Margin="{Binding Margin}" 
                            Style="{StaticResource MediaSource}">
-                    <Hyperlink NavigateUri="{Binding Url}"
-                               Style="{StaticResource NormalHyperlink}">
-                        <Run Text="{Binding Title}"></Run>
-                    </Hyperlink>
+                <Hyperlink NavigateUri="{Binding Url}"
+                            Style="{StaticResource NormalHyperlink}">
+                    <Run Text="{Binding Title}"></Run>
+                </Hyperlink>
+                <Run Text="{Binding Colon, Mode=OneWay}"></Run>
             </TextBlock>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmpl:TrackViewModel}" >
-            <TextBlock Style="{StaticResource MediaSource}">
-                    <Hyperlink Tag="something" IsEnabled="{Binding HasUrl}" 
+            <TextBlock Style="{StaticResource MediaSource}" Margin="{Binding Margin}">
+                    <Hyperlink IsEnabled="{Binding Url, Converter={StaticResource HasNontrivialConverter}}" 
                                NavigateUri="{Binding Url}"
                                Style="{StaticResource NormalHyperlink}">
                         <Run Text="{Binding Title}" ></Run>
@@ -129,6 +133,20 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmpl:EllipsisViewModel}">
             <TextBlock Style="{StaticResource MediaSource}">...</TextBlock>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmsr:CommonSourceRemarksViewModel}">
+            <StackPanel Orientation="Horizontal" Margin="{Binding Margin}">
+                <TextBlock Style="{StaticResource Description}" Text="{Binding PreContactText}"></TextBlock>
+                <TextBlock Style="{StaticResource Description}">
+                    <Hyperlink NavigateUri="{Binding Contact}" Style="{StaticResource NormalHyperlink}">
+                        <Run Text="{Binding ContactText, Mode=OneWay}"/>
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock Style="{StaticResource Description}" Text="{Binding PostContactText}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vmsr:XamlSourceRemarksViewModel}">
+            <ContentPresenter Content="{Binding Element}" Margin="{Binding Margin}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -345,20 +363,20 @@
                                     <Button.Template>
                                         <ControlTemplate>
                                             <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                    Width="16" Height="16" Child="{StaticResource ResourceKey=ClearIcon}">
+                                                    Width="16" Height="16" Child="{StaticResource ClearIcon}">
                                             </Border>
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
                                 <Button Grid.Column="2" Click="BtnSearchOnClick" Width="30" Height="30" 
-                                        Content="{StaticResource ResourceKey=SearchIcon}">
+                                        Content="{StaticResource SearchIcon}">
                                 </Button>
                             </Grid>
                             <TextBlock Name="MatchCount" Grid.Column="1" Style="{StaticResource Description}"></TextBlock>
                         </Grid>
                         <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
                             <TextBlock Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center">
-                                鸣谢<Hyperlink Style="{StaticResource ResourceKey=SpecialHyperlink}"
+                                鸣谢<Hyperlink Style="{StaticResource SpecialHyperlink}"
                                              NavigateUri="Dummy"
                                              RequestNavigate="FriendlyLinksOnRequestNavigate">
                                     友情链接
@@ -371,14 +389,24 @@
                         </StackPanel>
                     </Grid>
                     <ListBox Name="VideoList" SelectionChanged="VideoListOnSelectionChanged" 
+                             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                              HorizontalContentAlignment="Stretch">
                         <ListBox.Resources>
                             <Style x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
+                                <Setter Property="Background" Value="{Binding Background}"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
-                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                                    Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" 
+                                                    SnapsToDevicePixels="True">
+                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                                  Content="{TemplateBinding Content}" 
+                                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <MultiTrigger>
@@ -411,7 +439,8 @@
                                                     <Setter Property="BorderBrush" TargetName="Bd" Value="Violet"/>
                                                 </MultiTrigger>
                                                 <Trigger Property="IsEnabled" Value="False">
-                                                    <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                                    <Setter Property="TextElement.Foreground" TargetName="Bd"
+                                                            Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -421,19 +450,27 @@
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Title}" Style="{StaticResource ResourceKey=MediaTitle}">
-                                            <Hyperlink Style="{StaticResource ResourceKey=UndecoratedLink}"
-                                                            IsEnabled="{Binding HasExternalLink}"
+                                <!--
+                                  Reference: 
+                                  https://stackoverflow.com/questions/5526217/how-to-get-or-compute-actual-width-of-listbox-without-vertical-scrollbar-if-visi 
+                                -->
+                                <StackPanel Orientation="Vertical" Width="{Binding Path=ViewportWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ScrollViewer}}">
+                                    <WrapPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}">
+                                        <TextBlock Style="{StaticResource MediaTitle}">
+                                            <Hyperlink Style="{StaticResource UndecoratedLink}"
+                                                           IsEnabled="{Binding ExternalLink, Converter={StaticResource HasNontrivialConverter}}"
                                                            NavigateUri="{Binding ExternalLink}">
+                                                <Run Text="{Binding Title, Mode=OneWay}"/>
                                             </Hyperlink>
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0" Text="{Binding Subtitle}" Style="{StaticResource ResourceKey=MediaSubtitle}">
+                                        <TextBlock Margin="3,0,0,0" Text="{Binding Subtitle}" Style="{StaticResource MediaSubtitle}">
                                         </TextBlock>
-                                        <TextBlock Margin="3,0,0,0" Text="{Binding BriefDescription}" Style="{StaticResource Description}"></TextBlock>
-                                    </StackPanel>
-                                    <ItemsControl ItemsSource="{Binding MediaSourceItems}">
+                                        <TextBlock Margin="8,0,0,0" Text="{Binding BriefDescription}" 
+                                               Visibility="{Binding BriefDescription, Converter={StaticResource HasNontrivialToVisibilityConverter}}" 
+                                               Style="{StaticResource Description}">
+                                        </TextBlock>
+                                    </WrapPanel>
+                                    <ItemsControl ItemsSource="{Binding MediaSourceItems}" Margin="5,0,0,0">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel/>

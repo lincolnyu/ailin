@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿//#define SIMULATE_FAILED_LOAD
+using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using static AiLinWpf.Helpers.ImageLoadingHelper;
 using AiLinWpf.Sources;
 using System.Collections;
+using System.Windows.Controls.Primitives;
 
 namespace AiLinWpf
 {
@@ -32,6 +34,13 @@ namespace AiLinWpf
             Opened,
             Ended,
             Failed
+        }
+
+        private enum RefreshOptions
+        {
+            NoRefresh,
+            RefreshWithNoMessage,
+            RefreshWithMessage
         }
 
         private delegate Task DownloadTask();
@@ -197,9 +206,16 @@ namespace AiLinWpf
             _suppressSearchBoxTextChangedHandling = saved;
         }
 
+        private bool HasSearchResults()
+            => _highlightedItems.Count > 0;
+
         private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
         {
             ShowPlaceholderText();
+            if (!HasSearchResults())
+            {
+                EndSearch();
+            }
         }
 
         private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
@@ -229,18 +245,21 @@ namespace AiLinWpf
             ShowPlaceholderText();
         }
 
-        private void BtnSearchOnClick(object sender, RoutedEventArgs e)
+        private async void BtnSearchOnClick(object sender, RoutedEventArgs e)
         {
-            SearchAndHighlight();
+            PrepareForSearch();
+            await SearchAndHighlight();
+            ScrollToFirstHighlightedIfAny();
         }
 
-        private void SearchBoxKeyDown(object sender, KeyEventArgs e)
+        private async void SearchBoxKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
+                PrepareForSearch();
                 if (_currentFocused == null)
                 {
-                    SearchAndHighlight();
+                    await SearchAndHighlight();
                 }
                 else
                 {
@@ -261,10 +280,19 @@ namespace AiLinWpf
                             _currentFocused = 0;
                         }
                     }
-                    var lbi = _highlightedItems[_currentFocused.Value];
-                    VideoList.ScrollIntoView(lbi);
-                    lbi.IsSelected = true;
                 }
+                ScrollToFirstHighlightedIfAny();
+            }
+        }
+
+        private void ScrollToFirstHighlightedIfAny()
+        {
+            if(_currentFocused.HasValue && _currentFocused.Value >= 0 && _currentFocused.Value < _highlightedItems.Count)
+            {
+                var lbi = _highlightedItems[_currentFocused.Value];
+                var obj = lbi.DataContext;
+                VideoList.ScrollIntoView(obj);
+                lbi.IsSelected = true;
             }
         }
 
@@ -283,23 +311,36 @@ namespace AiLinWpf
 
         #endregion
 
+        private void PrepareForSearch()
+        {
+            VideoList.SetValue(VirtualizingPanel.IsVirtualizingProperty, false);
+        }
+
+        private void EndSearch()
+        {
+            VideoList.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
+        }
+
         private async Task RedownloadMediaList(bool force)
         {
             var caption = force ? "是否确认重新下载媒体列表？" : "是否确认刷新媒体列表？";
             var res = MessageBox.Show(caption, Title, MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                await LoadAndRefreshMediaList(force, true);
+                await LoadAndRefreshMediaList(force, RefreshOptions.RefreshWithMessage);
             }
         }
 
         private async Task InitLoadAndRefreshMediaList()
         {
-            VideoList.ItemContainerGenerator.StatusChanged += ItemContainerGeneratorOnStatusChanged;
-            await LoadAndRefreshMediaList(false);
+#if SIMULATE_FAILED_LOAD
+            await LoadAndRefreshMediaList(false, RefreshOptions.NoRefresh);
+#else
+            await LoadAndRefreshMediaList(false, RefreshOptions.RefreshWithNoMessage);
+#endif
         }
 
-        private async Task LoadAndRefreshMediaList(bool force, bool showRefreshResult = false)
+        private async Task LoadAndRefreshMediaList(bool force, RefreshOptions refreshOption)
         {
             var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
             await mediaRepoManager.Initialize();
@@ -307,42 +348,28 @@ namespace AiLinWpf
             {
                 mediaRepoManager.Reset();
             }
-            var res = await mediaRepoManager.Refresh();
-            if (showRefreshResult)
+            if (refreshOption != RefreshOptions.NoRefresh)
             {
-                switch (res)
+                var res = await mediaRepoManager.Refresh();
+                if (refreshOption == RefreshOptions.RefreshWithMessage)
                 {
-                    case MediaRepoManager.RefreshResults.Refreshed:
-                        MessageBox.Show("成功下载并更新列表。", Title);
-                        break;
-                    case MediaRepoManager.RefreshResults.FailedToDownload:
-                        MessageBox.Show("下载列表失败。", Title);
-                        break;
-                    case MediaRepoManager.RefreshResults.AlreadyLatest:
-                        MessageBox.Show("已经是最新列表，无需更新。", Title);
-                        break;
+                    switch (res)
+                    {
+                        case MediaRepoManager.RefreshResults.Refreshed:
+                            MessageBox.Show("成功下载并更新列表。", Title);
+                            break;
+                        case MediaRepoManager.RefreshResults.FailedToDownload:
+                            MessageBox.Show("下载列表失败。", Title);
+                            await mediaRepoManager.ResetToDefault();
+                            break;
+                        case MediaRepoManager.RefreshResults.AlreadyLatest:
+                            MessageBox.Show("已经是最新列表，无需更新。", Title);
+                            break;
+                    }
                 }
             }
             _mediaList = new MediaListViewModel(mediaRepoManager.Current);
             VideoList.ItemsSource = _mediaList.MediaViewModels;
-        }
-
-        private void ItemContainerGeneratorOnStatusChanged(object sender, EventArgs e)
-        {
-            ColorVideoListItems(VideoList.Items);
-        }
-        
-        private void ColorVideoListItems(IList items)
-        {
-            foreach (var item in items.Cast<MediaInfoViewModel>().Where(i=>!i.BackgroundUpdatedToUI))
-            {
-                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
-                if (lbi != null)
-                {
-                    lbi.Background = item.Background;
-                    item.BackgroundUpdatedToUI = true;
-                }
-            }
         }
 
         private async Task LoadImages()
@@ -526,35 +553,15 @@ namespace AiLinWpf
             var mivm = (MediaInfoViewModel)item;
             if (mivm != null)
             {
-                switch (mivm.Id)
+                var bgm = mivm.Model.Songs.Count == 1 ? mivm.Model.Songs.First() : 
+                    mivm.Model.Songs.FirstOrDefault(x => x.Item1 == "bgm");
+                if (bgm != null && !string.IsNullOrWhiteSpace(bgm.Item2))
                 {
-                    case "EShNHZXH":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/fblxzhf.mp3");
-                        break;
-                    case "HFQX":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wlsh.mp3");
-                        break;
-                    case "KXZZY":
-                        await TryPlayAudioInternet("http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3");
-                        break;
-                    case "WZTTDN":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wzttdn.mp3");
-                        break;
-                    case "YLZhZhND":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/a-morning-in-cornwell.mp3");
-                        break;
-                    case "XEBLK":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xeblk.mp3");
-                        break;
-                    case "XJRSh":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xjrsh.mp3");
-                        break;
-                    case "XYJ":
-                        await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");
-                        break;
-                    default:
-                        StopPlayingAudio();
-                        break;
+                    await TryPlayAudioInternet(bgm.Item2);
+                }
+                else
+                {
+                    StopPlayingAudio();
                 }
             }
             else
@@ -613,7 +620,31 @@ namespace AiLinWpf
             }
         }
 
-        private void SearchAndHighlight()
+        private async Task<ListBoxItem> GetListBoxItem(object item)
+        {
+            while (true)
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                EventHandler handler = null;
+                VideoList.ItemContainerGenerator.StatusChanged += handler = (sender, e) =>
+                {
+                    VideoList.ItemContainerGenerator.StatusChanged -= handler;
+                    tcs.SetResult(true);
+                };
+                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                if (lbi != null)
+                {
+                    VideoList.ItemContainerGenerator.StatusChanged -= handler;
+                    return lbi;
+                }
+                else
+                {
+                    await tcs.Task;
+                }
+            }
+        }
+
+        private async Task SearchAndHighlight()
         {
             DeHighlight();
             if (string.IsNullOrWhiteSpace(_searchTarget))
@@ -625,7 +656,8 @@ namespace AiLinWpf
             var count = 0;
             foreach (var item in VideoList.Items)
             {
-                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                ListBoxItem lbi = null;
+                lbi = await GetListBoxItem(item);
                 var p = lbi.GetFirstPanelFromDatabound();
                 if (p != null)
                 {

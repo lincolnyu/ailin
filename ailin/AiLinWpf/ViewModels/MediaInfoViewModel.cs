@@ -1,28 +1,17 @@
-﻿using AiLinLib.Media;
-using AiLinWpf.Styles;
-using System;
+﻿using System;
 using System.Windows.Media;
 using System.Globalization;
 using System.Text;
 using System.Collections.ObjectModel;
+using AiLinLib.Media;
+using AiLinWpf.Styles;
 using AiLinWpf.ViewModels.Playlist;
-using System.Windows;
+using AiLinWpf.ViewModels.SourcesRemarks;
 
 namespace AiLinWpf.ViewModels
 {
     public class MediaInfoViewModel
     {
-        public enum Types
-        {
-            Uncategorized,
-            Movie,      // 电影
-            Television, // 电视剧
-            RadioDrama, // 广播剧
-            Recite,     // 朗诵
-            Interview,  // 访谈
-            Show        // 综艺
-        }
-
         public MediaInfoViewModel(MediaInfo model)
         {
             Model = model;
@@ -53,11 +42,9 @@ namespace AiLinWpf.ViewModels
 
         #region Deduced properties
 
-        // TODO can use a converter
-        public bool HasExternalLink => Model.ExternalLink != null;
+        public string Year => DateStr?.Substring(0, 4)??"";
 
-        public string Year => DateStr.Substring(0, 4);
-
+        public int TypeId { get; private set; }
         public string TypeStr { get; private set; }
 
         public string Subtitle { get; private set; }
@@ -69,8 +56,6 @@ namespace AiLinWpf.ViewModels
         #endregion
 
         public DateTime Date { get; private set; }
-
-        public Types Type { get; private set; }
 
         public Brush Background { get; private set; }
         public bool BackgroundUpdatedToUI { get; set; }
@@ -132,32 +117,38 @@ namespace AiLinWpf.ViewModels
             Background = Coloring.Transparent;
             switch (Model.Category)
             {
+                case "film":
                 case "movie":
-                    Type = Types.Movie;
                     TypeStr = "电影";
                     Background = Coloring.PaleGoldenrodBrush;
+                    TypeId = 1;
+                    break;
+                case "short":
+                    TypeStr = "微电影";
+                    Background = Coloring.PaleGoldenrodBrush;
+                    TypeId = 1;
                     break;
                 case "tv":
                 case "television":
-                    Type = Types.Television;
                     TypeStr = "电视剧";
                     Background = Coloring.LightSkyBlueBrush;
+                    TypeId = 2;
                     break;
                 case "radio drama":
-                    Type = Types.RadioDrama;
                     TypeStr = "广播剧";
+                    TypeId = 3;
                     break;
                 case "recite":
-                    Type = Types.Recite;
                     TypeStr = "朗诵";
+                    TypeId = 4;
                     break;
                 case "interview":
-                    Type = Types.Interview;
                     TypeStr = "访谈";
+                    TypeId = 5;
                     break;
                 case "show":
-                    Type = Types.Show;
                     TypeStr = "综艺";
+                    TypeId = 6;
                     break;
             }
         }
@@ -179,6 +170,9 @@ namespace AiLinWpf.ViewModels
                     Date = DateTime.ParseExact(Model.DateStr, "yyyy", CultureInfo.InvariantCulture);
                 }
             }
+            catch (NullReferenceException)
+            {
+            }
             catch (ArgumentException)
             {
             }
@@ -189,35 +183,77 @@ namespace AiLinWpf.ViewModels
             MediaSourceItems.Clear();
             foreach (var source in Model.Sources)
             {
-                var title = source.Playlist.Count > 0 ? source.Name + ":" : source.Name;
+                var i = -1;
+                Func<bool> isLast = () => i == source.Playlist.Count-1;
+                var hasColon = source.Playlist.Count > 0;
+                var title = source.Name.TrimEnd('：');
                 var url = source.Target;
                 MediaProviderLabelViewModel mp;
                 if (!string.IsNullOrWhiteSpace(url))
                 {
-                    mp = new MediaProviderWithUrlViewModel { Title = title, Url = url, Margin = Layouts.StandardIsolatedTextItemMargin };
+                    mp = new MediaProviderWithUrlViewModel
+                    {
+                        Title = title, Url = url,
+                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness),
+                        HasColon = hasColon
+                    };
                 }
                 else
                 {
-                    mp = new MediaProviderLabelViewModel { Title = title, Margin = Layouts.StandardIsolatedTextItemMargin };
+                    mp = new MediaProviderLabelViewModel
+                    {
+                        Title = title,
+                        Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness),
+                        HasColon = hasColon
+                    };
                 }
                 MediaSourceItems.Add(mp);
+                var checkConsecutiveness = CheckConsecutiveness();
                 int? lastI = null;
-                foreach (var t in source.Playlist)
+                for (i++ ; i < source.Playlist.Count; i++)
                 {
+                    var t = source.Playlist[i];
                     var tt = t.Item1;
-                    if (int.TryParse(tt, out var itt))
+                    if (checkConsecutiveness)
                     {
-                        var inconsecutive = lastI.HasValue && lastI + 1 != itt;
-                        if (inconsecutive)
+                        if (int.TryParse(tt, out var itt))
                         {
-                            MediaSourceItems.Add(EllipsisViewModel.Instance);
+                            var inconsecutive = lastI.HasValue && lastI + 1 != itt;
+                            if (inconsecutive)
+                            {
+                                MediaSourceItems.Add(EllipsisViewModel.Instance);
+                            }
+                            lastI = itt;
                         }
-                        lastI = itt;
                     }
                     var tvm = new TrackViewModel { Title = tt, Url = t.Item2 };
+                    tvm.Margin = Layouts.GenerateLeftJustified(isLast()? 
+                        Layouts.StandardSeparationMarginThickness : Layouts.StandardTrackItemMarginThickness);
                     MediaSourceItems.Add(tvm);
                 }
             }
+
+            if (Model.SourcesRemarks?.Contains("<") == true)
+            {
+                var xsrvm = XamlSourceRemarksViewModel.TryParseBlock(Model.SourcesRemarks);
+                if (xsrvm != null)
+                {
+                    xsrvm.Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness);
+                    MediaSourceItems.Add(xsrvm);
+                }
+            }
+            else
+            {
+                var gsrvm = CommonSourceRemarksViewModel.TryParse(Model.SourcesRemarks);
+                if (gsrvm != null)
+                {
+                    gsrvm.Margin = Layouts.GenerateLeftJustified(Layouts.StandardSeparationMarginThickness);
+                    MediaSourceItems.Add(gsrvm);
+                }
+            }
         }
+
+        private bool CheckConsecutiveness()
+            => Model.SourcesRemarks?.Contains("剧集不全")?? false;
     }
 }
