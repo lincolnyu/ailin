@@ -32,17 +32,17 @@ namespace AiLinWpf.Helpers
             }
         }
 
-        public static Panel GetFirstPanelFromDatabound(this DependencyObject element)
+        public static T GetFirst<T>(this DependencyObject element) where T : DependencyObject
         {
             var childCount = VisualTreeHelper.GetChildrenCount(element);
             for (var i = 0; i < childCount; i++)
             {
                 var child = VisualTreeHelper.GetChild(element, i);
-                if (child is Panel p)
+                if (child is T p)
                 {
                     return p;
                 }
-                var p2 = child.GetFirstPanelFromDatabound();
+                var p2 = child.GetFirst<T>();
                 if (p2 != null)
                 {
                     return p2;

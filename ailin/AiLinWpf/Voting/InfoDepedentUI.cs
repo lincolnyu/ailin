@@ -174,7 +174,11 @@ namespace AiLinWpf.Voting
                 if (invite != null)
                 {
                     Clipboard.SetText(invite);
-                    MessageBox.Show(invite, "以下内容已经复制到剪贴板");
+                    var sb = new StringBuilder();
+                    sb.AppendLine("以下内容已经复制到剪贴板：");
+                    sb.AppendLine();
+                    sb.Append(invite);
+                    MessageBox.Show(sb.ToString(), MainWindow.Title);
                 }
                 else
                 {

@@ -18,6 +18,7 @@ using static AiLinWpf.Helpers.ImageLoadingHelper;
 using AiLinWpf.Sources;
 using System.Collections;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 
 namespace AiLinWpf
 {
@@ -306,6 +307,21 @@ namespace AiLinWpf
             {
                 var force = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
                 await RedownloadMediaList(force);
+            }
+        }
+
+        private void HyperlinkCopyAddressOnClick(object sender, RoutedEventArgs e)
+        {
+            if (((ContextMenu)((MenuItem)e.Source).Parent).PlacementTarget is TextBlock tb
+                && tb.Inlines.FirstInline is Hyperlink hl)
+            {
+                var uri = hl.NavigateUri;
+                Clipboard.SetText(uri.AbsoluteUri);
+                MessageBox.Show($"链接'{uri}'已经复制到剪贴板", Title);
+            }
+            else
+            {
+                MessageBox.Show($"抱歉！出错了，无法产生并复制链接", Title);
             }
         }
 
@@ -658,7 +674,7 @@ namespace AiLinWpf
             {
                 ListBoxItem lbi = null;
                 lbi = await GetListBoxItem(item);
-                var p = lbi.GetFirstPanelFromDatabound();
+                var p = lbi.GetFirst<Panel>();
                 if (p != null)
                 {
                     var tbs = p.GetAllTexts().ToList();
