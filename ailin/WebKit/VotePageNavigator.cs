@@ -80,8 +80,8 @@ namespace WebKit
             SetUserAgentIfMobile();
             try
             {
-                _downloading = true;
 #if SIMULATE_DOWNLOADING_NULL
+                _downloading = true;
                 await Task.Delay(3000);
                 _downloading = false;
                 var page = "";
@@ -93,8 +93,19 @@ namespace WebKit
                 // And ConvertGB2312ToUTF() is also CPU bound
                 var page = await Task.Run(() =>
                 {
-                    var data = _client.DownloadData(url);
-                    _downloading = false;
+                    byte[] data;
+                    lock(_client)
+                    {
+                        try
+                        {
+                            _downloading = true;
+                            data = _client.DownloadData(url);
+                        }
+                        finally
+                        {
+                            _downloading = false;
+                        }
+                    }
                     return data.ConvertGB2312ToUTF();
                 });
 #endif
@@ -127,9 +138,12 @@ namespace WebKit
                 _cancelled = true;
                 try
                 {
-                    if (_downloading)
+                    lock (_client)
                     {
-                        _client.CancelAsync();
+                        if (_downloading)
+                        {
+                            _client.CancelAsync();
+                        }
                     }
                     Debug.WriteLine("Cancelling refresh is successful");
                 }
