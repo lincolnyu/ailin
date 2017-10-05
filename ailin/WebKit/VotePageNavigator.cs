@@ -1,13 +1,12 @@
 ﻿//#define SIMULATE_TIMEOUT
 //#define SIMULATE_DOWNLOADING_NULL
+//#define SIMULATE_BAD_DOWNLOAD
 
-using AiLinWpfLib.Helpers;
 using Redback.Helpers;
 using System;
 using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using WebKit.Helpers;
 #if SIMULATE_TIMEOUT
@@ -81,31 +80,45 @@ namespace WebKit
             SetUserAgentIfMobile();
             try
             {
-                _downloading = true;
 #if SIMULATE_DOWNLOADING_NULL
+                _downloading = true;
                 await Task.Delay(3000);
                 _downloading = false;
                 var page = "";
 #else
-                var data = await _client.DownloadDataTaskAsync(url);
-                _downloading = false;
-                var page = await Task.Run(() => data.ConvertGB2312ToUTF());
+#if SIMULATE_BAD_DOWNLOAD
+                url = "http://bad/link";
+#endif
+                // This is because _client.DownloadDataTaskAsync() doesn't work quite async well for long downloading
+                // And ConvertGB2312ToUTF() is also CPU bound
+                var page = await Task.Run(() =>
+                {
+                    byte[] data;
+                    lock(_client)
+                    {
+                        try
+                        {
+                            _downloading = true;
+                            data = _client.DownloadData(url);
+                        }
+                        finally
+                        {
+                            _downloading = false;
+                        }
+                    }
+                    return data.ConvertGB2312ToUTF();
+                });
 #endif
                 return page;
             }
+            catch (ArgumentException)
+            {
+                Debug.WriteLine("Downloading or analyzing page raised ArgumentException");
+                return null;
+            }
             catch (WebException)
             {
-                Debug.WriteLine("Downloading page raised WebException");
-                return null;
-            }
-            catch (TaskCanceledException)
-            {
-                Debug.WriteLine("Downloading page raised TaskCanceledException");
-                return null;
-            }
-            catch (ObjectDisposedException)
-            {
-                Debug.WriteLine("Downloading page raised ObjectDisposedException");
+                Debug.WriteLine("Downloading or analyzing page raised WebException");
                 return null;
             }
         }
@@ -125,9 +138,12 @@ namespace WebKit
                 _cancelled = true;
                 try
                 {
-                    if (_downloading)
+                    lock (_client)
                     {
-                        _client.CancelAsync();
+                        if (_downloading)
+                        {
+                            _client.CancelAsync();
+                        }
                     }
                     Debug.WriteLine("Cancelling refresh is successful");
                 }
