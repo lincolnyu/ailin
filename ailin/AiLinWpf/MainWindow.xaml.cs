@@ -1,4 +1,5 @@
 ﻿//#define SIMULATE_FAILED_LOAD
+//#define TEST_FALLBACK_IMAGES
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,8 +17,6 @@ using AiLinWpf.Helpers;
 using System.Windows.Input;
 using static AiLinWpf.Helpers.ImageLoadingHelper;
 using AiLinWpf.Sources;
-using System.Collections;
-using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 
 namespace AiLinWpf
@@ -390,32 +389,63 @@ namespace AiLinWpf
 
         private async Task LoadImages()
         {
-            const string tiebaFallback = "pack://application:,,,/Images/fallback-tieba.png";
-            const string generalFallback = "pack://application:,,,/Images/fallback.gif";
-
             DownloadTask[] downloads = {
                 async () =>
                 {
-                    var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 5000, 1);
+                    const string fallback = "pack://application:,,,/Images/init-zhulin-small.jpg";
+                    var uri = await LZhMBLogo.TryLoadWebImage(
+#if TEST_FALLBACK_IMAGES
+                        "http://bad/image/link1.jpg",
+#else
+                        "http://www.zhulin.net/images/lzmb.jpg",
+#endif
+                        fallback, 5000, 1);
                     await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
-                        LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
+                        LZhMBLogo.Stretch = uri == fallback ? Stretch.Uniform : Stretch.None));
                 },
                 async ()=>
                 {
-                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 5000, 1);
+                    const string fallback = "pack://application:,,,/Images/init-weibo-small.jpg";
+                    await ZhLYMHLogo.TryLoadWebImage(
+#if TEST_FALLBACK_IMAGES
+                        "http://bad/image/link2.jpg",
+#else
+                        "http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", 
+#endif
+                        fallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 5000, 1);
+                    const string fallback = "pack://application:,,,/Images/init-lovechina66-small.jpg";
+                    await LoveChinaLogo.TryLoadWebImage(
+#if TEST_FALLBACK_IMAGES
+                        "http://bad/image/link3.jpg",
+#else
+                        "http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", 
+#endif
+                        fallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
-                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 5000, 1);
+                    const string fallback = "pack://application:,,,/Images/init-tieba.jpg";
+                    await TiebaLogo.TryLoadWebImage(
+#if TEST_FALLBACK_IMAGES
+                        "http://bad/image/link4.jpg",
+#else
+                        "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg",
+#endif
+                        fallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    await CollectionLogo.TryLoadWebImage("http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", generalFallback, 5000, 1);
+                    const string fallback = "pack://application:,,,/Images/init-giantpost-small.jpg";
+                    await CollectionLogo.TryLoadWebImage(
+#if TEST_FALLBACK_IMAGES
+                        "http://bad/image/link5.jpg",
+#else
+                        "http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", 
+#endif
+                        fallback, 5000, 1);
                 }
             };
 

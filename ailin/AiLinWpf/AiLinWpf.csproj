@@ -158,6 +158,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Compile Include="Helpers\InterpretationHelper.cs" />
+    <Resource Include="Images\init-giantpost-small.jpg" />
+    <Resource Include="Images\init-lovechina66-small.jpg" />
+    <Resource Include="Images\init-weibo-small.jpg" />
+    <Resource Include="Images\init-zhulin-small.jpg" />
     <Content Include="Jsons\media.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
