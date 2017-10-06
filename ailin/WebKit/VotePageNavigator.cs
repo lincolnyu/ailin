@@ -86,9 +86,6 @@ namespace WebKit
                 _downloading = false;
                 var page = "";
 #else
-#if SIMULATE_BAD_DOWNLOAD
-                url = "http://bad/link";
-#endif
                 // This is because _client.DownloadDataTaskAsync() doesn't work quite async well for long downloading
                 // And ConvertGB2312ToUTF() is also CPU bound
                 var page = await Task.Run(() =>
@@ -99,7 +96,18 @@ namespace WebKit
                         try
                         {
                             _downloading = true;
+#if SIMULATE_BAD_DOWNLOAD
+                            const int rep = 100;
+                            var rand = new Random();
+                            data = null;
+                            for (var i = 0; i < rep; i++)
+                            {
+                                url = $"http://bad/link{rand.Next()}";
+                                data = _client.DownloadData(url);
+                            }
+#else
                             data = _client.DownloadData(url);
+#endif
                         }
                         finally
                         {
