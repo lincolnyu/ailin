@@ -51,6 +51,18 @@ namespace AiLinWpf.Helpers
             return null;
         }
 
+        public static T GetFirstAncestor<T>(this DependencyObject element) where T : DependencyObject
+        {
+            for (var p = VisualTreeHelper.GetParent(element); p != null; p = VisualTreeHelper.GetParent(p))
+            {
+                if (p is T t)
+                {
+                    return t;
+                }
+            }
+            return null;
+        }
+
         public static IEnumerable<FrameworkElement> GetAllTexts(this Panel panel)
         {
             foreach (var c in panel.Children)
