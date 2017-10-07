@@ -1,5 +1,6 @@
 ﻿//#define SIMULATE_FAILED_LOAD
 //#define TEST_FALLBACK_IMAGES
+//#define USE_FALLBACK_IMAGES_ONLY
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -394,7 +395,9 @@ namespace AiLinWpf
                 {
                     const string fallback = "pack://application:,,,/Images/init-zhulin-small.jpg";
                     var uri = await LZhMBLogo.TryLoadWebImage(
-#if TEST_FALLBACK_IMAGES
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
                         "http://bad/image/link1.jpg",
 #else
                         "http://www.zhulin.net/images/lzmb.jpg",
@@ -407,7 +410,9 @@ namespace AiLinWpf
                 {
                     const string fallback = "pack://application:,,,/Images/init-weibo-small.jpg";
                     await ZhLYMHLogo.TryLoadWebImage(
-#if TEST_FALLBACK_IMAGES
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
                         "http://bad/image/link2.jpg",
 #else
                         "http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", 
@@ -418,7 +423,9 @@ namespace AiLinWpf
                 {
                     const string fallback = "pack://application:,,,/Images/init-lovechina66-small.jpg";
                     await LoveChinaLogo.TryLoadWebImage(
-#if TEST_FALLBACK_IMAGES
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
                         "http://bad/image/link3.jpg",
 #else
                         "http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", 
@@ -429,7 +436,9 @@ namespace AiLinWpf
                 {
                     const string fallback = "pack://application:,,,/Images/init-tieba.jpg";
                     await TiebaLogo.TryLoadWebImage(
-#if TEST_FALLBACK_IMAGES
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
                         "http://bad/image/link4.jpg",
 #else
                         "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg",
@@ -440,7 +449,9 @@ namespace AiLinWpf
                 {
                     const string fallback = "pack://application:,,,/Images/init-giantpost-small.jpg";
                     await CollectionLogo.TryLoadWebImage(
-#if TEST_FALLBACK_IMAGES
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
                         "http://bad/image/link5.jpg",
 #else
                         "http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", 
