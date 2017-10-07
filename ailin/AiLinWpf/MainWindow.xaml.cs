@@ -92,7 +92,7 @@ namespace AiLinWpf
         private List<ListBoxItem> _highlightedItems = new List<ListBoxItem>();
         private int? _currentFocused;
 
-        public const string MediaListUrl = "http://localhost:80/exetel/apps/ailin/media.json";
+        public const string MediaListUrl = "http://quanben.azurewebsites.net/apps/ailin/media.json.txt";
         public const string MediaListFileName = "media.json";
 
         #endregion
