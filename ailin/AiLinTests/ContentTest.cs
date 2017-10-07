@@ -14,7 +14,8 @@ namespace AiLinTests
             using (var inputStream = new StreamReader(inputFile))
             {
                 var str = inputStream.ReadToEnd();
-                var msg = str.GetVoteResponseMessage();
+                var res = str.GetVoteResponseMessage();
+                var msg = res.Item1;
                 const string expected = " 您选择的选项可能已投过票,请勿重复投票！若您当天尚未投过，请返回投票页面稍后再投！ \r\n\t\t\t\t\t    (\r\n\t\t\t\t\t    RPT-3\t\t\t\t\t    )\t\t\t\r\n";
                 Assert.AreEqual(expected, msg);
             }
@@ -27,7 +28,8 @@ namespace AiLinTests
             using (var inputStream = new StreamReader(inputFile))
             {
                 var str = inputStream.ReadToEnd();
-                var msg = str.GetVoteResponseMessage(true);
+                var res = str.GetVoteResponseMessage(true);
+                var msg = res.Item1;
                 const string expected = "您选择的选项可能已投过票,请勿重复投票！若您当天尚未投过，请返回投票页面稍后再投！(RPT-3)";
                 Assert.AreEqual(expected, msg);
             }
@@ -40,7 +42,8 @@ namespace AiLinTests
             using (var inputStream = new StreamReader(inputFile))
             {
                 var str = inputStream.ReadToEnd();
-                var msg = str.GetVoteResponseMessage();
+                var res = str.GetVoteResponseMessage();
+                var msg = res.Item1;
                 const string expected = "1个选项被成功提交！";
                 Assert.AreEqual(expected, msg);
             }

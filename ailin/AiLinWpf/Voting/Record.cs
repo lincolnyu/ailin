@@ -2,7 +2,7 @@
 using System.Text;
 using WebKit;
 
-namespace AiLinWpf.Data
+namespace AiLinWpf.Voting
 {
     public class Record
     {

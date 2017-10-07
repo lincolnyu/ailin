@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -102,7 +102,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\HasNontrivialConverter.cs" />
+    <Compile Include="Converters\HasNontrivialToVisibilityConverter.cs" />
+    <Compile Include="Converters\ToStringConverter.cs" />
+    <Compile Include="Sources\MediaRepoManager.cs" />
+    <Compile Include="Helpers\UiHelper.cs" />
     <Compile Include="Styles\Coloring.cs" />
+    <Compile Include="Styles\Layouts.cs" />
+    <Compile Include="ViewModels\Playlist\EllipsisViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\MediaProviderLabelViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\MediaProviderWithUrlViewModel.cs" />
+    <Compile Include="ViewModels\Playlist\TrackViewModel.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,17 +121,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Actions\Resource.cs" />
-    <Compile Include="Actions\ResourceList.cs" />
+    <Compile Include="ViewModels\MediaInfoViewModel.cs" />
+    <Compile Include="ViewModels\MediaListViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\InfoDepedentUI.cs" />
-    <Compile Include="Data\Record.cs" />
-    <Compile Include="Data\RecordRepository.cs" />
+    <Compile Include="ViewModels\SourcesRemarks\CommonSourceRemarksViewModel.cs" />
+    <Compile Include="ViewModels\SourcesRemarks\XamlSourceRemarksViewModel.cs" />
+    <Compile Include="Voting\InfoDepedentUI.cs" />
+    <Compile Include="Voting\Record.cs" />
+    <Compile Include="Voting\RecordRepository.cs" />
     <Compile Include="Helpers\ChineseHelper.cs" />
-    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\ImageLoadingHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -145,9 +157,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Compile Include="Helpers\InterpretationHelper.cs" />
+    <Resource Include="Images\init-giantpost-small.jpg" />
+    <Resource Include="Images\init-lovechina66-small.jpg" />
+    <Resource Include="Images\init-weibo-small.jpg" />
+    <Resource Include="Images\init-zhulin-small.jpg" />
+    <Content Include="Jsons\media.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -157,6 +175,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\qsharp\QSharp\QSharp.Scheme.Classical.Sequential\QSharp.Scheme.Classical.Sequential%28dns11%29.csproj">
+      <Project>{c503a736-6ccd-4fc6-b920-96cc7b9c9d9c}</Project>
+      <Name>QSharp.Scheme.Classical.Sequential%28dns11%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AiLinLib\AiLinLib.csproj">
+      <Project>{99d20b9e-18c5-42b8-a82b-f1dcdfdbdf76}</Project>
+      <Name>AiLinLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AiLinWpfLib\AiLinWpfLib.csproj">
+      <Project>{23db5fce-6c82-45d3-b8dd-063b3e678df3}</Project>
+      <Name>AiLinWpfLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebKit\WebKit.csproj">
       <Project>{b2eb9446-88b7-4506-bbb4-d0eb9375a320}</Project>
       <Name>WebKit</Name>
@@ -179,7 +209,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\tieba-fallback.png" />
+    <Resource Include="Images\search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fallback-tieba.png" />
+    <Resource Include="Images\init-giantpost.jpg" />
+    <Resource Include="Images\init-lovechina66.jpg" />
+    <Resource Include="Images\init-tieba.jpg" />
+    <Resource Include="Images\init-weibo.jpg" />
+    <Resource Include="Images\init-zhulin.jpg" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

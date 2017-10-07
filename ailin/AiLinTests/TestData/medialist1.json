@@ -1,0 +1,122 @@
+{
+  "version" : "1.0",
+  "mediaList": [
+    {
+      "id": "EShNHZXH",
+      "title": "二十年后再相会",
+      "type": "movie",
+      "date": "1984",
+      "role": "船舶监造师诸晖",
+      "director": "石晓华",
+      "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/fblxzhf.mp3" }
+      ],
+      "sources": [
+        {
+          "name": "乐视",
+          "target": "http://www.le.com/ptv/vplay/26553300.html?ch=sohu_v"
+        },
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XMTg4OTU1ODM4MA==.html"
+        }
+      ]
+    },
+    {
+      "id": "XEBLK",
+      "title": "肖尔布拉克",
+      "type": "movie",
+      "date": "1984",
+      "role": "知青叶娟",
+      "director": "包起成",
+      "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/xeblk.mp3" }
+      ],
+      "sources": [
+        {
+          "name": "风行网",
+          "target": "http://www.fun.tv/vplay/g-37790/"
+        },
+        {
+          "name": "Youtube",
+          "target": "https://www.youtube.com/watch?v=GXF0P4-a2L4"
+        }
+      ]
+    },
+    {
+      "id": "BWXZ",
+      "title": "别无选择",
+      "type": "movie",
+      "date": "1991",
+      "sources": [
+        {
+          "name": "优酷",
+          "playlist": [
+            { "片源1": "http://v.youku.com/v_show/id_XMzYzMTU2MzI=.html" },
+            { "片源2": "http://v.youku.com/v_show/id_XMTM2MjUzMjU2.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GHGZhQ",
+      "title": "共和国之旗",
+      "type": "movie",
+      "date": "1998",
+      "sources": [
+        {
+          "name": "腾讯视频",
+          "target": "http://v.qq.com/detail/6/6q1uczedvs1ezs8.html?ptag=baidu.aladdin.movie",
+          "playlist": [
+            { "播放": "https://v.qq.com/x/cover/6q1uczedvs1ezs8.html?new=1" }
+          ]
+        },
+        {
+          "name": "优酷",
+          "playlist": [
+            { "1": "http://v.youku.com/v_show/id_XMTM3ODE3ODQyMA==.html" },
+            { "2": "http://v.youku.com/v_show/id_XMTM3ODE4MDA2NA==.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MYPF",
+      "title": "命运配方",
+      "type": "tv",
+      "date": "2003",
+      "sources": [
+        {
+          "name": "优酷",
+          "playlist": [
+            { "1": "http://v.youku.com/v_show/id_XMTM4NDI2OTQwOA==.html" },
+            { "2": "http://v.youku.com/v_show/id_XMTM4NDI0NzE2MA==.html" },
+            { "3": "http://v.youku.com/v_show/id_XMTM4NDIyNTg3Mg==.html" },
+            { "4": "http://v.youku.com/v_show/id_XMTM4NDE5MzY4NA==.html" },
+            { "5": "http://v.youku.com/v_show/id_XMTM4NDE3NjYxNg==.html" },
+            { "6": "http://v.youku.com/v_show/id_XMTM4NDEzNTE3Ng==.html" },
+            { "7": "http://v.youku.com/v_show/id_XMTM4NDEzNDY4MA==.html" },
+            { "8": "http://v.youku.com/v_show/id_XMTM4NDExNzgzMg==.html" },
+            { "9": "http://v.youku.com/v_show/id_XMTM4NDA4ODg0NA==.html" },
+            { "10": "http://v.youku.com/v_show/id_XMTM4NDA1NTk3Ng==.html" },
+            { "11": "http://v.youku.com/v_show/id_XMTM4NDAxNzU3Mg==.html" },
+            { "12": "http://v.youku.com/v_show/id_XMTY3MjkyNzQw.html" },
+            { "13": "http://v.youku.com/v_show/id_XMTM4NDU3ODIxNg==.html" },
+            { "14": "http://v.youku.com/v_show/id_XMTM4NDUxMTkwOA==.html" },
+            { "17": "http://v.youku.com/v_show/id_XMTM4NDUwNDY2MA==.html" },
+            { "18": "http://v.youku.com/v_show/id_XMTM4NDUzMjU4OA==.html" },
+            { "19": "http://v.youku.com/v_show/id_XMTM4NDQ2Mzk5Ng==.html" },
+            { "20": "http://v.youku.com/v_show/id_XMTM4NDQ0MDc2NA==.html" },
+            { "21": "http://v.youku.com/v_show/id_XMTM4NDQzMjU4MA==.html" },
+            { "22": "http://v.youku.com/v_show/id_XMTM4NDM5NjgwOA==.html" },
+            { "23": "http://v.youku.com/v_show/id_XMTM4NDM3NDE3Ng==.html" },
+            { "24": "http://v.youku.com/v_show/id_XMTM4NDM0ODYwMA==.html" },
+            { "25": "http://v.youku.com/v_show/id_XMTM4NDI5MzMwMA==.html" }
+          ]
+        }
+      ]
+    }
+  ]
+}

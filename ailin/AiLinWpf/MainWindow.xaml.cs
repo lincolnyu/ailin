@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿//#define SIMULATE_FAILED_LOAD
+//#define TEST_FALLBACK_IMAGES
+//#define USE_FALLBACK_IMAGES_ONLY
+using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -8,10 +11,14 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Threading.Tasks;
-using AiLinWpf.Data;
-using AiLinWpf.Actions;
-using WebKit;
-using static AiLinWpf.Helpers.ImageHelper;
+using AiLinWpf.Voting;
+using AiLinWpf.ViewModels;
+using System.Linq;
+using AiLinWpf.Helpers;
+using System.Windows.Input;
+using static AiLinWpf.Helpers.ImageLoadingHelper;
+using AiLinWpf.Sources;
+using System.Windows.Documents;
 
 namespace AiLinWpf
 {
@@ -20,6 +27,8 @@ namespace AiLinWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Types
+
         public enum MediaStatuses
         {
             Stopped,
@@ -27,6 +36,15 @@ namespace AiLinWpf
             Ended,
             Failed
         }
+
+        private enum RefreshOptions
+        {
+            NoRefresh,
+            RefreshWithNoMessage,
+            RefreshWithMessage
+        }
+
+        private delegate Task DownloadTask();
 
         private class SortingSaver : IDisposable
         {
@@ -49,11 +67,15 @@ namespace AiLinWpf
             }
         }
 
+        #endregion
+
+        #region Fields
+
         private const int Vote1 = 43;
         private const int Vote2 = 1069;
 
         private List<InfoDependentUI> _infoDepUIList = new List<InfoDependentUI>();
-        private ResourceList _resourceList;
+        private MediaListViewModel _mediaList;
 
         private bool? _byNameAscending;
         private bool? _byDateAscending;
@@ -63,52 +85,391 @@ namespace AiLinWpf
 
         private bool _sorting;
 
+        private bool _suppressSearchBoxTextChangedHandling = false;
+        private string _searchTarget;
+        private List<Tuple<FrameworkElement, FrameworkElement>> _highlightedPairs
+            = new List<Tuple<FrameworkElement, FrameworkElement>>();
+        private List<ListBoxItem> _highlightedItems = new List<ListBoxItem>();
+        private int? _currentFocused;
+
+        public const string MediaListUrl = "http://quanben.azurewebsites.net/apps/ailin/media.json.txt";
+        public const string MediaListFileName = "media.json";
+
+        #endregion
+
+        #region Constructors
+
         public MainWindow()
         {
             InitializeComponent();
-            InitInfoDepdentUI();
             SetTitle();
-            _resourceList = new ResourceList(this);
+            InitInfoDepdentUI();
         }
 
-        private void WindowOnLoaded(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Event handlers
+
+        private async void WindowOnLoaded(object sender, RoutedEventArgs e)
         {
-            LoadImages();
+            ShowPlaceholderText();
+            await InitLoadAndRefreshMediaList();
+            await LoadImages();
         }
 
-        private delegate void DownloadTask();
-
-        private void LoadImages()
+        public void HyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            const string tiebaFallback = "pack://application:,,,/Images/tieba-fallback.png";
-            const string generalFallback = "pack://application:,,,/Images/fallback.gif";
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+        }
 
-            DownloadTask[] tasks = {
+        private void BtnOrderByTimeOnClick(object sender, RoutedEventArgs e)
+        {
+            using (new SortingSaver(this))
+            {
+                _byDateAscending = !(_byDateAscending ?? false);
+                var c = _byDateAscending.Value ? MediaListViewModel.CompareDateAscending : MediaListViewModel.CompareDateDescending;
+                BtnOrderByTime.Content = _byDateAscending.Value ? "时间升序" : "时间降序";
+                _mediaList.Push(c);
+                UpdateButtonOrder();
+            }
+        }
+
+        private void BtnOrderByTypeOnClick(object sender, RoutedEventArgs e)
+        {
+            using (new SortingSaver(this))
+            {
+                _byTypeAscending = !(_byTypeAscending ?? false);
+                var c = _byTypeAscending.Value ? MediaListViewModel.CompareTypeAscending : MediaListViewModel.CompareTypeDescending;
+                BtnOrderByType.Content = _byTypeAscending.Value ? "类型升序" : "类型降序";
+                _mediaList.Push(c);
+                UpdateButtonOrder();
+            }
+        }
+
+        private void BtnOrderByNameOnClick(object sender, RoutedEventArgs e)
+        {
+            using (new SortingSaver(this))
+            {
+                _byNameAscending = !(_byNameAscending ?? false);
+                var c = _byNameAscending.Value ? MediaListViewModel.CompareTitleAscending : MediaListViewModel.CompareTitleDescending;
+                BtnOrderByName.Content = _byNameAscending.Value ? "名称升序" : "名称降序";
+                _mediaList.Push(c);
+                UpdateButtonOrder();
+            }
+        }
+
+        private void AudioPlayerOnMediaOpened(object sender, RoutedEventArgs e)
+        {
+            SetPlayStatus(MediaStatuses.Opened);
+        }
+
+        private void AudioPlayerOnMediaEnded(object sender, RoutedEventArgs e)
+        {
+            SetPlayStatus(MediaStatuses.Ended);
+        }
+
+        private void AudioPlayerOnMediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            SetPlayStatus(MediaStatuses.Failed);
+        }
+
+        private void SetPlayStatus(MediaStatuses status)
+        {
+            _mediaStatus = status;
+        }
+
+        private void PlaySongsOnUnchecked(object sender, RoutedEventArgs e)
+        {
+            AudioPlayer.Stop();
+        }
+
+        private async void PlaySongsOnChecked(object sender, RoutedEventArgs e)
+        {
+            await PlaySelected();
+        }
+
+        private void FriendlyLinksOnRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            FriendlyLinks.IsSelected = true;
+        }
+
+        private void SearchBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            var saved = _suppressSearchBoxTextChangedHandling;
+            _suppressSearchBoxTextChangedHandling = true;
+
+            if (string.IsNullOrWhiteSpace(_searchTarget))
+            {
+                SearchBox.Text = "";
+            }
+
+            _suppressSearchBoxTextChangedHandling = saved;
+        }
+
+        private bool HasSearchResults()
+            => _highlightedItems.Count > 0;
+
+        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            ShowPlaceholderText();
+            if (!HasSearchResults())
+            {
+                EndSearch();
+            }
+        }
+
+        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_suppressSearchBoxTextChangedHandling)
+            {
+                UpdateSearchTarget(SearchBox.Text);
+            }
+        }
+
+        private void ShowPlaceholderText()
+        {
+            var saved = _suppressSearchBoxTextChangedHandling;
+            _suppressSearchBoxTextChangedHandling = true;
+
+            if (String.IsNullOrWhiteSpace(_searchTarget))
+            {
+                SearchBox.Text = "搜索...";
+            }
+
+            _suppressSearchBoxTextChangedHandling = saved;
+        }
+
+        private void BtnClearOnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateSearchTarget("");
+            ShowPlaceholderText();
+        }
+
+        private async void BtnSearchOnClick(object sender, RoutedEventArgs e)
+        {
+            PrepareForSearch();
+            await SearchAndHighlight();
+            ScrollToFirstHighlightedIfAny();
+        }
+
+        private async void SearchBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PrepareForSearch();
+                if (_currentFocused == null)
+                {
+                    await SearchAndHighlight();
+                }
+                else
+                {
+                    var shift = Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
+                    if (shift)
+                    {
+                        _currentFocused--;
+                        if (_currentFocused.Value < 0)
+                        {
+                            _currentFocused = _highlightedItems.Count - 1;
+                        }
+                    }
+                    else
+                    {
+                        _currentFocused++;
+                        if (_currentFocused.Value >= _highlightedItems.Count)
+                        {
+                            _currentFocused = 0;
+                        }
+                    }
+                }
+                ScrollToFirstHighlightedIfAny();
+            }
+        }
+
+        private void ScrollToFirstHighlightedIfAny()
+        {
+            if(_currentFocused.HasValue && _currentFocused.Value >= 0 && _currentFocused.Value < _highlightedItems.Count)
+            {
+                var lbi = _highlightedItems[_currentFocused.Value];
+                var obj = lbi.DataContext;
+                VideoList.ScrollIntoView(obj);
+                lbi.IsSelected = true;
+            }
+        }
+
+        private async void MediaItemOnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                SearchBox.Focus();
+            }
+            else if (e.Key == Key.F5)
+            {
+                var force = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+                await RedownloadMediaList(force);
+            }
+        }
+
+        private void HyperlinkCopyAddressOnClick(object sender, RoutedEventArgs e)
+        {
+            if (((ContextMenu)((MenuItem)e.Source).Parent).PlacementTarget is TextBlock tb
+                && tb.Inlines.FirstInline is Hyperlink hl)
+            {
+                var uri = hl.NavigateUri;
+                Clipboard.SetText(uri.AbsoluteUri);
+                MessageBox.Show($"链接'{uri}'已经复制到剪贴板", Title);
+            }
+            else
+            {
+                MessageBox.Show($"抱歉！出错了，无法产生并复制链接", Title);
+            }
+        }
+
+        #endregion
+
+        private void PrepareForSearch()
+        {
+            VideoList.SetValue(VirtualizingPanel.IsVirtualizingProperty, false);
+        }
+
+        private void EndSearch()
+        {
+            VideoList.SetValue(VirtualizingPanel.IsVirtualizingProperty, true);
+        }
+
+        private async Task RedownloadMediaList(bool force)
+        {
+            var caption = force ? "是否确认重新下载媒体列表？" : "是否确认刷新媒体列表？";
+            var res = MessageBox.Show(caption, Title, MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.Yes)
+            {
+                await LoadAndRefreshMediaList(force, RefreshOptions.RefreshWithMessage);
+            }
+        }
+
+        private async Task InitLoadAndRefreshMediaList()
+        {
+#if SIMULATE_FAILED_LOAD
+            await LoadAndRefreshMediaList(false, RefreshOptions.NoRefresh);
+#else
+            await LoadAndRefreshMediaList(false, RefreshOptions.RefreshWithNoMessage);
+#endif
+        }
+
+        private async Task LoadAndRefreshMediaList(bool force, RefreshOptions refreshOption)
+        {
+            var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
+            await mediaRepoManager.Initialize();
+            if (force)
+            {
+                mediaRepoManager.Reset();
+            }
+            if (refreshOption != RefreshOptions.NoRefresh)
+            {
+                var res = await mediaRepoManager.Refresh();
+                if (refreshOption == RefreshOptions.RefreshWithMessage)
+                {
+                    switch (res)
+                    {
+                        case MediaRepoManager.RefreshResults.Refreshed:
+                            MessageBox.Show("成功下载并更新列表。", Title);
+                            break;
+                        case MediaRepoManager.RefreshResults.FailedToDownload:
+                            MessageBox.Show("下载列表失败。", Title);
+                            await mediaRepoManager.ResetToDefault();
+                            break;
+                        case MediaRepoManager.RefreshResults.AlreadyLatest:
+                            MessageBox.Show("已经是最新列表，无需更新。", Title);
+                            break;
+                    }
+                }
+            }
+            _mediaList = new MediaListViewModel(mediaRepoManager.Current);
+            VideoList.ItemsSource = _mediaList.MediaViewModels;
+        }
+
+        private async Task LoadImages()
+        {
+            DownloadTask[] downloads = {
                 async () =>
                 {
-                    var uri = await LZhMBLogo.TryLoadWebImage("http://www.zhulin.net/images/lzmb.jpg", generalFallback, 1);
+                    const string fallback = "pack://application:,,,/Images/init-zhulin-small.jpg";
+                    var uri = await LZhMBLogo.TryLoadWebImage(
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
+                        "http://bad/image/link1.jpg",
+#else
+                        "http://www.zhulin.net/images/lzmb.jpg",
+#endif
+                        fallback, 5000, 1);
                     await LZhMBLogo.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
-                        LZhMBLogo.Stretch = uri == generalFallback ? Stretch.Uniform : Stretch.None));
+                        LZhMBLogo.Stretch = uri == fallback ? Stretch.Uniform : Stretch.None));
                 },
                 async ()=>
                 {
-                    await ZhLYMHLogo.TryLoadWebImage("http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", generalFallback, 1, 5000);
+                    const string fallback = "pack://application:,,,/Images/init-weibo-small.jpg";
+                    await ZhLYMHLogo.TryLoadWebImage(
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
+                        "http://bad/image/link2.jpg",
+#else
+                        "http://wx2.sinaimg.cn/mw690/ab98e598ly1fc5m8aizjpj21rs1fyqv2.jpg", 
+#endif
+                        fallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    await LoveChinaLogo.TryLoadWebImage("http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", generalFallback, 1, 5000);
+                    const string fallback = "pack://application:,,,/Images/init-lovechina66-small.jpg";
+                    await LoveChinaLogo.TryLoadWebImage(
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
+                        "http://bad/image/link3.jpg",
+#else
+                        "http://r1.ykimg.com/0130391F455691A356625A00E4413F737EF418-80F3-1059-40B8-4FA3147D1345", 
+#endif
+                        fallback, 5000, 1);
                 },
                 async ()=>
                 {
-                    const string tiebaImage = "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg";
-                    await TiebaLogo.TryLoadWebImage(tiebaImage, tiebaFallback, 1, 5000);
+                    const string fallback = "pack://application:,,,/Images/init-tieba.jpg";
+                    await TiebaLogo.TryLoadWebImage(
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
+                        "http://bad/image/link4.jpg",
+#else
+                        "http://imgsrc.baidu.com/forum/pic/item/3ac79f3df8dcd100c3cd89c7748b4710b8122f86.jpg",
+#endif
+                        fallback, 5000, 1);
+                },
+                async ()=>
+                {
+                    const string fallback = "pack://application:,,,/Images/init-giantpost-small.jpg";
+                    await CollectionLogo.TryLoadWebImage(
+#if USE_FALLBACK_IMAGES_ONLY
+                        fallback,
+#elif TEST_FALLBACK_IMAGES
+                        "http://bad/image/link5.jpg",
+#else
+                        "http://www.zhulin.net/html/bbs/UploadFile/2006-8/200683115131166.jpg", 
+#endif
+                        fallback, 5000, 1);
                 }
             };
 
-            foreach (var task in tasks)
+#if LOAD_IMAGE_IN_PARALLEL
+            var tasks = downloads.Select(dl => dl()).ToArray();
+            await Task.WhenAll(tasks);
+#else
+            foreach (var dl in downloads)
             {
-                task();
+                await dl();
             }
+#endif
+            Trace.WriteLine("All image downloading processes have been completed.");
         }
 
         private void SetTitle()
@@ -123,7 +484,6 @@ namespace AiLinWpf
             _infoDepUIList.Add(new InfoDependentUI
             {
                 VoteId = Vote1,
-                Navigator = new VotePageNavigator(Vote1),
 
                 Tab = Tab1,
 
@@ -156,7 +516,6 @@ namespace AiLinWpf
             _infoDepUIList.Add(new InfoDependentUI
             {
                 VoteId = Vote2,
-                Navigator = new VotePageNavigator(Vote2),
 
                 Tab = Tab2,
 
@@ -192,54 +551,12 @@ namespace AiLinWpf
             }
         }
 
-        public void HyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
-        }
-
-        private void BtnOrderByTimeOnClick(object sender, RoutedEventArgs e)
-        {
-            using (new SortingSaver(this))
-            {
-                _byDateAscending = !(_byDateAscending ?? false);
-                var c = _byDateAscending.Value ? ResourceList.CompareDateAscending : ResourceList.CompareDateDescending;
-                BtnOrderByTime.Content = _byDateAscending.Value ? "按时间升序" : "按时间降序";
-                _resourceList.Push(c);
-                UpdateButtonOrder();
-            }
-        }
-
-        private void BtnOrderByTypeOnClick(object sender, RoutedEventArgs e)
-        {
-            using (new SortingSaver(this))
-            {
-                _byTypeAscending = !(_byTypeAscending ?? false);
-                var c = _byTypeAscending.Value ? ResourceList.CompareTypeAscending : ResourceList.CompareTypeDescending;
-                BtnOrderByType.Content = _byTypeAscending.Value ? "按类型升序" : "按类型降序";
-                _resourceList.Push(c);
-                UpdateButtonOrder();
-            }
-        }
-
-        private void BtnOrderByNameOnClick(object sender, RoutedEventArgs e)
-        {
-            using (new SortingSaver(this))
-            {
-                _byNameAscending = !(_byNameAscending ?? false);
-                var c = _byNameAscending.Value ? ResourceList.CompareTitleAscending : ResourceList.CompareTitleDescending;
-                BtnOrderByName.Content = _byNameAscending.Value ? "按名称升序" : "按名称降序";
-                _resourceList.Push(c);
-                UpdateButtonOrder();
-            }
-        }
-
         private void UpdateButtonOrder()
         {
             var index = 0;
-            foreach (var c in _resourceList.Comparisons)
+            foreach (var c in _mediaList.Comparisons)
             {
-                if (c == ResourceList.CompareDateAscending || c == ResourceList.CompareDateDescending)
+                if (c == MediaListViewModel.CompareDateAscending || c == MediaListViewModel.CompareDateDescending)
                 {
                     var i = OrderButtons.Children.IndexOf(BtnOrderByTime);
                     if(index != i)
@@ -248,7 +565,7 @@ namespace AiLinWpf
                         OrderButtons.Children.Insert(index, BtnOrderByTime);
                     }
                 }
-                else if (c == ResourceList.CompareTypeAscending || c == ResourceList.CompareTypeDescending)
+                else if (c == MediaListViewModel.CompareTypeAscending || c == MediaListViewModel.CompareTypeDescending)
                 {
                     var i = OrderButtons.Children.IndexOf(BtnOrderByType);
                     if (index != i)
@@ -290,38 +607,18 @@ namespace AiLinWpf
                 return;
             }
             var item = VideoList.SelectedItem;
-            var lbi = (ListBoxItem)item;
-            if (lbi != null)
+            var mivm = (MediaInfoViewModel)item;
+            if (mivm != null)
             {
-                switch (lbi.Name)
+                var bgm = mivm.Model.Songs.Count == 1 ? mivm.Model.Songs.First() : 
+                    mivm.Model.Songs.FirstOrDefault(x => x.Item1 == "bgm");
+                if (bgm != null && !string.IsNullOrWhiteSpace(bgm.Item2))
                 {
-                    case "EShNHLXH":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/fblxzhf.mp3");
-                        break;
-                    case "HFQX":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wlsh.mp3");
-                        break;
-                    case "KXZZY":
-                        await TryPlayAudioInternet("http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3");
-                        break;
-                    case "WZTTDN":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/wzttdn.mp3");
-                        break;
-                    case "YLZhZhND":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/a-morning-in-cornwell.mp3");
-                        break;
-                    case "XEBLK":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xeblk.mp3");
-                        break;
-                    case "XJRSh":
-                        await TryPlayAudioInternet("http://quanben.azurewebsites.net/media/xjrsh.mp3");
-                        break;
-                    case "XYJ":
-                        await TryPlayAudioInternet("http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3");
-                        break;
-                    default:
-                        StopPlayingAudio();
-                        break;
+                    await TryPlayAudioInternet(bgm.Item2);
+                }
+                else
+                {
+                    StopPlayingAudio();
                 }
             }
             else
@@ -380,39 +677,92 @@ namespace AiLinWpf
             }
         }
 
-        private void AudioPlayerOnMediaOpened(object sender, RoutedEventArgs e)
+        private async Task<ListBoxItem> GetListBoxItem(object item)
         {
-            SetPlayStatus(MediaStatuses.Opened);
+            while (true)
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                EventHandler handler = null;
+                VideoList.ItemContainerGenerator.StatusChanged += handler = (sender, e) =>
+                {
+                    VideoList.ItemContainerGenerator.StatusChanged -= handler;
+                    tcs.SetResult(true);
+                };
+                var lbi = (ListBoxItem)VideoList.ItemContainerGenerator.ContainerFromItem(item);
+                if (lbi != null)
+                {
+                    VideoList.ItemContainerGenerator.StatusChanged -= handler;
+                    return lbi;
+                }
+                else
+                {
+                    await tcs.Task;
+                }
+            }
         }
 
-        private void AudioPlayerOnMediaEnded(object sender, RoutedEventArgs e)
+        private async Task SearchAndHighlight()
         {
-            SetPlayStatus(MediaStatuses.Ended);
+            DeHighlight();
+            if (string.IsNullOrWhiteSpace(_searchTarget))
+            {
+                return;
+            }
+            var first = true;
+            var search = _searchTarget.Trim();
+            var count = 0;
+            foreach (var item in VideoList.Items)
+            {
+                ListBoxItem lbi = null;
+                lbi = await GetListBoxItem(item);
+                var p = lbi.GetFirst<Panel>();
+                if (p != null)
+                {
+                    var tbs = p.GetAllTexts().ToList();
+                    var pairs = tbs.Highlight(search);
+                    var nonEmpty = false;
+                    foreach (var pair in pairs)
+                    {
+                        nonEmpty = true;
+                        _highlightedPairs.Add(pair);
+                    }
+                    if (nonEmpty)
+                    {
+                        _highlightedItems.Add(lbi);
+                        _currentFocused = 0;
+                        if (first)
+                        {
+                            VideoList.ScrollIntoView(lbi);
+                            lbi.IsSelected = true;
+                            first = false;
+                        }
+                        count++;
+                    }
+                }
+            }
+            if (count > 0)
+            {
+                MatchCount.Text = $"找到{count}条记录";
+            }
+            else
+            {
+                MatchCount.Text = $"没有找到匹配项";
+            }
         }
 
-        private void AudioPlayerOnMediaFailed(object sender, ExceptionRoutedEventArgs e)
+        private void DeHighlight()
         {
-            SetPlayStatus(MediaStatuses.Failed);
+            _highlightedPairs.DeHighlight();
+            _highlightedPairs.Clear();
+            _highlightedItems.Clear();
+            _currentFocused = null;
+            MatchCount.Text = "";
         }
 
-        private void SetPlayStatus(MediaStatuses status)
+        private void UpdateSearchTarget(string target)
         {
-            _mediaStatus = status;
-        }
-        
-        private void PlaySongsOnUnchecked(object sender, RoutedEventArgs e)
-        {
-            AudioPlayer.Stop();
-        }
-
-        private async void PlaySongsOnChecked(object sender, RoutedEventArgs e)
-        {
-            await PlaySelected();
-        }
-
-        private void FriendlyLinksOnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            FriendlyLinks.IsSelected = true;
+            _searchTarget = target;
+            DeHighlight();
         }
     }
 }

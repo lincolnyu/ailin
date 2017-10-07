@@ -1,4 +1,7 @@
-﻿using AiLinWpf.Styles;
+﻿//#define TEST_DISABLE_INITIAL_LOAD
+//#define TEST_INVITE
+
+using AiLinWpf.Styles;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -9,30 +12,57 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using WebKit;
 using WebKit.Helpers;
-using static AiLinWpf.Helpers.ImageHelper;
+using static AiLinWpf.Helpers.ImageLoadingHelper;
 using static WebKit.VotePageNavigator;
 
-namespace AiLinWpf.Data
+namespace AiLinWpf.Voting
 {
     public class InfoDependentUI
     {
         public enum States
         {
+            Init,
             Refreshing,
             Loaded,
-            LoadedWithQuestion,
             SubmittingQuestion,
             ReplyReceived,
-            RefreshingAfterReply,
-            Error
+            Error,
+            Cancelled
         }
 
-        public States State { get; set; }
+        public enum RefreshReasons
+        {
+            UserRequested,
+            AfterReply,
+            PossiblyExpired
+        }
+
+        private DateTime? _lastRefresh;
+        private readonly TimeSpan _expiry
+            = TimeSpan.FromSeconds(60);
+
+        private string _inviteMessage;
+        private DateTime _lastInviteMessageRefresh;
+        private readonly TimeSpan _inviteMessageExpiry
+#if TEST_INVITE
+            = TimeSpan.FromSeconds(1);
+        private Canceller _inviteCanceller = new Canceller();
+        private bool _notFirst;
+#else
+            = TimeSpan.FromMinutes(15);
+#endif
+
+        private AsyncLock MobileNavLock = new AsyncLock();
+        public VotePageNavigator MobileNavigator { get; private set; }
+
+        public States State { get; private set; }
+
+        public RefreshReasons RefreshReason { get; private set; }
 
         public ErrorCodes Error { get; private set; }
 
         public int VoteId;
-        public VotePageNavigator Navigator;
+        public VotePageNavigator Navigator { get; private set; }
         public PageInfo PageInfo;
 
         public TabItem Tab;
@@ -62,14 +92,15 @@ namespace AiLinWpf.Data
         public Run ResultText;
         public Hyperlink ResultLink;
 
-        public string InviteMessage;
-
         public MainWindow MainWindow;
 
         public RecordRepository Records;
 
         public void Setup(MainWindow window)
         {
+            Navigator = new VotePageNavigator(VoteId);
+            MobileNavigator = new VotePageNavigator(VoteId, MobilePageUrlPattern, true);
+
             Records = new RecordRepository(VoteId);
             MainWindow = window;
             Tab.Loaded += TabOnLoaded;
@@ -78,35 +109,49 @@ namespace AiLinWpf.Data
             Invite.Click += InviteButtonClick;
             InviteEmail.Click += InviteEmailButtonClick;
             ResultLink.RequestNavigate += window.HyperlinkRequestNavigate;
-            State = States.Refreshing;
-
+            State = States.Init;
             LoadLast();
         }
 
-        #region Event handlers
+#region Event handlers
 
         private async void TabOnLoaded(object sender, RoutedEventArgs e)
         {
-            await RefreshVoteAsync();
+            EnableLinsPages(false);
+#if !TEST_DISABLE_INITIAL_LOAD
+            State = States.Refreshing;
+            await RefreshVoteAsync(true);
+#endif
+        }
+
+        private void CancelInvite()
+        {
+            MobileNavigator.CancelRefresh();
+#if TEST_INVITE
+            _inviteCanceller.Cancel();
+#endif
         }
 
         private async void RefreshTab(object sender, RoutedEventArgs e)
         {
-            if (State == States.Error)
+            if (State == States.Refreshing)
             {
-                Application.Current.Shutdown();
+                Navigator.CancelRefresh();
+                CancelInvite();
+                return;
             }
             if (State == States.ReplyReceived)
             {
                 ResultPanel.Visibility = Visibility.Collapsed;
                 VoteButton.Visibility = Visibility.Visible;
                 ChoicesPanel.IsEnabled = true;
-                State = States.RefreshingAfterReply;
+                RefreshReason = RefreshReasons.AfterReply;
             }
             else
             {
-                State = States.Refreshing;
+                RefreshReason = RefreshReasons.UserRequested;
             }
+            State = States.Refreshing;
             await RefreshVoteAsync();
         }
 
@@ -115,37 +160,86 @@ namespace AiLinWpf.Data
             ToggleVote();
         }
 
-        private void InviteButtonClick(object sender, RoutedEventArgs e)
+        private async void InviteButtonClick(object sender, RoutedEventArgs e)
         {
-            if (InviteMessage != null)
+            const string cancelStr = "取消";
+            if ((string)Invite.Content != cancelStr)
             {
-                Clipboard.SetText(InviteMessage);
-                MessageBox.Show(InviteMessage, "以下内容已经复制到剪贴板");
+                var oldContent = Invite.Content;
+                var oldWidth = Invite.ActualWidth;
+                Invite.Content = cancelStr;
+                Invite.Width = oldWidth;
+                var invite = await GetInviteMessageAsync();
+                Invite.Content = oldContent;
+                if (invite != null)
+                {
+                    Clipboard.SetText(invite);
+                    var sb = new StringBuilder();
+                    sb.AppendLine("以下内容已经复制到剪贴板：");
+                    sb.AppendLine();
+                    sb.Append(invite);
+                    MessageBox.Show(sb.ToString(), MainWindow.Title);
+                }
+                else
+                {
+                    MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                }
             }
             else
             {
-                MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                CancelInvite();
             }
         }
 
-        private void InviteEmailButtonClick(object sender, RoutedEventArgs e)
+        private async void InviteEmailButtonClick(object sender, RoutedEventArgs e)
         {
-            if (InviteMessage != null)
+            const string cancelStr = "取消";
+            if ((string)InviteEmail.Content != cancelStr)
             {
-                var body = InviteMessage.Replace("\n", "%0A");
-                body = body.Replace("\r", "");
-                body = body.Replace("?", "%3F");
-                body = body.Replace("&", "%26");
-                var mailto = $"mailto:?subject=亲，帮我个忙&body={body}";
-                Process.Start(new ProcessStartInfo(mailto));
+                var oldContent = InviteEmail.Content;
+                var oldWidth = InviteEmail.ActualWidth;
+                InviteEmail.Content = cancelStr;
+                InviteEmail.Width = oldWidth;
+                var invite = await GetInviteMessageAsync();
+                InviteEmail.Content = oldContent;
+                if (invite != null)
+                {
+                    var body = invite.Replace("\n", "%0A");
+                    body = body.Replace("\r", "");
+                    body = body.Replace("?", "%3F");
+                    body = body.Replace("&", "%26");
+                    var mailto = $"mailto:?subject=亲，帮我个忙&body={body}";
+                    Process.Start(new ProcessStartInfo(mailto));
+                }
+                else
+                {
+                    MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                }
             }
             else
             {
-                MessageBox.Show("很抱歉，链接地址未能正确获得", MainWindow.Title);
+                CancelInvite();
             }
         }
 
-        #endregion
+#endregion
+
+        public async Task<string> GetInviteMessageAsync()
+        {
+            using (await MobileNavLock.Wait())
+            {
+                if (_inviteMessage == null || DateTime.UtcNow - _lastInviteMessageRefresh >= _inviteMessageExpiry)
+                {
+                    _inviteMessage = await RetrieveInvite_unsafe();
+
+                    if (_inviteMessage != null)
+                    {
+                        _lastInviteMessageRefresh = DateTime.UtcNow;
+                    }
+                }
+                return _inviteMessage;
+            }
+        }
 
         private async void RbClick(object sender, RoutedEventArgs e)
             => await RbClickAsync(sender, e);
@@ -157,7 +251,7 @@ namespace AiLinWpf.Data
             State = States.SubmittingQuestion;
             var rb = (RadioButton)sender;
             var c = (Question.Choice)rb.Tag;
-            var s = VotePageNavigator.CreateSubmit(PageInfo, c);
+            var s = CreateSubmit(PageInfo, c);
             byte[] result;
             var resultLinkContainer = (TextBlock)ResultLink.Parent;
             try
@@ -232,14 +326,16 @@ namespace AiLinWpf.Data
             }
         }
 
-        private async Task RefreshVoteAsync()
+        private async Task RefreshVoteAsync(bool mandatory = false)
         {
             DisableRefresh();
             var res = await Navigator.SearchForZhuLinAsync(true);
-            PageInfo = res.Item1;
-            Error = res.Item2;
-            if (PageInfo != null)
+            var page = res.Item1;
+            var error = res.Item2;
+            if (page != null && error == ErrorCodes.Success)
             {
+                PageInfo = page;
+                Error = error;
                 NumVotesText.Text = PageInfo.Votes?.ToString() ?? "无法获取";
                 PopularityText.Text = PageInfo.Popularity?.ToString() ?? "无法获取";
                 RankText.Text = PageInfo.Rank?.ToString() ?? "无法获取";
@@ -270,90 +366,91 @@ namespace AiLinWpf.Data
                     }
                 }
             }
+            else if (!mandatory && PageInfo != null && error == ErrorCodes.Cancelled)
+            {
+                RestoreRefresh();
+                State = States.Loaded;
+                Error = ErrorCodes.Success;
+                return;
+            }
             else
             {
-                State = States.Error;
-                ReportError();
+                PageInfo = page;
+                Error = error;
+                ProcessError();
                 return;
             }
 
-            var mobileNavigator = new VotePageNavigator(VoteId, VotePageNavigator.MobilePageUrlPattern, true);
-            var resMob = await mobileNavigator.SearchForZhuLinMobileUrlAsync();
-            var mp = resMob.Item1;
-            if (mp != null)
-            {
-                LinsPageMobile.NavigateUri = new Uri(mp);
-            }
-
-            if (mp != null || PageInfo.PageUrl != null)
-            {
-                var sb = new StringBuilder();
-                sb.Append("亲，请为我的偶像朱琳老师投上您宝贵的一票");
-                if (PageInfo.Rank != null)
-                {
-                    sb.Append($"，她现在在{PageInfo.Rank}位");
-                }
-                sb.AppendLine("。多谢了先！");
-                if (mp != null)
-                {
-                    sb.AppendLine($"手机网址： {mp}");
-                }
-                if (PageInfo.PageUrl != null)
-                {
-                    sb.AppendLine($"普通网址： {PageInfo.PageUrl}");
-                }
-                InviteMessage = sb.ToString();
-            }
-            else
-            {
-                InviteMessage = null;
-            }
+            await GetInviteMessageAsync();
 
             RestoreRefresh();
             State = States.Loaded;
+            _lastRefresh = DateTime.UtcNow;
         }
 
         private void DisableRefresh()
         {
-            RefreshButton.Content = "正在刷新……";
+            RefreshButton.Foreground = Coloring.Black;
+            switch (RefreshReason)
+            {
+                case RefreshReasons.UserRequested:
+                case RefreshReasons.AfterReply:
+                    RefreshButton.Content = "正在刷新（按此键取消刷新）……";
+                    break;
+                case RefreshReasons.PossiblyExpired:
+                    RefreshButton.Content = "网页可能已经过期，正在刷新……";
+                    break;
+            }
             VoteButton.IsEnabled = false;
-            RefreshButton.IsEnabled = false;
-            LinsProfile.IsEnabled = false;
-            LinsPage.IsEnabled = false;
-            LinsPageMobile.IsEnabled = false;
+            RefreshButton.IsEnabled = true;
+            EnableLinsPages(false);
             Invite.IsEnabled = false;
             InviteEmail.IsEnabled = false;
-            InviteMessage = "";
             CollapseVote();
         }
 
-        private void RestoreRefresh()
+        private void RestoreRefresh(bool enableVoteButton = true)
         {
             RefreshButton.IsEnabled = true;
-            VoteButton.IsEnabled = true;
-            LinsProfile.IsEnabled = true;
-            LinsPage.IsEnabled = true;
-            LinsPageMobile.IsEnabled = true;
-            if (InviteMessage != null)
-            {
-                Invite.IsEnabled = true;
-                InviteEmail.IsEnabled = true;
-            }
+            VoteButton.IsEnabled = enableVoteButton;
+            EnableLinsPages(true);
+            Invite.IsEnabled = true;
+            InviteEmail.IsEnabled = true;
             CollapseVote();
             RefreshButton.Content = "刷新";
         }
 
-        private void ReportError()
+        private void EnableLinsPages(bool enabled)
+        {
+            LinsProfile.IsEnabled = enabled;
+            LinsPage.IsEnabled = enabled;
+            LinsPageMobile.IsEnabled = enabled;
+        }
+
+        private void ProcessError()
         {
             RefreshButton.IsEnabled = true;
+            if (Error ==  ErrorCodes.Cancelled)
+            {
+                _lastRefresh = null;
+                State = States.Cancelled;
+                RestoreRefresh();
+                return;
+            }
+            State = States.Error;
             RefreshButton.Foreground = Coloring.RedBrush;
             switch (Error)
             {
                 case ErrorCodes.ParsingError:
-                    RefreshButton.Content = "网络错误，点此关闭后重新打开程序以重试";
+                    RefreshButton.Content = "解析失败，点此重试";
                     break;
                 case ErrorCodes.WebRequestError:
-                    RefreshButton.Content = "解析失败，点此关闭后重新打开程序以重试";
+                    RefreshButton.Content = "网络错误，点此重试";
+                    break;
+                case ErrorCodes.TimeOutError:
+                    RefreshButton.Content = "超时错误，点此重试";
+                    break;
+                case ErrorCodes.Cancelled:
                     break;
                 default:
                     Debug.Assert(false, "未识别错误");
@@ -378,7 +475,7 @@ namespace AiLinWpf.Data
             ResultPanel.Visibility = Visibility.Visible;
         }
 
-        public void ToggleVote()
+        public async void ToggleVote()
         {
             if (VoteExpanded())
             {
@@ -386,8 +483,74 @@ namespace AiLinWpf.Data
             }
             else
             {
-                ExpandVote();
+                await RefreshIfNeeded();
+                if (State == States.Loaded)
+                {
+                    ExpandVote();
+                }
+                else
+                {
+                    CollapseVote();
+                }
             }
+        }
+
+        private async Task RefreshIfNeeded()
+        {
+            if (_lastRefresh == null || DateTime.UtcNow - _lastRefresh >= _expiry)
+            {
+                State = States.Refreshing;
+                RefreshReason = RefreshReasons.PossiblyExpired;
+                await RefreshVoteAsync(true);
+            }
+        }
+
+        private async Task<string> RetrieveInvite_unsafe()
+        {
+            var resMob = await MobileNavigator.SearchForZhuLinMobileUrlAsync();
+            var mp = resMob.Item1;
+            if (mp != null)
+            {
+                LinsPageMobile.NavigateUri = new Uri(mp);
+            }
+
+#if TEST_INVITE
+            try
+            {
+                if (_notFirst)
+                {
+                    await Task.Delay(10000, _inviteCanceller.Token);
+                }
+                else
+                {
+                    _notFirst = true;
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                return null;
+            }
+#endif
+            if (mp != null || PageInfo.PageUrl != null)
+            {
+                var sb = new StringBuilder();
+                sb.Append("亲，请为我的偶像朱琳老师投上您宝贵的一票");
+                if (PageInfo?.Rank != null)
+                {
+                    sb.Append($"，她现在在{PageInfo.Rank}位");
+                }
+                sb.AppendLine("。多谢了先！");
+                if (mp != null)
+                {
+                    sb.AppendLine($"手机网址： {mp}");
+                }
+                if (PageInfo?.PageUrl != null)
+                {
+                    sb.AppendLine($"普通网址： {PageInfo.PageUrl}");
+                }
+                return  sb.ToString();
+            }
+            return null;
         }
 
         private bool VoteExpanded()

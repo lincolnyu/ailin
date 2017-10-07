@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebKit", "WebKit\WebKit.csproj", "{B2EB9446-88B7-4506-BBB4-D0EB9375A320}"
 EndProject
@@ -10,6 +10,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinWpf", "AiLinWpf\AiLinWpf.csproj", "{4FD7235A-9A3D-4EF0-B5E0-2B845FF71585}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinTests", "AiLinTests\AiLinTests.csproj", "{170273A2-36B8-479F-AF22-76215AA45557}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedbackCoreLite", "..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj", "{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AiLinLib", "AiLinLib\AiLinLib.csproj", "{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonParser_dns11", "..\..\jsonparser\JsonParser\JsonParser\JsonParser_dns11.csproj", "{714C9E77-900F-4078-ABA1-96C6BEEAAB62}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QSharp.Scheme.Classical.Sequential(dns11)", "..\..\qsharp\QSharp\QSharp.Scheme.Classical.Sequential\QSharp.Scheme.Classical.Sequential(dns11).csproj", "{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUI", "TestUI\TestUI.csproj", "{9266A996-3902-4114-A16E-11263A180A3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLinWpfLib", "AiLinWpfLib\AiLinWpfLib.csproj", "{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +45,35 @@ Global
 		{170273A2-36B8-479F-AF22-76215AA45557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170273A2-36B8-479F-AF22-76215AA45557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170273A2-36B8-479F-AF22-76215AA45557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D20B9E-18C5-42B8-A82B-F1DCDFDBDF76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714C9E77-900F-4078-ABA1-96C6BEEAAB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C503A736-6CCD-4FC6-B920-96CC7B9C9D9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9266A996-3902-4114-A16E-11263A180A3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED292338-703A-4057-B3B1-8F77BA32021A}
 	EndGlobalSection
 EndGlobal

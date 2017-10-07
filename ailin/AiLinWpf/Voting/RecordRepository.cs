@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.IsolatedStorage;
 
-namespace AiLinWpf.Data
+namespace AiLinWpf.Voting
 {
     public class RecordRepository
     {
@@ -12,7 +12,7 @@ namespace AiLinWpf.Data
         public RecordRepository(int id)
         {
             VoteId = id;
-            FileName = $"records_{id}txt";
+            FileName = $"records_{id}.txt";
         }
 
         public void Save()

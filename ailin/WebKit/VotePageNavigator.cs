@@ -1,9 +1,17 @@
-﻿using System;
+﻿//#define SIMULATE_TIMEOUT
+//#define SIMULATE_DOWNLOADING_NULL
+//#define SIMULATE_BAD_DOWNLOAD
+
+using Redback.Helpers;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebKit.Helpers;
+#if SIMULATE_TIMEOUT
+using System.Threading;
+#endif
 
 namespace WebKit
 {
@@ -13,7 +21,9 @@ namespace WebKit
         {
             Success,
             WebRequestError,
-            ParsingError
+            ParsingError,
+            TimeOutError,
+            Cancelled
         }
 
         public const int DefaultVoteId = 43;
@@ -30,6 +40,11 @@ namespace WebKit
         private string _baseUrl;
 
         private bool _isMobile;
+        private bool _cancelled;
+        private bool _downloading;
+#if SIMULATE_TIMEOUT
+        private Canceller _timeoutCanceller = new Canceller();
+#endif
 
         public VotePageNavigator(string mainPageUrl, bool isMobile = false)
         {
@@ -50,7 +65,7 @@ namespace WebKit
             client.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
             client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
 
-            var host = _baseUrl.BaseUrlToDomain();
+            var host = _baseUrl.BaseUrlToHost();
             client.Headers.Add(HttpRequestHeader.Host, host);
 
             SetUserAgentIfMobile();
@@ -65,12 +80,53 @@ namespace WebKit
             SetUserAgentIfMobile();
             try
             {
-                var data = await _client.DownloadDataTaskAsync(url);
-                var page = data.ConvertGB2312ToUTF();
+#if SIMULATE_DOWNLOADING_NULL
+                _downloading = true;
+                await Task.Delay(3000);
+                _downloading = false;
+                var page = "";
+#else
+                // This is because _client.DownloadDataTaskAsync() doesn't work quite async well for long downloading
+                // And ConvertGB2312ToUTF() is also CPU bound
+                var page = await Task.Run(() =>
+                {
+                    byte[] data;
+                    lock(_client)
+                    {
+                        try
+                        {
+                            _downloading = true;
+#if SIMULATE_BAD_DOWNLOAD
+                            const int rep = 100;
+                            var rand = new Random();
+                            data = null;
+                            for (var i = 0; i < rep; i++)
+                            {
+                                url = $"http://bad/link{rand.Next()}";
+                                data = _client.DownloadData(url);
+                            }
+#else
+                            data = _client.DownloadData(url);
+#endif
+                        }
+                        finally
+                        {
+                            _downloading = false;
+                        }
+                    }
+                    return data.ConvertGB2312ToUTF();
+                });
+#endif
                 return page;
+            }
+            catch (ArgumentException)
+            {
+                Debug.WriteLine("Downloading or analyzing page raised ArgumentException");
+                return null;
             }
             catch (WebException)
             {
+                Debug.WriteLine("Downloading or analyzing page raised WebException");
                 return null;
             }
         }
@@ -83,6 +139,32 @@ namespace WebKit
             }
         }
 
+        public void CancelRefresh()
+        {
+            if (_cancelled == false)
+            {
+                _cancelled = true;
+                try
+                {
+                    lock (_client)
+                    {
+                        if (_downloading)
+                        {
+                            _client.CancelAsync();
+                        }
+                    }
+                    Debug.WriteLine("Cancelling refresh is successful");
+                }
+                catch (WebException)
+                {
+                    Debug.WriteLine("Cancelling refresh raised WebException");
+                }
+            }
+#if SIMULATE_TIMEOUT
+            _timeoutCanceller.Cancel();
+#endif
+        }
+
         public Tuple<string, ErrorCodes> SearchForZhuLinMobileUrl()
         {
             var task = SearchForZhuLinMobileUrlAsync();
@@ -92,12 +174,14 @@ namespace WebKit
 
         public async Task<Tuple<string, ErrorCodes>> SearchForZhuLinMobileUrlAsync()
         {
-            for (var url = _mainPageUrl; url != null;)
+            _cancelled = false;
+            for (var url = _mainPageUrl; url != null && !_cancelled; )
             {
                 var page = await GetPageGB2312(url);
                 if (page == null)
                 {
-                    return new Tuple<string, ErrorCodes>(null, ErrorCodes.WebRequestError);
+                    return new Tuple<string, ErrorCodes>(null, _cancelled ? ErrorCodes.Cancelled
+                        : ErrorCodes.WebRequestError);
                 }
                 if (page.Contains("朱琳")) // TODO what about another Zhu Lin?
                 {
@@ -105,7 +189,8 @@ namespace WebKit
                 }
                 url = GetLinkToNextPage(url, page);
             }
-            return new Tuple<string, ErrorCodes>(null, ErrorCodes.ParsingError);
+            return new Tuple<string, ErrorCodes>(null, _cancelled ? ErrorCodes.Cancelled 
+                : ErrorCodes.ParsingError);
         }
 
         public Tuple<PageInfo, ErrorCodes> SearchForZhuLin(bool getQuestions = true)
@@ -119,13 +204,26 @@ namespace WebKit
         public async Task<Tuple<PageInfo, ErrorCodes>> SearchForZhuLinAsync(bool getQuestions = true)
         {
             Debug.Assert(!_isMobile);
+            _cancelled = false;
+#if SIMULATE_TIMEOUT
+            try
+            {
+                await Task.Delay(3000, _timeoutCanceller.Token);
+                return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.TimeOutError);
+            }
+            catch (TaskCanceledException)
+            {
+                return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.Cancelled);
+            }
+#else
             // should be like <a href="/vote/rankdetail-2685.html" target=_blank class=zthei >朱琳</a>
-            for (var url = _mainPageUrl; url != null; )
+            for (var url = _mainPageUrl; url != null && !_cancelled; )
             {
                 var page = await GetPageGB2312(url);
                 if (page == null)
                 {
-                    return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.WebRequestError);
+                    return new Tuple<PageInfo, ErrorCodes>(null, _cancelled ? 
+                        ErrorCodes.Cancelled : ErrorCodes.WebRequestError);
                 }
                 var pattern = @"(<a href=[^>]+>)朱琳</a>"; // TODO what about another Zhu Lin?
                 var regex = new Regex(pattern);
@@ -134,7 +232,7 @@ namespace WebKit
                 {
                     var a = match.Groups[1].Value;
                     var proflink = a.GetAttribute("href");
-                    proflink = url.RelativeToAbsolute(proflink);
+                    proflink = url.GetAbsoluteUrl(proflink);
 
                     var start = match.Index + match.Length;
 
@@ -153,7 +251,7 @@ namespace WebKit
 
                     if (thumbnail != null)
                     {
-                        thumbnail = url.RelativeToAbsolute(thumbnail);
+                        thumbnail = url.GetAbsoluteUrl(thumbnail);
                     }
 
                     var pageId = GetPageId(url);
@@ -175,7 +273,9 @@ namespace WebKit
                 }
                 url = GetLinkToNextPage(url, page);
             }
-            return new Tuple<PageInfo, ErrorCodes>(null, ErrorCodes.ParsingError);
+            return new Tuple<PageInfo, ErrorCodes>(null,
+                _cancelled ? ErrorCodes.Cancelled : ErrorCodes.ParsingError);
+#endif
         }
 
         private int GetPageId(string url)
@@ -322,7 +422,7 @@ namespace WebKit
             {
                 var val = match.Groups[1].Value;
                 val = val.UrlInHtmlToUrl();
-                val = _mainPageUrl.RelativeToAbsolute(val);
+                val = _mainPageUrl.GetAbsoluteUrl(val);
                 val = val.Trim();
                 return val;
             }

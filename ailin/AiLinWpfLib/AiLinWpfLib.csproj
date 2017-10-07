@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2EB9446-88B7-4506-BBB4-D0EB9375A320}</ProjectGuid>
+    <ProjectGuid>{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebKit</RootNamespace>
-    <AssemblyName>WebKit</AssemblyName>
+    <RootNamespace>AiLinWpfLib</RootNamespace>
+    <AssemblyName>AiLinWpfLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,31 +40,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncLock.cs" />
-    <Compile Include="Canceller.cs" />
-    <Compile Include="Helpers\TextContentHelper.cs" />
-    <Compile Include="Helpers\CommonHelper.cs" />
-    <Compile Include="Helpers\VoteResponseHelper.cs" />
-    <Compile Include="MyWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SubmitHandler.cs" />
-    <Compile Include="PageInfo.cs" />
-    <Compile Include="Question.cs" />
-    <Compile Include="VotePageNavigator.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj">
-      <Project>{01b732cb-bf3f-4f3a-b61c-9eff5d8e0322}</Project>
-      <Name>RedbackCoreLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AiLinWpfLib\AiLinWpfLib.csproj">
-      <Project>{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}</Project>
-      <Name>AiLinWpfLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -42,10 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentTest.cs" />
+    <Compile Include="MediaJsonTest.cs" />
     <Compile Include="ParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj">
+      <Project>{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}</Project>
+      <Name>RedbackCoreLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AiLinLib\AiLinLib.csproj">
+      <Project>{99d20b9e-18c5-42b8-a82b-f1dcdfdbdf76}</Project>
+      <Name>AiLinLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebKit\WebKit.csproj">
       <Project>{b2eb9446-88b7-4506-bbb4-d0eb9375a320}</Project>
       <Name>WebKit</Name>
@@ -58,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestData\medialist1.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
