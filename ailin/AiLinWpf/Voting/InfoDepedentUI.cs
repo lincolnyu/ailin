@@ -140,6 +140,11 @@ namespace AiLinWpf.Voting
                 CancelInvite();
                 return;
             }
+            if(State == States.SubmittingQuestion)
+            {
+                Navigator.CancelRefresh();
+                return;
+            }
             if (State == States.ReplyReceived)
             {
                 ResultPanel.Visibility = Visibility.Collapsed;
@@ -258,10 +263,19 @@ namespace AiLinWpf.Voting
             {
                 result = await Navigator.SubmitAsync(s);
             }
+            catch (RequestCancelled)
+            {
+                resultLinkContainer.Visibility = Visibility.Collapsed;
+                ResultText.Text = "投票已取消，请重试";
+                RestoreRefreshSubmitted();
+                State = States.ReplyReceived;
+                return;
+            }
             catch (Exception)
             {
                 resultLinkContainer.Visibility = Visibility.Collapsed;
                 ResultText.Text = "提交出错，请重试";
+                RestoreRefreshSubmitted();
                 State = States.ReplyReceived;
                 return;
             }
@@ -460,9 +474,9 @@ namespace AiLinWpf.Voting
 
         public void DisableRefreshSubmitting()
         {
-            RefreshButton.Content = "正在投票……";
+            RefreshButton.Content = "正在投票（点此取消）……";
+            RefreshButton.IsEnabled = true;
             VoteButton.IsEnabled = false;
-            RefreshButton.IsEnabled = false;
         }
 
         private void RestoreRefreshSubmitted()

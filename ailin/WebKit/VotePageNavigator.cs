@@ -26,6 +26,26 @@ namespace WebKit
             Cancelled
         }
 
+        public class RequestCancelled : Exception
+        {
+        }
+
+        private class ClientEngagedAsyncKeeper : IDisposable
+        {
+            private VotePageNavigator _owner;
+
+            public ClientEngagedAsyncKeeper(VotePageNavigator owner)
+            {
+                _owner = owner;
+                _owner._clientEngagedAsync = true;
+            }
+
+            public void Dispose()
+            {
+                _owner._clientEngagedAsync = false;
+            }
+        }
+
         public const int DefaultVoteId = 43;
         public const int SecondVoteId = 1069;
         public const string MainPageUrlPattern = "http://www.ttpaihang.com/vote/rank.php?voteid=";
@@ -41,7 +61,7 @@ namespace WebKit
 
         private bool _isMobile;
         private bool _cancelled;
-        private bool _downloading;
+        private bool _clientEngagedAsync;
 #if SIMULATE_TIMEOUT
         private Canceller _timeoutCanceller = new Canceller();
 #endif
@@ -90,34 +110,36 @@ namespace WebKit
                 // And ConvertGB2312ToUTF() is also CPU bound
                 var page = await Task.Run(() =>
                 {
-                    byte[] data;
+                    byte[] data = null;
                     lock(_client)
                     {
-                        try
+                        using (new ClientEngagedAsyncKeeper(this))
                         {
-                            _downloading = true;
 #if SIMULATE_BAD_DOWNLOAD
                             const int rep = 100;
                             var rand = new Random();
-                            data = null;
+                            var data = null;
                             for (var i = 0; i < rep; i++)
                             {
                                 url = $"http://bad/link{rand.Next()}";
                                 data = _client.DownloadData(url);
                             }
 #else
-                            data = _client.DownloadData(url);
+                            var t = _client.DownloadDataTaskAsync(url);
+                            t.Wait();
+                            data = t.Result;
 #endif
-                        }
-                        finally
-                        {
-                            _downloading = false;
-                        }
+                        }   
                     }
-                    return data.ConvertGB2312ToUTF();
+                    return data?.ConvertGB2312ToUTF()?? null;
                 });
 #endif
                 return page;
+            }
+            catch (AggregateException)
+            {
+                Debug.WriteLine("Downloading or analyzing page raised AggregateException");
+                return null;
             }
             catch (ArgumentException)
             {
@@ -146,12 +168,9 @@ namespace WebKit
                 _cancelled = true;
                 try
                 {
-                    lock (_client)
+                    if (_clientEngagedAsync)
                     {
-                        if (_downloading)
-                        {
-                            _client.CancelAsync();
-                        }
+                        _client.CancelAsync();
                     }
                     Debug.WriteLine("Cancelling refresh is successful");
                 }
@@ -403,14 +422,39 @@ namespace WebKit
 
         public byte[] Submit(SubmitHandler sh, string url = SubmitUrl)
         {
-            _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
-            return _client.UploadValues(url, "POST", sh.KeyValues);
+            lock(_client)
+            {
+                _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
+                return _client.UploadValues(url, "POST", sh.KeyValues);
+            }
         }
 
         public async Task<byte[]> SubmitAsync(SubmitHandler sh, string url = SubmitUrl)
         {
-            _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
-            return await _client.UploadValuesTaskAsync(url, "POST", sh.KeyValues);
+            return await Task.Run(() =>
+            {
+                lock (_client)
+                {
+                    using (new ClientEngagedAsyncKeeper(this))
+                    {
+                        try
+                        {
+                            _client.Headers.Add(HttpRequestHeader.Referer, sh.RefPage.PageUrl);
+                            var t = _client.UploadValuesTaskAsync(url, "POST", sh.KeyValues);
+                            t.Wait();
+                            return t.Result;
+                        }
+                        catch (AggregateException e)
+                        {
+                            if (e.InnerException is WebException we && we.Status == WebExceptionStatus.RequestCanceled)
+                            {
+                                throw new RequestCancelled();
+                            }
+                            throw e;
+                        }
+                    }
+                }
+            });
         }
 
         public string GetLinkToNextPage(string pageUrl, string pageContent)
