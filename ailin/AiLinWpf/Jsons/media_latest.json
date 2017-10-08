@@ -1,0 +1,2328 @@
+{
+  "version": "0.0",
+  "mediaList": [
+    {
+      "id": "PGZh",
+      "title": "叛国者",
+      "date": "1980",
+      "role": "助手沈虹",
+      "director": "张其昌",
+      "producer": "西安电影制片厂",
+      "type": "film",
+      "sources": [
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XOTA5NDI3NTY4.html"
+        }
+      ]
+    },
+    {
+      "id": "XY",
+      "title": "小院",
+      "date": "1981",
+      "type": "short",
+      "role": "桑桑",
+      "sources": [
+        {
+          "name": "土豆",
+          "target": "http://video.tudou.com/v/XMjEwNDUzNDc2MA==.html"
+        },
+        {
+          "name": "bilibili",
+          "target": "http://www.bilibili.com/video/av4042145/"
+        }
+      ]
+    },
+    {
+      "id": "XSD",
+      "title": "相思豆",
+      "date": "1981",
+      "type": "tv",
+      "role": "方姐",
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "LYChQ",
+      "title": "梨园传奇",
+      "date": "1982",
+      "type": "film",
+      "role": "坤旦花想容",
+      "sources": [
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XMjczMDI3MTc4NA==.html"
+        },
+        {
+          "name": "Youtube",
+          "target": "https://www.youtube.com/watch?v=zL18G-U4bBo"
+        }
+      ]
+    },
+    {
+      "id": "WWDShJ",
+      "title": "弯弯的石径",
+      "date": "1982",
+      "type": "tv",
+      "role": "秦小婉",
+      "director": "米家山",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist": [
+            { "1": "http://v.youku.com/v_show/id_XODMxODQ4NDg=.html" },
+            { "2": "http://v.youku.com/v_show/id_XODMwOTc0MTY=.html" },
+            { "3": "http://v.youku.com/v_show/id_XODMwMTg2MTY=.html" }
+          ]
+        },
+        {
+          "name": "56网：",
+          "playlist": [
+            { "播放": "http://www.56.com/w67/play_album-aid-9804385_vid-NTc3NTYxMzU.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YLRQDDF",
+      "title": "远离人群的地方",
+      "date": "1983",
+      "type": "film",
+      "role": "科学院记者覃泓",
+      "sources": [
+        {
+          "name": "1905电影网",
+          "target": "http://www.1905.com/vod/play/873539.shtml"
+        }
+      ]
+    },
+    {
+      "id": "LTC",
+      "title": "骆驼草",
+      "date": "1983",
+      "type": "film",
+      "role": "导弹专家柳英",
+      "director": "景慕逵、赵继烈",
+      "producer": "八一电影制片厂",
+      "sources": [
+        {
+          "name": "1905电影网",
+          "target": "http://v.youku.com/v_show/id_XMTE4MzM1MjY0.html"
+        }
+      ]
+    },
+    {
+      "id": "JFZ",
+      "title": "金房子",
+      "date": "1983",
+      "type": "tv",
+      "role": "喜爱文艺的女青年文静",
+      "director": "徐庆东",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist": [
+            { "1": "http://v.youku.com/v_show/id_XODMyMzUyNjg=.html" },
+            { "2": "http://v.youku.com/v_show/id_XODMyODU0MjA=.html" },
+            { "3": "http://v.youku.com/v_show/id_XODMzMzc4NDg=.html" },
+            { "4": "http://v.youku.com/v_show/id_XODMzOTQxMTI=.html" }
+          ]
+        },
+        {
+          "name": "56网：",
+          "playlist": [
+            { "播放": "http://www.56.com/w89/play_album-aid-12193523_vid-ODQ1ODk0MjE.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XEBLK",
+      "title": "肖尔布拉克",
+      "date": "1984",
+      "type": "film",
+      "role": "知青叶娟",
+      "producer": "上海电影制片厂",
+      "sources": [
+        {
+          "name": "乐视",
+          "target": "http://www.le.com/ptv/vplay/26553300.html?ch=sohu_v"
+        },
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XMTg4OTU1ODM4MA==.html"
+        }
+      ]
+    },
+    {
+      "id": "EShNHZXH",
+      "title": "二十年后再相会",
+      "date": "1984",
+      "type": "film",
+      "role": "船舶监造师诸晖",
+      "producer": "上海电影制片厂",
+      "sources": [
+        {
+          "name": "风行网",
+          "target": "http://www.fun.tv/vplay/g-37790/"
+        },
+        {
+          "name": "Youtube",
+          "target": "https://www.youtube.com/watch?v=GXF0P4-a2L4"
+        }
+      ]
+    },
+    {
+      "id": "XYJ",
+      "title": "西游记之趣经女儿国",
+      "date": "1986",
+      "type": "tv",
+      "role": "女儿国国王",
+      "director": "杨洁",
+      "producer": "中央电视台及下属中国电视剧制作中心",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist": [
+            { "标准版": "http://v.youku.com/v_show/id_XMTEyMTY2Njg4.html" },
+            { "世杰版": "http://v.youku.com/v_show/id_XMTU4NzczODg0NA==.html" }
+          ]
+        },
+        {
+          "name": "腾讯："
+        },
+        {
+          "name": "标准版（较高清）",
+          "target": "https://v.qq.com/x/cover/aav44xv50k8sfjb/v01837h5xtn.html?ptag=2345.tv"
+        },
+        {
+          "name": "乐视：",
+          "playlist": [
+            { "完整版": "http://www.le.com/ptv/vplay/20873763.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KXZZY",
+      "title": "凯旋在子夜",
+      "date": "198610",
+      "type": "tv",
+      "role": "江曼",
+      "director": "尤小刚",
+      "playwright": "韩静霆",
+      "adaptedFrom": "韩静霆同名小说",
+      "producer": "北京电视艺术中心",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist": [
+            { "1": "http://v.youku.com/v_show/id_XMTE1NDI4MTI4.html" },
+            { "2": "http://v.youku.com/v_show/id_XMTE1NDI4MzE2.html" },
+            { "3": "http://v.youku.com/v_show/id_XMTE1NDI4Njg0.html" },
+            { "4": "http://v.youku.com/v_show/id_XMTE1NDI4Nzcy.html" },
+            { "5": "http://v.youku.com/v_show/id_XMTE1NDI5MDgw.html" },
+            { "6": "http://v.youku.com/v_show/id_XMTE1NDI5MTky.html" },
+            { "7": "http://v.youku.com/v_show/id_XMTE1NDI5Mzk2.html" },
+            { "8": "http://v.youku.com/v_show/id_XMTE1NDI5NTU2.html" },
+            { "9": "http://v.youku.com/v_show/id_XMTE1NDI5Njk2.html" },
+            { "10": "http://v.youku.com/v_show/id_XMTE1NDI5ODMy.html" },
+            { "11": "http://v.youku.com/v_show/id_XMTE1NDMwMDUy.html" }
+          ]
+        },
+        {
+          "name": "腾讯:",
+          "playlist": [
+            { "播放": "https://v.qq.com/x/cover/0rupde2v5mqir49/c00155kqqxa.html" }
+          ]
+        },
+        {
+          "name": "爱奇艺:",
+          "playlist": [
+            { "播放": "http://www.iqiyi.com/a_19rrhb7wu1.html?vfm=2008_aldbd" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YLZhZhND",
+      "title": "远离战争年代",
+      "date": "1987",
+      "type": "film",
+      "sources": [
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XMTM0ODQxMjcyMA==.html"
+        }
+      ]
+    },
+    {
+      "id": "TGZh",
+      "title": "逃港者",
+      "date": "1987",
+      "type": "film",
+      "sources": [
+        {
+          "name": "56网：",
+          "playlist":[
+            {"上集": "http://www.56.com/w25/play_album-aid-7556826_vid-MzgwNDE1ODE.html"},
+            {"下集": "http://www.56.com/w25/play_album-aid-7556826_vid-MzgwNDE1NDM.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BZhL",
+      "title": "白栅栏",
+      "date": "1988",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XODQ3NjAxMzI=.html"},
+            {"2": "http://v.youku.com/v_show/id_XODQ4Mjg0ODQ=.html"},
+            {"3": "http://v.youku.com/v_show/id_XODQ4NTIyMjA=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BWXZ",
+      "title": "别无选择",
+      "date": "1991",
+      "type": "film",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"片源1": "http://v.youku.com/v_show/id_XMzYzMTU2MzI=.html"},
+            {"片源2": "http://v.youku.com/v_show/id_XMTM2MjUzMjU2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XX",
+      "title": "小雪",
+      "role": "欧鹿老师",
+      "director": "戚健",
+      "playwright": "戚健、姜凌",
+      "producer": "长春电影制片厂",
+      "link": "http://www.1905.com/mdb/film/2215816/",
+      "date": "1991",
+      "type": "film",
+      "sources": [
+        {
+          "name": "土豆",
+          "target": "http://video.tudou.com/v/XMTk4NTg2MDEwOA==.html"
+        },
+        {
+          "name": "56网",
+          "target": "http://www.56.com/w28/play_album-aid-7738122_vid-NTM0MjQ3NDY.html"
+        }
+      ],
+      "sourcesRemarks": "只有上半部分，且这两个链接也已失效或设为私有。如有线索烦请告知作者。"
+    },
+    {
+      "id": "TBNR",
+      "title": "台北女人",
+      "date": "1992",
+      "type": "film",
+      "sources": [
+        {
+          "name": "优酷",
+          "target": "http://v.youku.com/v_show/id_XMTM3ODE4MDg3Ng==.html?from=y1.7-1.2"
+        },
+        {
+          "name": "1905电影网",
+          "target": "http://www.1905.com/vod/play/86081.shtml"
+        }
+      ]
+    },
+    {
+      "id": "XJRSh",
+      "title": "戏剧人生（又名《情同初恋》）",
+      "date": "1992",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTA1MTc2NTc2.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTA1MTkwMzgw.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTA1MjAzNTY4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTA1MjE5OTUy.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTA1MjI2ODYw.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTA1NDkxOTg0.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTA1MjM5NTc2.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTA1MjQ1MDY0.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTA1NTQ1NDk2.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTA1MjUzNzQ0.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTA1MjU2MTEy.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTA1MjYxNzA0.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTA1MjY2NTc2.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTA1MjgwNDY0.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTA1Mjg4OTgw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTA1MzA0OTQw.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTA1MzE3MjYw.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTA1MzI5MjUy.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTA1MzU3MDM2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YYDM",
+      "title": "永远的门",
+      "date": "1993",
+      "type": "film",
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "HY",
+      "title": "火浴",
+      "date": "1993",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM5NDYyMzcxMg==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM5NDY0NTU5Ng==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTM5NDY1MDcyMA==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM5NDY1NTk5Mg==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM5NDY2MDk5Mg==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM5NDY2NjI3Mg==.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTM5NDY3MTE0MA==.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTM5NDY3OTM5Ng==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM5NDY4NDg2NA==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM5NDY4OTcwNA==.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTM5NDYzMDcxNg==.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ZYZT",
+      "title": "遭遇昨天",
+      "date": "1994",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNjA2MDg3NTY=.html"},
+            {"2": "http://v.youku.com/v_show/id_XNjA2MDQ0OTI=.html"},
+            {"3": "http://v.youku.com/v_show/id_XNjA2MjA0NTY=.html"},
+            {"4": "http://v.youku.com/v_show/id_XNjA2NTc0MTI=.html"},
+            {"5": "http://v.youku.com/v_show/id_XNjA2NTcyMTY=.html"},
+            {"6": "http://v.youku.com/v_show/id_XNjA2NTcxNzI=.html"},
+            {"7": "http://v.youku.com/v_show/id_XNjA2ODU3NzI=.html"},
+            {"8": "http://v.youku.com/v_show/id_XNjA4MDM0MDA=.html"},
+            {"9": "http://v.youku.com/v_show/id_XNjA2ODk5MDg=.html"},
+            {"10": "http://v.youku.com/v_show/id_XNjA4MDE4OTI=.html"},
+            {"11": "http://v.youku.com/v_show/id_XNjA2ODU2NzI=.html"},
+            {"12": "http://v.youku.com/v_show/id_XNjA2ODU2NzI=.html"},
+            {"13": "http://v.youku.com/v_show/id_XNjA3MjY5MTY=.html"},
+            {"14": "http://v.youku.com/v_show/id_XNjA3OTk4ODg=.html"},
+            {"15": "http://v.youku.com/v_show/id_XNjA3MjY2MDA=.html"},
+            {"16": "http://v.youku.com/v_show/id_XNjA3NjMyMDg=.html"},
+            {"17": "http://v.youku.com/v_show/id_XNjA3NjExMjA=.html"},
+            {"18": "http://v.youku.com/v_show/id_XNjA3NjMzNDg=.html"},
+            {"19": "http://v.youku.com/v_show/id_XNjA4MTcwODg=.html"},
+            {"20": "http://v.youku.com/v_show/id_XNjA4MjY4NDQ=.html"},
+            {"21": "http://v.youku.com/v_show/id_XNjA4Mzc3NjA=.html"},
+            {"22": "http://v.youku.com/v_show/id_XNjA4NDY5NDg=.html"},
+            {"23": "http://v.youku.com/v_show/id_XNjA4NTU1OTI=.html"},
+            {"24": "http://v.youku.com/v_show/id_XNjA4NjIxMTY=.html"},
+            {"25": "http://v.youku.com/v_show/id_XNjA4NzY1MDg=.html"},
+            {"26": "http://v.youku.com/v_show/id_XNjA4NzYwNDg=.html"},
+            {"27": "http://v.youku.com/v_show/id_XNjA4NzY1OTY=.html"},
+            {"28": "http://v.youku.com/v_show/id_XNjA4ODU1Mjg=.html"},
+            {"29": "http://v.youku.com/v_show/id_XNjA4ODUxMjg=.html"},
+            {"30": "http://v.youku.com/v_show/id_XNjA4ODU2MTI=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AMM",
+      "title": "啊，妈妈",
+      "date": "1995",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1a": "http://v.youku.com/v_show/id_XODM3NzAyNjA=.html"},
+            {"1b": "http://v.youku.com/v_show/id_XODM3NDQxMTY=.html"},
+            {"2a": "http://v.youku.com/v_show/id_XODM4ODExNTI=.html"},
+            {"2b": "http://v.youku.com/v_show/id_XODU0NjE2NTI=.html"},
+            {"3a": "http://v.youku.com/v_show/id_XODU0MDE4MzI=.html"},
+            {"3b": "http://v.youku.com/v_show/id_XODUzOTE3Mjg=.html"},
+            {"4a": "http://v.youku.com/v_show/id_XODU2MDI0NjQ=.html"},
+            {"4b": "http://v.youku.com/v_show/id_XODU2MzEzNjQ=.html"},
+            {"5a": "http://v.youku.com/v_show/id_XODU2NjQ5MTI=.html"},
+            {"5b": "http://v.youku.com/v_show/id_XODU2NzMyNTY=.html"},
+            {"6a": "http://v.youku.com/v_show/id_XODU3NjE0MDg=.html"},
+            {"6b": "http://v.youku.com/v_show/id_XODU3ODMzMzI=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DQZhQ",
+      "title": "大秦之腔",
+      "date": "1996",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_大秦腔",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTE1NjI3Mzky.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTE1NjI3NDMy.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTE1NjI3NTM2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTE1NjI3NTcy.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTE1NjI3NjMy.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTE1NjI2MTcy.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTE1NjI2Mjg0.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTE1NjI2MzUy.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTE1NjI2NDM2.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTE1NjI2NDk2.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTE1NjI2NTky.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTE1NjI2NjQ4.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTE1NjI2NzEy.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTE1NjI2ODAw.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTE1NjI2MjIw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTE1NjI2OTIw.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTE1NjI2OTky.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTE1NjI3MDc2.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTE1NjI3MTEy.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTE1NjI3MTUy.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTE1NjI3MjEy.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTE1NjI3Mjc2.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTE1NjI3MzMy.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTE1NjI3NjY4.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTE1NjI3NzEy.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTE1NjI3NzUy.html"},
+            {"27": "http://v.youku.com/v_show/id_XMTE1NjI3ODAw.html"},
+            {"28": "http://v.youku.com/v_show/id_XMTE1NjI3ODQw.html"},
+            {"29": "http://v.youku.com/v_show/id_XMTE1NjI3ODg4.html"},
+            {"30": "http://v.youku.com/v_show/id_XMTE1NjI3OTYw.html"},
+            {"31": "http://v.youku.com/v_show/id_XMTE1NjI3OTky.html"},
+            {"32": "http://v.youku.com/v_show/id_XMTE1NjI4MDY4.html"},
+            {"33": "http://v.youku.com/v_show/id_XMTE1NjI4MTI4.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "JShFY",
+      "title": "家事风云",
+      "date": "1997",
+      "type": "tv",
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "GHGZhQ",
+      "title": "共和国之旗",
+      "date": "1998",
+      "type": "film",
+      "sources": [
+        {
+          "name": "腾讯视频：",
+          "target": "http://v.qq.com/detail/6/6q1uczedvs1ezs8.html?ptag=baidu.aladdin.movie"
+        },
+        {
+          "name": "播放",
+          "target": "https://v.qq.com/x/cover/6q1uczedvs1ezs8.html?new=1"
+        },
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM3ODE3ODQyMA==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM3ODE4MDA2NA==.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ZGLY",
+      "title": "走过柳源",
+      "date": "1998",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_走过柳源",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNjE3MTU5ODQ=.html"},
+            {"2": "http://v.youku.com/v_show/id_XNjE3MzY2NzI=.html"},
+            {"3": "http://v.youku.com/v_show/id_XNjE3NTU0NDQ=.html"},
+            {"4": "http://v.youku.com/v_show/id_XNjE3ODY4NjA=.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTAyMjY5Mzk2.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTAyMjg0Mzcy.html"},
+            {"7": "http://v.youku.com/v_show/id_XNjE4MjQzMzY=.html"},
+            {"8": "http://v.youku.com/v_show/id_XNjE4NjIxMDA=.html"},
+            {"9": "http://v.youku.com/v_show/id_XNjE4NjIyMDQ=.html"},
+            {"10": "http://v.youku.com/v_show/id_XNjE5MTI4NDQ=.html"},
+            {"11": "http://v.youku.com/v_show/id_XNjE5MjIyMDQ=.html"},
+            {"12": "http://v.youku.com/v_show/id_XNjE5MjI3MzI=.html"},
+            {"13": "http://v.youku.com/v_show/id_XNjE5MjUwNDA=.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTAyMjU4Mjgw.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTAyMjYyNDQ4.html"},
+            {"16": "http://v.youku.com/v_show/id_XNjE5NzI0ODA=.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTAyMjYzMzQ0.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HFQX",
+      "title": "洪峰抢险（又名《不可战胜》）",
+      "date": "1998",
+      "type": "film",
+      "sources": [
+        {
+          "name": "土豆",
+          "target": "http://video.tudou.com/v/XMjM2MzgwMzQ2OA==.html"
+        }
+      ]
+    },
+    {
+      "id": "NShWDShM",
+      "title": "你是我的生命",
+      "date": "1998",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM4NDc3NTU0NA==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM4NDc3MTk5Ng==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTM4NDcyOTg4MA==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM4NDY5MDcwMA==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM4NDcyNDc3Ng==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM4NDY2Njc4OA==.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTM4NDY2NTc2MA==.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTM4NDYwOTIyNA==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM4NDU4NDc2OA==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM4NDgzMTc4OA==.html"},
+            {"11": "http://v.youku.com/v_show/id_XMjc0OTMxMTc2MA==.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTM4NDgyMDkyMA==.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTM4NDgxODgyOA==.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTM4NDgxODY4NA==.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTM4NDgwODg5Mg==.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTM4NDc5NjQ1Ng==.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTM4NDgwODc5Mg==.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTM4NDc5NjM1Mg==.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTM4NDc3NjMwMA==.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTM4NDg0NDg4NA==.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTM4NDg0NDMyOA==.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTM4NDgzNzQyMA==.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HPWSh",
+      "title": "和平卫士",
+      "date": "1999",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_和平卫士",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMjMyNTIyMTI4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMjMzMjcxNTI4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMjMzMjcxODA4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMjMzMzI2NTIw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMjMzMzI2NjA4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMjMzMzI2NzEy.html"},
+            {"7": "http://v.youku.com/v_show/id_XMjMzMzI2ODAw.html"},
+            {"8": "http://v.youku.com/v_show/id_XMjMzMzI2ODcy.html"},
+            {"9": "http://v.youku.com/v_show/id_XMjMzMzI2OTgw.html"},
+            {"10": "http://v.youku.com/v_show/id_XMjMzMzI3MDg4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMjMzMzI3MjEy.html"},
+            {"12": "http://v.youku.com/v_show/id_XMjMzMjc5ODIw.html"},
+            {"13": "http://v.youku.com/v_show/id_XMjMzMzI3MzA0.html"},
+            {"14": "http://v.youku.com/v_show/id_XMjMzMzI3NDIw.html"},
+            {"15": "http://v.youku.com/v_show/id_XMjMzMzI3NTM2.html"},
+            {"16": "http://v.youku.com/v_show/id_XMjMzMjg0MDUy.html"},
+            {"17": "http://v.youku.com/v_show/id_XMjMzMzYwMzky.html"},
+            {"18": "http://v.youku.com/v_show/id_XMjMzMzU4NzY0.html"},
+            {"19": "http://v.youku.com/v_show/id_XMjMzMzYwNTQ4.html"},
+            {"20": "http://v.youku.com/v_show/id_XMjMzMzYxMzAw.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GRZhL",
+      "title": "光荣之旅",
+      "date": "1999",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_光荣之旅",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM4MzAyNjQwNA==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM4MzA1NDg2MA==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTM4MzA3NDM2NA==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM4MzA5MDUxNg==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM4MzEwMDg4NA==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM4MzExMDA4NA==.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTM4MzEyMTE2MA==.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTM4MzQxNzcxMg==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM4MzQ2NDMzMg==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM4MzM2NDQ4MA==.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTM4MzM2Mzc4OA==.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTM4MzM2MzMwNA==.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTM4MzEzNzUxMg==.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTM4MzEzNjY2NA==.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTM4MzEzNjY0NA==.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTM4MzI4NDU4OA==.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTM4MzI4NDU4MA==.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTM4MzI4NDU5Mg==.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YBFQ",
+      "title": "永不放弃",
+      "date": "2000",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_永不放弃",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNTA5NTI5MjAw.html"},
+            {"2": "http://v.youku.com/v_show/id_XNTA5NTI5MTEy.html"},
+            {"3": "http://v.youku.com/v_show/id_XNTA5NTI5NDI0.html"},
+            {"4": "http://v.youku.com/v_show/id_XNTA5NTI5NDI4.html"},
+            {"5": "http://v.youku.com/v_show/id_XNTA5NTI5NTgw.html"},
+            {"6": "http://v.youku.com/v_show/id_XNTA5NTI5NjA4.html"},
+            {"7": "http://v.youku.com/v_show/id_XNTA5NTI5ODI0.html"},
+            {"8": "http://v.youku.com/v_show/id_XNTA5NTI5Nzc2.html"},
+            {"9": "http://v.youku.com/v_show/id_XNTA5NTMwMDcy.html"},
+            {"10": "http://v.youku.com/v_show/id_XNTA5NTMwMTI4.html"},
+            {"11": "http://v.youku.com/v_show/id_XNTA5NTMwNDMy.html"},
+            {"12": "http://v.youku.com/v_show/id_XNTA5NTMwMzY0.html"},
+            {"13": "http://v.youku.com/v_show/id_XNTA5NTMwNzA4.html"},
+            {"14": "http://v.youku.com/v_show/id_XNTA5NTMzNTA4.html"},
+            {"15": "http://v.youku.com/v_show/id_XNTA5NTMzNjUy.html"},
+            {"16": "http://v.youku.com/v_show/id_XNTA5NTMzNzY0.html"},
+            {"17": "http://v.youku.com/v_show/id_XNTA5NTM0MDQw.html"},
+            {"18": "http://v.youku.com/v_show/id_XNTA5NTMzOTI4.html"},
+            {"19": "http://v.youku.com/v_show/id_XNTA5NTM0MTQ0.html"},
+            {"20": "http://v.youku.com/v_show/id_XNTA5NTM0MjY0.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ChTM",
+      "title": "朝天门",
+      "date": "2000",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "土豆：",
+          "playlist": [
+            { "1": "http://video.tudou.com/v/XMjEzMjM2OTQ4MA==.html" }
+          ]
+        }
+      ],
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "QChLGCh",
+      "title": "情长路更长",
+      "date": "2001",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_%E6%83%85%E9%95%BF%E8%B7%AF%E6%9B%B4%E9%95%BF",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNjEyNzQ2NDQ=.html"},
+            {"2": "http://v.youku.com/v_show/id_XNjEyODk4MDA=.html"},
+            {"3": "http://v.youku.com/v_show/id_XNjEyOTg4OTI=.html"},
+            {"4": "http://v.youku.com/v_show/id_XNjEzMDg4ODg=.html"},
+            {"5": "http://v.youku.com/v_show/id_XNjEzMDg4MDQ=.html"},
+            {"6": "http://v.youku.com/v_show/id_XNjEzMTc1Njg=.html"},
+            {"7": "http://v.youku.com/v_show/id_XNjEzNDQ1MzI=.html"},
+            {"8": "http://v.youku.com/v_show/id_XNjE0MjQwMjQ=.html"},
+            {"9": "http://v.youku.com/v_show/id_XNjE0MjIzNTY=.html"},
+            {"10": "http://v.youku.com/v_show/id_XNjE0MjIzNjA=.html"},
+            {"11": "http://v.youku.com/v_show/id_XNjE1MDIzNTY=.html"},
+            {"12": "http://v.youku.com/v_show/id_XNjE1MDQwMjQ=.html"},
+            {"13": "http://v.youku.com/v_show/id_XNjE1MDQ5NjQ=.html"},
+            {"14": "http://v.youku.com/v_show/id_XNjE1MjA3ODQ=.html"},
+            {"15": "http://v.youku.com/v_show/id_XNjE1MzI2MjQ=.html"},
+            {"16": "http://v.youku.com/v_show/id_XNjE1NDAxNTY=.html"},
+            {"17": "http://v.youku.com/v_show/id_XNjE1NTU2MTI=.html"},
+            {"18": "http://v.youku.com/v_show/id_XNjE2NjQ5ODA=.html"},
+            {"19": "http://v.youku.com/v_show/id_XNjE2NzY3NzI=.html"},
+            {"20": "http://v.youku.com/v_show/id_XNjE2ODQwNTI=.html"},
+            {"21": "http://v.youku.com/v_show/id_XNjE2OTkyMDA=.html"},
+            {"22": "http://v.youku.com/v_show/id_XNjE3MDQzNjg=.html"},
+            {"23": "http://v.youku.com/v_show/id_XNjE3MDg3ODQ=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HYHLQ",
+      "title": "红与黑2000",
+      "date": "2001",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM4Mzk2NDU1Ng==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM4Mzk1NjQ1Ng==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTM4Mzk1NTQ2OA==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM4Mzk1MDE4OA==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM4Mzk0ODIwMA==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM4MzkzNzgyOA==.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTM4MzkzNTg5Ng==.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTM4MzkyMjA3Mg==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM4MzkxODQ3Mg==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM4Mzg5OTQwMA==.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTM4Mzg5ODY2MA==.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTM4Mzg5NjU0MA==.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTM4Mzg3MTk2OA==.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTM4Mzk3MTIwMA==.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTM4Mzk2NTQyMA==.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTM4Mzk4NDM2NA==.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTM4Mzk3NzQ0MA==.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTM4NDAxNjMwNA==.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTM4Mzk5Mzk3Ng==.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTM4Mzk4NTAwMA==.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XD",
+      "title": "兄弟",
+      "date": "2002",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM3NzY5NjcwMA==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM3NzY5ODEwNA==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTM3NzcwMDA5Mg==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM3NzcwMDQzMg==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM3NzcwMDczMg==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM3NzcwMTEzNg==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM3NzcwMTM2MA==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM3NzcwMTY4NA==.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTM3NzcwMTk5Ng==.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTM3NzcwMjMyOA==.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTM3NzcwMjYyMA==.html"}
+          ]
+        }
+      ],
+      "sourcesRemarks": "剧集不全。如有线索烦请告知作者。"
+    },
+    {
+      "id": "ShKXY",
+      "title": "谁可相依",
+      "date": "2003",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_%E8%B0%81%E5%8F%AF%E7%9B%B8%E4%BE%9D",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTc4MzIxNzg4MA==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTc4MzIyMDY1Ng==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTc4MzIyMTI5Mg==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTc4MzIyMTkyMA==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTc4MzIyMjcwMA==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTc4MzIyMzQ2NA==.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTc4MzIyMzk3Ng==.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTc4MzIyNDU0OA==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTc4MzIyNTE4NA==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTc4MzIxODQ0NA==.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTc4MzIxOTAwMA==.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTc4MzIxOTU0NA==.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTc4MzIyMDE2NA==.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTc4Mzk5NDcwNA==.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTc4Mzk5NTEwOA==.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTc4Mzk5NTM4OA==.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTgxODQzMDkyMA==.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTc4Mzk5NjEzMg==.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTc4Mzk5NjYyOA==.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTc4Mzk5NzA4OA==.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TZHK",
+      "title": "桐籽花开",
+      "date": "2003",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_桐籽花开",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNTkyMjQyOTI=.html"},
+            {"2": "http://v.youku.com/v_show/id_XNTkyMjY4MzY=.html"},
+            {"3": "http://v.youku.com/v_show/id_XNTkyMjk1NDQ=.html"},
+            {"4": "http://v.youku.com/v_show/id_XNTkyMzIwMTY=.html"},
+            {"5": "http://v.youku.com/v_show/id_XNTkyMzQ4NjQ=.html"},
+            {"6": "http://v.youku.com/v_show/id_XNTkyMzc1NjA=.html"},
+            {"7": "http://v.youku.com/v_show/id_XNTkyMzk5NzY=.html"},
+            {"8": "http://v.youku.com/v_show/id_XNTkyNDI3OTI=.html"},
+            {"9": "http://v.youku.com/v_show/id_XNTkyNDUzMzY=.html"},
+            {"10": "http://v.youku.com/v_show/id_XNTkyNDc3NDQ=.html"},
+            {"11": "http://v.youku.com/v_show/id_XNTkyNDk5NzY=.html"},
+            {"12": "http://v.youku.com/v_show/id_XNTkyNTI2NzY=.html"},
+            {"13": "http://v.youku.com/v_show/id_XNTkyNTU5NjQ=.html"},
+            {"14": "http://v.youku.com/v_show/id_XNTkyNTg5MzY=.html"},
+            {"15": "http://v.youku.com/v_show/id_XNTkyNjE4MjA=.html"},
+            {"16": "http://v.youku.com/v_show/id_XNTkyNjQ3NzY=.html"},
+            {"17": "http://v.youku.com/v_show/id_XNTkyNjc1MTI=.html"},
+            {"18": "http://v.youku.com/v_show/id_XNTkyNzA3Njg=.html"},
+            {"19": "http://v.youku.com/v_show/id_XNTkyNzM3MTY=.html"},
+            {"20": "http://v.youku.com/v_show/id_XNTkyNzY4MDQ=.html"},
+            {"21": "http://v.youku.com/v_show/id_XNTkyNzk2MDg=.html"},
+            {"22": "http://v.youku.com/v_show/id_XNTkyODI2NzY=.html"},
+            {"23": "http://v.youku.com/v_show/id_XNTkyODUzODg=.html"},
+            {"24": "http://v.youku.com/v_show/id_XNTkyODg3MzY=.html"},
+            {"25": "http://v.youku.com/v_show/id_XNTkyOTE2MTI=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WXYY",
+      "title": "我心永远（又名《高光阴影》）",
+      "link": "http://baike.baidu.com/item/%E6%88%91%E5%BF%83%E6%B0%B8%E8%BF%9C#3",
+      "date": "2003",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "土豆：",
+          "target": "http://tv.sohu.com/s2010/wxyy/",
+          "playlist":[
+            {"1": "http://tv.sohu.com/20090219/n262341428.shtml"},
+            {"2": "http://tv.sohu.com/20090219/n262341435.shtml"},
+            {"3": "http://tv.sohu.com/20090219/n262341438.shtml"},
+            {"4": "http://tv.sohu.com/20090219/n262341465.shtml"},
+            {"5": "http://tv.sohu.com/20090219/n262341471.shtml"},
+            {"6": "http://tv.sohu.com/20090219/n262341477.shtml"},
+            {"7": "http://tv.sohu.com/20090219/n262341498.shtml"},
+            {"8": "http://tv.sohu.com/20090219/n262341487.shtml"},
+            {"9": "http://tv.sohu.com/20090219/n262341506.shtml"},
+            {"10": "http://tv.sohu.com/20090219/n262341541.shtml"},
+            {"11": "http://tv.sohu.com/20090219/n262341544.shtml"},
+            {"12": "http://tv.sohu.com/20090219/n262341575.shtml"},
+            {"13": "http://tv.sohu.com/20090219/n262341590.shtml"},
+            {"14": "http://tv.sohu.com/20090219/n262341596.shtml"},
+            {"15": "http://tv.sohu.com/20090219/n262341601.shtml"},
+            {"16": "http://tv.sohu.com/20090219/n262341625.shtml"},
+            {"17": "http://tv.sohu.com/20090219/n262341634.shtml"},
+            {"18": "http://tv.sohu.com/20090219/n262341636.shtml"},
+            {"19": "http://tv.sohu.com/20090219/n262341667.shtml"},
+            {"20": "http://tv.sohu.com/20090219/n262341677.shtml"}
+          ]
+        },
+        {
+          "name": "优酷",
+          "target": "http://www.soku.com/search_video/q_我心永远"
+        },
+        {
+          "name": "360影视",
+          "target": "http://www.360kan.com/tv/R4JvaqHbSG0lMn.html"
+        }
+      ]
+    },
+    {
+      "id": "HKYYSh",
+      "title": "花开也有声",
+      "link": "http://baike.baidu.com/item/%E8%8A%B1%E5%BC%80%E4%B9%9F%E6%9C%89%E5%A3%B0",
+      "date": "2003",
+      "type": "tv",
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "MYPF",
+      "title": "命运配方",
+      "link": "http://baike.baidu.com/item/命运配方",
+      "date": "2003",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM4NDI2OTQwOA==.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM4NDI0NzE2MA==.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTM4NDIyNTg3Mg==.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM4NDE5MzY4NA==.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM4NDE3NjYxNg==.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM4NDEzNTE3Ng==.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTM4NDEzNDY4MA==.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTM4NDExNzgzMg==.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM4NDA4ODg0NA==.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM4NDA1NTk3Ng==.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTM4NDAxNzU3Mg==.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTY3MjkyNzQw.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTM4NDU3ODIxNg==.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTM4NDUxMTkwOA==.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTM4NDUwNDY2MA==.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTM4NDUzMjU4OA==.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTM4NDQ2Mzk5Ng==.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTM4NDQ0MDc2NA==.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTM4NDQzMjU4MA==.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTM4NDM5NjgwOA==.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTM4NDM3NDE3Ng==.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTM4NDM0ODYwMA==.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTM4NDI5MzMwMA==.html"}
+          ]
+        }
+      ],
+      "sourcesRemarks": "剧集不全。如有线索烦请告知作者。"
+    },
+    {
+      "id": "FYZhGX",
+      "title": "风雨中国心（又名《傅抱石》）",
+      "date": "2003",
+      "type": "film",
+      "sources": [
+        {
+          "name": "背景介绍",
+          "target": "http://www.cctv.com/program/zgdybd/20031224/100622.shtml"
+        }
+      ],
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "RWMJZh",
+      "title": "让我们记住",
+      "date": "2003",
+      "type": "film",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist": [
+            { "1": "http://v.youku.com/v_show/id_XNjEwNTUwODQ=.html" },
+            { "2": "http://v.youku.com/v_show/id_XNjEwNjc3MDQ=.html" },
+            { "3": "http://v.youku.com/v_show/id_XNjEwODA2ODA=.html" },
+            { "4": "http://v.youku.com/v_show/id_XNjEwODE3MjA=.html" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LP",
+      "title": "龙票",
+      "date": "2004",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_龙票",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTI4Njk4NjEy.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTI4Njk4NjQ0.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTI4Njk4NjE2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTI4Njk4NjIw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTI4Njk4NjQw.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTI4Njk4NjQ4.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTI4Njk4NjUy.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTI4Njk4NjU2.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTI4Njk4NjY0.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTI4Njk4NjYw.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTI4Njk4NjA4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTI4Njk4Njcy.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTI4Njk4NjY4.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTI4Njk4Njc2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTI4Njk4Njgw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTI4Njk4Njg0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTI4Njk4NjI0.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTI4Njk4Njg4.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTI4Njk4NjI4.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTI4Njk4NjMy.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTI4Njk4NzQ0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTI4Njk4NzQ4.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTI4Njk4NzUy.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTI4Njk4NzYw.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTI4Njk4NzY0.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTI4Njk4NzY4.html"},
+            {"27": "http://v.youku.com/v_show/id_XMTI4Njk4Nzcy.html"},
+            {"28": "http://v.youku.com/v_show/id_XMTI4Njk4Nzgw.html"},
+            {"29": "http://v.youku.com/v_show/id_XMTI4Njk4Nzg0.html"},
+            {"30": "http://v.youku.com/v_show/id_XMTI4Njk4Nzg4.html"},
+            {"31": "http://v.youku.com/v_show/id_XMTI4Njk4Nzky.html"},
+            {"32": "http://v.youku.com/v_show/id_XMTI4Njk4Nzk2.html"},
+            {"33": "http://v.youku.com/v_show/id_XMTI4Njk4ODE2.html"},
+            {"34": "http://v.youku.com/v_show/id_XMTI4Njk4ODAw.html"},
+            {"35": "http://v.youku.com/v_show/id_XMTI4Njk4ODI0.html"},
+            {"36": "http://v.youku.com/v_show/id_XMTI4Njk4NzQw.html"},
+            {"37": "http://v.youku.com/v_show/id_XMTI4Njk4ODI4.html"},
+            {"38": "http://v.youku.com/v_show/id_XMTI4Njk4ODA0.html"},
+            {"39": "http://v.youku.com/v_show/id_XMTI4Njk4ODMy.html"},
+            {"40": "http://v.youku.com/v_show/id_XMTI4Njk4ODA4.html"},
+            {"41": "http://v.youku.com/v_show/id_XMTI4Njk4ODc2.html"},
+            {"42": "http://v.youku.com/v_show/id_XMTI4Njk4ODY0.html"},
+            {"43": "http://v.youku.com/v_show/id_XMTI4Njk4ODY4.html"},
+            {"44": "http://v.youku.com/v_show/id_XMTI4Njk4ODcy.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DYCQMJCh",
+      "title": "第一次亲密接触",
+      "date": "2004",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://list.youku.com/show/id_zcbfcd008962411de83b1.html",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTAwNDQ5MDMy.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTAwNDQ5NzUy.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTAwNDUwMDQw.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTAwNDUwNDI0.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTAwNDUwODUy.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTAwNDUxMjA0.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTAwNDUxNDY4.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTAwNDUxODA4.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTAwNDUyMTUy.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTAwNDQ5NDE2.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTAwNDUyNDQ4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTAwNDUyNzU2.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTAwNDUzMDA4.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTAwNDUzMjg0.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTAwNDUzNTc2.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTAwNDUzOTI4.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTAwNDU0Mjky.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTAwNDU0NTU2.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTAwNDU0ODU2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTAwNDU1MTUy.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTAwNDU1NDQ0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTAwNDU1NzIw.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "YShH",
+      "title": "月上海",
+      "date": "2004",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_月上海",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMjM5NjQzMDQ4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMjM5NjQzMTk2.html"},
+            {"3": "http://v.youku.com/v_show/id_XMjM5NjQzMzQw.html"},
+            {"4": "http://v.youku.com/v_show/id_XMjM5NjQzNDc2.html"},
+            {"5": "http://v.youku.com/v_show/id_XMjM5NjQzNjA4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMjM5NjQzNzgw.html"},
+            {"7": "http://v.youku.com/v_show/id_XMjM5NjQzOTM2.html"},
+            {"8": "http://v.youku.com/v_show/id_XMjM5NjQ0MTAw.html"},
+            {"9": "http://v.youku.com/v_show/id_XMjM5NjQ0MjEy.html"},
+            {"10": "http://v.youku.com/v_show/id_XMjM5NjQ0NDE2.html"},
+            {"11": "http://v.youku.com/v_show/id_XMjM5NjQ0NjM2.html"},
+            {"12": "http://v.youku.com/v_show/id_XMjM5NjQ0Nzgw.html"},
+            {"13": "http://v.youku.com/v_show/id_XMjM5NjQ0OTY0.html"},
+            {"14": "http://v.youku.com/v_show/id_XMjM5NjQ1MTEy.html"},
+            {"15": "http://v.youku.com/v_show/id_XMjM5NjQ1MjY0.html"},
+            {"16": "http://v.youku.com/v_show/id_XMjM5NjQ1NDEy.html"},
+            {"17": "http://v.youku.com/v_show/id_XMjM5NjQ1NDk2.html"},
+            {"18": "http://v.youku.com/v_show/id_XMjM5NjQ1NTky.html"},
+            {"19": "http://v.youku.com/v_show/id_XMjM5NjQ1Njgw.html"},
+            {"20": "http://v.youku.com/v_show/id_XMjM5NjQ1ODIw.html"},
+            {"21": "http://v.youku.com/v_show/id_XMjM5NjQ1OTU2.html"},
+            {"22": "http://v.youku.com/v_show/id_XMjM5NjQ2MDY4.html"},
+            {"23": "http://v.youku.com/v_show/id_XMjM5NjQ2MTg0.html"},
+            {"24": "http://v.youku.com/v_show/id_XMjM5NjQ2Mjc2.html"},
+            {"25": "http://v.youku.com/v_show/id_XMjM5NjQ2Mzg0.html"},
+            {"26": "http://v.youku.com/v_show/id_XMjM5NjQ2NDg0.html"},
+            {"27": "http://v.youku.com/v_show/id_XMjM5NjQ2NjA0.html"},
+            {"28": "http://v.youku.com/v_show/id_XMjM5NjQ2Njk2.html"},
+            {"29": "http://v.youku.com/v_show/id_XMjM5NjQ2ODAw.html"},
+            {"30": "http://v.youku.com/v_show/id_XMjM5NjQ2ODk2.html"},
+            {"31": "http://v.youku.com/v_show/id_XMjM5NjQ3MDAw.html"},
+            {"32": "http://v.youku.com/v_show/id_XMjM5NjQ3MDYw.html"},
+            {"33": "http://v.youku.com/v_show/id_XMjM5NjQ3MjA0.html"},
+            {"34": "http://v.youku.com/v_show/id_XMjM5NjQ3Mjk2.html"},
+            {"35": "http://v.youku.com/v_show/id_XMjM5NjQ3NDI0.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DP",
+      "title": "底牌",
+      "date": "2004",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_底牌",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTIxODQ3NjQ4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTIxODQ3NjUy.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTIxODQ3NjU2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTIxODQ3NjY0.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTIxODQ3NjY4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTIxODQ3Njcy.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTIxODQ3Njk2.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTIxODQ3NzAw.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTIxODQ3NzA0.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTIxODQ3NzA4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTIxODQ3NzEy.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTIxODQ3NzE2.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTIxODQ3NzIw.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTIxODQ3NzI0.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTIxODQ3NjQ0.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTIxODQ3Njc2.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTIxODQ3Njgw.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTIxODQ3Njg0.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTIxODQ3Njg4.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTIxODQ3Njky.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTIxODQ3NzY4.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTIxODQ3Nzcy.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTIxODQ3Nzc2.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTIxODQ3Nzgw.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MZYXMBZh",
+      "title": "民族英雄马本斋",
+      "date": "2004",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_民族英雄马本斋",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNTA2NDgzOTI4.html"},
+            {"2": "http://v.youku.com/v_show/id_XNTA2NDgzOTI0.html"},
+            {"3": "http://v.youku.com/v_show/id_XNTA2NDg0MDM2.html"},
+            {"4": "http://v.youku.com/v_show/id_XNTA2NDg0MDQ0.html"},
+            {"5": "http://v.youku.com/v_show/id_XNTA2NDg0MTA0.html"},
+            {"6": "http://v.youku.com/v_show/id_XNTA2NDg0MTg0.html"},
+            {"7": "http://v.youku.com/v_show/id_XNTA2NDg0MTEy.html"},
+            {"8": "http://v.youku.com/v_show/id_XNTA2NDg0MjA4.html"},
+            {"9": "http://v.youku.com/v_show/id_XNTA2NDg0MzUy.html"},
+            {"10": "http://v.youku.com/v_show/id_XNTA2NDg0MjQ0.html"},
+            {"11": "http://v.youku.com/v_show/id_XNTA2NDg0MzA0.html"},
+            {"12": "http://v.youku.com/v_show/id_XNTA2NDg0MzY4.html"},
+            {"13": "http://v.youku.com/v_show/id_XNTA2NDg0NDI0.html"},
+            {"14": "http://v.youku.com/v_show/id_XNTA2NDg0NDUy.html"},
+            {"15": "http://v.youku.com/v_show/id_XNTA2NDg2MTIw.html"},
+            {"16": "http://v.youku.com/v_show/id_XNTA2NDg2MTA0.html"},
+            {"17": "http://v.youku.com/v_show/id_XNTA2NDg2MTQ4.html"},
+            {"18": "http://v.youku.com/v_show/id_XNTA2NDg2Mjcy.html"},
+            {"19": "http://v.youku.com/v_show/id_XNTMwNjMyNDA0.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FYXG",
+      "title": "风雨西关",
+      "date": "2004",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_风雨西关",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTIxODIzNTY0.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTIxODIzNTcy.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTIxODIzNTc2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTIxODIzNTgw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTIxODIzNTg4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTIxODIzNTky.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTIxODIzNTk2.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTIxODIzNjAw.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTIxODIzNjA0.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTIxODIzNjA4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTIxODIzNjEy.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTIxODIzNjE2.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTIxODIzNjIw.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTIxODIzNTg0.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTIxODIzNTM2.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTIxODIzNTQw.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTIxODIzNTQ0.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTIxODIzNTQ4.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTIxODIzNTUy.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTIxODIzNTU2.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTIxODIzNjg4.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTIxODIzNjky.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTIxODIzNjk2.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTIxODIzNzAw.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTIxODIzNzA0.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTIxODIzNzA4.html"},
+            {"27": "http://v.youku.com/v_show/id_XMTIxODIzNzEy.html"},
+            {"28": "http://v.youku.com/v_show/id_XMTIxODIzNzE2.html"},
+            {"29": "http://v.youku.com/v_show/id_XMTI0NTM4OTM2.html"},
+            {"30": "http://v.youku.com/v_show/id_XMTIxODIzNzI4.html"},
+            {"31": "http://v.youku.com/v_show/id_XMTIxODIzNzMy.html"},
+            {"32": "http://v.youku.com/v_show/id_XMTIxODIzNzY4.html"},
+            {"33": "http://v.youku.com/v_show/id_XMTIxODIzNzM2.html"},
+            {"34": "http://v.youku.com/v_show/id_XMTIxODIzNzQw.html"},
+            {"35": "http://v.youku.com/v_show/id_XMTIxODIzNzQ0.html"},
+            {"36": "http://v.youku.com/v_show/id_XMTIxODIzNzQ4.html"},
+            {"37": "http://v.youku.com/v_show/id_XMTIxODIzNzUy.html"},
+            {"38": "http://v.youku.com/v_show/id_XMTIxODIzNzU2.html"},
+            {"39": "http://v.youku.com/v_show/id_XMTIxODIzNzYw.html"},
+            {"40": "http://v.youku.com/v_show/id_XMTIxODIzNzY0.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ChTHHK",
+      "title": "春天花会开（又名《魂系红领巾》）",
+      "date": "2005",
+      "type": "film",
+      "sources": [
+        {
+          "name": "优酷",
+          "target": "http://www.56.com/u39/v_OTUyMDIwMzY.html"
+        }
+      ]
+    },
+    {
+      "id": "ShGJJ",
+      "title": "商贾将军",
+      "date": "2005",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_商贾将军",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMzMzMjIxMzQ4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMzMzMjIxMzQ4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMzMzMjI0MzQ0.html"},
+            {"4": "http://v.youku.com/v_show/id_XMzMzMjI3NTgw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMzMzMjMxMTUy.html"},
+            {"6": "http://v.youku.com/v_show/id_XMzMzMjM2MzI0.html"},
+            {"7": "http://v.youku.com/v_show/id_XMzMzMjQxNTg4.html"},
+            {"8": "http://v.youku.com/v_show/id_XMzMzMjQ2NjI4.html"},
+            {"9": "http://v.youku.com/v_show/id_XMzMzMjUyMzc2.html"},
+            {"10": "http://v.youku.com/v_show/id_XMzMzMjU2MjA4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMzMzMjY0Mzg4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMzMzMjY4NDQw.html"},
+            {"13": "http://v.youku.com/v_show/id_XMzMzMjc0Nzcy.html"},
+            {"14": "http://v.youku.com/v_show/id_XMzMzMjc5OTg4.html"},
+            {"15": "http://v.youku.com/v_show/id_XMzMzMjg3Njcy.html"},
+            {"16": "http://v.youku.com/v_show/id_XMzMzMjk0MTg0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMzMzMjk1NTE2.html"},
+            {"18": "http://v.youku.com/v_show/id_XMzMzMjk2ODAw.html"},
+            {"19": "http://v.youku.com/v_show/id_XMzMzMzEyOTk2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMzMzMzM5MzQ4.html"},
+            {"21": "http://v.youku.com/v_show/id_XMzMzMzQ2MTM2.html"},
+            {"22": "http://v.youku.com/v_show/id_XMzMzMzU1MDc2.html"},
+            {"23": "http://v.youku.com/v_show/id_XMzMzMzczNDg4.html"},
+            {"24": "http://v.youku.com/v_show/id_XMzMzMzgzODIw.html"},
+            {"25": "http://v.youku.com/v_show/id_XMzMzNDEwMTky.html"},
+            {"26": "http://v.youku.com/v_show/id_XMzMzNDExNDA4.html"},
+            {"27": "http://v.youku.com/v_show/id_XMzMzNDIxMDky.html"},
+            {"28": "http://v.youku.com/v_show/id_XMzMzNDI1NjE2.html"},
+            {"29": "http://v.youku.com/v_show/id_XMzMzNDM3MDEy.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NNNY",
+      "title": "那年那月",
+      "date": "2005",
+      "type": "film",
+      "sources": [
+        {
+          "name": "1905电影网",
+          "target": "http://www.1905.com/vod/play/400757.shtml"
+        }
+      ]
+    },
+    {
+      "id": "LJHY",
+      "title": "临界婚姻",
+      "date": "2005",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_临界婚姻",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTQwMTgwOTA0.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTQwMTgwOTA4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTQwMTgwOTEy.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTQwMTgwOTIw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTQwMTgwOTI0.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTQwMTgwOTI4.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTQwMTgwOTMy.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTQwMTgwOTM2.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTQwMTgwOTQw.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTQwMTgwOTQ0.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTQwMTgwOTQ4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTQwMTgwOTUy.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTQwMTgwOTAw.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTQwMTgwOTU2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTQwMTgwOTYw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTQwMTgwOTY0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTQwMTgwOTY4.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTQwMTgwOTcy.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTQwMTgwOTc2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTQwMTgwOTgw.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTQwMTgxMDA0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTQwMTgxMDA4.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTQwMTgxMDEy.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTQwMTgxMDE2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SKNDShK",
+      "title": "撕开你的伤口",
+      "date": "2005",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "PPTV：",
+          "playlist":[
+            {"1": "http://v.pptv.com/show/ibZubGTIsJGLFQ6s.html"},
+            {"2": "http://v.pptv.com/show/ibpyiaIFsVicTueHIQ.html"},
+            {"3": "http://v.pptv.com/show/ib52hHzQmLmzPTbU.html"},
+            {"4": "http://v.pptv.com/show/EPOzMUokLGrNS7M.html"},
+            {"5": "http://v.pptv.com/show/icJaYFia0icF1W4Np4.html"},
+            {"6": "http://v.pptv.com/show/EicS6OFMNBUOmJIw.html"},
+            {"7": "http://v.pptv.com/show/Fe6wLmX33x2AicmY.html"},
+            {"8": "http://v.pptv.com/show/FOibvLWb40A5x71c.html"},
+            {"9": "http://v.pptv.com/show/FvG1M0giaKmjLSbE.html"},
+            {"10": "http://v.pptv.com/show/Gv3BP1QGDkyvLZU.html"},
+            {"11": "http://v.pptv.com/show/FicC2NE8hKWfKSLA.html"},
+            {"12": "http://v.pptv.com/show/LcbIRv1vZ6UIhu4.html"},
+            {"13": "http://v.pptv.com/show/GPu7OVIMBEKlI4s.html"},
+            {"14": "http://v.pptv.com/show/IMPDQfp0XJr9eibM.html"},
+            {"15": "http://v.pptv.com/show/IcLEQvlzW5n8euI.html"},
+            {"16": "http://v.pptv.com/show/J8DGRP9xWZf6eOA.html"},
+            {"17": "http://v.pptv.com/show/Gfq8OlELA0GkIoo.html"},
+            {"18": "http://v.pptv.com/show/GiczCQPt1XZvibfOQ.html"},
+            {"19": "http://v.pptv.com/show/HPe3NU4gKGbJR68.html"},
+            {"20": "http://v.pptv.com/show/IsXJRicxuZqQHhe0.html"},
+            {"21": "http://v.pptv.com/show/I8TKSANdNXPWVLw.html"},
+            {"22": "http://v.pptv.com/show/KcrMSgFbM3HUUro.html"},
+            {"23": "http://v.pptv.com/show/Hfa4Nk0f9zWYFn4.html"},
+            {"24": "http://v.pptv.com/show/Hvm9O1AKAkCjIYk.html"},
+            {"25": "http://v.pptv.com/show/KMvLSQJcNHLVU7s.html"},
+            {"26": "http://v.pptv.com/show/JL9icicZbIwP5h30c.html"},
+            {"27": "http://v.pptv.com/show/Jb6AicpXHzw1w7lY.html"},
+            {"28": "http://v.pptv.com/show/HiciaibPFcJATibiaIIg.html"},
+            {"29": "http://v.pptv.com/show/JsHFQichyWpj7eeE.html"},
+            {"30": "http://v.pptv.com/show/K8zSUOuFjcsurBQ.html"},
+            {"31": "http://v.pptv.com/show/LMfHRf5wWJb5d98.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ShYHT",
+      "title": "十月怀胎",
+      "date": "2005",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_十月怀胎",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTI0MTk1NDg=.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTI0MTk1ODA=.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTI0MTk2MDA=.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTI0MTk2Mjg=.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTI0MTk2NjA=.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTI0MTk3MDA=.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTI0MTk3NDA=.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTI0MTk3NTY=.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTI0MTk3OTI=.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTI0MTk4MTY=.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTI0MTk4NDg=.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTI0MTk4NzI=.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTI0MTk4OTI=.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTI0MTk5MTY=.html"},
+            {"15": "http://v.youku.com/v_show/id_XMzEzNTc3Nzg0.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTI0MTk5NzY=.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTI0MTk5ODg=.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTI0MjAwMzY=.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTI0MjAwNjg=.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTI0MjAxMDA=.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTM5OTU1MDYyOA==.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTI0MjAxNTI=.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTI0MjAxNjA=.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTI0MjAxNzI=.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTI0MjAyMTI=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "FQXD",
+      "title": "非亲兄弟",
+      "date": "2005",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_非亲兄弟",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTQwMTgwOTA0.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTQwMTgwOTA4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTQwMTgwOTEy.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTQwMTgwOTIw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTQwMTgwOTI0.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTQwMTgwOTI4.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTQwMTgwOTMy.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTQwMTgwOTM2.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTQwMTgwOTQw.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTQwMTgwOTQ0.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTQwMTgwOTQ4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTQwMTgwOTUy.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTQwMTgwOTAw.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTQwMTgwOTU2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTQwMTgwOTYw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTQwMTgwOTY0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTQwMTgwOTY4.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTQwMTgwOTcy.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTQwMTgwOTc2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTQwMTgwOTgw.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTQwMTgxMDA0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTQwMTgxMDA4.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTQwMTgxMDEy.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTQwMTgxMDE2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ZGJTSEY",
+      "title": "中国家庭421",
+      "date": "2005",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_中国家庭421",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNjMxMzExMzI=.html"},
+            {"2": "http://v.youku.com/v_show/id_XNjMxMzI4NzY=.html"},
+            {"3": "http://v.youku.com/v_show/id_XNjMxMzYzMTI=.html"},
+            {"4": "http://v.youku.com/v_show/id_XNjMxMzc3ODQ=.html"},
+            {"5": "http://v.youku.com/v_show/id_XNjMxNDM3MjQ=.html"},
+            {"6": "http://v.youku.com/v_show/id_XNjMyNDQ3NTY=.html"},
+            {"7": "http://v.youku.com/v_show/id_XNjMyNDgzNTY=.html"},
+            {"8": "http://v.youku.com/v_show/id_XNjMyODY0NDg=.html"},
+            {"9": "http://v.youku.com/v_show/id_XNjM2MTUwMjQ=.html"},
+            {"10": "http://v.youku.com/v_show/id_XNjM2Mjk1NTY=.html"},
+            {"11": "http://v.youku.com/v_show/id_XNjM2MzIwOTI=.html"},
+            {"12": "http://v.youku.com/v_show/id_XNjM2Njc0Mjg=.html"},
+            {"13": "http://v.youku.com/v_show/id_XNjM2NzExODQ=.html"},
+            {"14": "http://v.youku.com/v_show/id_XNjM4MDI0NDg=.html"},
+            {"15": "http://v.youku.com/v_show/id_XNjM4MDE4Mjg=.html"},
+            {"16": "http://v.youku.com/v_show/id_XNjM4MDE4ODA=.html"},
+            {"17": "http://v.youku.com/v_show/id_XNjM4MTM4ODg=.html"},
+            {"18": "http://v.youku.com/v_show/id_XNjM4MTY2NjA=.html"},
+            {"19": "http://v.youku.com/v_show/id_XNjM4MTY0MTY=.html"},
+            {"20": "http://v.youku.com/v_show/id_XNjM4MjQxNTI=.html"},
+            {"21": "http://v.youku.com/v_show/id_XNjM4MzY2NTY=.html"},
+            {"22": "http://v.youku.com/v_show/id_XNjM4MzY5NjA=.html"},
+            {"23": "http://v.youku.com/v_show/id_XNjM4Mzg3NjA=.html"},
+            {"24": "http://v.youku.com/v_show/id_XNjM4MzkwNjA=.html"},
+            {"25": "http://v.youku.com/v_show/id_XNjM4NDY4MDQ=.html"},
+            {"26": "http://v.youku.com/v_show/id_XNjM4NDY4Mjg=.html"},
+            {"27": "http://v.youku.com/v_show/id_XNjM4NjEyNjA=.html"},
+            {"28": "http://v.youku.com/v_show/id_XNjM4NjEyNjg=.html"},
+            {"29": "http://v.youku.com/v_show/id_XNjM4ODYwMjQ=.html"},
+            {"30": "http://v.youku.com/v_show/id_XNjM4ODU3Mjg=.html"},
+            {"31": "http://v.youku.com/v_show/id_XNjM5MDc3MjQ=.html"},
+            {"32": "http://v.youku.com/v_show/id_XNjM5MDc3ODA=.html"},
+            {"33": "http://v.youku.com/v_show/id_XNjM5MDg3NjA=.html"},
+            {"34": "http://v.youku.com/v_show/id_XNjM5MDkzNTI=.html"},
+            {"35": "http://v.youku.com/v_show/id_XNjM5MDg4NjQ=.html"},
+            {"36": "http://v.youku.com/v_show/id_XNjM5MDkxNjg=.html"},
+            {"37": "http://v.youku.com/v_show/id_XNjM5MDU5ODg=.html"},
+            {"38": "http://v.youku.com/v_show/id_XNjM5MDYwNzI=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WYTW",
+      "title": "我要跳舞",
+      "date": "2006",
+      "type": "film",
+      "sources": [
+        {
+          "name": "56网",
+          "target": "http://www.56.com/u37/v_NDg5OTc4MTA.html"
+        }
+      ]
+    },
+    {
+      "id": "ShHN",
+      "title": "山魂女",
+      "date": "2006",
+      "type": "film",
+      "sources": [
+        {
+          "name": "1905电影网：",
+          "playlist": [
+            { "剧情介绍": "http://www.1905.com/mdb/film/57847/" }
+          ]
+        }
+      ],
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "WZTTDN",
+      "title": "我在天堂等你",
+      "date": "2006",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_风雨西关",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTAyODQ2NTg4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTAyODQ2OTk2.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTAyODQ2OTk2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTAyODQ3NTg0.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTAyODQ3OTA4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTAyODQ4MjA0.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTAyODQ4MjA0.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTAyODUyMzA0.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTAyODUyMzA0.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTAyODQ2ODMy.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTAyODUyNzUy.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTAyODUyOTg4.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTAyODUzMjEy.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTAyODUzNDE2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTAyODUzNzA0.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTAyODUzOTE2.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTAyODU0MTMy.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTAyODU0MzU2.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTAyODU0NTQ0.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTAyODU0NzUy.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTAyODU0OTg4.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTAyODU1MjAw.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTAyODU1NDE2.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTAyODU1NjYw.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTAyODU1OTIw.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTAyODU2MjY0.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MMZAWYC",
+      "title": "妈妈再爱我一次",
+      "date": "2006",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_妈妈再爱我一次",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTAxMjc1Njgw.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTAxMjY1MDc2.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTAxMjY1NDQ4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTAxMjY1Nzgw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTAxMjY2MDg4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTAxMjY2NDky.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTAxMjY2OTA4.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTAxMjY3Mjg0.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTAxMjY3NzQw.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTAxMjc1OTM2.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTAxMjY4MjAw.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTAxMjY4NTg4.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTAxMjY5MDE2.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTAxMjcwMjky.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTAxMjcwNjky.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTAxMjcxMjg4.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTAxMjcxNjM2.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTAxMjcxOTg0.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTAxMjc2MzE2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTAxMjcyMzY0.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTAxMjcyNzI4.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTAxMjczMjA4.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTAxMjczNTA4.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTAxMjczODI4.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTAxMjc0MDQ0.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTAxMjc0MzE2.html"},
+            {"27": "http://v.youku.com/v_show/id_XMTAxMjc0NjAw.html"},
+            {"28": "http://v.youku.com/v_show/id_XMTAxMjc0ODY4.html"},
+            {"29": "http://v.youku.com/v_show/id_XMTAxMjc1MTU2.html"},
+            {"30": "http://v.youku.com/v_show/id_XMTAxMjc1NDEy.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "JYDN1",
+      "title": "家有爹娘1",
+      "date": "2006",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_家有爹娘",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTEyMTI1NDUy.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTEyMTI1NzA0.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTEyMTI1OTQ4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTEyMTI2MTcy.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTEyMTI2MzYw.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTEyMTI2NTQw.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTEyMTI2NzQ4.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTEyMTI2OTYw.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTEyMTI3MTY4.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTEyMTI3MzQw.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTEyMTI3NTU2.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTEyMTI3NzY4.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTEyMTI3OTg4.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTEyMTI4MjE2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTEyMTI4NDQw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTEyMTI4NjI4.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTEyMTI4ODE2.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTEyMTI5MDE2.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTEyMTI5MjAw.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTEyMTI5Mzky.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTEyMTI5NjA0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTEyMTI5ODM2.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTEyMTMwMDI4.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTEyMTMwMjIw.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTEyMTMwNDUy.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NRX",
+      "title": "女人香",
+      "date": "2006",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_女人香",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTE0OTU0MDUy.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTE0OTU0MTI4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTE0OTU0MTk2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTE0OTU0MjYw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTE0OTU0MzY4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTE0OTU0NDU2.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTE0OTU0NTg4.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTE0OTU0Njk2.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTE0OTU0ODA4.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTE0OTU0ODk2.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTE0OTU0OTk2.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTE0OTU1MDYw.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTE0OTU1MTY0.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTE0OTU1MzQ4.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTE0OTU1NTYw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTE0OTU1Njk2.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTE0OTU1Nzg0.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTE0OTU1ODk2.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTE0OTU2MDAw.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTE0OTU2MDgw.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTE0OTU2MTcy.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTE0OTU2Mjg0.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTE0OTU2NDAw.html"},
+            {"24": "http://v.youku.com/v_show/id_XODMwOTA3NTI0.html"},
+            {"25": "http://v.youku.com/v_show/id_XODMwOTA4Mjg4.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XZSh",
+      "title": "雪在烧",
+      "date": "2007",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_雪在烧",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XOTEyNDAxMjA=.html"},
+            {"2": "http://v.youku.com/v_show/id_XOTEyNDU1MDQ=.html"},
+            {"3": "http://v.youku.com/v_show/id_XOTEyNTA0NzY=.html"},
+            {"4": "http://v.youku.com/v_show/id_XOTEyNTQ3MDQ=.html"},
+            {"5": "http://v.youku.com/v_show/id_XOTEyNTgyNDA=.html"},
+            {"6": "http://v.youku.com/v_show/id_XOTEyNjI5NjA=.html"},
+            {"7": "http://v.youku.com/v_show/id_XOTEyNjc4MTI=.html"},
+            {"8": "http://v.youku.com/v_show/id_XOTEyNzIxNTY=.html"},
+            {"9": "http://v.youku.com/v_show/id_XOTEyNzY2NDA=.html"},
+            {"10": "http://v.youku.com/v_show/id_XOTEyODA4Njg=.html"},
+            {"11": "http://v.youku.com/v_show/id_XOTEyODQ3MzI=.html"},
+            {"12": "http://v.youku.com/v_show/id_XOTEyODg4NjA=.html"},
+            {"13": "http://v.youku.com/v_show/id_XOTEyOTQwMjg=.html"},
+            {"14": "http://v.youku.com/v_show/id_XOTEyOTgzODg=.html"},
+            {"15": "http://v.youku.com/v_show/id_XOTEyMzU4ODg=.html"},
+            {"16": "http://v.youku.com/v_show/id_XOTEzMDIzMjA=.html"},
+            {"17": "http://v.youku.com/v_show/id_XOTEzMDY4NDA=.html"},
+            {"18": "http://v.youku.com/v_show/id_XOTEzMTA5OTI=.html"},
+            {"19": "http://v.youku.com/v_show/id_XOTEzMTU0ODQ=.html"},
+            {"20": "http://v.youku.com/v_show/id_XOTEzMTk2MjA=.html"},
+            {"21": "http://v.youku.com/v_show/id_XOTEzMjM4NzY=.html"},
+            {"22": "http://v.youku.com/v_show/id_XOTEzMjgwMDA=.html"},
+            {"23": "http://v.youku.com/v_show/id_XOTEzMzI5OTI=.html"},
+            {"24": "http://v.youku.com/v_show/id_XOTEzMzc1NDA=.html"},
+            {"25": "http://v.youku.com/v_show/id_XOTEzNDI1MzY=.html"},
+            {"26": "http://v.youku.com/v_show/id_XOTEzNDY3NDQ=.html"},
+            {"27": "http://v.youku.com/v_show/id_XOTEzNTE5NTY=.html"},
+            {"28": "http://v.youku.com/v_show/id_XOTEzNTY3MjQ=.html"},
+            {"29": "http://v.youku.com/v_show/id_XOTEzNjIxNDQ=.html"},
+            {"30": "http://v.youku.com/v_show/id_XOTEzNjY2NzI=.html"},
+            {"31": "http://v.youku.com/v_show/id_XOTEzNzE0Njg=.html"},
+            {"32": "http://v.youku.com/v_show/id_XOTEzNzUzNTY=.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HPShM",
+      "title": "和平使命",
+      "date": "2007",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_和平使命",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTIyMDQwOTA0.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTIyMDQwODQ4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTIyMDQwOTE2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTIyMDQwODky.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTIyMDQwOTAw.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTIyMDQwODk2.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTIyMDQwODY0.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTIyMDQwOTIw.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTIyMDQwOTA4.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTIyMDQwOTI0.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTIyMDQwODg0.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTIyMDQwODUy.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTIyMDQwOTMy.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTIyMDQwODg4.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTIyMDQwODU2.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTIyMDQwODcy.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTIyMDQwOTI4.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTIyMDQwODYw.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTIyMDQwODc2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTIyMDQwOTEy.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTIyMDQwOTQ0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTIyMDQwOTQw.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "JJDBHL",
+      "title": "静静的白桦林",
+      "date": "2008",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_静静的白桦林",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XOTM0NDY3Njg4.html"},
+            {"2": "http://v.youku.com/v_show/id_XOTM0NDY5NTI4.html"},
+            {"3": "http://v.youku.com/v_show/id_XOTM0NDcyNjg0.html"},
+            {"4": "http://v.youku.com/v_show/id_XOTM0NDc0NzI4.html"},
+            {"5": "http://v.youku.com/v_show/id_XOTM0NDc4MDMy.html"},
+            {"6": "http://v.youku.com/v_show/id_XOTM0NDc5OTg0.html"},
+            {"7": "http://v.youku.com/v_show/id_XOTM0NDgzMTY0.html"},
+            {"8": "http://v.youku.com/v_show/id_XOTM0NDg3NTky.html"},
+            {"9": "http://v.youku.com/v_show/id_XOTM0NDkzMjE2.html"},
+            {"10": "http://v.youku.com/v_show/id_XOTM0NDk4MTky.html"},
+            {"11": "http://v.youku.com/v_show/id_XOTM0NTAxMTg4.html"},
+            {"12": "http://v.youku.com/v_show/id_XOTM0NTA1Mjg0.html"},
+            {"13": "http://v.youku.com/v_show/id_XOTM0NTEwNzMy.html"},
+            {"14": "http://v.youku.com/v_show/id_XOTM0NTIwNzQw.html"},
+            {"15": "http://v.youku.com/v_show/id_XOTM0NTI4OTM2.html"},
+            {"16": "http://v.youku.com/v_show/id_XOTM0NTM3NzA4.html"},
+            {"17": "http://v.youku.com/v_show/id_XOTM0NTQ0MTQ0.html"},
+            {"18": "http://v.youku.com/v_show/id_XOTM0NTQ5Nzcy.html"},
+            {"19": "http://v.youku.com/v_show/id_XOTM0NTU0NDcy.html"},
+            {"20": "http://v.youku.com/v_show/id_XOTM0NTU5MDE2.html"},
+            {"21": "http://v.youku.com/v_show/id_XOTM0NTYzNTA4.html"},
+            {"22": "http://v.youku.com/v_show/id_XOTM0NTcxMDQ4.html"},
+            {"23": "http://v.youku.com/v_show/id_XOTM0NTc4NDY0.html"},
+            {"24": "http://v.youku.com/v_show/id_XOTM0NTgyODMy.html"},
+            {"25": "http://v.youku.com/v_show/id_XOTM0NTg3NTQ4.html"},
+            {"26": "http://v.youku.com/v_show/id_XOTM0NTkzNjQ4.html"},
+            {"27": "http://v.youku.com/v_show/id_XOTM0NTk4Mzk2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "XBZZNDNR",
+      "title": "下辈子做你的女人",
+      "date": "2007",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_下辈子做你的女人",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTE3OTI1OTY4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTE3OTI1OTA4.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTE3OTI2MjI4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTE3OTI1ODgw.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTE3OTI0OTYw.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTE3OTI1ODEy.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTE3OTI1MjUy.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTE3OTI1NzY4.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTE3OTI1MDY0.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTE3OTI1MjA4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTE3OTI1MTA4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTE3OTI1MTUy.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTE3OTI1MDA0.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTE3OTI1MDM2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTE3OTI0OTA0.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTE3OTI0ODUy.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTE3OTI0NzY0.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTE3OTI0MjYw.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTE3OTI0ODA4.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTE3OTI0NzA4.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTE3OTI0Mzg4.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTE3OTI0NzQ0.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTE3OTI0NTg0.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTE3OTI0MTI0.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTE3OTI0MDE2.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTE3OTI0MTky.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "HLChQ",
+      "title": "贺龙传奇",
+      "date": "2007",
+      "type": "tv",
+      "sourcesRemarks": "<TextBlock>此剧可能由于各种原因尚未公映，<Hyperlink NavigateUri=\"http://tieba.baidu.com/p/1431044407\">背景状况介绍</Hyperlink>。</TextBlock><TextBlock>如有其他线索烦请<Hyperlink NavigateUri=\"mailto:linc.yu@outlook.com?subject=爱琳投票助手影视资源建议\">告知作者</Hyperlink>。</TextBlock>"
+    },
+    {
+      "id": "JYDN2",
+      "title": "家有爹娘2",
+      "date": "2008",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "乐视：",
+          "target": "http://www.le.com/tv/22263.htm",
+          "playlist":[
+            {"1": "http://www.le.com/ptv/vplay/700795.html"},
+            {"2": "http://www.le.com/ptv/vplay/700778.html"},
+            {"3": "http://www.le.com/ptv/vplay/700797.html"},
+            {"4": "http://www.le.com/ptv/vplay/700786.html"},
+            {"5": "http://www.le.com/ptv/vplay/700791.html"},
+            {"6": "http://www.le.com/ptv/vplay/700773.html"},
+            {"7": "http://www.le.com/ptv/vplay/700787.html"},
+            {"8": "http://www.le.com/ptv/vplay/700779.html"},
+            {"9": "http://www.le.com/ptv/vplay/700792.html"},
+            {"10": "http://www.le.com/ptv/vplay/700774.html"},
+            {"11": "http://www.le.com/ptv/vplay/700783.html"},
+            {"12": "http://www.le.com/ptv/vplay/700788.html"},
+            {"13": "http://www.le.com/ptv/vplay/700780.html"},
+            {"14": "http://www.le.com/ptv/vplay/700793.html"},
+            {"15": "http://www.le.com/ptv/vplay/700776.html"},
+            {"16": "http://www.le.com/ptv/vplay/700784.html"},
+            {"17": "http://www.le.com/ptv/vplay/700789.html"},
+            {"18": "http://www.le.com/ptv/vplay/700781.html"},
+            {"19": "http://www.le.com/ptv/vplay/700794.html"},
+            {"20": "http://www.le.com/ptv/vplay/700777.html"},
+            {"21": "http://www.le.com/ptv/vplay/700777.html"},
+            {"22": "http://www.le.com/ptv/vplay/700785.html"},
+            {"23": "http://www.le.com/ptv/vplay/700790.html"},
+            {"24": "http://www.le.com/ptv/vplay/700782.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ChL",
+      "title": "初恋",
+      "date": "2011",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_初恋%202011",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMjQ4OTQ5MDM2.html"},
+            {"2": "http://v.youku.com/v_show/id_XMjQ4OTg1NjY0.html"},
+            {"3": "http://v.youku.com/v_show/id_XMjQ5MDkwODY0.html"},
+            {"4": "http://v.youku.com/v_show/id_XMjQ5MTAwMTc2.html"},
+            {"5": "http://v.youku.com/v_show/id_XMjQ5MTA1Njc2.html"},
+            {"6": "http://v.youku.com/v_show/id_XMjQ5MTc2NjA0.html"},
+            {"7": "http://v.youku.com/v_show/id_XMjQ5MTg2OTg4.html"},
+            {"8": "http://v.youku.com/v_show/id_XMjQ5MjE0NzQ4.html"},
+            {"9": "http://v.youku.com/v_show/id_XMjQ5MjQ0ODY4.html"},
+            {"10": "http://v.youku.com/v_show/id_XMjQ5MjY2MTA4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMjQ5Mjc4OTU2.html"},
+            {"12": "http://v.youku.com/v_show/id_XMjQ5Mjg5MjEy.html"},
+            {"13": "http://v.youku.com/v_show/id_XMjQ5Mjk0NDQ4.html"},
+            {"14": "http://v.youku.com/v_show/id_XMjQ5MzAzMzEy.html"},
+            {"15": "http://v.youku.com/v_show/id_XMjQ5MzEwODky.html"},
+            {"16": "http://v.youku.com/v_show/id_XMjQ5MzE4NzQ4.html"},
+            {"17": "http://v.youku.com/v_show/id_XMjQ5MzI3Mjk2.html"},
+            {"18": "http://v.youku.com/v_show/id_XMjQ5MzMyMTg4.html"},
+            {"19": "http://v.youku.com/v_show/id_XMjQ5MzM4MDY4.html"},
+            {"20": "http://v.youku.com/v_show/id_XMjQ5MzQyMDk2.html"},
+            {"21": "http://v.youku.com/v_show/id_XMjQ5MzQ1ODky.html"},
+            {"22": "http://v.youku.com/v_show/id_XMjQ5MzQ4OTYw.html"},
+            {"23": "http://v.youku.com/v_show/id_XMjQ5MzUxODky.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LGX",
+      "title": "锣鼓巷",
+      "date": "2008",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_锣鼓巷",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMTM1MDE5NzQ4.html"},
+            {"2": "http://v.youku.com/v_show/id_XMTM1MDIwNTgw.html"},
+            {"3": "http://v.youku.com/v_show/id_XMTYxNDkzNjU2.html"},
+            {"4": "http://v.youku.com/v_show/id_XMTM1MDIyMDA0.html"},
+            {"5": "http://v.youku.com/v_show/id_XMTM1MDIyNzI4.html"},
+            {"6": "http://v.youku.com/v_show/id_XMTM1MDEwMDYw.html"},
+            {"7": "http://v.youku.com/v_show/id_XMTM1MDEwNzIw.html"},
+            {"8": "http://v.youku.com/v_show/id_XMTM1MDExNDg0.html"},
+            {"9": "http://v.youku.com/v_show/id_XMTM1MDEyMDgw.html"},
+            {"10": "http://v.youku.com/v_show/id_XMTM1MDEyNzk2.html"},
+            {"11": "http://v.youku.com/v_show/id_XMTM1MDEzNTcy.html"},
+            {"12": "http://v.youku.com/v_show/id_XMTM1MDE0MTE2.html"},
+            {"13": "http://v.youku.com/v_show/id_XMTM1MDE0ODAw.html"},
+            {"14": "http://v.youku.com/v_show/id_XMTM1MDMzNTU2.html"},
+            {"15": "http://v.youku.com/v_show/id_XMTM1MDE1Mzc2.html"},
+            {"16": "http://v.youku.com/v_show/id_XMTM1MDE2MDY0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMTM1MDE2ODcy.html"},
+            {"18": "http://v.youku.com/v_show/id_XMTM1MDE3MzQw.html"},
+            {"19": "http://v.youku.com/v_show/id_XMTM1MDE3OTUy.html"},
+            {"20": "http://v.youku.com/v_show/id_XMTM1MDE4NzI4.html"},
+            {"21": "http://v.youku.com/v_show/id_XMTM1MDE5MTg0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMTM1MDIzMjMy.html"},
+            {"23": "http://v.youku.com/v_show/id_XMTM1MDIzOTEy.html"},
+            {"24": "http://v.youku.com/v_show/id_XMTYxNDkzNDY0.html"},
+            {"25": "http://v.youku.com/v_show/id_XMTM1MDI1MDU2.html"},
+            {"26": "http://v.youku.com/v_show/id_XMTM1MDI1ODM2.html"},
+            {"27": "http://v.youku.com/v_show/id_XMTM1MDI2NDU2.html"},
+            {"28": "http://v.youku.com/v_show/id_XMTM1MDI3MTY4.html"},
+            {"29": "http://v.youku.com/v_show/id_XMTM1MDI4MDcy.html"},
+            {"30": "http://v.youku.com/v_show/id_XMTM1MDI4NzYw.html"},
+            {"31": "http://v.youku.com/v_show/id_XMTM1MDI5MzQ4.html"},
+            {"32": "http://v.youku.com/v_show/id_XMTM1MDMwMDg4.html"},
+            {"33": "http://v.youku.com/v_show/id_XMTM1MDMwNDQw.html"},
+            {"34": "http://v.youku.com/v_show/id_XMTM1MDMxMDIw.html"},
+            {"35": "http://v.youku.com/v_show/id_XMTM1MDMxNzcy.html"},
+            {"36": "http://v.youku.com/v_show/id_XMTM1MDMyMjky.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NDDYShM",
+      "title": "你到底要什么",
+      "date": "2007",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_你到底要什么",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMjIxNDQxMzE2.html"},
+            {"2": "http://v.youku.com/v_show/id_XMjIxNDQxMjk2.html"},
+            {"3": "http://v.youku.com/v_show/id_XMjIxNDQxMTQ4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMjIxNDQxMzA0.html"},
+            {"5": "http://v.youku.com/v_show/id_XMjIxNDQxMzEy.html"},
+            {"6": "http://v.youku.com/v_show/id_XMjIxNDQxMzA4.html"},
+            {"7": "http://v.youku.com/v_show/id_XMjIxNDQxMTUy.html"},
+            {"8": "http://v.youku.com/v_show/id_XMjIxNDQxMTU2.html"},
+            {"9": "http://v.youku.com/v_show/id_XMjIxNDQxMTYw.html"},
+            {"10": "http://v.youku.com/v_show/id_XMjIxNDQxMTY0.html"},
+            {"11": "http://v.youku.com/v_show/id_XMjIxNDQxMTc2.html"},
+            {"12": "http://v.youku.com/v_show/id_XMjIxNDQxMTY4.html"},
+            {"13": "http://v.youku.com/v_show/id_XMjIxNDQxMTcy.html"},
+            {"14": "http://v.youku.com/v_show/id_XMjIxNDQxMTg4.html"},
+            {"15": "http://v.youku.com/v_show/id_XMjIxNDQxMTgw.html"},
+            {"16": "http://v.youku.com/v_show/id_XMjIxNDQxMTg0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMjIxNDQxMjA4.html"},
+            {"18": "http://v.youku.com/v_show/id_XMjIxNDQxMTky.html"},
+            {"19": "http://v.youku.com/v_show/id_XMjIxNDQxMTk2.html"},
+            {"20": "http://v.youku.com/v_show/id_XMjIxNDQxMjAw.html"},
+            {"21": "http://v.youku.com/v_show/id_XMjIxNDQxMjA0.html"},
+            {"22": "http://v.youku.com/v_show/id_XMjI3MjExODgw.html"},
+            {"23": "http://v.youku.com/v_show/id_XMjIxNDQxMjEy.html"},
+            {"24": "http://v.youku.com/v_show/id_XMjI3MjEyMTY0.html"},
+            {"25": "http://v.youku.com/v_show/id_XMjIxNDQxMjE2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ZhALZ4",
+      "title": "重案六组4",
+      "date": "2010",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_重案六组%20第四部",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XMzIwNzYwODMy.html"},
+            {"2": "http://v.youku.com/v_show/id_XMzIwNzYxMzQw.html"},
+            {"3": "http://v.youku.com/v_show/id_XMzIwNzYxOTI4.html"},
+            {"4": "http://v.youku.com/v_show/id_XMzIwNzYyNTky.html"},
+            {"5": "http://v.youku.com/v_show/id_XMzIwNzYzMTgw.html"},
+            {"6": "http://v.youku.com/v_show/id_XMzIwNzYzNjYw.html"},
+            {"7": "http://v.youku.com/v_show/id_XMzIwNzY1MTMy.html"},
+            {"8": "http://v.youku.com/v_show/id_XMzIwNzY2MDA0.html"},
+            {"9": "http://v.youku.com/v_show/id_XMzIwNzY3NzY4.html"},
+            {"10": "http://v.youku.com/v_show/id_XMzIwNzY4ODA4.html"},
+            {"11": "http://v.youku.com/v_show/id_XMzIwNzcwNzY4.html"},
+            {"12": "http://v.youku.com/v_show/id_XMzIwNzcyMDAw.html"},
+            {"13": "http://v.youku.com/v_show/id_XMzIwNzc0NzEy.html"},
+            {"14": "http://v.youku.com/v_show/id_XMzIwNzc4NzI0.html"},
+            {"15": "http://v.youku.com/v_show/id_XMzIwNzgwODA0.html"},
+            {"16": "http://v.youku.com/v_show/id_XMzIwNzg1ODQ0.html"},
+            {"17": "http://v.youku.com/v_show/id_XMzIwNzg3ODY0.html"},
+            {"18": "http://v.youku.com/v_show/id_XMzIwNzkxMzYw.html"},
+            {"19": "http://v.youku.com/v_show/id_XMzIwNzkzOTUy.html"},
+            {"20": "http://v.youku.com/v_show/id_XMzIwNzk2MjM2.html"},
+            {"21": "http://v.youku.com/v_show/id_XMzIwNzk4Mjgw.html"},
+            {"22": "http://v.youku.com/v_show/id_XMzIwODAyMTA0.html"},
+            {"23": "http://v.youku.com/v_show/id_XMzIwODA0NzQw.html"},
+            {"24": "http://v.youku.com/v_show/id_XMzIwODA3MTg4.html"},
+            {"25": "http://v.youku.com/v_show/id_XMzIwODEzNTAw.html"},
+            {"26": "http://v.youku.com/v_show/id_XMzIwODE1ODgw.html"},
+            {"27": "http://v.youku.com/v_show/id_XMzIwOTY4ODAw.html"},
+            {"28": "http://v.youku.com/v_show/id_XMzIwOTcxMTY4.html"},
+            {"29": "http://v.youku.com/v_show/id_XMzIwOTc2MTIw.html"},
+            {"30": "http://v.youku.com/v_show/id_XMzIwOTgwMjUy.html"},
+            {"31": "http://v.youku.com/v_show/id_XMzIwOTgyNzEy.html"},
+            {"32": "http://v.youku.com/v_show/id_XMzIwOTg3NjAw.html"},
+            {"33": "http://v.youku.com/v_show/id_XMzIwOTkxOTA0.html"},
+            {"34": "http://v.youku.com/v_show/id_XMzIwOTk3Mzg0.html"},
+            {"35": "http://v.youku.com/v_show/id_XMzIxMDAxMzI0.html"},
+            {"36": "http://v.youku.com/v_show/id_XMzIxMDA0MzEy.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KJPL",
+      "title": "独家披露",
+      "date": "2010",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "爱奇艺：",
+          "playlist": [
+            { "全31集": "http://www.iqiyi.com/v_19rrnyv1ys.html" }
+          ]
+        }
+      ],
+      "sourcesRemarks": "（版权原因，或需用客户端才可播放）"
+    },
+    {
+      "id": "XYBHDZhZh",
+      "title": "硝烟背后的战争",
+      "date": "2010",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_硝烟背后的战争",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNTI0NTY0MjQw.html"},
+            {"2": "http://v.youku.com/v_show/id_XNTI0NTY0Mjg0.html"},
+            {"3": "http://v.youku.com/v_show/id_XNTI0NTY0NTMy.html"},
+            {"4": "http://v.youku.com/v_show/id_XNTI0NTY0NTc2.html"},
+            {"5": "http://v.youku.com/v_show/id_XNTI0NTY0Nzg0.html"},
+            {"6": "http://v.youku.com/v_show/id_XNTI0NTY0ODI4.html"},
+            {"7": "http://v.youku.com/v_show/id_XNTI0NTY1MDgw.html"},
+            {"8": "http://v.youku.com/v_show/id_XNTI0NTY1MTA0.html"},
+            {"9": "http://v.youku.com/v_show/id_XNTI0NTY1MzI4.html"},
+            {"10": "http://v.youku.com/v_show/id_XNTI0NTY1Mzgw.html"},
+            {"11": "http://v.youku.com/v_show/id_XNTI0NTY1NjM2.html"},
+            {"12": "http://v.youku.com/v_show/id_XNTI0NTY1Njg0.html"},
+            {"13": "http://v.youku.com/v_show/id_XNTI0NTY1OTIw.html"},
+            {"14": "http://v.youku.com/v_show/id_XNTI0NTY1OTUy.html"},
+            {"15": "http://v.youku.com/v_show/id_XNTI0NTY2MjA0.html"},
+            {"16": "http://v.youku.com/v_show/id_XNTI0NTY2MjM2.html"},
+            {"17": "http://v.youku.com/v_show/id_XNTI0NTY2NTA4.html"},
+            {"18": "http://v.youku.com/v_show/id_XNTI0NTY2NTM2.html"},
+            {"19": "http://v.youku.com/v_show/id_XNTI0NTY2NzI4.html"},
+            {"20": "http://v.youku.com/v_show/id_XNTI0NTY2NzQw.html"},
+            {"21": "http://v.youku.com/v_show/id_XNTI0NTY2OTM2.html"},
+            {"22": "http://v.youku.com/v_show/id_XNTI0NTY2OTcy.html"},
+            {"23": "http://v.youku.com/v_show/id_XNTI0NTY3MTk2.html"},
+            {"24": "http://v.youku.com/v_show/id_XNTI0NTY3MjE2.html"},
+            {"25": "http://v.youku.com/v_show/id_XNTI0NTY3NTE2.html"},
+            {"26": "http://v.youku.com/v_show/id_XNTI0NTY3NTU2.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ADAN",
+      "title": "俺爹俺娘",
+      "date": "2011",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "土豆",
+          "target": "http://video.tudou.com/v/XMjEwMzI0ODYyOA==.html"
+        }
+      ]
+    },
+    {
+      "id": "QGX",
+      "title": "青果巷",
+      "date": "2012",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_青果巷",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNjg0MjUxMzk2.html"},
+            {"2": "http://v.youku.com/v_show/id_XNjg0MTczMDg0.html"},
+            {"3": "http://v.youku.com/v_show/id_XNjg0MTg0MDI0.html"},
+            {"4": "http://v.youku.com/v_show/id_XNjg0MTkzNDY0.html"},
+            {"5": "http://v.youku.com/v_show/id_XNjg0MjAyNTgw.html"},
+            {"6": "http://v.youku.com/v_show/id_XNjg1MTY1MjA4.html"},
+            {"7": "http://v.youku.com/v_show/id_XNjg1MjAxODE2.html"},
+            {"8": "http://v.youku.com/v_show/id_XNjg1MTg0NzEy.html"},
+            {"9": "http://v.youku.com/v_show/id_XNjg2MDE3NzU2.html"},
+            {"10": "http://v.youku.com/v_show/id_XNjg2MDIzNzMy.html"},
+            {"11": "http://v.youku.com/v_show/id_XNjg2MDI5MzQ0.html"},
+            {"12": "http://v.youku.com/v_show/id_XNjg2MjM5MjI0.html"},
+            {"13": "http://v.youku.com/v_show/id_XNjg2MjQ2MzI4.html"},
+            {"14": "http://v.youku.com/v_show/id_XNjg2MjU1MTg0.html"},
+            {"15": "http://v.youku.com/v_show/id_XNjg2NDc0NDgw.html"},
+            {"16": "http://v.youku.com/v_show/id_XNjg2NDg5ODc2.html"},
+            {"17": "http://v.youku.com/v_show/id_XNjg2NTE0MDQw.html"},
+            {"18": "http://v.youku.com/v_show/id_XNjg2NTI2MDIw.html"},
+            {"19": "http://v.youku.com/v_show/id_XNjg2NTM3MzIw.html"},
+            {"20": "http://v.youku.com/v_show/id_XNjg2NTU0ODQw.html"},
+            {"21": "http://v.youku.com/v_show/id_XNjg3MTg4NDUy.html"},
+            {"22": "http://v.youku.com/v_show/id_XNjg3MTk0NTc2.html"},
+            {"23": "http://v.youku.com/v_show/id_XNjg3MjA0OTA4.html"},
+            {"24": "http://v.youku.com/v_show/id_XNjg3MjA3OTQ0.html"},
+            {"25": "http://v.youku.com/v_show/id_XNjg3MjEwNzk2.html"},
+            {"26": "http://v.youku.com/v_show/id_XNjg3MjE2NzE2.html"},
+            {"27": "http://v.youku.com/v_show/id_XNjg3Nzg3MTI0.html"},
+            {"28": "http://v.youku.com/v_show/id_XNjg3NzkwODQ0.html"},
+            {"29": "http://v.youku.com/v_show/id_XNjg3Nzk4NjEy.html"},
+            {"30": "http://v.youku.com/v_show/id_XNjg4Mjc3MTcy.html"},
+            {"31": "http://v.youku.com/v_show/id_XNjg4Mjc5MjYw.html"},
+            {"32": "http://v.youku.com/v_show/id_XNjg4MjgxNTE2.html"},
+            {"33": "http://v.youku.com/v_show/id_XNjg4MzAyMjEy.html"},
+            {"34": "http://v.youku.com/v_show/id_XNjg4MzIzODQw.html"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BDYG",
+      "title": "遍地阳光",
+      "link": "http://baike.baidu.com/item/遍地阳光",
+      "date": "2013",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "playlist": [
+            { "片花": "http://v.youku.com/v_show/id_XNjQwMTk5NDcy.html" }
+          ]
+        }
+      ],
+      "sourcesRemarks": "unavailable"
+    },
+    {
+      "id": "LAXDL",
+      "title": "恋爱相对论",
+      "date": "2013",
+      "type": "tv",
+      "sources": [
+        {
+          "name": "优酷：",
+          "target": "http://www.soku.com/search_video/q_恋爱相对论",
+          "playlist":[
+            {"1": "http://v.youku.com/v_show/id_XNzg5OTQ0MTE2.html"},
+            {"2": "http://v.youku.com/v_show/id_XNzg5OTQ1NDE2.html"},
+            {"3": "http://v.youku.com/v_show/id_XNzg5OTQ2NzQ0.html"},
+            {"4": "http://v.youku.com/v_show/id_XNzkxNDE3MDk2.html"},
+            {"5": "http://v.youku.com/v_show/id_XNzkxNDIxOTky.html"},
+            {"6": "http://v.youku.com/v_show/id_XNzkyNjg1MTY0.html"},
+            {"7": "http://v.youku.com/v_show/id_XNzkyNjkxOTcy.html"},
+            {"8": "http://v.youku.com/v_show/id_XNzkzMzQ1NzQ0.html"},
+            {"9": "http://v.youku.com/v_show/id_XNzkzMzUyODY4.html"},
+            {"10": "http://v.youku.com/v_show/id_XNzkzMzkxOTAw.html"},
+            {"11": "http://v.youku.com/v_show/id_XNzkzNDYxODcy.html"},
+            {"12": "http://v.youku.com/v_show/id_XNzkzODkyNjk2.html"},
+            {"13": "http://v.youku.com/v_show/id_XNzkzOTA1Mjg0.html"},
+            {"14": "http://v.youku.com/v_show/id_XNzkzOTExMTg4.html"},
+            {"15": "http://v.youku.com/v_show/id_XNzkzOTE0NjUy.html"},
+            {"16": "http://v.youku.com/v_show/id_XNzkzOTE4MjIw.html"},
+            {"17": "http://v.youku.com/v_show/id_XNzkzOTIxNDUy.html"},
+            {"18": "http://v.youku.com/v_show/id_XNzk0MDA3NDM2.html"},
+            {"19": "http://v.youku.com/v_show/id_XNzk0MDEwNDIw.html"},
+            {"20": "http://v.youku.com/v_show/id_XNzk0MDIwNDMy.html"},
+            {"21": "http://v.youku.com/v_show/id_XNzk0MDc2OTQ0.html"},
+            {"22": "http://v.youku.com/v_show/id_XNzk0MjA0ODA4.html"},
+            {"23": "http://v.youku.com/v_show/id_XNzk0MjExNTg4.html"},
+            {"24": "http://v.youku.com/v_show/id_XNzk0MjE4NDQ4.html"},
+            {"25": "http://v.youku.com/v_show/id_XNzk0MjI0NjY0.html"},
+            {"26": "http://v.youku.com/v_show/id_XNzk0NTQ4NTky.html"},
+            {"27": "http://v.youku.com/v_show/id_XNzk0NTUxMDUy.html"},
+            {"28": "http://v.youku.com/v_show/id_XNzk0NTUzMjA4.html"},
+            {"29": "http://v.youku.com/v_show/id_XNzk0NTU1MzM2.html"},
+            { "30": "http://v.youku.com/v_show/id_XNzk0NTYwMjEy.html" },
+            {"31": "http://v.youku.com/v_show/id_XNzk0NTYzNzAw.html"},
+            {"32": "http://v.youku.com/v_show/id_XNzk0NTY2MjY4.html"},
+            {"33": "http://v.youku.com/v_show/id_XNzk0NTczNDEy.html"}
+          ]
+        }
+      ]
+    }
+  ]
+}
