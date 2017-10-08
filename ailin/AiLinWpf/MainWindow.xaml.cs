@@ -308,6 +308,10 @@ namespace AiLinWpf
                 var force = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
                 await RedownloadMediaList(force);
             }
+            else if (e.Key == Key.R && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+            {
+                await ResetMediaList();
+            }
         }
 
         private void HyperlinkCopyAddressOnClick(object sender, RoutedEventArgs e)
@@ -347,6 +351,23 @@ namespace AiLinWpf
             }
         }
 
+        private async Task ResetMediaList()
+        {
+            var res = MessageBox.Show("是否确认重置媒体列表？", Title, MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.Yes)
+            {
+                var mediaRepoManager = new MediaRepoManager(MediaListUrl, MediaListFileName);
+                await mediaRepoManager.Initialize();
+                mediaRepoManager.Reset();
+                await mediaRepoManager.ResetToDefault();
+
+                _mediaList = new MediaListViewModel(mediaRepoManager.Current);
+                VideoList.ItemsSource = _mediaList.MediaViewModels;
+
+                MessageBox.Show("已充值为默认媒体列表。", Title);
+            }
+        }
+
         private async Task InitLoadAndRefreshMediaList()
         {
 #if SIMULATE_FAILED_LOAD
@@ -364,28 +385,34 @@ namespace AiLinWpf
             {
                 mediaRepoManager.Reset();
             }
+            var res = default(MediaRepoManager.RefreshResults);
             if (refreshOption != RefreshOptions.NoRefresh)
             {
-                var res = await mediaRepoManager.Refresh();
-                if (refreshOption == RefreshOptions.RefreshWithMessage)
+                res = await mediaRepoManager.Refresh();
+                if (res ==  MediaRepoManager.RefreshResults.FailedToDownload)
                 {
-                    switch (res)
-                    {
-                        case MediaRepoManager.RefreshResults.Refreshed:
-                            MessageBox.Show("成功下载并更新列表。", Title);
-                            break;
-                        case MediaRepoManager.RefreshResults.FailedToDownload:
-                            MessageBox.Show("下载列表失败。", Title);
-                            await mediaRepoManager.ResetToDefault();
-                            break;
-                        case MediaRepoManager.RefreshResults.AlreadyLatest:
-                            MessageBox.Show("已经是最新列表，无需更新。", Title);
-                            break;
-                    }
+                    await mediaRepoManager.ResetToDefault();
                 }
             }
+
             _mediaList = new MediaListViewModel(mediaRepoManager.Current);
             VideoList.ItemsSource = _mediaList.MediaViewModels;
+
+            if (refreshOption == RefreshOptions.RefreshWithMessage)
+            {
+                switch (res)
+                {
+                    case MediaRepoManager.RefreshResults.Refreshed:
+                        MessageBox.Show("成功下载并更新列表。", Title);
+                        break;
+                    case MediaRepoManager.RefreshResults.FailedToDownload:
+                        MessageBox.Show("下载列表失败。", Title);
+                        break;
+                    case MediaRepoManager.RefreshResults.AlreadyLatest:
+                        MessageBox.Show("已经是最新列表，无需更新。", Title);
+                        break;
+                }
+            }
         }
 
         private async Task LoadImages()
