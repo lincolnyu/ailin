@@ -162,7 +162,7 @@
     <Resource Include="Images\init-lovechina66-small.jpg" />
     <Resource Include="Images\init-weibo-small.jpg" />
     <Resource Include="Images\init-zhulin-small.jpg" />
-    <Content Include="Jsons\media.json">
+    <Content Include="Jsons\media_init.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Jsons\media_latest.json" />

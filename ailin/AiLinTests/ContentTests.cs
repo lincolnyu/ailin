@@ -5,7 +5,7 @@ using WebKit.Helpers;
 namespace AiLinTests
 {
     [TestClass]
-    public class ContentTest
+    public class ContentTests
     {
         [TestMethod]
         public void TestContent1()

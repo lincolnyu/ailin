@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Net;
 using System.Net.Cache;
-using System.Threading;
 using System.IO;
 
 namespace AiLinWpfLib.Helpers

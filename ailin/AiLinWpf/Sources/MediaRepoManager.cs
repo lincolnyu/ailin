@@ -125,7 +125,7 @@ namespace AiLinWpf.Sources
         {
             try
             {
-                using (var fs = new FileStream(@"Jsons\media.json", FileMode.Open))
+                using (var fs = new FileStream(@"Jsons\media_init.json", FileMode.Open))
                 using (var sr = new StreamReader(fs))
                 {
                     var json = await sr.ReadToEndAsync();

@@ -62,7 +62,16 @@ namespace AiLinWpf.ViewModels
 
         private void YieldSubtitle()
         {
-            Subtitle = $"{Year}年{TypeStr}";
+            var sb = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(Year))
+            {
+                sb.Append($"{Year}年");
+            }
+            if (!string.IsNullOrWhiteSpace(TypeStr))
+            {
+                sb.Append(TypeStr);
+            }
+            Subtitle = sb.ToString();
         }
 
         private void YieldBriefDescription()
