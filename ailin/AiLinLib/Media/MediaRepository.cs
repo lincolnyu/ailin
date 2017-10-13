@@ -2,6 +2,7 @@
 using JsonParser;
 using JsonParser.JsonStructures;
 using System;
+using AiLinLib.Helpers;
 
 namespace AiLinLib.Media
 {
@@ -17,9 +18,9 @@ namespace AiLinLib.Media
         {
         }
 
-        public string OriginalJson { get; private set; }
+        public string OriginalJson { get; set; }
 
-        public string Version { get; private set; }
+        public string Version { get; set; }
 
         public List<MediaInfo> MediaList { get; } = new List<MediaInfo>();
 
@@ -28,6 +29,12 @@ namespace AiLinLib.Media
         public MediaInfo this[string id]
         {
             get => IdToInfo.TryGetValue(id, out var res) ? res : null;
+        }
+
+        public void AddMedia(MediaInfo mi)
+        {
+            IdToInfo[mi.Id] = mi;
+            MediaList.Add(mi);
         }
 
         public static MediaRepository TryParse(string json)
@@ -42,6 +49,20 @@ namespace AiLinLib.Media
                 return mr;
             }
             return null;
+        }
+
+        public JsonPairs WriteToJson()
+        {
+            var rootNode = new JsonPairs();
+            rootNode.SetValue("version", Version);
+            var mediaList = new JsonArray();
+            foreach (var mi in MediaList)
+            {
+                var miJson = mi.WriteToJson();
+                mediaList.Items.Add(miJson);
+            }
+            rootNode.KeyValues["mediaList"] = mediaList;
+            return rootNode;
         }
 
         private static MediaRepository TryParseMainPairs(JsonPairs pairs)
@@ -67,8 +88,7 @@ namespace AiLinLib.Media
                     var mi = MediaInfo.TryParse(mediaInfo);
                     if (mi != null)
                     {
-                        mr.MediaList.Add(mi);
-                        mr.IdToInfo[mi.Id] = mi;
+                        mr.AddMedia(mi);
                     }
                 }
             }

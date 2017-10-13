@@ -1,5 +1,5 @@
 {
-  "version": "0.0",
+  "version": "1.2.0",
   "mediaList": [
     {
       "id": "PGZh",
@@ -142,6 +142,9 @@
       "type": "film",
       "role": "知青叶娟",
       "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/xeblk.mp3" }
+      ],
       "sources": [
         {
           "name": "乐视",
@@ -160,6 +163,9 @@
       "type": "film",
       "role": "船舶监造师诸晖",
       "producer": "上海电影制片厂",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/fblxzhf.mp3" }
+      ],
       "sources": [
         {
           "name": "风行网",
@@ -179,6 +185,9 @@
       "role": "女儿国国王",
       "director": "杨洁",
       "producer": "中央电视台及下属中国电视剧制作中心",
+      "songs": [
+        { "bgm": "http://win.web.ra01.sycdn.kuwo.cn/resource/n1/192/21/55/3063801691.mp3" }
+      ],
       "sources": [
         {
           "name": "优酷：",
@@ -212,6 +221,9 @@
       "playwright": "韩静霆",
       "adaptedFrom": "韩静霆同名小说",
       "producer": "北京电视艺术中心",
+      "songs": [
+        { "bgm": "http://win.web.rc01.sycdn.kuwo.cn/resource/n2/85/34/1272694190.mp3" }
+      ],
       "sources": [
         {
           "name": "优酷：",
@@ -248,6 +260,9 @@
       "title": "远离战争年代",
       "date": "1987",
       "type": "film",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/a-morning-in-cornwell.mp3" }
+      ],
       "sources": [
         {
           "name": "优酷",
@@ -344,6 +359,9 @@
       "title": "戏剧人生（又名《情同初恋》）",
       "date": "1992",
       "type": "tv",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/xjrsh.mp3" }
+      ],
       "sources": [
         {
           "name": "优酷：",
@@ -583,6 +601,9 @@
       "title": "洪峰抢险（又名《不可战胜》）",
       "date": "1998",
       "type": "film",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/wlsh.mp3" }
+      ],
       "sources": [
         {
           "name": "土豆",
@@ -1522,7 +1543,7 @@
       ]
     },
     {
-      "id": "ZGJTSEY",
+      "id": "ZhGJTSEY",
       "title": "中国家庭421",
       "date": "2005",
       "type": "tv",
@@ -1605,6 +1626,9 @@
       "title": "我在天堂等你",
       "date": "2006",
       "type": "tv",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/wzttdn.mp3" }
+      ],
       "sources": [
         {
           "name": "优酷：",

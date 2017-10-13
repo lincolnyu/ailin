@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{170273A2-36B8-479F-AF22-76215AA45557}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AiLinTests</RootNamespace>
-    <AssemblyName>AiLinTests</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <ProjectGuid>{08A4BF0D-7D6A-4203-8E16-0D08AA94D3CE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AiLinCsvMediaMerger</RootNamespace>
+    <AssemblyName>AiLinCsvMediaMerger</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,7 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,41 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentTests.cs" />
-    <Compile Include="CsvParsingTests.cs" />
-    <Compile Include="MediaJsonTest.cs" />
-    <Compile Include="ParsingTests.cs" />
+    <Compile Include="CsvMediaLoader.cs" />
+    <Compile Include="MediaListMerger.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj">
-      <Project>{01B732CB-BF3F-4F3A-B61C-9EFF5D8E0322}</Project>
-      <Name>RedbackCoreLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AiLinCsvMediaMerger\AiLinCsvMediaMerger.csproj">
-      <Project>{08a4bf0d-7d6a-4203-8e16-0d08aa94d3ce}</Project>
-      <Name>AiLinCsvMediaMerger</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\jsonparser\JsonParser\JsonParser\JsonParser_dns11.csproj">
+      <Project>{714c9e77-900f-4078-aba1-96c6beeaab62}</Project>
+      <Name>JsonParser_dns11</Name>
     </ProjectReference>
     <ProjectReference Include="..\AiLinLib\AiLinLib.csproj">
       <Project>{99d20b9e-18c5-42b8-a82b-f1dcdfdbdf76}</Project>
       <Name>AiLinLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebKit\WebKit.csproj">
-      <Project>{b2eb9446-88b7-4506-bbb4-d0eb9375a320}</Project>
-      <Name>WebKit</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TestData\TestData1.txt" />
-    <Content Include="TestData\TestData2.txt" />
-    <Content Include="TestData\TestData3.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TestData\medialist1.json" />
-    <None Include="TestData\test.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

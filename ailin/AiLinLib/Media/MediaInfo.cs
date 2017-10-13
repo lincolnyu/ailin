@@ -1,4 +1,5 @@
-﻿using JsonParser.JsonStructures;
+﻿using AiLinLib.Helpers;
+using JsonParser.JsonStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,6 +130,105 @@ namespace AiLinLib.Media
                 mi.SourcesRemarks = sourcesRemarks;
             }
             return mi;
+        }
+
+        public JsonPairs WriteToJson()
+        {
+            var mikvp = new JsonPairs();
+            if (Id != null)
+            {
+                mikvp.SetValue("id", Id);
+            }
+            if (Title != null)
+            {
+                mikvp.SetValue("title", Title);
+            }
+            if (Category != null)
+            {
+                mikvp.SetValue("type", Category);
+            }
+            if (DateStr != null)
+            {
+                mikvp.SetValue("date", DateStr);
+            }
+            if (Role != null)
+            {
+                mikvp.SetValue("role", Role);
+            }
+            if (Director != null)
+            {
+                mikvp.SetValue("director", Director);
+            }
+            if (Producer != null)
+            {
+                mikvp.SetValue("producer", Producer);
+            }
+            if (Playwright != null)
+            {
+                mikvp.SetValue("playwright", Playwright);
+            }
+            if (AdaptedFrom != null)
+            {
+                mikvp.SetValue("adaptedFrom", AdaptedFrom);
+            }
+            if (Remarks != null)
+            {
+                mikvp.SetValue("remarks", Remarks);
+            }
+            if (ExternalLink != null)
+            {
+                mikvp.SetValue("link", ExternalLink);
+            }
+
+            if (Songs.Count > 0)
+            {
+                var songs = new JsonArray();
+                foreach (var song in Songs)
+                {
+                    var key = song.Item1;
+                    var val = song.Item2;
+                    var kvp = new JsonPairs();
+                    kvp.SetValue(key, val);
+                    songs.Items.Add(kvp);
+                }
+                mikvp.KeyValues["songs"] = songs;
+            }
+
+            if (Sources.Count > 0)
+            {
+                var sources = new JsonArray();
+                foreach (var source in Sources)
+                {
+                    var srckvp = new JsonPairs();
+                    srckvp.SetValue("name", source.Name);
+                    if (source.Target != null)
+                    {
+                        srckvp.SetValue("target", source.Target);
+                    }
+
+                    if (source.Playlist.Count > 0)
+                    {
+                        var playlist = new JsonArray();
+                        foreach (var t in source.Playlist)
+                        {
+                            var plkvp = new JsonPairs();
+                            plkvp.SetValue(t.Item1, t.Item2);
+                            playlist.Items.Add(plkvp);
+                        }
+                        srckvp.KeyValues["playlist"] = playlist;
+                    }
+
+                    sources.Items.Add(srckvp);
+                }
+                mikvp.KeyValues["sources"] = sources;
+            }
+
+            if (SourcesRemarks != null)
+            {
+                mikvp.SetValue("sourcesRemarks", SourcesRemarks);
+            }
+
+            return mikvp;
         }
     }
 }
