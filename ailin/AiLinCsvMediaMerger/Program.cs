@@ -7,13 +7,6 @@ namespace AiLinCsvMediaMerger
 {
     class Program
     {
-        static string TestWriteJson(string jsonIn)
-        {
-            var mr = MediaRepository.TryParse(jsonIn);
-            var jsout = mr.WriteToJson();
-            return jsout.ToString(JsonFormat.NormalFormat, null, 0, 2);
-        }
-
         static void Main(string[] args)
         {
             try
@@ -21,18 +14,33 @@ namespace AiLinCsvMediaMerger
                 var csvFilePath = args[0];
                 var jsonFilePath = args[1];
                 var targetJsonFilePath = args[2];
-                var targetVersion = args[3];
+                var targetVersion = args.Length > 3? args[3] : null;
 
-                string jsonIn;
-                using (var sr = new StreamReader(jsonFilePath))
+                MediaRepository source;
+                using (var sr = new StreamReader(csvFilePath))
                 {
-                    jsonIn = sr.ReadToEnd();
+                    source = CsvMediaLoader.Load(sr);
                 }
 
-                var jsonOut = TestWriteJson(jsonIn);
+                MediaRepository target;
+                using (var sr = new StreamReader(jsonFilePath))
+                {
+                    var jsonStr = sr.ReadToEnd();
+                    target = MediaRepository.TryParse(jsonStr);
+                }
+
+                MediaListMerger.Merge(source, target, true);
+
+                if (targetVersion != null)
+                {
+                    target.Version = targetVersion;
+                }
+
                 using (var sw = new StreamWriter(targetJsonFilePath))
                 {
-                    sw.Write(jsonOut);
+                    var json = target.WriteToJson();
+                    var jsonStr = json.ToString(JsonFormat.NormalFormat, null, 0, 2);
+                    sw.Write(jsonStr);
                 }
             }
             catch (Exception e)

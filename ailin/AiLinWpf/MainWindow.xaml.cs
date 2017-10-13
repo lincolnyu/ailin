@@ -93,6 +93,10 @@ namespace AiLinWpf
         private int? _currentFocused;
 
         public const string MediaListUrl = "http://quanben.azurewebsites.net/apps/ailin/media.json.txt";
+
+        /// <summary>
+        ///  The name of the file in the local storage that keeps the latest media list updated from the server
+        /// </summary>
         public const string MediaListFileName = "media.json";
 
         #endregion
