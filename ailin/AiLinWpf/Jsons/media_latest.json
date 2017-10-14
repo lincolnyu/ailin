@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
+  "version": "1.2.2",
   "mediaList": [
     {
       "id": "PGZh",
@@ -1923,6 +1923,9 @@
       "type": "tv",
       "date": "2008",
       "role": "卫生所所长达兰",
+      "songs": [
+        { "bgm": "http://quanben.azurewebsites.net/media/xl.mp3" }
+      ],
       "sources": [
         {
           "name": "优酷：",
