@@ -1,5 +1,5 @@
 {
-  "version": "1.2.2",
+  "version": "1.2.3",
   "mediaList": [
     {
       "id": "PGZh",
@@ -374,7 +374,7 @@
     },
     {
       "id": "XJRSh",
-      "title": "戏剧人生",
+      "title": "戏剧人生（又名《情同初恋》）",
       "type": "tv",
       "date": "1992",
       "role": "话剧演员周泱",
@@ -629,7 +629,7 @@
     },
     {
       "id": "HFQX",
-      "title": "洪峰抢险",
+      "title": "洪峰抢险（又名《不可战胜》）",
       "type": "film",
       "date": "1998",
       "role": "记者王军",
@@ -645,10 +645,10 @@
     },
     {
       "id": "NShWDShM",
-      "title": "你是我的生命（滴血背后）",
+      "title": "你是我的生命（又名《滴血背后》）",
       "type": "tv",
       "date": "1998",
-      "role": "胡玉珊",
+      "role": "一位丢失了儿子的母亲胡玉珊",
       "director": "何伟",
       "playwright": "赵化南、余雍和",
       "sources": [
@@ -967,7 +967,7 @@
     },
     {
       "id": "WXYY",
-      "title": "我心永远",
+      "title": "我心永远（又名《高光阴影》）",
       "type": "tv",
       "date": "2003",
       "link": "http://baike.baidu.com/item/%E6%88%91%E5%BF%83%E6%B0%B8%E8%BF%9C#3",
@@ -1056,7 +1056,7 @@
     },
     {
       "id": "FYZhGX",
-      "title": "风雨中国心",
+      "title": "风雨中国心（又名《傅抱石》）",
       "type": "film",
       "date": "2003",
       "role": "傅抱石夫人",
@@ -1360,7 +1360,7 @@
     },
     {
       "id": "ChTHHK",
-      "title": "春天花会开",
+      "title": "春天花会开（又名《魂系红领巾》）",
       "type": "film",
       "date": "2005",
       "sources": [
