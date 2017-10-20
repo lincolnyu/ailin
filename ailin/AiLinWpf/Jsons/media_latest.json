@@ -1,5 +1,5 @@
 {
-  "version": "1.2.3",
+  "version": "1.2.4",
   "mediaList": [
     {
       "id": "PGZh",
@@ -109,7 +109,7 @@
       "producer": "八一电影制片厂",
       "sources": [
         {
-          "name": "1905电影网",
+          "name": "优酷",
           "target": "http://v.youku.com/v_show/id_XMTE4MzM1MjY0.html"
         }
       ]
