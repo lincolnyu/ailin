@@ -164,167 +164,171 @@
                 <TabItem.Header>
                     <TextBlock>投票1（最红）</TextBlock>
                 </TabItem.Header>
-                <StackPanel>
-                    <StackPanel.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" Opacity="0.5" 
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" Opacity="0.5" 
                                     AlignmentX="Right"
                                     AlignmentY="Bottom"
                                     Stretch="Uniform"></ImageBrush>
-                    </StackPanel.Background>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"></ColumnDefinition>
-                            <ColumnDefinition Width="3*" MinWidth="100" MaxWidth="180"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock >朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
-                            <TextBlock >她目前的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
-                            <TextBlock >她目前的排名：<TextBlock Name="Rank1"></TextBlock></TextBlock>
-                            <TextBlock FontSize="15">上次投票时间：<TextBlock FontSize="15" Name="LastVoteTime1"></TextBlock></TextBlock>
-                            <TextBlock FontSize="15">上次投票前，<TextBlock FontSize="15" Name="LastVoteResult1"></TextBlock></TextBlock>
-                            <StackPanel Name="VotePage1">
-                                <TextBlock>
+                        </StackPanel.Background>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*" MinWidth="100" MaxWidth="180"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock >朱琳老师的当前得票是：<TextBlock Name="NumVotes1"></TextBlock></TextBlock>
+                                <TextBlock >她目前的人气指数：<TextBlock Name="Popularity1"></TextBlock></TextBlock>
+                                <TextBlock >她目前的排名：<TextBlock Name="Rank1"></TextBlock></TextBlock>
+                                <TextBlock FontSize="15">上次投票时间：<TextBlock FontSize="15" Name="LastVoteTime1"></TextBlock></TextBlock>
+                                <TextBlock FontSize="15">上次投票前，<TextBlock FontSize="15" Name="LastVoteResult1"></TextBlock></TextBlock>
+                                <StackPanel Name="VotePage1">
+                                    <TextBlock>
                                     <Hyperlink Name="LinsPage1">
                                         她所在的投票页
                                     </Hyperlink>
-                                </TextBlock>
-                                <TextBlock>
+                                    </TextBlock>
+                                    <TextBlock>
                                     <Hyperlink Name="LinsProf1">
                                         她在该投票中的简介
                                     </Hyperlink>
-                                </TextBlock>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock>
+                                    </TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock>
                                         <Hyperlink Name="LinsPageMobile1">
                                             投票页移动版
                                         </Hyperlink>
-                                    </TextBlock>
-                                    <Button Name="Invite1" Margin="10,0,0,0">
-                                        <Button.ToolTip>
-                                            创建邀请信息到剪贴板，然后复制到邮件或即时消息分享给朋友
-                                        </Button.ToolTip>
-                                        创建邀请
-                                    </Button>
-                                    <Button Name="InviteEmail1" Margin="5,0,0,0">
-                                        Email邀请
-                                    </Button>
+                                        </TextBlock>
+                                        <Button Name="Invite1" Margin="10,0,0,0">
+                                            <Button.ToolTip>
+                                                创建邀请信息到剪贴板，然后复制到邮件或即时消息分享给朋友
+                                            </Button.ToolTip>
+                                            创建邀请
+                                        </Button>
+                                        <Button Name="InviteEmail1" Margin="5,0,0,0">
+                                            Email邀请
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                            <TextBlock>
+                                <TextBlock>
                                 <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
                                        RequestNavigate="HyperlinkRequestNavigate">
                                     该投票的主页
                                 </Hyperlink>
-                            </TextBlock>
-                        </StackPanel>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center">
                             <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">
                                 <Image Name="ProfileImage1"/>
                             </Hyperlink>
-                        </TextBlock>
-                    </Grid>
-                    <Button Name="Refresh1">刷新</Button>
-                    <Button Name="VoteBtn1">马上投票给她</Button>
-                    <StackPanel Name="QuestionForm1" Visibility="Collapsed">
-                        <TextBlock>选择问题后投票就立即下达</TextBlock>
-                        <TextBlock Name="Question1"></TextBlock>
-                        <StackPanel Name="Choices1">
-                        </StackPanel>
-                        <RichTextBox Name="Result1" Visibility="Collapsed">
-                            <FlowDocument>
-                                <Paragraph>
-                                    <Run Name="ResultText1"></Run>
-                                    <TextBlock>
+                            </TextBlock>
+                        </Grid>
+                        <Button Name="Refresh1">刷新</Button>
+                        <Button Name="VoteBtn1">马上投票给她</Button>
+                        <StackPanel Name="QuestionForm1" Visibility="Collapsed">
+                            <TextBlock>选择问题后投票就立即下达</TextBlock>
+                            <TextBlock Name="Question1"></TextBlock>
+                            <StackPanel Name="Choices1">
+                            </StackPanel>
+                            <RichTextBox Name="Result1" Visibility="Collapsed">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run Name="ResultText1"></Run>
+                                        <TextBlock>
                                         <Hyperlink Name="ResultPage1">详情</Hyperlink>
-                                    </TextBlock>
-                                </Paragraph>
-                            </FlowDocument>
-                        </RichTextBox>
+                                        </TextBlock>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Name="Tab2">
                 <TabItem.Header>
                     <TextBlock>投票2（演技）</TextBlock>
                 </TabItem.Header>
-                <StackPanel>
-                    <StackPanel.Background>
-                        <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" Opacity="0.5" 
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Images/background.jpg" Opacity="0.5" 
                                     AlignmentX="Right"
                                     AlignmentY="Bottom"
                                     Stretch="Uniform"></ImageBrush>
-                    </StackPanel.Background>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"></ColumnDefinition>
-                            <ColumnDefinition Width="3*" MinWidth="100" MaxWidth="180"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <TextBlock>朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
-                            <TextBlock>她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
-                            <TextBlock>她目前的排名：<TextBlock Name="Rank2"></TextBlock></TextBlock>
-                            <TextBlock FontSize="15">上次投票时间：<TextBlock FontSize="15" Name="LastVoteTime2"></TextBlock></TextBlock>
-                            <TextBlock FontSize="15">上次投票前，<TextBlock FontSize="15" Name="LastVoteResult2"></TextBlock></TextBlock>
-                            <StackPanel Name="VotePage2">
-                                <TextBlock>
+                        </StackPanel.Background>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*" MinWidth="100" MaxWidth="180"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock>朱琳老师的当前得票是：<TextBlock Name="NumVotes2"></TextBlock></TextBlock>
+                                <TextBlock>她目前的人气指数：<TextBlock Name="Popularity2"></TextBlock></TextBlock>
+                                <TextBlock>她目前的排名：<TextBlock Name="Rank2"></TextBlock></TextBlock>
+                                <TextBlock FontSize="15">上次投票时间：<TextBlock FontSize="15" Name="LastVoteTime2"></TextBlock></TextBlock>
+                                <TextBlock FontSize="15">上次投票前，<TextBlock FontSize="15" Name="LastVoteResult2"></TextBlock></TextBlock>
+                                <StackPanel Name="VotePage2">
+                                    <TextBlock>
                                     <Hyperlink Name="LinsPage2">
                                         她所在的投票页
                                     </Hyperlink>
-                                </TextBlock>
-                                <TextBlock>
+                                    </TextBlock>
+                                    <TextBlock>
                                     <Hyperlink Name="LinsProf2">
                                         她在该投票中的简介
                                     </Hyperlink>
-                                </TextBlock>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock>
+                                    </TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock>
                                         <Hyperlink Name="LinsPageMobile2">
                                             投票页移动版
                                         </Hyperlink>
-                                    </TextBlock>
-                                    <Button Name="Invite2" Margin="10,0,0,0">
-                                        <Button.ToolTip>
-                                            创建邀请信息到剪贴板，然后复制到邮件或即时消息分享给朋友
-                                        </Button.ToolTip>
-                                        创建邀请
-                                    </Button>
-                                    <Button Name="InviteEmail2" Margin="5,0,0,0">
-                                        Email邀请
-                                    </Button>
+                                        </TextBlock>
+                                        <Button Name="Invite2" Margin="10,0,0,0">
+                                            <Button.ToolTip>
+                                                创建邀请信息到剪贴板，然后复制到邮件或即时消息分享给朋友
+                                            </Button.ToolTip>
+                                            创建邀请
+                                        </Button>
+                                        <Button Name="InviteEmail2" Margin="5,0,0,0">
+                                            Email邀请
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
-                            <TextBlock>
+                                <TextBlock>
                                 <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
                                        RequestNavigate="HyperlinkRequestNavigate">
                                     该投票的主页
                                 </Hyperlink>
-                            </TextBlock>
-                        </StackPanel>
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center">
                             <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">
                                 <Image Name="ProfileImage2"/>
                             </Hyperlink>
-                        </TextBlock>
-                    </Grid>
-                    <Button Name="Refresh2">刷新</Button>
-                    <Button Name="VoteBtn2">马上投票给她</Button>
-                    <StackPanel Name="QuestionForm2" Visibility="Collapsed">
-                        <TextBlock>选择问题后投票就立即下达</TextBlock>
-                        <TextBlock Name="Question2"></TextBlock>
-                        <StackPanel Name="Choices2">
-                        </StackPanel>
-                        <RichTextBox Name="Result2" Visibility="Collapsed">
-                            <FlowDocument>
-                                <Paragraph>
-                                    <Run Name="ResultText2"></Run>
-                                    <TextBlock>
+                            </TextBlock>
+                        </Grid>
+                        <Button Name="Refresh2">刷新</Button>
+                        <Button Name="VoteBtn2">马上投票给她</Button>
+                        <StackPanel Name="QuestionForm2" Visibility="Collapsed">
+                            <TextBlock>选择问题后投票就立即下达</TextBlock>
+                            <TextBlock Name="Question2"></TextBlock>
+                            <StackPanel Name="Choices2">
+                            </StackPanel>
+                            <RichTextBox Name="Result2" Visibility="Collapsed">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run Name="ResultText2"></Run>
+                                        <TextBlock>
                                         <Hyperlink Name="ResultPage2">详情</Hyperlink>
-                                    </TextBlock>
-                                </Paragraph>
-                            </FlowDocument>
-                        </RichTextBox>
+                                        </TextBlock>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem KeyDown="MediaItemOnKeyDown">
                 <TabItem.Header>
