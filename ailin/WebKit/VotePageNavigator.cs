@@ -153,6 +153,11 @@ namespace WebKit
             }
         }
 
+        public void ClearCookies()
+        {
+            _client.ClearCookies();
+        }
+
         private void SetUserAgentIfMobile()
         {
             if (_isMobile)

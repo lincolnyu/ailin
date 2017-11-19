@@ -37,6 +37,13 @@ namespace AiLinWpf.Voting
             PossiblyExpired
         }
 
+        public enum RequestModes
+        {
+            Normal,
+            ClearCookiesOnly,
+            ClearCookiesAndSpoofIP // Not implemented
+        }
+
         private DateTime? _lastRefresh;
         private readonly TimeSpan _expiry
             = TimeSpan.FromSeconds(60);
@@ -54,6 +61,8 @@ namespace AiLinWpf.Voting
 
         private AsyncLock MobileNavLock = new AsyncLock();
         public VotePageNavigator MobileNavigator { get; private set; }
+
+        public RequestModes RequestMode { get; set; } = RequestModes.ClearCookiesOnly;
 
         public States State { get; private set; }
 
@@ -249,6 +258,8 @@ namespace AiLinWpf.Voting
         private async void RbClick(object sender, RoutedEventArgs e)
             => await RbClickAsync(sender, e);
 
+        private Random _random = new Random();
+
         private async Task RbClickAsync(object sender, RoutedEventArgs e)
         {
             DisableRefreshSubmitting();
@@ -262,6 +273,11 @@ namespace AiLinWpf.Voting
             try
             {
                 result = await Navigator.SubmitAsync(s);
+                if (RequestMode == RequestModes.ClearCookiesOnly
+                    || RequestMode ==  RequestModes.ClearCookiesAndSpoofIP)
+                {
+                    Navigator.ClearCookies();
+                }
             }
             catch (RequestCancelled)
             {

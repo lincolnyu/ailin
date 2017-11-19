@@ -5,7 +5,7 @@ namespace WebKit
 {
     class MyWebClient : WebClient
     {
-        private readonly CookieContainer _container = new CookieContainer();
+        private CookieContainer _container = new CookieContainer();
 
         public CookieContainer CookieContainer => _container;
 
@@ -18,6 +18,11 @@ namespace WebKit
                 webRequest.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             }
             return request;
+        }
+
+        public void ClearCookies()
+        {
+            _container = new CookieContainer();
         }
     }
 }
