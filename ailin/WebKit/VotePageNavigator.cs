@@ -158,6 +158,11 @@ namespace WebKit
             _client.ClearCookies();
         }
 
+        public void SetProxy(string proxyAddress)
+        {
+            _client.Proxy = !string.IsNullOrWhiteSpace(proxyAddress)? new WebProxy(proxyAddress) : null;
+        }
+
         private void SetUserAgentIfMobile()
         {
             if (_isMobile)
