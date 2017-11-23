@@ -60,6 +60,14 @@ namespace AiLinWpf.Voting
 #endif
 
         private AsyncLock MobileNavLock = new AsyncLock();
+
+        #region Proxy related
+
+        private string _lastProxy;
+        private bool _proxyUpdateNeeded;
+        
+        #endregion
+
         public VotePageNavigator MobileNavigator { get; private set; }
 
         public RequestModes RequestMode { get; set; } = RequestModes.ClearCookiesOnly;
@@ -105,6 +113,9 @@ namespace AiLinWpf.Voting
 
         public RecordRepository Records;
 
+        public CheckBox ProxyEnabled;
+        public TextBox Proxy;
+
         public void Setup(MainWindow window)
         {
             Navigator = new VotePageNavigator(VoteId);
@@ -118,11 +129,37 @@ namespace AiLinWpf.Voting
             Invite.Click += InviteButtonClick;
             InviteEmail.Click += InviteEmailButtonClick;
             ResultLink.RequestNavigate += window.HyperlinkRequestNavigate;
+            if (ProxyEnabled != null && Proxy != null)
+            {
+                ProxyEnabled.Checked += (s, e) => HandleProxyChange();
+                ProxyEnabled.Unchecked += (s, e) => HandleProxyChange();
+                Proxy.TextChanged += (s, e) => HandleProxyChange();
+            }
             State = States.Init;
             LoadLast();
         }
 
-#region Event handlers
+        #region Event handlers
+
+        private void HandleProxyChange()
+        {
+            var newProxy = ProxyEnabled.IsChecked == true && !string.IsNullOrWhiteSpace(Proxy.Text) ? Proxy.Text : null;
+            _proxyUpdateNeeded = _lastProxy != newProxy;
+        }
+
+        private bool UpdateProxyIfNeeded()
+        {
+            if (_proxyUpdateNeeded)
+            {
+                var proxy = ProxyEnabled.IsChecked == true && !string.IsNullOrWhiteSpace(Proxy.Text) ? Proxy.Text : null;
+                Navigator.ClearCookies();
+                Navigator.SetProxy(proxy);
+                _lastProxy = proxy;
+                _proxyUpdateNeeded = false;
+                return true;
+            }
+            return false;
+        }
 
         private async void TabOnLoaded(object sender, RoutedEventArgs e)
         {
@@ -143,6 +180,8 @@ namespace AiLinWpf.Voting
 
         private async void RefreshTab(object sender, RoutedEventArgs e)
         {
+            UpdateProxyIfNeeded();
+
             if (State == States.Refreshing)
             {
                 Navigator.CancelRefresh();
@@ -263,6 +302,8 @@ namespace AiLinWpf.Voting
         private async Task RbClickAsync(object sender, RoutedEventArgs e)
         {
             DisableRefreshSubmitting();
+
+            _lastRefresh = null; // make sure a refresh is needed after submit even if it fails
 
             State = States.SubmittingQuestion;
             var rb = (RadioButton)sender;
@@ -527,7 +568,8 @@ namespace AiLinWpf.Voting
 
         private async Task RefreshIfNeeded()
         {
-            if (_lastRefresh == null || DateTime.UtcNow - _lastRefresh >= _expiry)
+            var proxyUpdated = UpdateProxyIfNeeded();
+            if (proxyUpdated || _lastRefresh == null || DateTime.UtcNow - _lastRefresh >= _expiry)
             {
                 State = States.Refreshing;
                 RefreshReason = RefreshReasons.PossiblyExpired;

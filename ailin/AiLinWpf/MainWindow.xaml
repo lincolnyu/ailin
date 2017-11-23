@@ -212,16 +212,21 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <TextBlock>
-                                <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
-                                       RequestNavigate="HyperlinkRequestNavigate">
-                                    该投票的主页
-                                </Hyperlink>
+                                    <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=43" 
+                                           RequestNavigate="HyperlinkRequestNavigate">
+                                        该投票的主页
+                                    </Hyperlink>
                                 </TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Name="ProxyEnabled1" FontSize="18" VerticalContentAlignment="Center">使用代理</CheckBox>
+                                    <TextBox Name="Proxy1" Width="200" FontSize="18"
+                                             IsEnabled="{Binding Path=IsChecked, ElementName=ProxyEnabled1}"></TextBox>
+                                </StackPanel>
                             </StackPanel>
                             <TextBlock Grid.Column="1" VerticalAlignment="Center">
-                            <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">
-                                <Image Name="ProfileImage1"/>
-                            </Hyperlink>
+                                <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">
+                                    <Image Name="ProfileImage1"/>
+                                </Hyperlink>
                             </TextBlock>
                         </Grid>
                         <Button Name="Refresh1">刷新</Button>
@@ -297,11 +302,16 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <TextBlock>
-                                <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
-                                       RequestNavigate="HyperlinkRequestNavigate">
-                                    该投票的主页
-                                </Hyperlink>
+                                    <Hyperlink NavigateUri="http://www.ttpaihang.com/vote/rank.php?voteid=1069" 
+                                           RequestNavigate="HyperlinkRequestNavigate">
+                                        该投票的主页
+                                    </Hyperlink>
                                 </TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Name="ProxyEnabled2" FontSize="18" VerticalContentAlignment="Center">使用代理</CheckBox>
+                                    <TextBox Name="Proxy2" Width="200" FontSize="18"
+                                             IsEnabled="{Binding Path=IsChecked, ElementName=ProxyEnabled2}"></TextBox>
+                                </StackPanel>
                             </StackPanel>
                             <TextBlock Grid.Column="1" VerticalAlignment="Center">
                             <Hyperlink TextDecorations="None" RequestNavigate="HyperlinkRequestNavigate">

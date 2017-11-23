@@ -108,6 +108,7 @@ namespace AiLinWpf
             InitializeComponent();
             SetTitle();
             InitInfoDepdentUI();
+            BindProxySettings();
         }
 
         #endregion
@@ -541,7 +542,10 @@ namespace AiLinWpf
 
                 ResultPanel = Result1,
                 ResultText = ResultText1,
-                ResultLink = ResultPage1
+                ResultLink = ResultPage1,
+
+                ProxyEnabled = ProxyEnabled1,
+                Proxy = Proxy1
             });
 
             _infoDepUIList.Add(new InfoDependentUI
@@ -573,7 +577,10 @@ namespace AiLinWpf
 
                 ResultPanel = Result2,
                 ResultText = ResultText2,
-                ResultLink = ResultPage2
+                ResultLink = ResultPage2,
+
+                ProxyEnabled = ProxyEnabled2,
+                Proxy = Proxy2
             });
 
             foreach (var idui in _infoDepUIList)
@@ -794,6 +801,34 @@ namespace AiLinWpf
         {
             _searchTarget = target;
             DeHighlight();
+        }
+
+        private void BindProxySettings()
+        {
+            Proxy1.TextChanged += (s, e) =>
+            {
+                Proxy2.Text = Proxy1.Text;
+            };
+            Proxy2.TextChanged += (s, e) =>
+            {
+                Proxy1.Text = Proxy2.Text;
+            };
+            ProxyEnabled1.Checked += (s, e) =>
+            {
+                ProxyEnabled2.IsChecked = ProxyEnabled1.IsChecked;
+            };
+            ProxyEnabled1.Unchecked += (s, e) =>
+            {
+                ProxyEnabled2.IsChecked = ProxyEnabled1.IsChecked;
+            };
+            ProxyEnabled2.Checked += (s, e) =>
+            {
+                ProxyEnabled1.IsChecked = ProxyEnabled2.IsChecked;
+            };
+            ProxyEnabled2.Unchecked += (s, e) =>
+            {
+                ProxyEnabled1.IsChecked = ProxyEnabled2.IsChecked;
+            };
         }
     }
 }
