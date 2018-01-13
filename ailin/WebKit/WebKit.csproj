@@ -1,69 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2EB9446-88B7-4506-BBB4-D0EB9375A320}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebKit</RootNamespace>
-    <AssemblyName>WebKit</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="AsyncLock.cs" />
-    <Compile Include="Canceller.cs" />
-    <Compile Include="Helpers\TextContentHelper.cs" />
-    <Compile Include="Helpers\CommonHelper.cs" />
-    <Compile Include="Helpers\VoteResponseHelper.cs" />
-    <Compile Include="MyWebClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="SubmitHandler.cs" />
-    <Compile Include="PageInfo.cs" />
-    <Compile Include="Question.cs" />
-    <Compile Include="VotePageNavigator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj">
-      <Project>{01b732cb-bf3f-4f3a-b61c-9eff5d8e0322}</Project>
-      <Name>RedbackCoreLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AiLinWpfLib\AiLinWpfLib.csproj">
-      <Project>{23DB5FCE-6C82-45D3-B8DD-063B3E678DF3}</Project>
-      <Name>AiLinWpfLib</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
