@@ -6,6 +6,13 @@ namespace WebKit.Helpers
 {
     public static class CommonHelper
     {
+#if NETCOREAPP2_0
+        static CommonHelper()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+#endif
+
         public static string ConvertGB2312ToUTF(this byte[] b)
         {
             var enc = Encoding.GetEncoding(936);
