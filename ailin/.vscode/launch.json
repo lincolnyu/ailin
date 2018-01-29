@@ -12,9 +12,8 @@
             "program": "${workspaceFolder}/TestConsole/bin/Debug/netcoreapp2.0/TestConsole.dll",
             "args": [],
             "cwd": "${workspaceFolder}/TestConsole",
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
+            "console": "externalTerminal",
+            "stopAtEntry": false, 
         },
         {
             "name": ".NET Core Attach",

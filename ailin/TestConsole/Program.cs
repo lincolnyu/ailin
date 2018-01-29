@@ -11,9 +11,10 @@ namespace TestConsole
     {
         static void TestDesktop(int voteid = VotePageNavigator.DefaultVoteId)
         {
-            const string qf = @"d:\temp\question.txt";
-            const string submit = @"d:\temp\submit.txt";
-            const string reply = @"d:\temp\reply.html";
+            const string qf = @"c:\temp\question.txt";
+            const string submit = @"c:\temp\submit.txt";
+            const string reply = @"c:\temp\reply.html";
+            const string textEditor = @"c:\windows\notepad.exe";
 
             var vpn = new VotePageNavigator(voteid);
             var pi = vpn.SearchForZhuLin().Item1;
@@ -32,7 +33,7 @@ namespace TestConsole
                     sw.WriteLine("{0}: {1}", ++i, a.Text.TrimQuestionString());
                 }
             }
-            Process.Start(qf);
+            Process.Start(textEditor, qf);
 
             Console.WriteLine("Input your answer below");
             var userIn = Console.ReadLine();
@@ -48,7 +49,7 @@ namespace TestConsole
                         sw.WriteLine($"{k}: {s.KeyValues.Get(k)}");
                     }
                 }
-                Process.Start(submit);
+                Process.Start(textEditor, submit);
 
                 var res = vpn.Submit(s);
                 using (var fs = new FileStream(reply, FileMode.Create))
@@ -56,7 +57,7 @@ namespace TestConsole
                 {
                     bw.Write(res);
                 }
-                Process.Start(reply);
+                Process.Start(textEditor, reply);
             }
         }
 
@@ -69,7 +70,7 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-            TestMobile();
+            TestDesktop();
         }
     }
 }
