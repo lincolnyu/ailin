@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AiLinConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\quanb\\OneDrive\\cache\\qb-l1\\Proxy,Ip,List.txt C:\\Users\\quanb\\OneDrive\\cache\\qb-l1\\ZhuLinVoteStore.txt"
+    }
+  }
+}

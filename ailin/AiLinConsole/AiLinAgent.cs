@@ -1,5 +1,6 @@
 ﻿using AiLinConsole.ProxyManagement;
 using AiLinConsole.QuestionManagement;
+using System.Linq;
 using WebKit;
 using WebKit.Helpers;
 
@@ -12,6 +13,12 @@ namespace AiLinConsole
         public IProxyProvider ProxyProvider { get; }
         public IQuestionSolver QuestionSolver { get; }
 
+        public AiLinAgent(IProxyProvider proxyProvider, IQuestionSolver questionSolver)
+        {
+            ProxyProvider = proxyProvider;
+            QuestionSolver = questionSolver;
+        }
+        
         public int[] VoteIds = {
             VotePageNavigator.DefaultVoteId,
             VotePageNavigator.SecondVoteId
@@ -19,14 +26,20 @@ namespace AiLinConsole
 
         public event VoteResultDelegate VoteResultReceived;
 
-        public void RunThruAllProxies()
+        public void RunThruAllProxies(bool doNoProxyToo = false)
         {
-            foreach (var proxy in ProxyProvider)
+            var proxies = doNoProxyToo ?
+                Enumerable.Concat(new Proxy[] { null }, ProxyProvider) 
+                : ProxyProvider;
+            foreach (var proxy in proxies)
             {
                 foreach (var voteId in VoteIds)
                 {
                     var vpn = new VotePageNavigator(voteId);
-                    vpn.SetProxy(proxy.Address);
+                    if (proxy != null)
+                    {
+                        vpn.SetProxy(proxy.Address);
+                    }
                     var pi = vpn.SearchForZhuLin().Item1;
                     var q = pi.Question.Title;
                     var choices = pi.Question.Choices;
