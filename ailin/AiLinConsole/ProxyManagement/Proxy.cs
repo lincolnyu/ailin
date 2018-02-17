@@ -6,6 +6,11 @@ namespace AiLinConsole.ProxyManagement
     {
         public string Address { get; set; }
 
+        /// <summary>
+        ///  Speed in KB/s
+        /// </summary>
+        public double? Speed { get; set; }
+
         public TimeSpan? RecommendedTimeout { get; set; }
 
         public override string ToString()

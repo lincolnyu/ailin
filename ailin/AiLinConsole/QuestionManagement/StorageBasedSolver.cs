@@ -94,7 +94,8 @@ namespace AiLinConsole.QuestionManagement
             }
         }
 
-        public int Solve(string question, List<Question.Choice> choices)
+        public Tuple<int, FeedbackDelegate> Solve(string question, 
+            List<Question.Choice> choices)
         {
             if (Answers.TryGetValue(question, out var answer))
             {
@@ -103,7 +104,7 @@ namespace AiLinConsole.QuestionManagement
                     var r = Match(choices, ci.Item1, ci.Item2);
                     if (r != null)
                     {
-                        return r.Value;
+                        return new Tuple<int, FeedbackDelegate>(r.Value, null);
                     }
                 }
                 for (var i = 0; i < choices.Count; i++)
@@ -111,7 +112,7 @@ namespace AiLinConsole.QuestionManagement
                     var ci = choices[i];
                     if (answer.PossibleAnswers.Contains(ci.Key))
                     {
-                        return i;
+                        return new Tuple<int, FeedbackDelegate>(i, null);
                     }
                 }
             }
@@ -120,16 +121,23 @@ namespace AiLinConsole.QuestionManagement
                 answer = Answers[question] = new Answer();
             }
             var tuple = _askHuman(question, choices);
+            if (tuple == null) return null;
             var index = tuple.Item1;
             var indepedent = tuple.Item2;
             var key = choices[index].Key;
-            answer.ChoicesInstances.Add(
-                new Tuple<List<Question.Choice>, int>(choices, index));
-            if (indepedent)
+            void fb(bool correct)
             {
-                answer.PossibleAnswers.Add(key);
+                if (correct)
+                {
+                    answer.ChoicesInstances.Add(
+                        new Tuple<List<Question.Choice>, int>(choices, index));
+                    if (indepedent)
+                    {
+                        answer.PossibleAnswers.Add(key);
+                    }
+                }
             }
-            return index;
+            return new Tuple<int, FeedbackDelegate>(index, fb);
         }
 
         private int? Match(List<Question.Choice> question, List<Question.Choice> orderedExisting, int iAnswer)

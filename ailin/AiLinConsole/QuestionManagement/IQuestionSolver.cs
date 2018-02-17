@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebKit;
 
 namespace AiLinConsole.QuestionManagement
 {
-    interface IQuestionSolver
+    public delegate void FeedbackDelegate(bool correct);
+
+    public interface IQuestionSolver
     {
-        int Solve(string question, List<Question.Choice> choices);
+        Tuple<int, FeedbackDelegate> Solve(string question, List<Question.Choice> choices);
     }
 }

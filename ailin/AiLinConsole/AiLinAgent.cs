@@ -57,11 +57,11 @@ namespace AiLinConsole
 
         public void Cancel()
         {
+            _cancelledSync = true;
             if (_vpn != null)
             {
                 _vpn.CancelRefresh();
             }
-            _cancelledSync = true;
         }
 
         public void RunThruAllProxies(bool doNoProxyToo = false)
@@ -80,6 +80,7 @@ namespace AiLinConsole
                     TimeSpan? timeout = null;
                     if (proxy != null)
                     {
+                        _vpn.ClearCookies();
                         _vpn.SetProxy(proxy.Address);
                         timeout = proxy.RecommendedTimeout;
                     }
@@ -90,20 +91,24 @@ namespace AiLinConsole
                     {
                         var q = pi.Question.Title;
                         var choices = pi.Question.Choices;
-                        var sol = QuestionSolver.Solve(q, choices);
+                        var solres = QuestionSolver.Solve(q, choices);
+                        if (_cancelledSync || solres == null) break;
+                        var sol = solres.Item1;
                         var s = VotePageNavigator.CreateSubmit(pi, sol);
-
                         var res = RunWithTimeout(timeout, ()=> _vpn.Submit(s), _vpn);
                         if (_cancelledSync) break;
                         var replydata = res.ConvertGB2312ToUTF();
                         var reply = replydata.GetVoteResponseMessage(true);
                         var replymsg = reply.Item1;
                         var successful = reply.Item2;
+                        var correct = !replymsg.Contains("回答错误");
+                        solres.Item2?.Invoke(correct);
                         VoteResultReceived?.Invoke(voteId, proxy, successful, replymsg);
                     }
                     else
                     {
                         VoteResultReceived?.Invoke(voteId, proxy, false, "Network or parsing error");
+                        break;
                     }
                 }
             }

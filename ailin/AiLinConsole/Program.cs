@@ -48,10 +48,21 @@ namespace AiLinConsole
 
         void MainFuncThread()
         {
-            var proxyProvider = new ManualProxyProvider();
-            using (var sr = new StreamReader(_ppFileName))
+            IProxyProvider proxyProvider = null;
+            if (_ppFileName != null)
             {
-                proxyProvider.Load(sr);
+                proxyProvider = new ManualProxyProvider();
+                using (var sr = new StreamReader(_ppFileName))
+                {
+                    ((ManualProxyProvider)proxyProvider).Load(sr);
+                }
+            }
+            else
+            {
+                proxyProvider = new OnlineRandomProxyProvider(p=>
+                {
+                    return new Tuple<bool, bool>(p.Speed > 60, false);
+                });
             }
             StorageBasedSolver questionSolver = null;
             try
@@ -66,7 +77,7 @@ namespace AiLinConsole
                 }
                 _agent = new AiLinAgent(proxyProvider, questionSolver);
                 _agent.VoteResultReceived += Agent_VoteResultReceived;
-                _agent.RunThruAllProxies(true);
+                _agent.RunThruAllProxies(false);
             }
             finally
             {
@@ -113,8 +124,8 @@ namespace AiLinConsole
 
             using (var program = new Program
             {
-                _ppFileName = args[0],
-                _qsFileName = args[1],
+                _qsFileName = args[0],
+                _ppFileName = args.Length > 1 ? args[1] : null,
             })
             {
                 while (File.Exists(sigfn))
@@ -193,7 +204,7 @@ namespace AiLinConsole
             return new Tuple<Process, string>(process, path);
         }
 
-        private static Tuple<int, bool> AskHuman(string question, List<Question.Choice> choices)
+        private Tuple<int, bool> AskHuman(string question, List<Question.Choice> choices)
         {
             var sb = new StringBuilder();
             sb.AppendLine(question);
@@ -206,10 +217,11 @@ namespace AiLinConsole
             var textRes = ShowInTextEditor(sb.ToString());
             var textProc = textRes.Item1;
 
-            while (true)
+            while (!_cancelled)
             {
                 Console.Write("Please input the answer: ");
                 var input = Console.ReadLine();
+                if (_cancelled) break;
                 if (!int.TryParse(input, out var ii))
                 {
                     Console.WriteLine("Answer invalid. Try again.");
@@ -217,6 +229,7 @@ namespace AiLinConsole
                 }
                 Console.Write("Are the keys indepedent(Y for yes)? ");
                 input = Console.ReadLine();
+                if (_cancelled) break;
                 var indepedent = input.Trim().ToUpper() == "Y";
                 if (!textProc.HasExited)
                 {
@@ -224,6 +237,7 @@ namespace AiLinConsole
                 }
                 return new Tuple<int, bool>(ii-1, indepedent);
             }
+            return null;
         }
     }
 }
