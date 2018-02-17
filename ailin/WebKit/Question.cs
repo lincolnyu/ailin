@@ -7,10 +7,30 @@ namespace WebKit
     {
         public class Choice : IEquatable<Choice>, IComparable<Choice>
         {
-            public string Text { get; set; }
+            private string _text;
+            private string _key;
+
+            public string Text
+            {
+                get { return _text; }
+                set
+                {
+                    _text = value;
+                    _key = null;
+                }
+            }
+
             public string Value { get; set; }
 
-            public string Key => Text.Trim();
+            public string Key
+            {
+                get
+                {
+                    if (_key != null) return _key;
+                    _key = Text.Trim().Replace("\n", "").Replace("\r", "");
+                    return _key;
+                }
+            }
 
             public int CompareTo(Choice other)
             {
@@ -24,19 +44,16 @@ namespace WebKit
 
             public override string ToString()
             {
-                return $"{Text}|{Value}";
+                return Key;
             }
 
             public static Choice FromString(string s)
             {
-                var segs = s.Split('|');
-                if (segs.Length != 2) return null;
-                var c = new Choice
+                return new Choice
                 {
-                    Text = segs[0],
-                    Value = segs[1]
+                    Text = s,
+                    Value = ""
                 };
-                return c;
             }
         }
 

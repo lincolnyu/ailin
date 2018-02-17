@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\redback\Redback\RedbackCoreLite\RedbackCoreLite.csproj" />
     <ProjectReference Include="..\WebKit\WebKit.csproj" />
   </ItemGroup>
 

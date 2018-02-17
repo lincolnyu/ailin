@@ -66,7 +66,7 @@ namespace AiLinConsole.QuestionManagement
                 else if (spaces == 2)
                 {
                     var si = line.TrimStart();
-                    if (si == "Possible")
+                    if (si == "Possible:")
                     {
                         currPA = curr.PossibleAnswers;
                         currC = null;
@@ -117,7 +117,7 @@ namespace AiLinConsole.QuestionManagement
             }
             else
             {
-                answer = new Answer();
+                answer = Answers[question] = new Answer();
             }
             var tuple = _askHuman(question, choices);
             var index = tuple.Item1;
