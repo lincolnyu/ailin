@@ -10,7 +10,8 @@ namespace AiLinConsole
 {
     class AiLinAgent
     {
-        public delegate void VoteStartedDelegate(int voteId, IProxy proxy);
+        public delegate void SuppressVoteDelegate();
+        public delegate void VoteStartedDelegate(int voteId, IProxy proxy, SuppressVoteDelegate suppress);
         public delegate void VoteResultDelegate(int voteId, IProxy proxy, 
             bool successful, bool solvedByUser, string replyMsg);
 
@@ -68,7 +69,7 @@ namespace AiLinConsole
         }
 
         public static bool IsIncorrect(string replyMsg)
-            => replyMsg.Contains("回答错误");
+            => replyMsg?.Contains("回答错误")?? false;
 
         public void RunThruAllProxies(bool doNoProxyToo = false)
         {
@@ -82,7 +83,13 @@ namespace AiLinConsole
                 foreach (var voteId in VoteIds)
                 {
                     if (_cancelledSync) break;
-                    VoteStarted?.Invoke(voteId, proxy);
+                    var suppressVote = false;
+                    void suppress()
+                    {
+                        suppressVote = true;
+                    }
+                    VoteStarted?.Invoke(voteId, proxy, suppress);
+                    if (suppressVote) continue;
                     _vpn = new VotePageNavigator(voteId);
                     TimeSpan? timeout = null;
                     if (proxy != null)

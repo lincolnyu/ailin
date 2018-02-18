@@ -18,8 +18,10 @@ namespace AiLinConsole
 
         private string _ppFileName;
         private string _qsFileName;
+        private string _proxyHistoryFileName;
         private Thread _thread;
         private AiLinAgent _agent;
+        private ProxyHistory _proxyHistory = new ProxyHistory();
         private bool _cancelled = false;
 
         Program()
@@ -48,6 +50,13 @@ namespace AiLinConsole
 
         void MainFuncThread()
         {
+            if (File.Exists(_proxyHistoryFileName))
+            {
+                using (var sr = new StreamReader(_proxyHistoryFileName))
+                {
+                    _proxyHistory.Load(sr);
+                }
+            }
             IProxyProvider proxyProvider = null;
             if (_ppFileName != null)
             {
@@ -61,8 +70,8 @@ namespace AiLinConsole
             {
                 proxyProvider = new OnlineRandomProxyProvider(p=>
                 {
-                    return new Tuple<bool, bool>(p.Speed > 60, false);
-                });
+                    return new Tuple<bool, bool>(true, false);
+                }, 100);
             }
             StorageBasedSolver questionSolver = null;
             try
@@ -86,16 +95,26 @@ namespace AiLinConsole
                 {
                     PrepareFileAndWrite(_qsFileName, sw => questionSolver.Save(sw));
                 }
+                PrepareFileAndWrite(_proxyHistoryFileName, sw => _proxyHistory.Save(sw));
             }
             Console.WriteLine("Main working thread terminated.");
         }
 
-        private void AgentOnVoteStarted(int voteId, IProxy proxy)
+        private void AgentOnVoteStarted(int voteId, IProxy proxy, AiLinAgent.SuppressVoteDelegate suppress)
         {
-            Console.Write($"Vote {voteId} started");
-            if (proxy != null)
+            if (_proxyHistory.RecentlyVisited(proxy.Address, voteId.ToString()))
             {
-                Console.WriteLine($" on proxy {proxy.Address}");
+                suppress();
+                Console.WriteLine($"Vote {voteId} via proxy {proxy.Address} canceled due to recent use");
+            }
+            else
+            {
+                _proxyHistory.Visit(proxy.Address, voteId.ToString());
+                Console.Write($"Vote {voteId} started");
+                if (proxy != null)
+                {
+                    Console.WriteLine($" via proxy {proxy.Address}");
+                }
             }
         }
 
@@ -147,15 +166,20 @@ namespace AiLinConsole
             using (var program = new Program
             {
                 _qsFileName = args[0],
-                _ppFileName = args.Length > 1 ? args[1] : null,
+                _proxyHistoryFileName = args[1],
+                _ppFileName = args.Length > 2 ? args[2] : null,
             })
             {
                 while (File.Exists(sigfn))
                 {
                     Thread.Sleep(1000);
                 }
-                Console.WriteLine("End of main function reached.");
             }
+            if (File.Exists(sigfn))
+            {
+                File.Delete(sigfn);
+            }
+            Console.WriteLine("End of main function reached.");
         }
 
         private static void PrepareFileAndWrite(string filename, Action<StreamWriter> writeAction)

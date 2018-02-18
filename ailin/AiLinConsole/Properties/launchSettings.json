@@ -2,7 +2,7 @@
   "profiles": {
     "AiLinConsole": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\quanb\\OneDrive\\cache\\qb-l1\\ZhuLinVoteStore.txt"
+      "commandLineArgs": "C:\\Users\\quanb\\OneDrive\\cache\\qb-l1\\ZhuLinVoteStore.txt C:\\Users\\quanb\\OneDrive\\cache\\qb-l1\\ZhuLinVoteProxyHistory.txt"
     }
   }
 }
