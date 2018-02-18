@@ -21,13 +21,17 @@ namespace AiLinConsole.ProxyManagement
         /// </returns>
         public delegate Tuple<bool, bool> FilterDelegate(Proxy proxy);
 
-        public const string Url = "https://gimmeproxy.com/api/getProxy?protocol=http";
+        private string _url = "https://gimmeproxy.com/api/getProxy?protocol=http";
 
         private FilterDelegate _filter;
 
-        public OnlineRandomProxyProvider(FilterDelegate filter)
+        public OnlineRandomProxyProvider(FilterDelegate filter, double? minSpeed=60)
         {
             _filter = filter;
+            if (minSpeed.HasValue)
+            {
+                _url += $"&minSpeed={minSpeed}";
+            }
         }
 
         public IEnumerator<IProxy> GetEnumerator()
@@ -35,17 +39,16 @@ namespace AiLinConsole.ProxyManagement
             var client = new WebClient();
             while (true)
             {
-                var data = client.DownloadData(Url);
+                var data = client.DownloadData(_url);
                 // Here we assume it's UTF8
                 var content = Encoding.UTF8.GetString(data);
                 if (content.ParseJson() is JsonPairs jspairs)
                 {
-                    jspairs.TryGetValue("ip", out string ip);
-                    jspairs.TryGetValue("port", out string port);
+                    jspairs.TryGetValue("ipPort", out string ipport);
                     jspairs.TryGetValue("speed", out Numeric speed); // KBps
                     var proxy = new Proxy
                     {
-                        Address = $"{ip}:{port}",
+                        Address = $"{ipport}",
                         Speed = double.Parse(speed.Value)
                         // TODO work out timeout
                     };

@@ -10,6 +10,7 @@ namespace AiLinConsole
 {
     class AiLinAgent
     {
+        public delegate void VoteStartedDelegate(int voteId, IProxy proxy);
         public delegate void VoteResultDelegate(int voteId, IProxy proxy, bool successful, string replyMsg);
 
         public IProxyProvider ProxyProvider { get; }
@@ -29,6 +30,7 @@ namespace AiLinConsole
         private VotePageNavigator _vpn;
         private bool _cancelledSync = false;
 
+        public event VoteStartedDelegate VoteStarted;
         public event VoteResultDelegate VoteResultReceived;
 
         public static T RunWithTimeout<T>(TimeSpan? timeout, 
@@ -64,6 +66,9 @@ namespace AiLinConsole
             }
         }
 
+        public static bool IsIncorrect(string replyMsg)
+            => replyMsg.Contains("回答错误");
+
         public void RunThruAllProxies(bool doNoProxyToo = false)
         {
             _cancelledSync = false;
@@ -76,6 +81,7 @@ namespace AiLinConsole
                 foreach (var voteId in VoteIds)
                 {
                     if (_cancelledSync) break;
+                    VoteStarted?.Invoke(voteId, proxy);
                     _vpn = new VotePageNavigator(voteId);
                     TimeSpan? timeout = null;
                     if (proxy != null)
@@ -89,21 +95,25 @@ namespace AiLinConsole
                     if (_cancelledSync) break;
                     if (pi != null)
                     {
-                        var q = pi.Question.Title;
-                        var choices = pi.Question.Choices;
-                        var solres = QuestionSolver.Solve(q, choices);
-                        if (_cancelledSync || solres == null) break;
-                        var sol = solres.Item1;
-                        var s = VotePageNavigator.CreateSubmit(pi, sol);
-                        var res = RunWithTimeout(timeout, ()=> _vpn.Submit(s), _vpn);
-                        if (_cancelledSync) break;
-                        var replydata = res.ConvertGB2312ToUTF();
-                        var reply = replydata.GetVoteResponseMessage(true);
-                        var replymsg = reply.Item1;
-                        var successful = reply.Item2;
-                        var correct = !replymsg.Contains("回答错误");
-                        solres.Item2?.Invoke(correct);
-                        VoteResultReceived?.Invoke(voteId, proxy, successful, replymsg);
+                        bool incorrect;
+                        do
+                        {
+                            var q = pi.Question.Title;
+                            var choices = pi.Question.Choices;
+                            var solres = QuestionSolver.Solve(q, choices);
+                            if (_cancelledSync || solres == null) break;
+                            var sol = solres.Item1;
+                            var s = VotePageNavigator.CreateSubmit(pi, sol);
+                            var res = RunWithTimeout(timeout, () => _vpn.Submit(s), _vpn);
+                            if (_cancelledSync) break;
+                            var replydata = res.ConvertGB2312ToUTF();
+                            var reply = replydata.GetVoteResponseMessage(true);
+                            var replymsg = reply.Item1;
+                            var successful = reply.Item2;
+                            incorrect = IsIncorrect(replymsg);
+                            solres.Item2?.Invoke(!incorrect);
+                            VoteResultReceived?.Invoke(voteId, proxy, successful, replymsg);
+                        } while (incorrect);
                     }
                     else
                     {

@@ -76,7 +76,8 @@ namespace AiLinConsole
                     }
                 }
                 _agent = new AiLinAgent(proxyProvider, questionSolver);
-                _agent.VoteResultReceived += Agent_VoteResultReceived;
+                _agent.VoteStarted += AgentOnVoteStarted;
+                _agent.VoteResultReceived += AgentOnResultReceived;
                 _agent.RunThruAllProxies(false);
             }
             finally
@@ -89,7 +90,16 @@ namespace AiLinConsole
             Console.WriteLine("Main working thread terminated.");
         }
 
-        private void Agent_VoteResultReceived(int voteId, IProxy proxy,
+        private void AgentOnVoteStarted(int voteId, IProxy proxy)
+        {
+            Console.Write($"Vote {voteId} started");
+            if (proxy != null)
+            {
+                Console.WriteLine($" on proxy {proxy.Address}");
+            }
+        }
+
+        private void AgentOnResultReceived(int voteId, IProxy proxy,
             bool successful, string replyMsg)
         {
             Console.Write($"Vote {voteId}");
@@ -103,9 +113,17 @@ namespace AiLinConsole
             }
             else if (!_cancelled)
             {
-                var textRes = ShowInTextEditor(replyMsg);
-                var textFileName = Path.GetFileNameWithoutExtension(textRes.Item2);
-                Console.WriteLine($" failed. See text '{textFileName}' popped up for detail.");
+                var incorrect = AiLinAgent.IsIncorrect(replyMsg);
+                if (incorrect)
+                {
+                    Console.WriteLine(" failed. Answer incorrect. Try again.");
+                }
+                else
+                {
+                    var textRes = ShowInTextEditor(replyMsg);
+                    var textFileName = Path.GetFileNameWithoutExtension(textRes.Item2);
+                    Console.WriteLine($" failed. See text '{textFileName}' popped up for detail.");
+                }
             }
             else
             {
