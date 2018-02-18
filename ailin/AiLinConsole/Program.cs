@@ -100,9 +100,13 @@ namespace AiLinConsole
         }
 
         private void AgentOnResultReceived(int voteId, IProxy proxy,
-            bool successful, string replyMsg)
+            bool successful, bool solvedByUser, string replyMsg)
         {
             Console.Write($"Vote {voteId}");
+            if (!solvedByUser)
+            {
+                Console.Write(" solved with existing knowledge");
+            }
             if (proxy != null)
             {
                 Console.Write($" with proxy {proxy.Address}");

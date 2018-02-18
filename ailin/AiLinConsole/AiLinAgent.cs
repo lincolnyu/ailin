@@ -11,7 +11,8 @@ namespace AiLinConsole
     class AiLinAgent
     {
         public delegate void VoteStartedDelegate(int voteId, IProxy proxy);
-        public delegate void VoteResultDelegate(int voteId, IProxy proxy, bool successful, string replyMsg);
+        public delegate void VoteResultDelegate(int voteId, IProxy proxy, 
+            bool successful, bool solvedByUser, string replyMsg);
 
         public IProxyProvider ProxyProvider { get; }
         public IQuestionSolver QuestionSolver { get; }
@@ -112,12 +113,13 @@ namespace AiLinConsole
                             var successful = reply.Item2;
                             incorrect = IsIncorrect(replymsg);
                             solres.Item2?.Invoke(!incorrect);
-                            VoteResultReceived?.Invoke(voteId, proxy, successful, replymsg);
+                            VoteResultReceived?.Invoke(voteId, proxy, successful, 
+                                solres.Item2 != null, replymsg);
                         } while (incorrect);
                     }
                     else
                     {
-                        VoteResultReceived?.Invoke(voteId, proxy, false, "Network or parsing error");
+                        VoteResultReceived?.Invoke(voteId, proxy, false, false, "Network or parsing error");
                         break;
                     }
                 }
