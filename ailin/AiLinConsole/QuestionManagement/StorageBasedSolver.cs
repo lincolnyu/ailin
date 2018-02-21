@@ -123,6 +123,10 @@ namespace AiLinConsole.QuestionManagement
             var tuple = _askHuman(question, choices);
             if (tuple == null) return null;
             var index = tuple.Item1;
+            if (index < 0 || index >= choices.Count)
+            {
+                return new Tuple<int, FeedbackDelegate>(-1, null);
+            }
             var indepedent = tuple.Item2;
             var key = choices[index].Key;
             void fb(bool correct)

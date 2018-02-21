@@ -111,17 +111,26 @@ namespace AiLinConsole
                             var solres = QuestionSolver.Solve(q, choices);
                             if (_cancelledSync || solres == null) break;
                             var sol = solres.Item1;
-                            var s = VotePageNavigator.CreateSubmit(pi, sol);
-                            var res = RunWithTimeout(timeout, () => _vpn.Submit(s), _vpn);
-                            if (_cancelledSync) break;
-                            var replydata = res.ConvertGB2312ToUTF();
-                            var reply = replydata.GetVoteResponseMessage(true);
-                            var replymsg = reply.Item1;
-                            var successful = reply.Item2;
-                            incorrect = IsIncorrect(replymsg);
-                            solres.Item2?.Invoke(!incorrect);
-                            VoteResultReceived?.Invoke(voteId, proxy, successful, 
-                                solres.Item2 != null, replymsg);
+                            if (sol >= 0)
+                            {
+                                var s = VotePageNavigator.CreateSubmit(pi, sol);
+                                var res = RunWithTimeout(timeout, () => _vpn.Submit(s), _vpn);
+                                if (_cancelledSync) break;
+                                var replydata = res.ConvertGB2312ToUTF();
+                                var reply = replydata.GetVoteResponseMessage(true);
+                                var replymsg = reply.Item1;
+                                var successful = reply.Item2;
+                                incorrect = IsIncorrect(replymsg);
+                                solres.Item2?.Invoke(!incorrect);
+                                VoteResultReceived?.Invoke(voteId, proxy, successful,
+                                    solres.Item2 != null, replymsg);
+                            }
+                            else
+                            {
+                                incorrect = true;
+                                VoteResultReceived?.Invoke(voteId, proxy, false,
+                                    true, "Invalid answer");
+                            }
                         } while (incorrect);
                     }
                     else
