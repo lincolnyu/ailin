@@ -21,17 +21,13 @@ namespace AiLinConsole.ProxyManagement
         /// </returns>
         public delegate Tuple<bool, bool> FilterDelegate(Proxy proxy);
 
-        private string _url = "https://gimmeproxy.com/api/getProxy?protocol=http";
+        private string _url = "https://gimmeproxy.com/api/getProxy?protocol=http&anonymityLevel=0";
 
         private FilterDelegate _filter;
 
-        public OnlineRandomProxyProvider(FilterDelegate filter, double? minSpeed=60)
+        public OnlineRandomProxyProvider(FilterDelegate filter)
         {
             _filter = filter;
-            if (minSpeed.HasValue)
-            {
-                _url += $"&minSpeed={minSpeed}";
-            }
         }
 
         public IEnumerator<IProxy> GetEnumerator()

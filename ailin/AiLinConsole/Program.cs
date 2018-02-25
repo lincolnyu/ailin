@@ -16,6 +16,7 @@ namespace AiLinConsole
 
         private static Random _rand = new Random();
 
+        private bool _showReplyMsg;
         private string _ppFileName;
         private string _qsFileName;
         private string _proxyHistoryFileName;
@@ -71,7 +72,7 @@ namespace AiLinConsole
                 proxyProvider = new OnlineRandomProxyProvider(p=>
                 {
                     return new Tuple<bool, bool>(true, false);
-                }, 100);
+                });
             }
             StorageBasedSolver questionSolver = null;
             try
@@ -87,7 +88,7 @@ namespace AiLinConsole
                 _agent = new AiLinAgent(proxyProvider, questionSolver);
                 _agent.VoteStarted += AgentOnVoteStarted;
                 _agent.VoteResultReceived += AgentOnResultReceived;
-                _agent.RunThruAllProxies(false);
+                _agent.RunThruAllProxies(true);
             }
             finally
             {
@@ -102,19 +103,26 @@ namespace AiLinConsole
 
         private void AgentOnVoteStarted(int voteId, IProxy proxy, AiLinAgent.SuppressVoteDelegate suppress)
         {
-            if (_proxyHistory.RecentlyVisited(proxy.Address, voteId.ToString()))
+            var proxyAddress = proxy?.Address ?? "noproxy";
+            if (_proxyHistory.RecentlyVisited(proxyAddress, voteId.ToString()))
             {
                 suppress();
-                Console.WriteLine($"Vote {voteId} via proxy {proxy.Address} canceled due to recent use");
+                Console.Write($"Vote {voteId}");
+                if (proxy != null)
+                {
+                    Console.Write($" via proxy {proxyAddress}");
+                }
+                Console.WriteLine(" canceled due to recent use");
             }
             else
             {
-                _proxyHistory.Visit(proxy.Address, voteId.ToString());
+                _proxyHistory.Visit(proxyAddress, voteId.ToString());
                 Console.Write($"Vote {voteId} started");
                 if (proxy != null)
                 {
-                    Console.WriteLine($" via proxy {proxy.Address}");
+                    Console.Write($" via proxy {proxy.Address}");
                 }
+                Console.WriteLine();
             }
         }
 
@@ -143,9 +151,17 @@ namespace AiLinConsole
                 }
                 else
                 {
-                    var textRes = ShowInTextEditor(replyMsg);
-                    var textFileName = Path.GetFileNameWithoutExtension(textRes.Item2);
-                    Console.WriteLine($" failed. See text '{textFileName}' popped up for detail.");
+                    if (_showReplyMsg)
+                    {
+                        var textRes = ShowInTextEditor(replyMsg);
+                        var textFileName = Path.GetFileNameWithoutExtension(textRes.Item2);
+                        Console.WriteLine($" failed. See text '{textFileName}' popped up for detail.");
+                    }
+                    else
+                    {
+                        // TODO we should do logging
+                        Console.WriteLine($" failed.");
+                    }
                 }
             }
             else
@@ -163,11 +179,17 @@ namespace AiLinConsole
             }
             Console.WriteLine($"File '{sigfn}' was created for execution signaling. Delete the file to abort this application");
 
+            var iqs = Array.IndexOf(args, "-qs");
+            var iph = Array.IndexOf(args, "-ph");
+            var ipp = Array.IndexOf(args, "-pp");
+            var inoreply = Array.IndexOf(args, "-noreply");
+
             using (var program = new Program
             {
-                _qsFileName = args[0],
-                _proxyHistoryFileName = args[1],
-                _ppFileName = args.Length > 2 ? args[2] : null,
+                _qsFileName = iqs >= 0 ? args[iqs + 1] : null,
+                _proxyHistoryFileName = iph >= 0 ? args[iph + 1] : null,
+                _ppFileName = ipp >= 0 ? args[ipp + 1] : null,
+                _showReplyMsg = inoreply < 0
             })
             {
                 while (File.Exists(sigfn))
