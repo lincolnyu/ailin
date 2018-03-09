@@ -92,11 +92,14 @@ namespace AiLinConsole
             }
             finally
             {
-                if (questionSolver != null)
+                if (_qsFileName != null && questionSolver != null)
                 {
                     PrepareFileAndWrite(_qsFileName, sw => questionSolver.Save(sw));
                 }
-                PrepareFileAndWrite(_proxyHistoryFileName, sw => _proxyHistory.Save(sw));
+                if (_proxyHistoryFileName != null)
+                {
+                    PrepareFileAndWrite(_proxyHistoryFileName, sw => _proxyHistory.Save(sw));
+                }
             }
             Console.WriteLine("Main working thread terminated.");
         }
