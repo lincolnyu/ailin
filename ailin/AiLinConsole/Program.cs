@@ -17,6 +17,7 @@ namespace AiLinConsole
         private static Random _rand = new Random();
 
         private bool _showReplyMsg;
+        private string _tempFolder;
         private string _ppFileName;
         private string _qsFileName;
         private string _proxyHistoryFileName;
@@ -156,7 +157,7 @@ namespace AiLinConsole
                 {
                     if (_showReplyMsg)
                     {
-                        var textRes = ShowInTextEditor(replyMsg);
+                        var textRes = ShowInTextEditor(replyMsg, _tempFolder);
                         var textFileName = Path.GetFileNameWithoutExtension(textRes.Item2);
                         Console.WriteLine($" failed. See text '{textFileName}' popped up for detail.");
                     }
@@ -175,7 +176,13 @@ namespace AiLinConsole
 
         static void Main(string[] args)
         {
-            var sigfn = GenerateRandomTempFile(DefaultTempFolder, "lock.");
+            var itf = Array.IndexOf(args, "-tf");
+            var tf = DefaultTempFolder;
+            if (itf >= 0)
+            {
+                tf = args[itf + 1];
+            }
+            var sigfn = GenerateRandomTempFile(tf, "lock.");
             using (var sw = new StreamWriter(sigfn))
             {
                 sw.WriteLine("This file was created for execution signaling");
@@ -192,7 +199,8 @@ namespace AiLinConsole
                 _qsFileName = iqs >= 0 ? args[iqs + 1] : null,
                 _proxyHistoryFileName = iph >= 0 ? args[iph + 1] : null,
                 _ppFileName = ipp >= 0 ? args[ipp + 1] : null,
-                _showReplyMsg = inoreply < 0
+                _showReplyMsg = inoreply < 0,
+                _tempFolder = tf
             })
             {
                 while (File.Exists(sigfn))
@@ -222,6 +230,10 @@ namespace AiLinConsole
 
         private static string GenerateRandomTempFile(string tempFolder, string prefix = "")
         {
+            if(!Directory.Exists(tempFolder))
+            {
+                Directory.CreateDirectory(tempFolder);
+            }
             string temppath;
             do
             {
@@ -232,8 +244,8 @@ namespace AiLinConsole
         }
 
         private static Tuple<Process, string> ShowInTextEditor(string content, 
-            string textEditor = @"c:\windows\notepad.exe",
             string tempFolder = DefaultTempFolder,
+            string textEditor = @"c:\windows\notepad.exe",
             string filename = null)
         {
             var toCreateRandom = filename == null;
@@ -285,7 +297,7 @@ namespace AiLinConsole
                 sb.AppendFormat("{0}: {1}", i++, c.Key);
                 sb.AppendLine();
             }
-            var textRes = ShowInTextEditor(sb.ToString());
+            var textRes = ShowInTextEditor(sb.ToString(), _tempFolder);
             var textProc = textRes.Item1;
 
             while (!_cancelled)
