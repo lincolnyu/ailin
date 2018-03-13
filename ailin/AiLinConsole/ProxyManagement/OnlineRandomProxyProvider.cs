@@ -35,7 +35,15 @@ namespace AiLinConsole.ProxyManagement
             var client = new WebClient();
             while (true)
             {
-                var data = client.DownloadData(_url);
+                byte[] data;
+                try
+                {
+                    data = client.DownloadData(_url);
+                }
+                catch (WebException)
+                {
+                    break; // TODO may make a few more attempts
+                }
                 // Here we assume it's UTF8
                 var content = Encoding.UTF8.GetString(data);
                 if (content.ParseJson() is JsonPairs jspairs)
