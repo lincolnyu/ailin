@@ -2,6 +2,7 @@
 using AiLinConsole.QuestionManagement;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using WebKit;
 using WebKit.Helpers;
@@ -98,45 +99,52 @@ namespace AiLinConsole
                         _vpn.SetProxy(proxy.Address);
                         timeout = proxy.RecommendedTimeout;
                     }
-                    var pi = RunWithTimeout(timeout, 
+                    try
+                    {
+                        var pi = RunWithTimeout(timeout,
                         () => _vpn.SearchForZhuLin().Item1, _vpn);
-                    if (_cancelledSync) break;
-                    if (pi != null)
-                    {
-                        bool incorrect;
-                        do
+                        if (_cancelledSync) break;
+                        if (pi != null)
                         {
-                            var q = pi.Question.Title;
-                            var choices = pi.Question.Choices;
-                            var solres = QuestionSolver.Solve(q, choices);
-                            if (_cancelledSync || solres == null) break;
-                            var sol = solres.Item1;
-                            if (sol >= 0)
+                            bool incorrect;
+                            do
                             {
-                                var s = VotePageNavigator.CreateSubmit(pi, sol);
-                                var res = RunWithTimeout(timeout, () => _vpn.Submit(s), _vpn);
-                                if (_cancelledSync) break;
-                                var replydata = res.ConvertGB2312ToUTF();
-                                var reply = replydata.GetVoteResponseMessage(true);
-                                var replymsg = reply.Item1;
-                                var successful = reply.Item2;
-                                incorrect = IsIncorrect(replymsg);
-                                solres.Item2?.Invoke(!incorrect);
-                                VoteResultReceived?.Invoke(voteId, proxy, successful,
-                                    solres.Item2 != null, replymsg);
-                            }
-                            else
-                            {
-                                incorrect = true;
-                                VoteResultReceived?.Invoke(voteId, proxy, false,
-                                    true, "Invalid answer");
-                            }
-                        } while (incorrect);
+                                var q = pi.Question.Title;
+                                var choices = pi.Question.Choices;
+                                var solres = QuestionSolver.Solve(q, choices);
+                                if (_cancelledSync || solres == null) break;
+                                var sol = solres.Item1;
+                                if (sol >= 0)
+                                {
+                                    var s = VotePageNavigator.CreateSubmit(pi, sol);
+                                    var res = RunWithTimeout(timeout, () => _vpn.Submit(s), _vpn);
+                                    if (_cancelledSync) break;
+                                    var replydata = res.ConvertGB2312ToUTF();
+                                    var reply = replydata.GetVoteResponseMessage(true);
+                                    var replymsg = reply.Item1;
+                                    var successful = reply.Item2;
+                                    incorrect = IsIncorrect(replymsg);
+                                    solres.Item2?.Invoke(!incorrect);
+                                    VoteResultReceived?.Invoke(voteId, proxy, successful,
+                                        solres.Item2 != null, replymsg);
+                                }
+                                else
+                                {
+                                    incorrect = true;
+                                    VoteResultReceived?.Invoke(voteId, proxy, false,
+                                        true, "Invalid answer");
+                                }
+                            } while (incorrect);
+                        }
+                        else
+                        {
+                            VoteResultReceived?.Invoke(voteId, proxy, false, false, "Network or parsing error");
+                            break;
+                        }
                     }
-                    else
+                    catch (WebException)
                     {
-                        VoteResultReceived?.Invoke(voteId, proxy, false, false, "Network or parsing error");
-                        break;
+                        VoteResultReceived?.Invoke(voteId, proxy, false, false, "Web exception encountered");
                     }
                 }
             }
