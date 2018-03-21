@@ -7,8 +7,6 @@ namespace AiLinConsole.ProxyManagement
 {
     public class ProxyHistory
     {
-        public readonly TimeSpan MaxHistoryLen = TimeSpan.FromDays(1);
-
         public class Record
         {
             public string ProxyAddress;
@@ -16,6 +14,17 @@ namespace AiLinConsole.ProxyManagement
         }
 
         public readonly Dictionary<string, Record> Records = new Dictionary<string, Record>();
+        
+        private bool IsRecentlyVisited(DateTime lastVisit)
+        {
+            var now = DateTime.UtcNow;
+            var diff = now - lastVisit;
+            if (diff.TotalHours > 12) return true; // maybe worth trying again
+            var tzi = TimeZoneInfo.FindSystemTimeZoneById("China Standard Time");
+            var bjnow = TimeZoneInfo.ConvertTimeFromUtc(now, tzi);
+            var bjLastVisit = TimeZoneInfo.ConvertTimeFromUtc(lastVisit, tzi);
+            return (bjnow.Year != bjLastVisit.Year || bjnow.DayOfYear != bjLastVisit.DayOfYear);
+        }
 
         public void Visit(string proxy, string target)
         {
@@ -39,8 +48,7 @@ namespace AiLinConsole.ProxyManagement
             {
                 return false;
             }
-            var elapse = DateTime.UtcNow - lv;
-            return elapse < MaxHistoryLen;
+            return IsRecentlyVisited(lv);
         }
 
         public void Load(StreamReader sr)
@@ -55,8 +63,7 @@ namespace AiLinConsole.ProxyManagement
                     var segs = line.Split('>');
                     var target = segs[0].Trim();
                     var lastVisit = DateTime.Parse(segs[1].Trim());
-                    var elapse = DateTime.UtcNow - lastVisit;
-                    if (elapse < MaxHistoryLen)
+                    if (IsRecentlyVisited(lastVisit))
                     {
                         record.LastVisit[target] = lastVisit;
                     }
@@ -88,8 +95,7 @@ namespace AiLinConsole.ProxyManagement
                 var hasVisits = false;
                 foreach(var lv in r.LastVisit)
                 {
-                    var elapse = DateTime.UtcNow - lv.Value;
-                    if (elapse < MaxHistoryLen)
+                    if (IsRecentlyVisited(lv.Value))
                     {
                         sb.AppendLine($"  {lv.Key}>{lv.Value}");
                         hasVisits = true;
