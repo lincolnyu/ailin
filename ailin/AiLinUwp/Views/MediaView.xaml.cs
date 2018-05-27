@@ -23,5 +23,70 @@ namespace AiLinUwp.Views
         {
             this.InitializeComponent();
         }
+
+        private void FriendlyLinksOnClick(Windows.UI.Xaml.Documents.Hyperlink sender, Windows.UI.Xaml.Documents.HyperlinkClickEventArgs args)
+        {
+
+        }
+
+        private void HyperlinkOnClick(Windows.UI.Xaml.Documents.Hyperlink sender, Windows.UI.Xaml.Documents.HyperlinkClickEventArgs args)
+        {
+
+        }
+
+        private void SearchBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchBoxKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void BtnClearOnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSearchOnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnOrderByTypeOnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnOrderByTimeOnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnOrderByNameOnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlaySongsOnUnchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlaySongsOnChecked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
