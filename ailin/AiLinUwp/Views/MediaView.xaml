@@ -11,66 +11,56 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="300"/>
-                <ColumnDefinition Width="*" MinWidth="120"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal" Name="OrderButtons">
-                <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">类型排序</Button>
-                <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">时间排序</Button>
-                <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">名称排序</Button>
-                <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" IsChecked="True" 
-                                  Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked">
-                    <!--  TODO tooltip: -->
-                    <!-- 
+        <VariableSizedWrapGrid Grid.Row="0" Orientation="Horizontal">
+            <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">类型排序</Button>
+            <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">时间排序</Button>
+            <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">名称排序</Button>
+            <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" VariableSizedWrapGrid.ColumnSpan="2"
+                      IsChecked="True" Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked">
+                <!--  TODO tooltip: -->
+                <!-- 
                     <CheckBox.ToolTip>
                         播放部分选中剧集的配乐（注：不一定使用原剧原唱）
                     </CheckBox.ToolTip>
                     -->
-                    播放乐曲
-                </CheckBox>
-            </StackPanel>
-            <Grid Grid.Column="1" Margin="10,0,10,0">
+                播放乐曲
+            </CheckBox>
+            <Grid VariableSizedWrapGrid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*" MinWidth="100"></ColumnDefinition>
-                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Height="30">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Name="SearchBox"
-                                         GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
-                                         TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyDown">
-                    </TextBox>
-                    <Button Grid.Column="1" Click="BtnClearOnClick" Margin="7"
+                <TextBox Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Name="SearchBox"
+                    GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
+                    TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyDown"
+                     VariableSizedWrapGrid.ColumnSpan="2">
+                </TextBox>
+                <Button Grid.Column="1" Click="BtnClearOnClick" Margin="7"
                                         Background="Transparent">
-                        <Button.Template>
-                            <ControlTemplate>
-                                <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
                                                     Width="16" Height="16" >
-                                    <!-- Child="{StaticResource ClearIcon}" -->
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button Grid.Column="2" Click="BtnSearchOnClick" Width="30" Height="30">
-                        <!-- ="{StaticResource SearchIcon}" -->
-                    </Button>
-                </Grid>
-                <TextBlock Name="MatchCount" Grid.Column="1" >
+                                <!-- Child="{StaticResource ClearIcon}" -->
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+            <StackPanel>
+                <Button Grid.Column="2" Click="BtnSearchOnClick" Width="30" Height="30" HorizontalAlignment="Left">
+                    <!-- ="{StaticResource SearchIcon}" -->
+                </Button>
+                <TextBlock Name="MatchCount" Grid.Column="1" Visibility="Collapsed">
                     <!-- Style="{StaticResource Description}" -->
                 </TextBlock>
-            </Grid>
-            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Margin="5,0,0,0" FontSize="12" VerticalAlignment="Center">
+            </StackPanel>
+            <TextBlock Margin="5,0,0,0" FontSize="12" HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       VariableSizedWrapGrid.ColumnSpan="4">
                                 鸣谢<Hyperlink NavigateUri="Dummy"
                                              Click="FriendlyLinksOnClick">
                                     友情链接
@@ -79,8 +69,7 @@
                                            Click="HyperlinkOnClick">
                                     联系作者
                                 </Hyperlink>
-                </TextBlock>
-            </StackPanel>
-        </Grid>
+            </TextBlock>
+        </VariableSizedWrapGrid>
     </Grid>
 </UserControl>
