@@ -48,17 +48,7 @@ namespace AiLinUwp.Views
         {
 
         }
-
-        private void SearchBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void BtnClearOnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void BtnSearchOnClick(object sender, RoutedEventArgs e)
         {
 
@@ -87,6 +77,10 @@ namespace AiLinUwp.Views
         private void PlaySongsOnChecked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SearchBoxOnQuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
         }
     }
 }

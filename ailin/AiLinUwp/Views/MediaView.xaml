@@ -24,7 +24,7 @@
             <SearchBox Grid.Column="0" VerticalContentAlignment="Center" 
                            Name="SearchBox" HorizontalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"
                     GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
-                    KeyDown="SearchBoxKeyDown"/>
+                    KeyDown="SearchBoxKeyDown" QuerySubmitted="SearchBoxOnQuerySubmitted"/>
             <TextBlock Margin="5,0,0,0" FontSize="12" HorizontalAlignment="Left"
                        VerticalAlignment="Center" 
                        VariableSizedWrapGrid.ColumnSpan="4">
