@@ -8,56 +8,23 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <VariableSizedWrapGrid Grid.Row="0" Orientation="Horizontal">
+    <UserControl.Resources>
+        <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
+    </UserControl.Resources>
+    <RelativePanel>
+        <VariableSizedWrapGrid Grid.Row="0" Orientation="Horizontal" Name="TopControls">
             <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">类型排序</Button>
             <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">时间排序</Button>
             <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">名称排序</Button>
-            <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" VariableSizedWrapGrid.ColumnSpan="2"
-                      IsChecked="True" Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked">
-                <!--  TODO tooltip: -->
-                <!-- 
-                    <CheckBox.ToolTip>
-                        播放部分选中剧集的配乐（注：不一定使用原剧原唱）
-                    </CheckBox.ToolTip>
-                    -->
-                播放乐曲
+            <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" VariableSizedWrapGrid.ColumnSpan="1"
+                      IsChecked="True" Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked"
+                      ToolTipService.ToolTip="播放部分选中剧集的配乐（注：不一定使用原剧原唱）">
+                配乐
             </CheckBox>
-            <Grid VariableSizedWrapGrid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Name="SearchBox"
+            <SearchBox Grid.Column="0" VerticalContentAlignment="Center" 
+                           Name="SearchBox" HorizontalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"
                     GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
-                    TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyDown"
-                     VariableSizedWrapGrid.ColumnSpan="2">
-                </TextBox>
-                <Button Grid.Column="1" Click="BtnClearOnClick" Margin="7"
-                                        Background="Transparent">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                                    Width="16" Height="16" >
-                                <!-- Child="{StaticResource ClearIcon}" -->
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </Grid>
-            <StackPanel>
-                <Button Grid.Column="2" Click="BtnSearchOnClick" Width="30" Height="30" HorizontalAlignment="Left">
-                    <!-- ="{StaticResource SearchIcon}" -->
-                </Button>
-                <TextBlock Name="MatchCount" Grid.Column="1" Visibility="Collapsed">
-                    <!-- Style="{StaticResource Description}" -->
-                </TextBlock>
-            </StackPanel>
+                    KeyDown="SearchBoxKeyDown"/>
             <TextBlock Margin="5,0,0,0" FontSize="12" HorizontalAlignment="Left"
                        VerticalAlignment="Center" 
                        VariableSizedWrapGrid.ColumnSpan="4">
@@ -71,5 +38,7 @@
                                 </Hyperlink>
             </TextBlock>
         </VariableSizedWrapGrid>
-    </Grid>
+        <ListBox Grid.Row="1" RelativePanel.Below="TopControls">
+        </ListBox>
+    </RelativePanel>
 </UserControl>
