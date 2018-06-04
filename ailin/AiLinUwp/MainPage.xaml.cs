@@ -15,34 +15,16 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace AiLinTurbo
+namespace AiLinUwp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private enum VoteNumber
-        {
-            A,
-            B
-        }
-
-        private VoteNumber _voteNumber;
-
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        private void VoteAClick(object sender, RoutedEventArgs e)
-        {
-            _voteNumber = VoteNumber.A;
-        }
-
-        private void VoteBClick(object sender, RoutedEventArgs e)
-        {
-            _voteNumber = VoteNumber.B;
         }
     }
 }

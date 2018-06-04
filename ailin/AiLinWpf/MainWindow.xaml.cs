@@ -369,7 +369,7 @@ namespace AiLinWpf
                 _mediaList = new MediaListViewModel(mediaRepoManager.Current);
                 VideoList.ItemsSource = _mediaList.MediaViewModels;
 
-                MessageBox.Show("已充值为默认媒体列表。", Title);
+                MessageBox.Show("已重置为默认媒体列表。", Title);
             }
         }
 

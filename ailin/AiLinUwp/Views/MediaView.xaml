@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="AiLinUwp.Views.MediaView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AiLinUwp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Image x:Key="SearchIcon" Source="pack://application:,,,/Images/search.png"/>
+    </UserControl.Resources>
+    <RelativePanel>
+        <VariableSizedWrapGrid Grid.Row="0" Orientation="Horizontal" Name="TopControls">
+            <Button Name="BtnOrderByType" Click="BtnOrderByTypeOnClick">类型排序</Button>
+            <Button Name="BtnOrderByTime" Click="BtnOrderByTimeOnClick">时间排序</Button>
+            <Button Name="BtnOrderByName" Click="BtnOrderByNameOnClick">名称排序</Button>
+            <CheckBox Margin="5,0,0,0" Name="PlaySongs" VerticalAlignment="Center" VariableSizedWrapGrid.ColumnSpan="1"
+                      IsChecked="True" Unchecked="PlaySongsOnUnchecked" Checked="PlaySongsOnChecked"
+                      ToolTipService.ToolTip="播放部分选中剧集的配乐（注：不一定使用原剧原唱）">
+                配乐
+            </CheckBox>
+            <SearchBox Grid.Column="0" VerticalContentAlignment="Center" 
+                           Name="SearchBox" HorizontalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"
+                    GotFocus="SearchBoxGotFocus" LostFocus="SearchBoxLostFocus" 
+                    KeyDown="SearchBoxKeyDown" QuerySubmitted="SearchBoxOnQuerySubmitted"/>
+            <TextBlock Margin="5,0,0,0" FontSize="12" HorizontalAlignment="Left"
+                       VerticalAlignment="Center" 
+                       VariableSizedWrapGrid.ColumnSpan="4">
+                                鸣谢<Hyperlink NavigateUri="Dummy"
+                                             Click="FriendlyLinksOnClick">
+                                    友情链接
+                                </Hyperlink>提供的信息，如有任何意见和建议请
+                                <Hyperlink NavigateUri="mailto:linc.yu@outlook.com?subject=爱琳投票助手意见和建议" 
+                                           Click="HyperlinkOnClick">
+                                    联系作者
+                                </Hyperlink>
+            </TextBlock>
+        </VariableSizedWrapGrid>
+        <ListBox Grid.Row="1" RelativePanel.Below="TopControls">
+        </ListBox>
+    </RelativePanel>
+</UserControl>
