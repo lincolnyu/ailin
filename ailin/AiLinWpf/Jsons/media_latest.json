@@ -1,5 +1,5 @@
 {
-  "version": "1.2.6",
+  "version": "1.3.1",
   "mediaList": [
     {
       "id": "PGZh",
@@ -152,6 +152,10 @@
         { "bgm": "http://quanben.azurewebsites.net/media/fblxzhf.mp3" }
       ],
       "sources": [
+		{
+		  "name": "bilibili",
+		  "target": "https://www.bilibili.com/video/av12155899"
+		},
         {
           "name": "风行网",
           "target": "http://www.fun.tv/vplay/g-37790/"
@@ -1185,6 +1189,8 @@
       "title": "月上海",
       "type": "tv",
       "date": "2004",
+	  "role": "叶美仪",
+	  "director": "王永春 陈洁",
       "sources": [
         {
           "name": "优酷：",
